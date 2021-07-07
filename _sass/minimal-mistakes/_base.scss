@@ -70,7 +70,7 @@ p {
 u,
 ins {
   text-decoration: none;
-  border-bottom: 1px solid $underline-color;
+  border-bottom: 1px solid $primary-color;
   padding-bottom: 4.5px;
   a {
     color: inherit;
@@ -175,7 +175,7 @@ td > code {
   padding-bottom: 0.1rem;
   font-size: 0.8em;
   background: $code-background-color;
-  color: $underline-color;
+  color: $primary-color;
   border-radius: $border-radius;
 
   &:before,
