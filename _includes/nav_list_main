@@ -88,32 +88,17 @@
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Basic" %}
-                        <li><a href="/categories/basic" class="">Basic ({{category[1].size}})</a></li>
+                        <li><a href="/categories/math-basic" class="">Basic ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Differentiation" %}
-                        <li><a href="/categories/differentiation" class="">Differentiation ({{category[1].size}})</a></li>
+                    {% if category[0] == "Advanced" %}
+                        <li><a href="/categories/math-advanced" class="">Advanced ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Linear Algebra" %}
-                        <li><a href="/categories/linear-algebra" class="">Linear Algebra ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Probability and Statistics" %}
-                        <li><a href="/categories/probability-statistics" class="">Probability and Statistics ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-
       </li>
   </ul>
 </nav>
