@@ -2,7 +2,7 @@
 title:  "인공지능을 위한 수학" 
 
 categories:
-  - Basic Math
+  - Math
 tags:
   - []
 
@@ -10,7 +10,7 @@ toc: true
 toc_sticky: true
 
 date: 2021-07-10
-last_modified_at: 2021-07-10
+last_modified_at: 2021-07-12
 ---
 
 ## Chapter 01 기초 수학
