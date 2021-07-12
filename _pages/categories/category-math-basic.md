@@ -1,5 +1,5 @@
 ---
-title: "C 프로그래밍"
+title: "Math"
 layout: archive
 permalink: categories/math-basic
 author_profile: true
@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories.Basic Math %}
+{% assign posts = site.categories[‘Basic Math’] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
