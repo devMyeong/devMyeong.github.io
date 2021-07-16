@@ -92,6 +92,15 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+
+		<span class="nav__sub-title">Liberal Arts</span>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Development" %}
+                        <li><a href="/categories/development" class="">Development ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
       </li>
   </ul>
 </nav>
