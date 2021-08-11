@@ -47,6 +47,15 @@ last_modified_at: 2021-08-06
 
 <br>
 
+## Chapter 01 서류 전형
+
+### 01-1 스펙 (대학은 꼭 나와야 할까? 영어는 필요한가?)
+- 이론적인 지식과 코딩능력 둘다 중요하다
+- 포트폴리오로 스펙의 한계를 넘을수 있다
+- 영어로된 문서를 읽는 연습을 꾸준히 하자
+
+<br>
+
 ## Chapter 99 Copyright
 
 [ 인프런 Rookiss님 영상 ](https://www.inflearn.com/users/@rookiss/)
