@@ -1,5 +1,5 @@
 ---
-title:  "C++과 언리얼로 만드는 MMORPG 게임 개발 시리즈 Part3: 자료구조와 알고리즘"
+title:  "Rookiss님 언리얼 강의 Part3: 자료구조와 알고리즘"
 
 categories:
   - Data Structure
