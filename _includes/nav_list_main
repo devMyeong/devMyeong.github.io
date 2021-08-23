@@ -67,6 +67,13 @@
             </ul>
 
         <span class="nav__sub-title">Coding Test</span>
+		    <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Data Structure" %}
+                        <li><a href="/categories/data-structure" class="">Data Structure ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "Algorithm" %}
