@@ -24,7 +24,7 @@ last_modified_at: 2021-08-23
 
 ![BIG-O](https://user-images.githubusercontent.com/80055816/130400676-3e92dcd2-18c8-496b-af3c-54d85ebc8a3d.png){: width="70%" height="70%"}{: .align-center}
 
-- 입력 N의 크기에 따라 성능이 영향을 받는 정도는 위와 같다
+- 입력 n의 크기에 따라 성능이 영향을 받는 정도는 위와 같다
 
 <br>
 
