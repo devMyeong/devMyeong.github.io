@@ -47,7 +47,8 @@ for (int32 y = 0; y < _size; y++)
 {
 	for (int32 x = 0; x < _size; x++)
 	{
-		if ( x==0 || x==_size -1 || y==0 || y=_size -1 )	// 외곽만 막아주는 코드
+		// 외곽만 막아주는 코드
+		if ( x==0 || x==_size -1 || y==0 || y=_size -1 )
 			_tile[y][x] = TileType::WALL;
 		else
 			_tile[y][x] = TileType::EMPTY;
@@ -57,13 +58,15 @@ for (int32 y = 0; y < _size; y++)
 {
 	for (int32 x = 0; x < _size; x++)
 	{
-		if (x % 2 == 0 || y % 2 == 0)					// 외곽과 길과 길사이를 막아주는 코드
+		// 외곽과 길과 길사이를 막아주는 코드
+		if (x % 2 == 0 || y % 2 == 0)
 			_tile[y][x] = TileType::WALL;
 		else
 			_tile[y][x] = TileType::EMPTY;
 	}
 }
-if (x % 2 == 0 || y % 2 == 0)							// 외곽과 원래 뚫려있는 길은 다시 뚫지 않는다
+// 외곽과 원래 뚫려있는 길은 다시 뚫지 않는다
+if (x % 2 == 0 || y % 2 == 0)
 	continue;
 ```
 
