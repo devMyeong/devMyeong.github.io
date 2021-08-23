@@ -58,7 +58,7 @@ for (int32 y = 0; y < _size; y++)
 {
 	for (int32 x = 0; x < _size; x++)
 	{
-		// 외곽과 길과 길사이를 막아주는 코드
+		// 외곽 및 길과 길사이를 막아주는 코드
 		if (x % 2 == 0 || y % 2 == 0)
 			_tile[y][x] = TileType::WALL;
 		else
