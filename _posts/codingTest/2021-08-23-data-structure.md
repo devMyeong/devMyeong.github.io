@@ -28,4 +28,18 @@ last_modified_at: 2021-08-23
 
 <br>
 
+## Chapter 01 미로 준비
+
+### 01-1 환경 설정
+
+![project](https://user-images.githubusercontent.com/80055816/130419000-f17a91a5-3452-432b-963d-ebe2f18c2b9c.PNG){: width="70%" height="70%"}{: .align-center}
+
+- [프로젝트 속성] - [미리 컴파일된 헤더 사용] 해주자
+
+![cpp](https://user-images.githubusercontent.com/80055816/130419187-bd733669-9bd9-4a3d-828b-df84d5963f06.PNG){: width="70%" height="70%"}{: .align-center}
+
+- [Cpp파일 우클릭] - [미리 컴파일된 헤더 만들기] 해주자
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
