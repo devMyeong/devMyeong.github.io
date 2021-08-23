@@ -40,6 +40,35 @@ last_modified_at: 2021-08-23
 
 - [Cpp파일 우클릭] - [미리 컴파일된 헤더 만들기] 해주자
 
+### 01-2 맵 만들기
+
+```cpp
+for (int32 y = 0; y < _size; y++)
+{
+	for (int32 x = 0; x < _size; x++)
+	{
+		if ( x==0 || x==_size -1 || y==0 || y=_size -1 )	// 외곽만 막아주는 코드
+			_tile[y][x] = TileType::WALL;
+		else
+			_tile[y][x] = TileType::EMPTY;
+	}
+}
+for (int32 y = 0; y < _size; y++)
+{
+	for (int32 x = 0; x < _size; x++)
+	{
+		if (x % 2 == 0 || y % 2 == 0)					// 외곽과 길과 길사이를 막아주는 코드
+			_tile[y][x] = TileType::WALL;
+		else
+			_tile[y][x] = TileType::EMPTY;
+	}
+}
+if (x % 2 == 0 || y % 2 == 0)							// 외곽과 원래 뚫려있는 길은 다시 뚫지 않는다
+	continue;
+```
+
+- Mazes For Programmers 책은 미로를 만드는 다양한 알고리즘을 다루는 책이다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
