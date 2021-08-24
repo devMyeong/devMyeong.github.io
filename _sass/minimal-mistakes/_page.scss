@@ -336,12 +336,12 @@ body {
 
 .page__taxonomy-item-category {
 
-  color: $primary-color;
+  color: $text-color;
   font-size: $type-size-5;
 
   &:hover {
     text-decoration: none;
-    color: mix(#00adb5, $text-color, 40%); /* 커서 댈 때 색깔 */
+    color: $primary-color; /* 커서 댈 때 색깔 */
   }
 }
 
