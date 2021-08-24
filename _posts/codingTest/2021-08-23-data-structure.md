@@ -72,6 +72,13 @@ if (x % 2 == 0 || y % 2 == 0)
 
 - Mazes For Programmers 책은 미로를 만드는 다양한 알고리즘을 다루는 책이다
 
+### 01-3 오른손 법칙
+
+```cpp
+// 현재 바로보는 방향을 기준으로 오른쪽으로 갈 수 있는지 확인
+int 32 newDir = (_dir -1 + DIR_COUNT) % DIR_COUNT;
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
