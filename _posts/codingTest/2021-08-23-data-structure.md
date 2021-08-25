@@ -87,7 +87,21 @@ int 32 newDir = (_dir -1 + DIR_COUNT) % DIR_COUNT;
 - 선형 구조의 대표적인 예는 배열, 연결 리스트, 스택, 큐
 - 비선형 구조의 대표적인 예는 트리, 그래프
 - 면접에서 배열, 동적 배열, 연결 리스트의 차이를 설명할 수 있어야 한다
-- 동적 배열 할당 정책중 하나는 실제 사용할 공간보다 1.5 ~ 2배 정도 많이 할당해서 사용하는 방법이 있다 ( 메모리 재할당 최소화를 위해 )
+- 동적 배열 할당 정책은 실제 사용할 공간보다 1.5 ~ 2배 정도 더 많이 공간을 할당한다
+
+### 02-2 동적 배열 구현 연습
+
+```cpp
+// 증설 작업
+int newCapacity = static_cast<int>(_capacity * 1.5);
+// newCapacity가 0또는 1이면 안되기 때문에 처리해주는 조건문
+if (newCapacity == _capacity)
+	newCapacity++;
+```
+
+- vector의 reserve()와 resize()의 차이에 대해서 알아야 한다
+- vector의 capacity와 size의 차이에 대해서 알아야 한다
+- 코딩 테스트에서 vector 구현은 은근히 자주 나온다
 
 <br>
 
