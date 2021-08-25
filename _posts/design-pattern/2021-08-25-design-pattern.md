@@ -11,8 +11,8 @@ comments: true
 toc: true
 toc_sticky: true
 
-date: 2021-08-12
-last_modified_at: 2021-08-24
+date: 2021-08-25
+last_modified_at: 2021-08-25
 ---
 
 ## Chapter 00 스트래티지 패턴
