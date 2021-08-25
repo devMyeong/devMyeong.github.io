@@ -130,6 +130,13 @@ last_modified_at: 2021-08-17
 
 <br>
 
+## Chapter 04 멘탈리티
+
+### 04-1 멘탈리티 ( 취업은 운칠기삼 )
+- 공부를 할때 블로그 정리를 하는등 히스토리를 만들자 이는 학업에도 도움이 되지만 취업 스펙이 될 수 있다
+
+<br>
+
 ## Chapter 99 Copyright
 
 [ 인프런 Rookiss님 영상 ](https://www.inflearn.com/users/@rookiss/)
