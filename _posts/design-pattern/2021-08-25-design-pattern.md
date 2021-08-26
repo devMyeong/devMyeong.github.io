@@ -105,4 +105,86 @@ void main()
 
 <br>
 
+## Chapter 01 어댑터 패턴
+
+### 01-1 어댑터 패턴(Adapter Pattern)
+
+```cpp
+//-------------------------------------------------------------------------
+// 어댑터 패턴을 활용하면 연관성 없는 두 객체를 묶어 사용할 수 있다
+// 어댑터 패턴을 활용하면 주어진 알고리즘을 요구사항에 맞춰 사용할 수 있다
+// 아래 코드에서는 주어진 알고리즘을 Math로 가정
+//-------------------------------------------------------------------------
+
+#include "stdafx.h"
+
+class Math
+{
+public:
+	Math()						{					}
+	virtual ~Math()				{					}
+
+public:
+	// 두배
+	double twoTime(double num)	{ return num * 2;	}
+
+	// 절반
+	double half(double num)		{ return num / 2;	}
+
+	// 강화된 알고리즘
+	double doubled(double d)	{ return d * 2;		}
+
+};
+
+class Adapter
+{
+public:
+	Adapter()					{					}
+	virtual ~Adapter()			{					}
+
+	// 원하는 기능
+public:
+	virtual float	twiceOf(float f)	= 0;
+	virtual float	halfOf(float f)		= 0;
+
+};
+
+class AdapterImpl : public Adapter
+{
+public:
+	AdapterImpl()				{					}
+	virtual ~AdapterImpl()		{					}
+
+	// 원하는 기능
+public:
+	float twiceOf(float f)
+	{
+		// Math 알고리즘을 바로 사용할 수 없어서 구현체에서
+		// 주어진 알고리즘을 사용할 수 있게 변경해준다
+		//return (float) Math().twoTime((double)f);
+		return (float)Math().doubled((double)f);
+	}
+	float halfOf(float f)
+	{
+		cout << "절반 함수 호출 시작" << endl;
+		return (float)Math().half((double)f);
+	}
+
+};
+
+void main()
+{
+	Adapter* adapter = new AdapterImpl();
+
+	cout << adapter->twiceOf((float)100.0) << endl;
+	cout << adapter->halfOf((float)80.0) << endl;
+
+	delete adapter;
+	adapter = nullptr;
+
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
