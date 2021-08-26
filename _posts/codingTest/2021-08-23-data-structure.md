@@ -134,7 +134,7 @@ Node<T>* AddNode(Node<T>* before, const T& value)
 	delete _head;
 	delete _tail;
 }
-// iterator는 Iterator<T>를 의미하게 정의한다
+// iterator가 Iterator<T>를 의미하게 정의한다
 using iterator = Iterator<T>;
 ```
 
