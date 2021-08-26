@@ -121,39 +121,39 @@ void main()
 class Math
 {
 public:
-	Math()						{					}
-	virtual ~Math()				{					}
+	Math() {}
+	virtual ~Math() {}
 
 public:
 	// 두배
-	double twoTime(double num)	{ return num * 2;	}
+	double twoTime(double num) { return num * 2; }
 
 	// 절반
-	double half(double num)		{ return num / 2;	}
+	double half(double num) { return num / 2; }
 
 	// 강화된 알고리즘
-	double doubled(double d)	{ return d * 2;		}
+	double doubled(double d) { return d * 2; }
 
 };
 
 class Adapter
 {
 public:
-	Adapter()					{					}
-	virtual ~Adapter()			{					}
+	Adapter() {}
+	virtual ~Adapter() {}
 
 	// 원하는 기능
 public:
-	virtual float	twiceOf(float f)	= 0;
-	virtual float	halfOf(float f)		= 0;
+	virtual float	twiceOf(float f) = 0;
+	virtual float	halfOf(float f) = 0;
 
 };
 
 class AdapterImpl : public Adapter
 {
 public:
-	AdapterImpl()				{					}
-	virtual ~AdapterImpl()		{					}
+	AdapterImpl() {}
+	virtual ~AdapterImpl() {}
 
 	// 원하는 기능
 public:
