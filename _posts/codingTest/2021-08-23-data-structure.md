@@ -103,6 +103,47 @@ if (newCapacity == _capacity)
 - vector의 capacity와 size의 차이에 대해서 알아야 한다
 - 코딩 테스트에서 vector 구현은 은근히 자주 나온다
 
+### 02-3 연결 리스트 구현 연습
+
+```cpp
+// [head] <-> [1] <-> [prevNode] <-> [before] <-> [tail]
+// [head] <-> [1] <-> [prevNode] <-> [newNode] <-> [before] <-> [tail]
+Node<T>* AddNode(Node<T>* before, const T& value)
+{
+	Node<T>* newNode = new Node<T>(value);
+	Node<T>* prevNode = before->_prev;
+
+	// newNode의 왼쪽 노드와 연결
+	prevNode->_next = newNode;
+	newNode->_prev = prevNode;
+
+	// newNode의 오른쪽 노드와 연결
+	newNode->_next = before;
+	before->_prev = newNode;
+
+	_size++;
+
+	return newNode;
+}
+~List()
+{
+	// 물고 있는 데이터들을 한번에 손쉽게 해제한다
+	while (_size > 0)
+		pop_back();
+
+	delete _head;
+	delete _tail;
+}
+// iterator는 Iterator<T>를 의미하게 정의한다
+using iterator = Iterator<T>;
+```
+
+- 리스트는 어떠한 데이터를 탐색하는 시간은 느린데 해당 데이터를 삭제하는 것은 빠르다는 모순이 있다
+- 리스트는 삭제 또는 추가할 위치를 저장하고 있을 때 그때 에서만 빠르다
+
+### 02-4 스택
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
