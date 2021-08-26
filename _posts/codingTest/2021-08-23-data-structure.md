@@ -142,7 +142,55 @@ using iterator = Iterator<T>;
 - 리스트는 삭제 또는 추가할 위치를 저장하고 있을 때 그때 에서만 빠르다
 
 ### 02-4 스택
-- 
+- Iterator 활용하면 어떤 컨테이너 인지 상관없이 코드를 하나만 만들어주면 되어서 인터페이스 통일이라는 큰 장점이 생긴다
+
+```cpp
+// stack의 내부의 데이터를 순차적으로 출력
+while (s.empty() == false)
+{
+	// 최상위 원소
+	int data = s.top();
+	// 최상위 원소 삭제
+	s.pop();
+
+	cout << data << endl;
+}
+```
+
+- stack 구현 문제도 코딩테스트로 나올수 있다
+- stack은 배열형태로 구현해도 되고 연결리스트로 형태로 구현해도 된다
+
+```cpp
+// 컨테이너를 선택할 수 있게 만든 Stack 클래스
+template<typename T, typename Container = vector<T>>
+class Stack
+{
+public:
+	void push(const T& value)
+	{
+		_container.push_back(value);
+	}
+
+	void pop()
+	{
+		_container.pop_back();
+	}
+
+	T& top()
+	{
+		return _container.back();
+	}
+
+	bool empty() { return _container.empty(); }
+	int size() { return _container.size(); }
+
+private:
+	//vector<T> _container;
+	//list<T> _container;
+	Container _container;
+};
+```
+
 
 <br>
 
