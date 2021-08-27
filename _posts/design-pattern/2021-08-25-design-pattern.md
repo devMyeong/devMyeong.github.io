@@ -304,4 +304,159 @@ void main()
 
 <br>
 
+## Chapter 03 팩토리 메소드
+
+### 03-1 팩토리 메소드(Factory Method Pattern)
+
+```cpp
+//-------------------------------------------------------------------------------------
+// Factory method는 부모(상위) 클래스에 알려지지 않은 구체 클래스를 생성하는 패턴이며
+// 자식(하위) 클래스가 어떤 객체를 생성할지를 결정하도록 하는 패턴이기도 하다
+//-------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+
+class Item
+{
+public:
+	Item() {}
+	virtual ~Item() {}
+
+public:
+	virtual void use() = 0;
+};
+
+class HpPotion : public Item
+{
+public:
+	HpPotion() {}
+	virtual ~HpPotion() {}
+
+public:
+	// Item을(를) 통해 상속됨
+	virtual void use() override
+	{
+		cout << "체력 회복" << endl;
+	}
+};
+
+class MpPotion : public Item
+{
+public:
+	MpPotion() {}
+	virtual ~MpPotion() {}
+
+public:
+	// Item을(를) 통해 상속됨
+	virtual void use() override
+	{
+		cout << "마력 회복" << endl;
+	}
+};
+
+class ItemCreator
+{
+public:
+	ItemCreator() {}
+	virtual ~ItemCreator() {}
+
+public:
+	// 팩토리 메소드
+	Item* create()
+	{
+		Item* item;
+
+		// step 1
+		requestItemInfo();
+		// step 2
+		item = createItem();
+		// step 3
+		createItemLog();
+
+		return item;
+	}
+
+protected:
+	// 아이템을 생성하기 전에 데이터 베이스에서 아이템 정보를 요청합니다
+	virtual void requestItemInfo() = 0;
+	// 아이템을 생성 후 아이템 복제 등의 불법을 방지하기 위해 데이터 베이스에 아이템 생성 정보를 남깁니다
+	virtual void createItemLog() = 0;
+	// 아이템을 생성하는 알고리즘
+	virtual Item* createItem() = 0;
+};
+
+class HpCreator : public ItemCreator
+{
+public:
+	HpCreator() {}
+	virtual ~HpCreator() {}
+
+public:
+	// ItemCreator을(를) 통해 상속됨
+	virtual void requestItemInfo() override
+	{
+		cout << "데이터베이스에서 체력 회복 물약의 정보를 가져옵니다" << endl;
+	}
+
+	virtual void createItemLog() override
+	{
+		cout << "체력 회복 물약을 새로 생성 했습니다 + 현재 날짜 및 시간" << endl;
+	}
+
+	virtual Item * createItem() override
+	{
+		return new HpPotion();
+	}
+
+};
+
+class MpCreator : public ItemCreator
+{
+public:
+	MpCreator() {}
+	virtual ~MpCreator() {}
+
+public:
+	// ItemCreator을(를) 통해 상속됨
+	virtual void requestItemInfo() override
+	{
+		cout << "데이터베이스에서 마력 회복 물약의 정보를 가져옵니다" << endl;
+	}
+
+	virtual void createItemLog() override
+	{
+		cout << "마력 회복 물약을 새로 생성 했습니다 + 현재 날짜 및 시간" << endl;
+	}
+
+	virtual Item * createItem() override
+	{
+		return new MpPotion();
+	}
+
+};
+
+void main(void)
+{
+	ItemCreator* creator = new HpCreator();
+	Item* item = creator->create();
+	item->use();
+
+	delete creator;
+	creator = nullptr;
+	delete item;
+	item = nullptr;
+
+	creator = new MpCreator();
+	item = creator->create();
+	item->use();
+
+	delete creator;
+	creator = nullptr;
+	delete item;
+	item = nullptr;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
