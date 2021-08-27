@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2021-08-23
-last_modified_at: 2021-08-23
+last_modified_at: 2021-08-27
 ---
 
 ## Chapter 00 오티
@@ -209,6 +209,33 @@ void pop()
 	_front = (_front + 1) % _container.size();
 	_size--;
 }
+```
+
+### 02-6 오른손 법칙 개선
+- 동적 배열, 연결 리스트는 면접에서 자주 등장하는 주제이다
+- 동적 배열은 push로 데이터 삽입시 O(1)의 시간복잡도를 가진다, 중간 삽입 및 삭제는 O(N) 시간복잡도를 가진다, 임의 접근은 O(1) 시간복잡도를 가진다
+- 연결 리스트는 데이터 삽입시 O(1)의 시간복잡도를 가진다, 임의 접근은 O(N)의 시간복잡도를 가진다
+
+```cpp
+for (int i = 0; i < _path.size() - 1; i++)
+{
+	// 스택 최상단의 내용과 내가 가려는 길이 일치한다면 되돌아 가고
+	// 있다는 뜻이다 따라서 해당 루트를 제거해야 한다
+	if (s.empty() == false && s.top() == _path[i + 1])
+		s.pop();
+	else
+		s.push(_path[i]);
+}
+
+vector<Pos> path;
+while (s.empty() == false)
+{
+	path.push_back(s.top());
+	s.pop();
+}
+	// 스택 특성상 reverse를 해줘야 한다 그렇지
+	// 않으면 목적지에서 출발지로 가게된다
+	std::reverse(path.begin(), path.end());
 ```
 
 <br>
