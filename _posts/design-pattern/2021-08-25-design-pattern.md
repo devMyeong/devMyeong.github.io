@@ -187,4 +187,121 @@ void main()
 
 <br>
 
+## Chapter 02 템플릿 메소드 패턴
+
+### 02-1 템플릿 메소드 패턴(Template Method Pattern)
+
+```cpp
+//----------------------------------------------
+// 알고리즘의 구조를 메소드에 정의하고
+// 하위 클래스에서 알고리즘 구조의
+// 변경없이 알고리즘을 재정의 하는 패턴
+//----------------------------------------------
+
+#include "stdafx.h"
+#include<string>
+
+class GameConnectHelper
+{
+public:
+	GameConnectHelper() {}
+	virtual ~GameConnectHelper() {}
+
+	// 외부에는 노출되면 안되고 하위 클래스 에서는 사용할 수 있어야 하는 알고리즘들
+protected:
+	virtual string doSecurity(string string) = 0;
+	virtual bool authentication(string id, string password) = 0;
+	virtual int authorization(string userName) = 0;
+	virtual string connection(string info) = 0;
+
+public:
+	// 템플릿 메소드
+	string requestConnection(string str)
+	{
+		// 보안 작업 -> 암호화 된 문자열을 복호화
+		string decodedInfo = doSecurity(str);
+
+		// 반환된 것을 가지고 아이디, 암호를 할당한다
+		string id = "aaa";
+		string password = "bbb";
+
+		if (authentication(id, password) == false)
+		{
+			cout << "예외 처리 작업" << endl;
+			cout << "아이디 암호 불일치" << endl;
+		}
+
+		string userName = "userName";
+		int i = authorization(userName);
+
+		switch (i)
+		{
+		case 0:
+			cout << "게임 매니저" << endl;
+			break;
+		case 1:
+			cout << "유료 회원" << endl;
+			break;
+		case 2:
+			cout << "무료 회원" << endl;
+			break;
+		case 3:
+			cout << "권한 없음" << endl;
+			break;
+		default:
+			cout << "기타 상황" << endl;
+			break;
+		}
+
+		return connection(decodedInfo);
+	}
+
+};
+
+class DefaultGameConnectHelper : public GameConnectHelper
+{
+public:
+	DefaultGameConnectHelper() {}
+	virtual ~DefaultGameConnectHelper() {}
+
+	// GameConnectHelper을(를) 통해 상속됨
+	virtual string doSecurity(string string) override
+	{
+		cout << "디코드" << endl;
+		return string;
+	}
+	virtual bool authentication(string id, string password) override
+	{
+		cout << "아이디/암호 확인 과정" << endl;
+		return true;
+	}
+	virtual int authorization(string userName) override
+	{
+		// 셧다운제가 생겨서 청소년의 접속을 막아야 한다면
+		// 이 함수에서 권한 확인을 한 뒤 청소년에 해당하는
+		// 코드를 return 하면 된다
+		cout << "권한 확인" << endl;
+		return 0;
+	}
+	virtual string connection(string info) override
+	{
+		// 이 단계에서는 접속단계 에서 필요한 정보들을 넘겨준다
+		cout << "마지막 접속단계!" << endl;
+		return info;
+	}
+};
+
+void main()
+{
+	GameConnectHelper* helper = new DefaultGameConnectHelper();
+
+	helper->requestConnection("아이디 암호 등 접속 정보");
+
+	delete helper;
+	helper = nullptr;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
