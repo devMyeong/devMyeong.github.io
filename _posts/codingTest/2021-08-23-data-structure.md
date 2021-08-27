@@ -204,8 +204,8 @@ while (q.empty() == false)
 
 void pop()
 {
-	// % _container.size()를 해주는 이유는 큐에 데이터가
-	// 다찼으면 인덱스가 다시 0으로 회귀 해야하기 때문이다
+	// % _container.size()를 해주는 이유는 큐에 데이터가 다찼으면
+	// 큐 구조 특성상 인덱스가 다시 0으로 회귀 해야하기 때문이다
 	_front = (_front + 1) % _container.size();
 	_size--;
 }
