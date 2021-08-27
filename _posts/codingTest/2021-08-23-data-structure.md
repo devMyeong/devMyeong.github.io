@@ -233,9 +233,9 @@ while (s.empty() == false)
 	path.push_back(s.top());
 	s.pop();
 }
-	// 스택 특성상 reverse를 해줘야 한다 그렇지
-	// 않으면 목적지에서 출발지로 가게된다
-	std::reverse(path.begin(), path.end());
+// 스택 특성상 reverse를 해줘야 한다 그렇지
+// 않으면 목적지에서 출발지로 가게된다
+std::reverse(path.begin(), path.end());
 ```
 
 <br>
