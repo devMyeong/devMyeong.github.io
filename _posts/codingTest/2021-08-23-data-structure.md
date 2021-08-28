@@ -295,6 +295,34 @@ vector<vector<int>> adjacent2 =
 };
 ```
 
+### 03-2 DFS (깊이 우선 탐색)
+- DFS (Depth First Search) 깊이 우선 탐색
+- BFS (Breadth First Search) 너비 우선 탐색
+- F10과 F11을 이용해서 디버깅을 하며 코드를 확인해보자
+
+```cpp
+// 인접 리스트 version
+// 모든 인접 정점을 순회한다
+for (int i = 0; i < adjacent[here].size(); i++)
+{
+	int there = adjacent[here][i];
+	if (visited[there] == false)
+		Dfs(there);
+}
+
+// 인접 행렬 version
+// 모든 인접 정점을 순회한다
+for (int there = 0; there < 6; there++)
+{
+	if (adjacent[here][there] == 0)
+		continue;
+
+	// 아직 방문하지 않은 곳이 있으면 방문한다
+	if (visited[there] == false)
+		Dfs(there);
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
