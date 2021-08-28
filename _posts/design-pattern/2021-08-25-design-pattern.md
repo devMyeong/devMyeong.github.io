@@ -591,7 +591,7 @@ private:
 
 void main(void)
 {
-	DoctorStrange* doctorStrange = new DoctorStrange(35, 40, 2);
+	DoctorStrange* doctorStrange = new DoctorStrange(100, 50, 25);
 	CopyUnit* copyUnit = new CopyUnit(doctorStrange);
 }
 ```
