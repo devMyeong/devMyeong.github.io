@@ -240,4 +240,61 @@ std::reverse(path.begin(), path.end());
 
 <br>
 
+## Chapter 03 그래프 기초
+
+### 03-1 그래프 기초
+- 정점(Vertex) : 데이터를 표현(사물, 개념 등)
+- 간선(Edge) : 정점들을 연결하는데 사용
+
+![DIR](https://user-images.githubusercontent.com/80055816/131204304-b604713a-b77e-4da6-9192-1bfa080358a3.png){: width="70%" height="70%"}{: .align-center}
+
+![WEIGHTED](https://user-images.githubusercontent.com/80055816/131204315-57bcb78b-249b-43f9-917c-682ee6e27eec.png){: width="70%" height="70%"}{: .align-center}
+
+- 우리가 구현할 그래프는 위와 같다
+
+```cpp
+// STL
+vector<int>& adj = adjacent[0];
+// 3 이라는 정점을 찾았는지 확인하는 코드
+bool connected2 = (std::find(adj.begin(), adj.end(), 3) != adj.end());
+
+// 연결된 목록을 따로 관리
+// [X][O][X][O][X][X] // 0 번째 정점에 1번 3번 정점이 연결 되어 있다
+// [O][X][O][O][X][X] // 1 번째 정점에 0번 2번 3번 정점이 연결 되어 있다
+// [X][X][X][X][X][X] // ...
+// [X][X][X][X][O][X]
+// [X][X][X][X][X][X]
+// [X][X][X][X][O][X]
+
+// 읽는 방법 : adjacent[from][to]
+// 행렬을 이용한 그래프 표현 (2차원 배열)
+// 메모리 소모가 심하지만, 빠른 접근이 가능하다
+// (간선이 많은 경우 이점이 있다)
+vector<vector<bool>> adjacent(6, vector<bool>(6, false));
+adjacent[0][1] = true;
+adjacent[0][3] = true;
+adjacent[1][0] = true;
+adjacent[1][2] = true;
+adjacent[1][3] = true;
+adjacent[3][4] = true;
+adjacent[5][4] = true;
+```
+
+- CreateGraph_3() 방법은 메모리를 많이 소모한다는 단점이 존재하지만 굉장히 빠르게 접근할 수 있다는 장점이 생긴다
+
+```cpp
+vector<vector<int>> adjacent2 =
+{
+	// 아래는 가중치 그래프 인데 -1은 비어 있는 것을 의미한다
+	vector<int> { -1, 15, -1, 35, -1, -1 }, // 0 번째 정점에 1번 3번 정점이 연결 되어 있다
+	vector<int> { 15, -1, +5, 10, -1, -1 }, // 1 번째 정점에 0번 2번 3번 정점이 연결 되어 있다
+	vector<int> { -1, -1, -1, -1, -1, -1 }, // ...
+	vector<int> { -1, -1, -1, -1, +5, -1 },
+	vector<int> { -1, -1, -1, -1, -1, -1 },
+	vector<int> { -1, -1, -1, -1, +5, -1 },
+};
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
