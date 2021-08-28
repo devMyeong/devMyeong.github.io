@@ -545,4 +545,57 @@ void main(void)
 
 <br>
 
+## Chapter 05 프로토 타입 패턴
+
+### 05-1 프로토 타입 패턴(Prototype Pattern) 1
+
+```cpp
+//--------------------------------------------------------------------------------------------------
+// 프로토 타입 패턴이란 생산 비용이 높은 인스턴스를 복사를 통해서 쉽게 생성 할 수 있도록 하는 패턴
+// 인스턴스 생산 비용이 높은 경우는 종류가 너무 많아서 클래스로 정리되지 않는 경우와 클래스로 부터
+// 인스턴스 생성이 어려운 경우가 있다
+//--------------------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+
+class Unit {
+public:
+	virtual ~Unit() {}
+	virtual Unit *clone() = 0;
+};
+
+class DoctorStrange : public Unit {
+public:
+	DoctorStrange(int hp, int atk, int spd) : mHp(hp), mAtk(atk), mSpd(spd) {}
+
+	virtual Unit *clone() {
+		return new DoctorStrange(mHp, mAtk, mSpd);
+	}
+
+private:
+	int mHp;
+	int mAtk;
+	int mSpd;
+};
+
+class CopyUnit {
+public:
+	CopyUnit(Unit *prototype) : mPrototype(prototype) {}
+	Unit *spawn() {
+		return mPrototype->clone();
+	}
+
+private:
+	Unit *mPrototype;
+};
+
+void main(void)
+{
+	DoctorStrange* doctorStrange = new DoctorStrange(35, 40, 2);
+	CopyUnit* copyUnit = new CopyUnit(doctorStrange);
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
