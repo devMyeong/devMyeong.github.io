@@ -459,4 +459,90 @@ void main(void)
 
 <br>
 
+## Chapter 04 싱글톤 패턴
+
+### 03-1 싱글톤 패턴(Singleton Pattern)
+
+```cpp
+//------------------------------------------------------------------------------------------
+// 소프트웨어 디자인 패턴에서 싱글턴 패턴(Singleton pattern)을 따르는 클래스는, 생성자가
+// 여러 차례 호출되더라도 실제로 생성되는 객체는 하나이고 최초 생성 이후에 호출된 생성자는
+// 최초의 생성자가 생성한 객체를 리턴한다 이와 같은 디자인 유형을 싱글턴 패턴이라고 한다
+//------------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+
+class SystemSpeaker
+{
+// 외부에서 new를 이용해서 생성하는 것을 막는다
+private:
+	SystemSpeaker() : m_iVolume(5) {}
+	virtual ~SystemSpeaker() { }
+
+public:
+	static SystemSpeaker* GetInstance()
+	{
+		if (instance == nullptr)
+		{
+			// 스피커와 통신 할수 있게끔 하는 작업을 여기에 넣어주어야 한다
+			instance = new SystemSpeaker();
+		}
+		return instance;
+	}
+
+	static void ReleaseInst()
+	{
+		if (instance)
+		{
+			delete instance;
+			instance = nullptr;
+			cout << "메모리가 정상적으로 해제되었습니다" << endl;
+		}
+		else
+			cout << "이미 메모리가 해제되었습니다" << endl;
+	}
+
+	int GetVolume()
+	{
+		return this->m_iVolume;
+	}
+
+	void SetVolume(int volume)
+	{
+		this->m_iVolume = volume;
+	}
+
+private:
+	static SystemSpeaker* instance;
+	int m_iVolume;
+};
+
+SystemSpeaker* SystemSpeaker::instance = nullptr;
+
+void main(void)
+{
+	SystemSpeaker* speaker1 = SystemSpeaker::GetInstance();
+	SystemSpeaker* speaker2 = SystemSpeaker::GetInstance();
+
+	// 5, 5 
+	cout << speaker1->GetVolume() << endl;
+	cout << speaker2->GetVolume() << endl;
+
+	speaker1->SetVolume(11);
+	// 11, 11
+	cout << speaker1->GetVolume() << endl;
+	cout << speaker2->GetVolume() << endl;
+
+	speaker2->SetVolume(22);
+	// 22, 22
+	cout << speaker1->GetVolume() << endl;
+	cout << speaker2->GetVolume() << endl;
+
+	speaker1->ReleaseInst();
+	speaker2->ReleaseInst();
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
