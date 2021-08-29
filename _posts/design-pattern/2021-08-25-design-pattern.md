@@ -602,4 +602,164 @@ void main(void)
 
 <br>
 
+## Chapter 06 빌더 패턴
+
+### 06-1 빌더 패턴(Builder Pattern) 1
+
+```cpp
+//-----------------------------------------------------------------------------------------
+// 빌더 패턴이란 복잡한 단계를 거쳐야 생성되는 객체의 구현을 서브 클래스에게 넘겨주는 패턴
+//-----------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+
+class Computer;
+
+class BluePrint
+{
+public:
+	BluePrint() {}
+	virtual ~BluePrint() {}
+
+public:
+	virtual void setCpu() = 0;
+	virtual void setRam() = 0;
+	virtual void setStorage() = 0;
+	virtual Computer* getComputer() = 0;
+};
+
+class ComputerFactory
+{
+public:
+	ComputerFactory() {}
+	virtual ~ComputerFactory() {}
+
+public:
+	void setBlueprint(BluePrint* print)
+	{
+		this->print = print;
+	}
+	void make()
+	{
+		print->setRam();
+		print->setCpu();
+		print->setStorage();
+	}
+
+	Computer* getComputer()
+	{
+		return print->getComputer();
+	}
+
+private:
+	BluePrint* print;
+};
+
+class Computer
+{
+public:
+	Computer(string cpu, string ram, string storage) : cpu(cpu), ram(ram), storage(storage)
+	{
+	}
+	virtual ~Computer() {}
+
+public:
+	string getCpu()
+	{
+		return cpu;
+	}
+	void setCpu(string cpu)
+	{
+		this->cpu = cpu;
+	}
+	string getRam()
+	{
+		return ram;
+	}
+	void setRam(string ram)
+	{
+		this->ram = ram;
+	}
+	string getStorage()
+	{
+		return storage;
+	}
+	void setStorage(string storage)
+	{
+		this->storage = storage;
+	}
+	string toString()
+	{
+		return cpu + ", " + ram + ", " + storage;
+	}
+
+private:
+	string cpu;
+	string ram;
+	string storage;
+};
+
+class LgGramBlueprint : public BluePrint
+{
+public:
+	LgGramBlueprint() { }
+	virtual ~LgGramBlueprint() { }
+
+public:
+
+
+	// BluePrint을(를) 통해 상속됨
+	virtual void setCpu() override
+	{
+		cpu = "i7";
+	}
+
+	virtual void setRam() override
+	{
+		ram = "8g";
+	}
+
+	virtual void setStorage() override
+	{
+		storage = "SSD 256";
+	}
+
+	virtual Computer* getComputer()
+	{
+		return new Computer(cpu, ram, storage);
+	}
+
+private:
+	string cpu;
+	string ram;
+	string storage;
+
+};
+
+void main(void)
+{
+	ComputerFactory* factory = new ComputerFactory();
+	
+	// 팩토리에 LgGramBlueprint라는 설계도를 넣어준다
+	factory->setBlueprint(new LgGramBlueprint());
+	
+	// 설계도를 바탕으로 만든다
+	factory->make();
+	
+	// 만들어진 결과값을 가지고 온다
+	Computer* computer = factory->getComputer();
+
+	cout << computer->toString() << endl;
+
+	delete factory;
+	factory = nullptr;
+
+	delete computer;
+	computer = nullptr;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
