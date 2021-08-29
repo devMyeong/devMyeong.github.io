@@ -569,6 +569,7 @@ public:
 	DoctorStrange(int hp, int atk, int spd) : mHp(hp), mAtk(atk), mSpd(spd) {}
 
 	virtual Unit *clone() {
+		// 깊은 복사가 이루어지고 있다
 		return new DoctorStrange(mHp, mAtk, mSpd);
 	}
 
@@ -595,6 +596,9 @@ void main(void)
 	CopyUnit* copyUnit = new CopyUnit(doctorStrange);
 }
 ```
+
+### 05-2 프로토 타입 패턴(Prototype Pattern) 2
+- 프로토 타입 패턴을 사용할때는 깊은 복사와 얕은 복사중에 어떤 복사를 선택할 것인지 잘 판단해야 한다
 
 <br>
 
