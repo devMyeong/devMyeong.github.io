@@ -330,6 +330,27 @@ for (int there = 0; there < 6; there++)
 - BFS는 큐로 예약을 한다
 - BFS는 코딩 면접에서 단골로 등장하기 때문에 안보고 구현해보는 연습을 하자
 
+### 03-4 BFS를 이용한 길찾기 구현
+
+```cpp
+_path.clear();
+// 거꾸로 거슬러 올라간다
+pos = dest;
+
+while (true)
+{
+	_path.push_back(pos);
+
+	// 시작점은 자신이 곧 부모이다
+	if (pos == parent[pos])
+		break;
+
+	pos = parent[pos];
+}
+```
+
+- 코드를 외우려 하지말고 공책에 알고리즘을 그려보자 즉 흐름을 그려보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
