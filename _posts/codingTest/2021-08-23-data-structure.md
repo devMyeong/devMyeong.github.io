@@ -323,6 +323,13 @@ for (int there = 0; there < 6; there++)
 }
 ```
 
+### 03-3 BFS (너비 우선 탐색)
+
+![bfs](https://user-images.githubusercontent.com/80055816/131243395-276f0cb5-118a-4c7c-b3b6-26f1ed0b6dfd.png){: width="70%" height="70%"}{: .align-center}
+
+- BFS는 큐로 예약을 한다
+- BFS는 코딩 면접에서 단골로 등장하기 때문에 안보고 구현해보는 연습을 하자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
