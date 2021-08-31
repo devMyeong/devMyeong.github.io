@@ -91,7 +91,7 @@ int main()
 }
 ```
 
-- thread 이미지
+![thread](https://user-images.githubusercontent.com/80055816/131530998-76f522a6-8f26-4ce2-8de3-66fe89ad47d5.PNG){: width="70%" height="70%"}{: .align-center}
 
 - thread 탭을 이용해 각 thread의 현재 진행 상황을 볼 수 있다
 
