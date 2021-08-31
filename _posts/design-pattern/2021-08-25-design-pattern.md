@@ -760,10 +760,6 @@ void main(void)
 }
 ```
 
-<br>
-
-## Chapter 06 빌더 패턴
-
 ### 06-2 빌더 패턴(Builder Pattern) 2
 
 ```cpp
