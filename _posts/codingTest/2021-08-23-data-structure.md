@@ -365,4 +365,36 @@ vector<int> best(6, INT32_MAX); // 각 정점별로 지금까지 발견한 최�
 
 <br>
 
+## Chapter 04 힙과 우선순위 큐
+
+### 04-1 트리 기초
+- 트리는 계층적 구조를 갖는 데이터를 표현하기 위한 자료구조 이다
+
+![treebase](https://user-images.githubusercontent.com/80055816/131501899-1f09ba6d-506f-4f74-a060-a8bc5858bc28.png){: width="70%" height="70%"}{: .align-center}
+
+- 트리와 관련된 용어는 부모, 자식, 형제, 선조, 자손, 루트, 잎, 깊이, 높이, 트리의 재귀적 속성 및 서브트리가 있다
+
+![sharedptr](https://user-images.githubusercontent.com/80055816/131501980-e4b34580-dca4-4d38-b6cf-03bc2a1cd373.PNG){: width="70%" height="70%"}{: .align-center}
+
+![ourtree](https://user-images.githubusercontent.com/80055816/131502028-2b689c9e-7603-4eb9-ac86-5f15e12d4b30.png){: width="70%" height="70%"}{: .align-center}
+
+- 깊이(depth)란 루트에서 어떤 노드에 노달하기 위해 거쳐야 하는 간선의 수 (aka. 몇 층?)
+- 높이(height)란 가장 깊숙히 있는 노드의 깊이 (max(depth))
+
+```cpp
+// 아래 부분은 N사의 손코딩 테스트에 나온 문제( Height 구하기 )
+int GetHeight(NodeRef root)
+{
+	int height = 1;
+
+	for (NodeRef& child : root->children)
+		// max 함수는 둘중 더 큰애를 골라준다
+		height = max(height, GetHeight(child) + 1);
+
+	return height;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
