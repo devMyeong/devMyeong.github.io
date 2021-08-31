@@ -54,6 +54,72 @@ last_modified_at: 2021-08-29
 
 - 멀티쓰레드 환경에서는 위의 이미지와 같이 Heap 영역과 데이터 영역을 모든 쓰레드들이 공유할 수 있다
 
+### 01-2 쓰레드 생성
+- 국내는 윈도우서버를 많이 사용하나 해외는 리눅스서버를 선호한다
+
+```cpp
+#include <thread>
+
+void HelloThread()
+{
+	cout << "Hello Thread!" << endl;
+}
+
+int main()
+{
+	// 메인쓰레드가 실행됨과 동시에 아래 코드에 해당하는
+	// 쓰레드가 생성되어 병렬로 처리가 된다
+	std::thread t(HelloThread);
+
+	// CPU 코어 개수
+	int32 count = t.hardware_concurrency();
+
+	// 쓰레드마다 id
+	auto id = t.get_id();
+
+	// std:thread 객체에서 실제 쓰레드를 분리
+	t.detach();
+	
+	// t 객체가 관리하고 있는 thread가 살아있는지 확인
+	if (t.joinable())
+	{
+		// t 쓰레드 보다 메인 쓰레드가 먼저 종료 되는것을 방지
+		t.join();
+	}
+
+	cout << "Hello Main" << endl;
+}
+```
+
+- thread 이미지
+
+- thread 탭을 이용해 각 thread의 현재 진행 상황을 볼 수 있다
+
+```cpp
+#include <thread>
+
+void HelloThread_2(int32 num)
+{
+	cout << num << endl;
+}
+
+int main()
+{
+	vector<std::thread> v;
+
+	for (int32 i = 0; i < 10; i++)
+	{
+		v.push_back(std::thread(HelloThread_2, i));
+	}
+
+	for (int32 i = 0; i < 10; i++)
+	{
+		if (v[i].joinable())
+			v[i].join();
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
