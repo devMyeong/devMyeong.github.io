@@ -360,7 +360,7 @@ while (true)
 list<VertexCost> discovered; // 발견 목록
 
 // 우월한 경로를 계속 갱신해줘야 한다
-vector<int> best(6, INT32_MAX); // 각 정점별로 지금까지 발견한 최소 거리 이며 INT32_MAX 단순히 엄청 큰값
+vector<int> best(6, INT32_MAX); // 각 정점별로 지금까지 발견한 최소 거리 이며 INT32_MAX는 단순히 엄청 큰값
 ```
 
 <br>
