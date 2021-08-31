@@ -762,4 +762,122 @@ void main(void)
 
 <br>
 
+## Chapter 07 빌더 패턴
+
+### 07-2 빌더 패턴(Builder Pattern) 2
+
+```cpp
+//--------------------------------------------------------------------
+// 많은 인자를 가진 객체의 생성을 다른 객체의 도움으로 생성하는 패턴
+//--------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+
+class Computer
+{
+public:
+	// 매개 변수가 여기서는 3개지만 100개쯤 된다고 가정해보자
+	Computer(string cpu, string ram, string storage) : cpu(cpu), ram(ram), storage(storage)
+	{
+	}
+	virtual ~Computer() {}
+
+public:
+	string getCpu()
+	{
+		return cpu;
+	}
+	void setCpu(string cpu)
+	{
+		this->cpu = cpu;
+	}
+	string getRam()
+	{
+		return ram;
+	}
+	void setRam(string ram)
+	{
+		this->ram = ram;
+	}
+	string getStorage()
+	{
+		return storage;
+	}
+	void setStorage(string storage)
+	{
+		this->storage = storage;
+	}
+	string toString()
+	{
+		return cpu + ", " + ram + ", " + storage;
+	}
+
+private:
+	string cpu;
+	string ram;
+	string storage;
+};
+
+class ComputerBuilder
+{
+private:
+	// 매개 변수가 여기서는 3개지만 100개쯤 된다고 가정해보자
+	ComputerBuilder() { computer = new Computer("default", "default", "default"); }
+	virtual ~ComputerBuilder() { delete computer; computer = nullptr; }
+
+public:
+	static ComputerBuilder* start()
+	{
+		return new ComputerBuilder();
+	}
+
+	static ComputerBuilder* startWithCpu(string cpu)
+	{
+		ComputerBuilder* builder = new ComputerBuilder();
+		builder->computer->setCpu(cpu);
+		return builder;
+	}
+
+	ComputerBuilder* setCpu(string string)
+	{
+		computer->setCpu(string);
+		return this;
+	}
+
+	ComputerBuilder* setRam(string string)
+	{
+		computer->setRam(string);
+		return this;
+	}
+
+	ComputerBuilder* setStorage(string string)
+	{
+		computer->setStorage(string);
+		return this;
+	}
+
+	Computer* build()
+	{
+		return this->computer;
+	}
+
+private:
+	Computer* computer;
+};
+
+void main(void)
+{
+	// 지금 넣어주고 있는 값이 무엇인지 함수명을 보고 알수있는 장점이 있다 ( 방식 1 )
+	Computer* computer = ComputerBuilder::start()->setCpu("i7")->setRam("8g")->setStorage("128g SSD")->build();
+
+	// 지금 넣어주고 있는 값이 무엇인지 함수명을 보고 알수있는 장점이 있다 ( 방식 2 )
+	//Computer* computer = ComputerBuilder::start()->startWithCpu("i7")->setRam("8g")->setStorage("128g SSD")->build();
+
+	cout << computer->toString() << endl;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
