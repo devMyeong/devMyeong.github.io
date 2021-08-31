@@ -395,6 +395,27 @@ int GetHeight(NodeRef root)
 }
 ```
 
+### 04-2 힙 트리 이론
+- 이진 트리란 각 노드가 <u>최대</u> 두 개의 자식 노드를 가지는 트리
+- 이진 트리의 특징은 오니쪽을 타고 가면 현재 값보다 작으며 오른쪽을 타고 가면 현재 값보다 크다
+
+![treeproblem](https://user-images.githubusercontent.com/80055816/131513101-e9173606-8962-4543-82fd-038f6f6d350f.png){: width="70%" height="70%"}{: .align-center}
+
+- 위의 이진 검색트리 처럼 그냥 무식하게 추가하면, 한쪽으로 기울어져서 균형이 깨진다(연결 리스트랑 다를게 없다) 즉 트리 재배치를 통해 균형을 유지하는 것이 과제이다(AVL, Red-Black)
+
+![heaptree](https://user-images.githubusercontent.com/80055816/131513186-66d29e6d-4ead-4d45-b879-17e9ec87ffee.png){: width="70%" height="70%"}{: .align-center}
+
+- 힙트리는 부모 노드가 가진 값이 항상 자식 노드가 가진 값보다 크기만 하면 된다
+- 힙트리는 마지막 레벨을 제외한 모든 레벨에 노드가 꽉 차 있다(완전 이진 트리)
+
+![heaptree2](https://user-images.githubusercontent.com/80055816/131513254-c0d3cf82-b012-4ac6-8460-682e91f19562.png){: width="70%" height="70%"}{: .align-center}
+
+- 마지막 레벨에 노드가 있을 때는. 항상 왼쪽부터 순서대로 채워야 한다
+- 노드 개수를 알면, 트리 구조는 무조건 확정할 수 있다
+- 배열을 이용해서 힙 구조를 바로 표현할 수 있다( 09:43 참조 )
+- 힙 트리 특성상 최대값은 무조건 루트 노드에 있는 값이다
+- 공책과 팬을 이용해서 트리를 그려보고 데이터를 제거하는 실습을 해보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
