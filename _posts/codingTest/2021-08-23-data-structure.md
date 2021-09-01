@@ -431,6 +431,9 @@ int GetHeight(NodeRef root)
 - 이진 탐색은 배열에 데이터가 정렬되어 있다고 가정한다
 - 데이터가 한번만 만들어지고 평생 바뀔일이 없다고 가정하면 배열로 관리해서 이진 탐색을 사용하는것 또한 우월한 방법이 될 수 있다
 
+### 05-2 이진 탐색 트리
+- 전위 순회 (preorder traverse), 중위 순회 (inorder), 후위 순회 (postorder)
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
