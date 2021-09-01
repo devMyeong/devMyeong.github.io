@@ -120,6 +120,11 @@ int main()
 }
 ```
 
+### 01-3 Atomic
+- [디버그] - [디스어셈블리] 사용법은 05:05 참조
+- atomic : All-Or-Nothing
+- `atomic<int32> sum = 0;`
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
