@@ -977,6 +977,218 @@ void main(void)
 }
 ```
 
+### 07-2 추상 팩토리 패턴(Abstract Factory Pattern) 2
+
+```cpp
+//-------------------------------------------------------------------------------------------
+// 관련있는 클래스를 하나의 팩토리로 묶어줘서 동일한 방식으로 생성할 수 있게 도와주는 패턴
+//-------------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+
+class Button;
+class TextArea;
+
+class Button
+{
+public:
+	Button() {}
+	virtual ~Button() {}
+
+public:
+	virtual void click() = 0;
+};
+
+class TextArea
+{
+public:
+	TextArea() {}
+	virtual ~TextArea() {}
+
+public:
+	virtual string getText() = 0;
+};
+
+class LinuxButton : public Button
+{
+public:
+	LinuxButton() {}
+	virtual ~LinuxButton() {}
+
+	// Button을(를) 통해 상속됨
+	virtual void click() override
+	{
+		cout << "리눅스 버튼" << endl;
+	}
+};
+
+class LinuxTextArea : public TextArea
+{
+public:
+	LinuxTextArea() {}
+	virtual ~LinuxTextArea() {}
+
+	// TextArea을(를) 통해 상속됨
+	virtual string getText() override
+	{
+		return "리눅스 텍스트 에어리어";
+	}
+};
+
+class MacButton : public Button
+{
+public:
+	MacButton() {}
+	virtual ~MacButton() {}
+
+	// Button을(를) 통해 상속됨
+	virtual void click() override
+	{
+		cout << "맥 버튼" << endl;
+	}
+};
+
+class MacTextArea : public TextArea
+{
+public:
+	MacTextArea() {}
+	virtual ~MacTextArea() {}
+
+	// TextArea을(를) 통해 상속됨
+	virtual string getText() override
+	{
+		return "맥 텍스트 에어리어";
+	}
+};
+
+class WinButton : public Button
+{
+public:
+	WinButton() {}
+	virtual ~WinButton() {}
+
+	// Button을(를) 통해 상속됨
+	virtual void click() override
+	{
+		cout << "윈도우 버튼" << endl;
+	}
+};
+
+class WinTextArea : public TextArea
+{
+public:
+	WinTextArea() {}
+	virtual ~WinTextArea() {}
+
+	// TextArea을(를) 통해 상속됨
+	virtual string getText() override
+	{
+		return "윈도우 텍스트 에어리어";
+	}
+};
+
+class GuiFac
+{
+public:
+	GuiFac() {}
+	virtual ~GuiFac() {}
+
+public:
+	virtual Button* createButton() = 0;
+	virtual TextArea* createTextArea() = 0;
+};
+
+class LinuxGuiFac : public GuiFac
+{
+public:
+	LinuxGuiFac() {}
+	virtual ~LinuxGuiFac() {}
+
+	// GuiFac을(를) 통해 상속됨
+	virtual Button* createButton() override
+	{
+		return new LinuxButton();
+	}
+	virtual TextArea * createTextArea() override
+	{
+		return new LinuxTextArea();
+	}
+};
+
+class MacGuiFac : public GuiFac
+{
+public:
+	MacGuiFac() {}
+	virtual ~MacGuiFac() {}
+
+	// GuiFac을(를) 통해 상속됨
+	virtual Button* createButton() override
+	{
+		return new MacButton();
+	}
+	virtual TextArea * createTextArea() override
+	{
+		return new MacTextArea();
+	}
+};
+
+class WinGuiFac : public GuiFac
+{
+public:
+	WinGuiFac() {}
+	virtual ~WinGuiFac() {}
+
+	// GuiFac을(를) 통해 상속됨
+	virtual Button* createButton() override
+	{
+		return new WinButton();
+	}
+	virtual TextArea * createTextArea() override
+	{
+		return new WinTextArea();
+	}
+};
+
+class FactoryInstance
+{
+public:
+	FactoryInstance() {}
+	virtual ~FactoryInstance() {}
+
+public:
+	// 이 부분을 라이브러리 형태로 제공한다고 가정한다 즉 각각의 팩토리를 감춘다
+	static GuiFac* getGuiFac()
+	{
+		// 이 부분에서 어떤 팩토리가 생성될지 선택된다
+		switch (getOsCode())
+		{
+		case 0:	return new MacGuiFac();
+		case 1:	return new LinuxGuiFac();
+		case 2:	return new WinGuiFac();
+		}
+	}
+	
+private:
+	static int getOsCode()
+	{
+		return 0;
+	}
+};
+
+void main(void)
+{
+	GuiFac* fac = FactoryInstance::getGuiFac();
+
+	// 이 밑에 소스들은 건들일 필요가 없다
+	Button* button = fac->createButton();
+	TextArea* area = fac->createTextArea();
+
+	button->click();
+	cout << area->getText() << endl;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
