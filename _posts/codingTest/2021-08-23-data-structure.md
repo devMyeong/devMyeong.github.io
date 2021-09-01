@@ -439,7 +439,12 @@ int GetHeight(NodeRef root)
 
 ![rb](https://user-images.githubusercontent.com/80055816/131637402-f1ac678a-d948-4e9d-9b97-f4ff4f1bf73d.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 05-4 레드 블랙 트리 #2
+- 오늘 주제는 일평생 한번 만들까 말까한 내용이다
+- 레드 블랙트리는 어떤 노드로부터 그에 속한 하위 리프 노드에 도달하는 모든 경로에는 같은 개수의 블랙 노드를 만난다 라는 특징이 있다는 것을 명심하자
 
+### 05-5 레드 블랙 트리 #3
+- 
 
 <br>
 
