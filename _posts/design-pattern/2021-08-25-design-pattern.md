@@ -876,4 +876,107 @@ void main(void)
 
 <br>
 
+## Chapter 07 추상 팩토리 패턴
+
+### 07-1 추상 팩토리 패턴(Abstract Factory Pattern) 1
+
+```cpp
+//-------------------------------------------------------------------------------------------
+// 관련있는 클래스를 하나의 팩토리로 묶어줘서 동일한 방식으로 생성할 수 있게 도와주는 패턴
+//-------------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+
+class Body
+{
+public:
+	Body() {}
+	virtual ~Body() {}
+};
+
+class Wheel
+{
+public:
+	Wheel() {}
+	virtual ~Wheel() {}
+};
+
+class SamBody : public Body
+{
+
+};
+
+class SamWheel : public Wheel
+{
+
+};
+
+class GtBody : public Body
+{
+
+};
+
+class GtWheel : public Wheel
+{
+
+};
+
+class BikeFactory
+{
+public:
+	BikeFactory() {}
+	virtual ~BikeFactory() {}
+
+public:
+	virtual Body* createBody() = 0;
+	virtual Wheel* createWheel() = 0;
+};
+
+class SamFactory : public BikeFactory
+{
+public:
+	SamFactory() {}
+	virtual ~SamFactory() {}
+
+	// BikeFactory을(를) 통해 상속됨
+	virtual Body * createBody() override
+	{
+		return new SamBody();
+	}
+	virtual Wheel * createWheel() override
+	{
+		return new SamWheel();
+	}
+};
+
+class GtBikeFactory : public BikeFactory
+{
+public:
+	GtBikeFactory() {}
+	virtual ~GtBikeFactory() {}
+
+	// BikeFactory을(를) 통해 상속됨
+	virtual Body * createBody() override
+	{
+		return new GtBody();
+	}
+	virtual Wheel * createWheel() override
+	{
+		return new GtWheel();
+	}
+};
+
+void main(void)
+{
+	//BikeFactory* factory = new SamFactory();
+	BikeFactory* factory = new GtBikeFactory();
+
+	Body* body = factory->createBody();
+	Wheel* wheel = factory->createWheel();
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
