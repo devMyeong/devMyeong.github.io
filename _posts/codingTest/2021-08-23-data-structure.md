@@ -437,7 +437,7 @@ int GetHeight(NodeRef root)
 ### 05-3 레드 블랙 트리 #1
 - 트리의 균형을 맞추는 대표적인 예시
 
-![rb](https://user-images.githubusercontent.com/80055816/131637402-f1ac678a-d948-4e9d-9b97-f4ff4f1bf73d.PNG){: width="100%" height="100%"}{: .align-center}
+![rb](https://user-images.githubusercontent.com/80055816/131720218-6db833e1-0d28-47d4-90d0-e8312e724271.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-4 레드 블랙 트리 #2
 - 오늘 주제는 일평생 한번 만들까 말까한 내용이다
