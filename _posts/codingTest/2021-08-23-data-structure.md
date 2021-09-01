@@ -444,7 +444,31 @@ int GetHeight(NodeRef root)
 - 레드 블랙트리는 어떤 노드로부터 그에 속한 하위 리프 노드에 도달하는 모든 경로에는 같은 개수의 블랙 노드를 만난다 라는 특징이 있다는 것을 명심하자
 
 ### 05-5 레드 블랙 트리 #3
-- 
+
+```cpp
+// 먼저 BST 삭제 실행...
+// - Case1) 삭제할 노드가 Red -> 그냥 삭제! 끝!
+// - Case2) root가 DB -> 그냥 추가 Black 삭제! 끝!
+// - Case3) DB의 sibling 노드가 Red
+// -- s = black, p = red (s <-> p 색상 교환)
+// -- DB 방향으로 rotate(p) 
+// -- goto other case
+// - Case4) DB의 sibling 노드가 Black && sibling의 양쪽 자식도 Black
+// -- 추가 Black을 parent에게 이전
+// --- p가 Red이면 Black 됨.
+// --- p가 Black이면 DB 됨.
+// -- s = red
+// -- p를 대상으로 알고리즘 이어서 실행 (DB가 여전히 존재하면)
+// - Case5) DB의 sibling 노드가 Black && sibling의 near child = red, far child = black
+// -- s <-> near 색상 교환
+// -- far 방향으로 rotate(s)
+// -- goto case 6
+// - Case6) DB의 sibling 노드가 Black && sibling의 far child = red
+// - p <-> s 색상 교환
+// - far = black
+// - rotate(p) (DB 방향으로)
+// - 추가 Black 제거
+```
 
 <br>
 
