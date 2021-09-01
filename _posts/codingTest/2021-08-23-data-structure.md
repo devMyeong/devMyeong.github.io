@@ -446,7 +446,7 @@ int GetHeight(NodeRef root)
 ### 05-5 레드 블랙 트리 #3
 
 ```cpp
-// 먼저 BST 삭제 실행...
+// 먼저 BST 삭제 실행... ( 참고로 이 주제가 코딩 테스트에 나올일은 없음 )
 // - Case1) 삭제할 노드가 Red -> 그냥 삭제! 끝!
 // - Case2) root가 DB -> 그냥 추가 Black 삭제! 끝!
 // - Case3) DB의 sibling 노드가 Red
