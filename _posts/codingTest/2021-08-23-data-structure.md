@@ -434,6 +434,13 @@ int GetHeight(NodeRef root)
 ### 05-2 이진 탐색 트리
 - 전위 순회 (preorder traverse), 중위 순회 (inorder), 후위 순회 (postorder)
 
+### 05-3 레드 블랙 트리 #1
+- 트리의 균형을 맞추는 대표적인 예시
+
+![rb](https://user-images.githubusercontent.com/80055816/131637402-f1ac678a-d948-4e9d-9b97-f4ff4f1bf73d.PNG){: width="70%" height="70%"}{: .align-center}
+
+
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
