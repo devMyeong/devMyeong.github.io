@@ -534,8 +534,8 @@ void HeapSort(vector<int>& v)
 // - 정복 (Conquer)		분할된 문제를 해결
 // - 결합 (Combine)		결과를 취합하여 마무리
 
-// 퀴즈 - a와 b가 정렬되어 있다고 가정하자
-// a와 b를 정렬된 합쳐서 리턴하는 함수를 구현하라
+// 퀴즈 - a와 b가 정렬되어 있다고 가정하자 a와 b를
+// 정렬된 상태로 합쳐서 리턴하는 함수를 구현하라
 vector<int> Merge(vector<int> a, vector<int> b)
 {
 	vector<int> temp;
