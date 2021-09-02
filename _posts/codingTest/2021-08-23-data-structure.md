@@ -472,4 +472,39 @@ int GetHeight(NodeRef root)
 
 <br>
 
+## Chapter 06 정렬
+
+### 06-1 기본 정렬(버블, 선택, 삽입)
+- 코딩 면접에서 정렬은 단골 주제이다
+
+```cpp
+// 1) 버블 정렬 (Bubble Sort)
+void BubbleSort(vector<int>& v)
+{
+	const int n = (int)v.size();
+
+	// (N-1) + (N-2) + ... + 2 + 1
+	// 등차수열의 합 = N * (N-1) / 2
+	// O(N^2)
+	for (int i = 0; i < n - 1; i++)
+	{
+		// n - 1 - i 에서 -i를 해주는 이유는 확보된
+		// 자리는 스위칭이 일어나지 않게 하기 위함
+		for (int j = 0; j < (n - 1 - i); j++)
+		{
+			if (v[j] > v[j + 1])
+			{
+				int temp = v[j];
+				v[j] = v[j + 1];
+				v[j + 1] = temp;
+			}
+		}
+	}
+}
+```
+
+- 삽입정렬은 문자열과 관련된 코딩 문제에서 자주 나온다
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
