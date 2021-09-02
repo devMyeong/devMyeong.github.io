@@ -584,7 +584,7 @@ vector<int> Merge(vector<int> a, vector<int> b)
 ![mst](https://user-images.githubusercontent.com/80055816/131801313-7cb04968-dab1-4377-8352-8838b87cff14.png){: width="100%" height="100%"}{: .align-center}
 
 - 최소 스패닝 트리 기반으로 통신 네트워크 구축시 구축 비용, 전송 시간 등을 최소로 해야 한다
-- 크루스칼(KRUSKAL) MST 알고리즘의 특징은 탐욕적인(greedy) 방법을 이용
+- 크루스칼(KRUSKAL) MST 알고리즘의 특징은 탐욕적인(greedy) 방법을 사용
 
 <br>
 
