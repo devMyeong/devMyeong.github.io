@@ -546,6 +546,14 @@ vector<int> Merge(vector<int> a, vector<int> b)
 
 - 디버깅 해가면서 공부하자, 25:46 처럼 그림을 그려가면 공부하자
 
+### 06-3 퀵 정렬
+
+```cpp
+// [5][1][3][7][9][2][4][6][8]
+// p
+//           high low	
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
