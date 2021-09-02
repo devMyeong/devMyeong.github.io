@@ -586,6 +586,9 @@ vector<int> Merge(vector<int> a, vector<int> b)
 - 최소 스패닝 트리 기반으로 통신 네트워크 구축시 구축 비용, 전송 시간 등을 최소로 해야 한다
 - 크루스칼(KRUSKAL) MST 알고리즘의 특징은 탐욕적인(greedy) 방법을 사용
 
+### 08-3 Kruskal 알고리즘을 이용한 맵 생성
+- 공부중
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
