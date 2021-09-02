@@ -505,6 +505,47 @@ void BubbleSort(vector<int>& v)
 
 - 삽입정렬은 문자열과 관련된 코딩 문제에서 자주 나온다
 
+### 06-2 힙 정렬과 병합 정렬
+
+```cpp
+// 힙 정렬
+void HeapSort(vector<int>& v)
+{
+	priority_queue<int, vector<int>, greater<int>> pq;
+	
+	// 데이터를 밀어넣는데 걸리는 시간은 logN
+	// 총 데이터는 N개 따라서 시간 복잡도는 O(NlogN)
+	for (int num : v)
+		pq.push(num);
+
+	v.clear();
+
+	// O(NlogN)
+	while (pq.empty() == false)
+	{
+		v.push_back(pq.top());
+		pq.pop();
+	}
+}
+
+// 병합 정렬
+// 분할 정복 (Divide and Conquer)
+// - 분할 (Divide)		문제를 더 단순하게 분할한다
+// - 정복 (Conquer)		분할된 문제를 해결
+// - 결합 (Combine)		결과를 취합하여 마무리
+
+// 퀴즈 - a와 b가 정렬되어 있다고 가정하자
+// a와 b를 정렬된 합쳐서 리턴하는 함수를 구현하라
+vector<int> Merge(vector<int> a, vector<int> b)
+{
+	vector<int> temp;
+
+	return temp;
+}
+```
+
+- 디버깅 해가면서 공부하자, 25:46 처럼 그림을 그려가면 공부하자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
