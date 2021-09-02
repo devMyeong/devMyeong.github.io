@@ -572,6 +572,20 @@ vector<int> Merge(vector<int> a, vector<int> b)
 - 이 주제 이후부터는 필수적이지는 않지만 배워두면 좋은 기법들을 설명한다
 - 서로 다른팀인 상태에서 팀이 합쳐지는 상황이 빈번하게 발생한다고 가정할때 사용할 수 있는 알고리즘
 
+### 08-2 Kruskal 알고리즘
+
+![spa](https://user-images.githubusercontent.com/80055816/131801235-3fde8210-23fe-4d7d-aec4-8ab06f36371c.png){: width="100%" height="100%"}{: .align-center}
+
+- 위의 이미지에서 노란선은 후보 간선
+- 스패닝 트리란 간선의 수를 최소화해서, 모든 정점을 연결하는것
+- 간선의 수를 최소화 한다는 말은 사이클이 생기지 않게 해야 한다는 뜻
+- 간선을 연결해보면 필연적으로 간선의 개수가 N-1개가 된다
+
+![mst](https://user-images.githubusercontent.com/80055816/131801313-7cb04968-dab1-4377-8352-8838b87cff14.png){: width="100%" height="100%"}{: .align-center}
+
+- 최소 스패닝 트리 기반으로 통신 네트워크 구축시 구축 비용, 전송 시간 등을 최소로 해야 한다
+- 크루스칼(KRUSKAL) MST 알고리즘의 특징은 탐욕적인(greedy) 방법을 이용
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
