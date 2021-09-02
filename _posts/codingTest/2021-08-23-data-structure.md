@@ -566,4 +566,12 @@ vector<int> Merge(vector<int> a, vector<int> b)
 
 <br>
 
+## Chapter 08 최소 스패닝 트리
+
+### 08-1 Disjoint Set(상호 배타적 집합)
+- 이 주제 이후부터는 필수적이지는 않지만 배워두면 좋은 기법들을 설명한다
+- 서로 다른팀인 상태에서 팀이 합쳐지는 상황이 빈번하게 발생한다고 가정할때 사용할 수 있는 알고리즘
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
