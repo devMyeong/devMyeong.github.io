@@ -97,6 +97,12 @@ int newCapacity = static_cast<int>(_capacity * 1.5);
 // newCapacity가 0또는 1이면 안되기 때문에 처리해주는 조건문
 if (newCapacity == _capacity)
 	newCapacity++;
+
+// 요청한 할당량 보다 기존의
+// 할당량이 더 많다면 return
+if (_capacity >= capacity)
+	return;
+}
 ```
 
 - vector의 reserve()와 resize()의 차이에 대해서 알아야 한다
