@@ -98,8 +98,7 @@ int newCapacity = static_cast<int>(_capacity * 1.5);
 if (newCapacity == _capacity)
 	newCapacity++;
 
-// 요청한 할당량 보다 기존의
-// 할당량이 더 많다면 return
+// 요청한 할당량 보다 기존의 할당량이 더 많다면 return
 if (_capacity >= capacity)
 	return;
 }
