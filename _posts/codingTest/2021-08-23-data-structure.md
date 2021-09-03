@@ -621,6 +621,9 @@ vector<int> Merge(vector<int> a, vector<int> b)
 // 2 7 5 9 4
 ```
 
+### 09-4 샘플 문제 : TIC-TAE-TOE
+- 공부중
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
