@@ -635,6 +635,9 @@ vector<int> Merge(vector<int> a, vector<int> b)
 // +3 +4
 ```
 
+### 09-6 실전 문제 : KART-RIDER (N모 회사)
+- 공부중
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
