@@ -624,6 +624,17 @@ vector<int> Merge(vector<int> a, vector<int> b)
 ### 09-4 샘플 문제 : TIC-TAE-TOE
 - 공부중
 
+### 09-5 실전 문제 : ENCHANT (K모 회사)
+```cpp
+// +1 +2 +3 +4
+// +1 +2 +4
+// +1 +3 +4
+// +1 +4
+// +2 +3 +4
+// +2 +4
+// +3 +4
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
