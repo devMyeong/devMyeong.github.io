@@ -601,6 +601,10 @@ vector<int> Merge(vector<int> a, vector<int> b)
 - 인공지능쪽 연구를 한다고 하면 중요하게 활용이 된다
 - 코딩 면접에서는 종종 나오는 주제이다 ( N사 )
 
+### 09-2 샘플 문제 : LIS
+- 이 주제는 동적 계획법(DP)의 대표적인 예시
+- 굉장히 많은 실습이 필요하다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
