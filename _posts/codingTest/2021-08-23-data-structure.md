@@ -207,10 +207,38 @@ while (q.empty() == false)
 	cout << value << endl;
 }
 
-void pop()
+void push(const T& value)
 {
+	// TODO : 다 찼는지 체크
+	if (_size == _container.size())
+	{
+		// ...
+		// 새 공간으로 데이터 복사( front 부터 back 전까지만 )
+		// [][][front][][][][][][][][][back][][][][]
+		// [front][][][][][][][][][back][][][][][][][][][][][][][][][][][][][][]
+		for (int i = 0; i < _size; i++)
+		{
+			int index = (_front + i) % _container.size();
+			newData[i] = _container[index];
+		}
+	}
+
+	...
+
 	// % _container.size()를 해주는 이유는 큐에 데이터가 다찼으면
 	// 큐 구조 특성상 인덱스가 다시 0으로 회귀 해야하기 때문이다
+	// 참고로 back은 데이터가 push될 위치
+	_container[_back] = value;
+	// _container.size()는 버퍼의 크기를 의미한다
+	_back = (_back + 1) % _container.size();
+	// _size는 데이터 개수이다
+	_size++;
+
+}
+
+void pop()
+{
+	// front는 데이터가 pop될 위치
 	_front = (_front + 1) % _container.size();
 	_size--;
 }
