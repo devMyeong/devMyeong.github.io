@@ -331,6 +331,8 @@ vector<vector<int>> adjacent2 =
 - BFS (Breadth First Search) 너비 우선 탐색
 - F10과 F11을 이용해서 디버깅을 하며 코드를 확인해보자
 
+![DFS](https://user-images.githubusercontent.com/80055816/132093559-fbb13c06-8b97-4e09-9b6c-f1fd9c29d6cd.png){: width="70%" height="70%"}{: .align-center}
+
 ```cpp
 void CreateGraph()
 {
@@ -376,8 +378,6 @@ int main()
 	Dfs(0);
 }
 ```
-
-![DFS](https://user-images.githubusercontent.com/80055816/132093559-fbb13c06-8b97-4e09-9b6c-f1fd9c29d6cd.png){: width="70%" height="70%"}{: .align-center}
 
 ### 03-3 BFS (너비 우선 탐색)
 
