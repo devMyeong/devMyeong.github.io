@@ -311,11 +311,7 @@ adjacent[1][2] = true;
 adjacent[1][3] = true;
 adjacent[3][4] = true;
 adjacent[5][4] = true;
-```
 
-- CreateGraph_3() 방법은 메모리를 많이 소모한다는 단점이 존재하지만 굉장히 빠르게 접근할 수 있다는 장점이 생긴다
-
-```cpp
 vector<vector<int>> adjacent2 =
 {
 	// 아래는 가중치 그래프 인데 -1은 비어 있는 것을 의미한다
@@ -327,6 +323,8 @@ vector<vector<int>> adjacent2 =
 	vector<int> { -1, -1, -1, -1, +5, -1 },
 };
 ```
+
+- CreateGraph_3() 방법은 메모리를 많이 소모한다는 단점이 존재하지만 굉장히 빠르게 접근할 수 있다는 장점이 생긴다
 
 ### 03-2 DFS (깊이 우선 탐색)
 - DFS (Depth First Search) 깊이 우선 탐색
