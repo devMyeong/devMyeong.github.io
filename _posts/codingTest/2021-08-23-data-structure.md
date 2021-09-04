@@ -383,8 +383,32 @@ int main()
 
 ![bfs](https://user-images.githubusercontent.com/80055816/131243395-276f0cb5-118a-4c7c-b3b6-26f1ed0b6dfd.png){: width="70%" height="70%"}{: .align-center}
 
+- 위의 이미지가 큐 방식으로 구현된 BFS라면 방문 순서가 어떻게 될지 예측해보자
+- BFS는 발견(예약)만 하고 당장 방문은 하지 않을수 있다
 - BFS는 큐로 예약을 한다
 - BFS는 코딩 면접에서 단골로 등장하기 때문에 안보고 구현해보는 연습을 하자
+
+```cpp
+void Bfs(int here)
+{
+	...
+	// 여기서 발견(예약)만 한다
+	for (int there : adjacent[here])
+	{
+		// 이미 방문한 상태인지 확인하고 이미 발견된 상태라면 두번 발견할 필요가 없다
+		if (discovered[there])
+			continue;
+
+		q.push(there);
+		discovered[there] = true;
+
+		// 이 구문 덕분에 누구에 의해서 발견 되었는지를 알 수 있다
+		parent[there] = here;
+		// 이 구문 덕분에 시작점에서 얼만큼 떨어져 있는지 알 수 있다
+		distance[there] = distance[here] + 1;
+	}
+}
+```
 
 ### 03-4 BFS를 이용한 길찾기 구현
 
