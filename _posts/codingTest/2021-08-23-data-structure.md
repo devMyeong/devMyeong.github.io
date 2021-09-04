@@ -332,27 +332,52 @@ vector<vector<int>> adjacent2 =
 - F10과 F11을 이용해서 디버깅을 하며 코드를 확인해보자
 
 ```cpp
-// 인접 리스트 version
-// 모든 인접 정점을 순회한다
-for (int i = 0; i < adjacent[here].size(); i++)
+void CreateGraph()
 {
-	int there = adjacent[here][i];
-	if (visited[there] == false)
-		Dfs(there);
+	vertices.resize(6);
+	// 미리 행 공간만 6개 할당한다
+	adjacent = vector<vector<int>>(6);
+
+	...
 }
-
-// 인접 행렬 version
-// 모든 인접 정점을 순회한다
-for (int there = 0; there < 6; there++)
+void Dfs(int here)
 {
-	if (adjacent[here][there] == 0)
-		continue;
+	// 방문!
+	visited[here] = true;
+	cout << "Visited : " << here << endl;
 
-	// 아직 방문하지 않은 곳이 있으면 방문한다
-	if (visited[there] == false)
-		Dfs(there);
+	// 인접 리스트 version
+	// 모든 인접 정점을 순회한다
+	for (int i = 0; i < adjacent[here].size(); i++)
+	{
+		// i=0 에는 첫번째 there 정보가 있고 i=1 에는 두번째 there 정보가 있다
+		int there = adjacent[here][i];
+		// 방문한 적이 없다면 there 안쪽으로 타고 들어간다 보면 된다
+		if (visited[there] == false)
+			Dfs(there);
+	}
+	
+	// 인접 행렬 version
+	// 모든 인접 정점을 순회한다
+	for (int there = 0; there < 6; there++)
+	{
+		if (adjacent[here][there] == 0)
+			continue;
+	
+		// 아직 방문하지 않은 곳이 있으면 방문한다
+		if (visited[there] == false)
+			Dfs(there);
+	}
+}
+int main()
+{
+	// 이 경우 0 에서 타고 들어갈수 있는 there 들만 방문한다
+	// 그래서 DfsAll() 함수가 있는거다
+	Dfs(0);
 }
 ```
+
+![DFS](https://user-images.githubusercontent.com/80055816/132093559-fbb13c06-8b97-4e09-9b6c-f1fd9c29d6cd.png){: width="70%" height="70%"}{: .align-center}
 
 ### 03-3 BFS (너비 우선 탐색)
 
