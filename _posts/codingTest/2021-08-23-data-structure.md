@@ -562,11 +562,11 @@ void pop()
 template<class _Ty = void>
 struct less
 {	// functor for operator<
-_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty first_argument_type;
-_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty second_argument_type;
-_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef bool result_type;
+	_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty first_argument_type;
+	_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty second_argument_type;
+	_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef bool result_type;
 
-constexpr bool operator()(const _Ty& _Left, const _Ty& _Right) const
+	constexpr bool operator()(const _Ty& _Left, const _Ty& _Right) const
 	{	// apply operator< to operands
 		// 이 부분이 중요하다
 		return (_Left < _Right)
