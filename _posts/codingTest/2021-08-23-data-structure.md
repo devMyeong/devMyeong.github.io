@@ -510,6 +510,70 @@ int GetHeight(NodeRef root)
 - 공책과 팬을 이용해서 트리를 그려보고 데이터를 제거하는 실습을 해보자
 
 ### 04-3 우선순위 큐 구현 연습
+- 우선순위 큐는 트리구조 이지만 양쪽으로 꽉 차있기 때문에 배열을 이용하여 표현할 수 있다 ( 04:35 참조 )
+
+```cpp
+void push(const T& data)
+{
+	...
+	// next에 부모 노드 인덱스가 들어간다
+	int next = (now - 1) / 2;
+	// 부모 노드와 비교해서 더 작으면 패배
+	if (_heap[now] < _heap[next])
+		break;
+}
+
+void pop()
+{
+	// 힙의 맨뒤에 있는것을 루트에 덮어쓴다
+	_heap[0] = _heap.back();
+	// 힙의 맨뒤에 있는 데이터 제거
+	_heap.pop_back();
+
+	while (true)
+	{
+		int left = 2 * now + 1;
+		int right = 2 * now + 2;
+
+		// 리프에 도달한 경우
+		if (left >= heap.size())
+			break;
+
+		// next는 최종적인 연산이 끝났을때 내가 이동해야 되는 인덱스
+		int next = now;
+
+		// 왼쪽과 비교
+		if (_heap[next] < _heap[left])
+			next = left;
+
+		// 둘 중 승자를 오른쪽과 비교
+		if (right < (int)_heap.size() && _heap[next], _heap[right])
+			next = right;
+
+		// 왼쪽/오른쪽 둘 다 현재 값보다 작으면 종료
+		if (next == now)
+			break;
+
+		...
+	}
+}
+
+// STRUCT TEMPLATE less
+template<class _Ty = void>
+struct less
+{	// functor for operator<
+_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty first_argument_type;
+_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef _Ty second_argument_type;
+_CXX17_DEPRECATE_ADAPTOR_TYPEDEFS typedef bool result_type;
+
+constexpr bool operator()(const _Ty& _Left, const _Ty& _Right) const
+	{	// apply operator< to operands
+		// 이 부분이 중요하다
+		return (_Left < _Right)
+	}
+};
+```
+
 - 가장 작은값 혹은 가장 큰값 둘중 하나를 데이터 중에서 계속 추출해야되는 필요성이 있을때 우선순위 큐가 활용된다
 
 ### 04-4 A* 길찾기 알고리즘
