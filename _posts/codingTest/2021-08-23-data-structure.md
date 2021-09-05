@@ -437,10 +437,20 @@ while (true)
 ```cpp
 // 발견목록을 queue가 아닌 list로 관리하는 이유는
 // 먼저 발견한 애가 먼저 방문이 된다는 보장이 없기 때문
+// 참고로 DFS는 먼저 찾은애가 반드시 먼저 꺼내지는 것이
+// 보장되기 때문에 queue로 구현되었다
 list<VertexCost> discovered; // 발견 목록
 
 // 우월한 경로를 계속 갱신해줘야 한다
 vector<int> best(6, INT32_MAX); // 각 정점별로 지금까지 발견한 최소 거리 이며 INT32_MAX는 단순히 엄청 큰값
+
+// 이 코드는 queue의 pop과 같은 기능을 한다
+int cost = bestIt->cost;
+here = bestIt->vertex;
+discovered.erase(bestIt);
+
+// there는 here에 의해 찾았다
+parent[there] = here;
 ```
 
 <br>
