@@ -547,7 +547,7 @@ void pop()
 			next = left;
 
 		// 둘 중 승자를 오른쪽과 비교
-		if (right < (int)_heap.size() && _heap[next], _heap[right])
+		if (right < (int)_heap.size() && _heap[next] < _heap[right])
 			next = right;
 
 		// 왼쪽/오른쪽 둘 다 현재 값보다 작으면 종료
