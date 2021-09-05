@@ -281,7 +281,7 @@ std::reverse(path.begin(), path.end());
 
 ![DIR](https://user-images.githubusercontent.com/80055816/131204304-b604713a-b77e-4da6-9192-1bfa080358a3.png){: width="70%" height="70%"}{: .align-center}
 
-![WEIGHTED](https://user-images.githubusercontent.com/80055816/131204315-57bcb78b-249b-43f9-917c-682ee6e27eec.png){: width="70%" height="70%"}{: .align-center}
+![WEIGHTED](https://user-images.githubusercontent.com/80055816/132113421-bff6b1bb-7882-4a35-8d7a-18299323cbaa.png){: width="70%" height="70%"}{: .align-center}
 
 - 우리가 구현할 그래프는 위와 같다
 
