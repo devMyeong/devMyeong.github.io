@@ -594,6 +594,7 @@ void Player::AStar()
 	// 초기값
 	{
 		int32 g = 0;
+		// 10을 곱해주는 이유는 한칸 이동하는 비용 단위가 10이기 때문이다
 		int32 h = 10 * (abs(dest.y - start.y) + abs(dest.x - start.x));
 		pq.push(PQNode{ g + h, g, start });
 		// 데이터가 너무 많아지면 2차원 배열을 이용할 수 없다
@@ -638,6 +639,65 @@ void Player::AStar()
 
 ### 05-2 이진 탐색 트리
 - 전위 순회 (preorder traverse), 중위 순회 (inorder), 후위 순회 (postorder)
+```cpp
+void BinarySearchTree::Insert(int key)
+{
+	...
+	while (node)
+	{
+		parent = node;
+		// 접근
+		if (key < node->key)
+			node = node->left;
+		else
+			node = node->right;
+	}
+
+	newNode->parent = parent;
+
+	// 붙이기
+	if (key < parent->key)
+		parent->left = newNode;
+	else
+		parent->right = newNode;
+}
+
+Node * BinarySearchTree::Min(Node * node)
+{
+	while (node->left)
+		node = node->left;
+
+	return node;
+}
+
+Node * BinarySearchTree::Max(Node * node)
+{
+	while (node->right)
+		node = node->right;
+
+	return node;
+}
+
+Node * BinarySearchTree::Next(Node * node)
+{
+	if (node->right)
+		return Min(node->right);
+
+	Node* parent = node->parent;
+
+	// 전달받은 노드(node)가 해당 노드의 부모에
+	// right에 있다면 부모가 자신보다 작은 케이스
+	// 따라서 자신보다 큰 케이스가 나타날때 까지
+	// 올라가야 한다
+	while (parent&&node == parent->right)
+	{
+		node = parent;
+		parent = parent->parent;
+	}
+
+	return parent;
+}
+```
 
 ### 05-3 레드 블랙 트리 #1
 - 트리의 균형을 맞추는 대표적인 예시
