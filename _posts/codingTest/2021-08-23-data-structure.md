@@ -18,6 +18,7 @@ last_modified_at: 2021-08-27
 ## Chapter 00 오티
 
 ### 00-1 오티 
+- 자료구조(資料構造, 영어: data structure)는 컴퓨터 과학에서 효율적인 접근 및 수정을 가능케 하는 자료의 조직, 관리, 저장을 의미한다
 - 정렬, 레드 블랙 트리, 해쉬 테이블이 면접에서 자주 나온다
 
 ### 00-2 Big-O 표기법
@@ -578,6 +579,51 @@ struct less
 
 ### 04-4 A* 길찾기 알고리즘
 - `A*와 다익스트라 알고리즘` 의 가장 큰 차이점은 A*는 시작점 뿐만 아니라 목적지라는 명확한 개념도 생기게 된다
+
+```cpp
+void Player::AStar()
+{
+	// 점수 매기기
+	// F = G + H
+	// F = 최종 점수 (작을 수록 좋음, 경로에 따라 달라짐)
+	// G = 시작점에서 해당 좌표까지 이동하는데 드는 비용 (작을 수록 좋음, 경로에 따라 달라짐)
+	// H = 목적지에서 얼마나 가까운지 (작을 수록 좋음, 고정)
+
+	...
+
+	// 초기값
+	{
+		int32 g = 0;
+		int32 h = 10 * (abs(dest.y - start.y) + abs(dest.x - start.x));
+		pq.push(PQNode{ g + h, g, start });
+		// 데이터가 너무 많아지면 2차원 배열을 이용할 수 없다
+		// 그때는 자료구조를 map 같은 것으로 바꿔야 한다
+		best[start.y][start.x] = g + h;
+		parent[start] = start;
+	}
+
+	while (pq.empty() == false)
+	{
+		...
+		// 방문
+		// 질문 : 내가 방문한 다음에 더 우수한 후보를 찾을수는 없나요?
+		// 답변 : 수학적으로 증명할 수 있는데 그건 존재할 수 없다
+		closed[node.pos.y][node.pos.x] = true;
+	}
+
+	for (int32 dir = 0; dir < DIR_COUNT; dir++)
+	{
+		...
+		// 비용 계산
+		// 여기서 node는 nextPos를 발견하기 이전의 parent에 해당한다
+		// 여기서 g는 시작점을 기준으로 이동하는 비용이다
+		int32 g = node.g + cost[dir];
+		// h는 목적지를 기준으로 얼마만큼 떨어져 있는지를 나타낸다
+		int32 h = 10 * (abs(dest.y - nextPos.y) + abs(dest.x - nextPos.x));
+		...
+	}
+}
+```
 
 <br>
 
