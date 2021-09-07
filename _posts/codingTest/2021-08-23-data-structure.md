@@ -795,6 +795,8 @@ void BubbleSort(vector<int>& v)
 
 ### 06-2 힙 정렬과 병합 정렬
 
+- 우선순위 큐를 만들때 무조건 힙을 사용해야 하는것은 아니다 하지만 둘은 궁합이 잘맞다
+
 ```cpp
 // 힙 정렬
 void HeapSort(vector<int>& v)
@@ -818,9 +820,24 @@ void HeapSort(vector<int>& v)
 
 // 병합 정렬
 // 분할 정복 (Divide and Conquer)
-// - 분할 (Divide)		문제를 더 단순하게 분할한다
-// - 정복 (Conquer)		분할된 문제를 해결
+// - 분할 (Divide)		문제를 더 단순하게 분할한다 즉 시간 복잡도는 O(logN)
+// - 정복 (Conquer)		분할된 문제를 해결 즉 시간 복잡도는 O(N)	
 // - 결합 (Combine)		결과를 취합하여 마무리
+
+void MergeSort(vector<int>& v, int left, int right)
+{
+	// 2. 언젠가 데이터가 한개만 남으면 빠져 나온다
+	if (left >= right)
+		return;
+
+	int mid = (left + right) / 2;
+	// 1. 계속 둘로 나눈다
+	MergeSort(v, left, mid);
+	MergeSort(v, mid + 1, right);
+
+	// 3. 빠져 나온 애들끼리 둘둘 조립을 한다
+	MergeResult(v, left, mid, right);
+}
 
 // 퀴즈 - a와 b가 정렬되어 있다고 가정하자 a와 b를
 // 정렬된 상태로 합쳐서 리턴하는 함수를 구현하라
@@ -832,6 +849,7 @@ vector<int> Merge(vector<int> a, vector<int> b)
 }
 ```
 
+- 병합 정렬을 5분안에 구현해 보세요 같은 문제는 말도 안되는 문제다 (너무 헷갈리기 때문)
 - 디버깅 해가면서 공부하자, 25:46 처럼 그림을 그려가면 공부하자
 
 ### 06-3 퀵 정렬
