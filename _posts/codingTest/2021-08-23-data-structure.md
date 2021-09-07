@@ -639,6 +639,7 @@ void Player::AStar()
 
 ### 05-2 이진 탐색 트리
 - 전위 순회 (preorder traverse), 중위 순회 (inorder), 후위 순회 (postorder)
+
 ```cpp
 void BinarySearchTree::Insert(int key)
 {
@@ -662,7 +663,7 @@ void BinarySearchTree::Insert(int key)
 		parent->right = newNode;
 }
 
-Node * BinarySearchTree::Min(Node * node)
+Node* BinarySearchTree::Min(Node * node)
 {
 	while (node->left)
 		node = node->left;
@@ -670,7 +671,7 @@ Node * BinarySearchTree::Min(Node * node)
 	return node;
 }
 
-Node * BinarySearchTree::Max(Node * node)
+Node* BinarySearchTree::Max(Node * node)
 {
 	while (node->right)
 		node = node->right;
@@ -678,7 +679,7 @@ Node * BinarySearchTree::Max(Node * node)
 	return node;
 }
 
-Node * BinarySearchTree::Next(Node * node)
+Node* BinarySearchTree::Next(Node * node)
 {
 	if (node->right)
 		return Min(node->right);
