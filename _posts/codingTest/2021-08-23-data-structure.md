@@ -866,8 +866,8 @@ vector<int> Merge(vector<int> a, vector<int> b)
 ### 07-1 해시 테이블
 - hash_map을 구현할 일은 거의 없다
 - map vs hash_map(C++11 표준 unordered_map)의 차이를 설명할 수 있어야 한다
-- map은 레드블랙트리 소위 균형이진 트리 구조이기 때문에 트리 구조로 관리된다
-- hash_map은 메모리 손해는 있으나 속도 측면에서는 map보다 빠르다
+- map은 레드블랙트리 소위 균형이진 트리 구조이기 때문에 트리 구조로 관리된다 또한 O(logN)을 보장하는 수준으로 Balancing 되어지는 특징을 갖고 있다
+- hash_map(unordered_map)은 메모리 손해는 있으나 속도 측면에서는 map보다 빠르다 그 이유는 hash_table을 통해 참조를 하기 때문에 각 node들을 정렬할 필요가 없기 때문이다
 
 <br>
 
