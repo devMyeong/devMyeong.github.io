@@ -701,7 +701,7 @@ Node* BinarySearchTree::Next(Node * node)
 	return parent;
 }
 
-// u 서버트리를 v 서브트리로 교체
+// u 서브트리를 v 서브트리로 교체
 void BinarySearchTree::RePlace(Node * u, Node * v)
 {
 	// 위에서 아래로 연결
