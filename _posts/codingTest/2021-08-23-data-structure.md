@@ -697,6 +697,24 @@ Node * BinarySearchTree::Next(Node * node)
 
 	return parent;
 }
+
+// u 서버트리를 v 서브트리로 교체
+void BinarySearchTree::RePlace(Node * u, Node * v)
+{
+	// 위에서 아래로 연결
+	if (u->parent == nullptr)
+		_root = v;
+	else if (u == v->parent->left)
+		u->parent->left = v;
+	else
+		u->parent->right = v;
+
+	// 아래에서 위로 연결
+	if (v)
+		v->parent = u->parent;
+
+	delete u;
+}
 ```
 
 ### 05-3 레드 블랙 트리 #1
