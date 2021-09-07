@@ -822,7 +822,7 @@ void HeapSort(vector<int>& v)
 // 분할 정복 (Divide and Conquer)
 // - 분할 (Divide)		문제를 더 단순하게 분할한다 즉 시간 복잡도는 O(logN)
 // - 정복 (Conquer)		분할된 문제를 해결 즉 시간 복잡도는 O(N)	
-// - 결합 (Combine)		결과를 취합하여 마무리
+// - 결합 (Combine)		결과를 취합하여 마무리 즉 최종 시간 복잡도는 O(NlogN)
 
 void MergeSort(vector<int>& v, int left, int right)
 {
