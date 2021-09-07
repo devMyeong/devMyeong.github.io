@@ -857,7 +857,7 @@ vector<int> Merge(vector<int> a, vector<int> b)
 ![quick](https://user-images.githubusercontent.com/80055816/132301220-407f5fa4-a4ec-44c2-99f6-b464464b0869.png){: width="100%" height="100%"}{: .align-center}
 
 - Partition 함수 자체는 시간복잡도가 O(N)이다 이유는 low는 최대 앞으로 N번 high는 최대 뒤로 N번 이동 할것이기 때문이다
-- QuickSort 함수는 최악의 경우 파티션이 N^2만큼 나뉘어지기 때문에 시간복잡도가 O(N^2) 이며 평균적으로는 O(NlogN) 이다
+- QuickSort 함수는 최악의 경우 파티션이 N만큼 나뉘어지기 때문에 시간복잡도가 O(N^2) 이며 평균적으로는 O(NlogN) 이다
 
 <br>
 
