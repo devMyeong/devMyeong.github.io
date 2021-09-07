@@ -665,6 +665,7 @@ void BinarySearchTree::Insert(int key)
 
 Node* BinarySearchTree::Min(Node * node)
 {
+	// 왼쪽으로 쭉
 	while (node->left)
 		node = node->left;
 
@@ -673,6 +674,7 @@ Node* BinarySearchTree::Min(Node * node)
 
 Node* BinarySearchTree::Max(Node * node)
 {
+	// 오른쪽으로 쭉
 	while (node->right)
 		node = node->right;
 
@@ -787,6 +789,8 @@ void BubbleSort(vector<int>& v)
 }
 ```
 
+- 선택정렬의 핵심은 bestIdx부터 찾고 이후에 교환이 일어난다는 것
+- 삽입정렬의 핵심은 insertData가 삽입할 데이터를 물고 있다는 것
 - 삽입정렬은 문자열과 관련된 코딩 문제에서 자주 나온다
 
 ### 06-2 힙 정렬과 병합 정렬
