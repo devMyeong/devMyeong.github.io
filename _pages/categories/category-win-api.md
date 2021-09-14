@@ -1,5 +1,5 @@
 ---
-title: "WinAPI"
+title: "WindowsAPI"
 layout: archive
 permalink: categories/win-api
 author_profile: true
