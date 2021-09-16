@@ -125,6 +125,78 @@ int main()
 - atomic : All-Or-Nothing
 - `atomic<int32> sum = 0;`
 
+### 01-4 Lock 기초
+
+```cpp
+#include "pch.h"
+#include <iostream>
+#include "CorePch.h"
+#include <thread>
+#include <atomic>
+#include <mutex>
+#include <vector>
+
+using namespace std;
+
+// stl 자료구조를 멀티쓰레드 환경에서 정상 동작 하게 하기위해 mutex를 활용하자
+vector<int32> v;
+
+// mutex의 특징은 Mutual Exclusive ( 상호배타적 )
+mutex m;
+
+// RAII ( Resource Acquisition Is Initialization )
+template<typename T>
+class LockGuard
+{
+public:
+	LockGuard(T& m)
+	{
+		_mutex = &m;
+		_mutex->lock();
+	}
+
+	~LockGuard()
+	{
+		_mutex->unlock();
+	}
+
+private:
+	T* _mutex;
+};
+
+void Push()
+{
+	for (int32 i = 0; i < 10000; i++)
+	{
+		// 자동으로 mutex 걸기 및 해제 담당
+		LockGuard<std::mutex> lockGuard(m);
+		// 위의 기능은 std에도 정의되어 있다
+		// std::lock_guard<std::mutex> lockGuard(m);
+		// 위의 기능을 유도리 있게 만든 버전의 클래스
+		// std::unique_lock<std::mutex> uniqueLock(m, std::defer_lock);
+		// 위의 uniqueLock 객체는 아래의 코드 이후부터 동작한다
+		// uniqueLock.lock();
+
+		// 수동으로 mutex 걸기
+		// m.lock();
+
+		v.push_back(i);
+
+		if (i == 5000)
+		{
+			// mutex 해제
+			// 수동으로 mutex 제어시 break를 통해 나가기 전에 반드시 unlock 해줘야 한다
+			// 이러한 실수를 방지하기 위한 클래스가 LockGuard
+			//m.unlock();
+			break;
+		}
+
+		// 수동으로 mutex 해제
+		// m.unlock();
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
