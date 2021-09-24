@@ -208,6 +208,60 @@ void Push()
 - 스핀락은 무작정 기다리는 정책
 - 유저레벨에서 커널레벨로 바뀌는 것이 컨텍스트 스위칭 이다
 
+### 01-7 SpinLock
+- 스핀락은 면접에서 자주나오는 단골 주제이다
+- C++ 에서 volatile는 컴파일러 에게 최적화를 하지말아 달라는 키워드 ( 06 : 03 )
+
+```cpp
+class SpinLock
+{
+public:
+	void lock()
+	{
+		// CAS (Compare-And-Swap)
+		bool expected = false;
+		bool desired = true;
+
+		// CAS 의사 코드
+		/*
+		if (_locked == expected)
+		{
+			expected = _locked;
+			return true;
+		}
+		else
+		{
+			expected = _locked;
+			return false;
+		}
+		*/
+
+		while (_locked.compare_exchange_strong(expected, desired) == false)
+		{
+			// 이 코드가 왜 필요한지는 영상 참조 ( 20 : 02 )
+			expected = true;
+		}
+		// 이 코드가 한번에 묶인게 위의 코드이다 ( 원자적으로 실행되기 위해 )
+		/*
+		while(_locked)
+		{
+
+		}
+
+		_locked = true;
+		*/
+	}
+
+	void unlock()
+	{
+		_locked.store(false);
+	}
+
+private:
+	atomic<bool> _locked = false;
+};
+``` 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
