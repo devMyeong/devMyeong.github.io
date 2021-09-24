@@ -227,6 +227,7 @@ public:
 		if (_locked == expected)
 		{
 			expected = _locked;
+			_locked = desired;
 			return true;
 		}
 		else
@@ -239,7 +240,7 @@ public:
 		while (_locked.compare_exchange_strong(expected, desired) == false)
 		{
 			// 이 코드가 왜 필요한지는 영상 참조 ( 20 : 02 )
-			expected = true;
+			expected = false;
 		}
 		// 이 코드가 한번에 묶인게 위의 코드이다 ( 원자적으로 실행되기 위해 )
 		/*
