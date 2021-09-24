@@ -263,6 +263,40 @@ private:
 };
 ``` 
 
+### 01-8 Sleep
+
+```cpp
+class SpinLock
+{
+public:
+	void lock()
+	{
+		// CAS (Compare-And-Swap)
+		bool expected = false;
+		bool desired = true;
+
+		while (_locked.compare_exchange_strong(expected, desired) == false)
+		{
+			expected = false;
+
+			// 100ms 동안 잠잔 다음에 다시 깨어나서 이어서 실행하라 ( 컨텍스트 스위칭 발생 )
+			this_thread::sleep_for(std::chrono::milliseconds(100));
+			// 위의 코드와 같의 의미이다
+			this_thread::sleep_for(100ms);
+		}
+
+	}
+
+	void unlock()
+	{
+		_locked.store(false);
+	}
+
+private:
+	atomic<bool> _locked = false;
+};
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
