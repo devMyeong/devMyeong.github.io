@@ -297,6 +297,21 @@ private:
 };
 ```
 
+### 01-9 Event
+
+```cpp
+// 커널 오브젝트 - 커널에서 관리하는 오브젝트 ( 가끔 신호를 주고 받는 상황에서 사용하면 좋다 )
+handle = ::CreateEvent(NULL /*보안 속성*/, FALSE /*bManualReset*/, FALSE /*bInitialState*/, NULL /*name*/);
+// 이벤트 활성화
+::SetEvent(handle);
+// 커널에게 이벤트가 활성화 되면 깨워달라고 부탁한 상태
+::WaitForSingleObject(handle, INFINITE);
+// bManualReset이 false이면 수동으로 리셋 해줘야 한다
+::ResetEvent(handle);
+// 핸들 종료
+::CloseHandle(handle);
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
