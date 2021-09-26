@@ -313,6 +313,59 @@ handle = ::CreateEvent(NULL /*보안 속성*/, FALSE /*bManualReset*/, FALSE /*b
 ::CloseHandle(handle);
 ```
 
+### 01-10 Condition Variable
+- Event의 문제점 숙지 필요 ( 00 : 49 )
+
+```cpp
+mutex m;
+queue<int> q;
+
+// 참고) CV는 User-Level Object ( 커널 오브젝트X )
+// 커널 레벨 오브젝트 - 다른 프로그램과 이벤트를 활용해 동기화가 가능하다
+// 유저 레벨 오브젝트 - 동일한 프로그램 내부에서만 사용할 수 있다
+condition_variable cv;
+
+void Producer()
+{
+	while (true)
+	{
+		// 1) Lock을 잡고
+		// 2) 공유 변수 값을 수정
+		// 3) Lock을 풀고
+		// 4) 조건변수 통해 다른 쓰레드에게 통지
+		{
+			unique_lock<mutex> lock(m);
+			q.push(100);
+		}
+	}
+
+	cv.notify_one(); // wait중인 쓰레드가 있으면 딱 1개를 깨운다
+}
+
+void Consumer()
+{
+	while (true)
+	{
+		unique_lock<mutex> lock(m);
+		// wait의 매개변수가 반드시 unique_lock 이어야
+		// 하는 이유는 영상 참조 ( 10 : 26 )
+		cv.wait(lock, []() { return q.empty() == false; });
+		// 1) Lock을 잡고
+		// 2) 조건 확인, 조건을 확인해야 하는 이유는 Spurious Wakeup 때문인데 영상 참조 ( 13: 53 )
+		// - 만족O => 빠져 나와서 이어서 코드를 진행
+		// - 만족X => Lock을 풀어주고 대기 상태
+
+		// while 문이 필요없는 이유는 영상 참조 ( 12 : 25 )
+		//while (q.empty() == false)
+		{
+			int data = q.front();
+			q.pop();
+			cout << q.size() << endl;
+		}
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
