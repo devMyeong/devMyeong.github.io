@@ -366,6 +366,76 @@ void Consumer()
 }
 ```
 
+### 01-11 Future
+
+```cpp
+int main()
+{
+	// 멀티쓰레드와 비동기적 실행을 헷갈리지 말자 ( 32 : 47 )
+	// 아래에서 배울 내용들은 비동기적 실행에 관한 내용이다
+
+	// future를 사용하는 첫번째 방법, std::async
+	{
+		// 1) deferred -> lazy evaluation 지연해서 실행하세요
+		// 2) async -> 별도의 쓰레드를 만들어서 실행하세요
+		// 3) deferred | async -> 둘 중 알아서 골라주세요
+		// Calculate는 전역함수인데 전역함수 말고 객체에 대해서 future를 사용하고 싶다면 영상 참조 ( 17 : 45 )
+		// 언젠가 미래에 결과물을 뱉어줄거야!
+		std::future<int64> future = std::async(std::launch::async, Calculate);
+
+		// 처리가 다 되었는지 확인
+		std::future_status status = future.wait_for(1ms);
+		if (status == future_status::ready)
+		{
+
+		}
+
+		// 결과물이 이제서야 필요하다
+		int64 sum = future.get();
+	}
+
+	// future를 사용하는 두번째 방법, std::promise 
+	{
+		// 미래(std::future)에 결과물을 반환해줄꺼라 약속(std::promise) 해줘~ (계약서?)
+		// PromiseWorker 쓰레드가 처리한다
+		std::promise<string> promise;
+		// 메인 쓰레드가 처리한다
+		std::future<string> future = promise.get_future();
+
+		thread t(PromiseWorker, std::move(promise));
+
+		string message = future.get();
+
+		t.join();
+
+		// 이 방법은 결론적으로 promise에 데이터를 넣어주고 future객체를 통해 받아주는 형태
+	}
+
+	// future를 사용하는 세번째 방법, std::packaged_task
+	{
+		std::packaged_task<int64(void)> task(Calculate);
+		std::future<int64> future = task.get_future();
+
+		std::thread t(TaskWorker, std::move(task));
+
+		int64 sum = future.get();
+
+		t.join();
+	}
+
+	// 결론)
+	// mutex, condition_variable까지 가지 않고 단순한 애들을 처리할 수 있는
+	// 특히나, 한 번 발생하는 이벤트에 유용하다!
+	// 닭잡는데 소잡는 칼을 쓸 필요 없다!
+	// 1) async
+	// 원하는 함수를 비동기적으로 실행
+	// 2) primise
+	// 결과물을 promise를 통해 future로 받아줌
+	// 3) packaged_task
+	// 원하는 함수의 실행 결과를 packaged_task를 통해 future로 받아줌
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
