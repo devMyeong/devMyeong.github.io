@@ -436,6 +436,12 @@ int main()
 }
 ```
 
+### 01-12 캐시
+
+![core](https://user-images.githubusercontent.com/80055816/135119879-da11fb29-d0de-42d4-a388-16a0102832ef.png){: width="70%" height="70%"}{: .align-center}
+
+- 캐시 히트에 대한 설명은 영상 참조 ( 10 : 22 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
