@@ -442,6 +442,14 @@ int main()
 
 - 캐시 히트에 대한 설명은 영상 참조 ( 10 : 22 )
 
+### 01-13 CPU 파이프라인
+- 가시성 문제 영상 참조 ( 5: 55 )
+- 코드 재배치 문제 영상 참조 ( 8 : 35 )
+- C++ 11 이전에는 모든 모델이 싱글 쓰레드 기준으로 구성되었다
+- C++ 11 이후에는 모든 모델이 멀티 쓰레드 환경을 고려했다
+
+![Pipeline](https://user-images.githubusercontent.com/80055816/135208037-251f5aa8-4bd5-4927-971c-7d1e28881f04.png){: width="70%" height="70%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
