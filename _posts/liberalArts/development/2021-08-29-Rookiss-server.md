@@ -450,6 +450,18 @@ int main()
 
 ![Pipeline](https://user-images.githubusercontent.com/80055816/135208037-251f5aa8-4bd5-4927-971c-7d1e28881f04.png){: width="70%" height="70%"}{: .align-center}
 
+### 01-14 메모리 모델
+- 여러 쓰레드가 동일한 메모리에 동시 접근하면 경합 조건(Race Condition)이 일어난다
+- 위의 문제를 해결하기 위한 방법으로는 Lock(mutex)를 이용한 상호 배타적(Mutual Exclusive) 접근 방법과 원자적(Atomic) 연산을 이용하는 방법이 있다
+- atomic 연산에 한해( 13 : 58 ), 모든 쓰레드가 동일 객체에 대해서 동일한 수정 순서를 관찰 ( 04 : 10 )
+- atomic 연산을 한다고 해가지고 가시성 문제와 코드 재배치 문제가 해결되는 것이 아니다 오해하지 말자
+
+```cpp
+num.store(1);
+// 이 코드는 위의 코드와 같은 의미이다 ( 이 코드는 메모리 정책을 포함하고 있다 )
+num.store(1, memory_order::memory_order_seq_cst);
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
