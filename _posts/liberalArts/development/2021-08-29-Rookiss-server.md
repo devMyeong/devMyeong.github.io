@@ -503,7 +503,7 @@ int main()
 ![tls](https://user-images.githubusercontent.com/80055816/135763529-189dc729-6908-48d9-b412-bf98537a8952.png){: width="70%" height="70%"}{: .align-center}
 
 - 데이터를 TLS에 한꺼번에 가져 올 수 있다 ( 06 : 20 )
-- TLS는 나만의 전역 메모리 같은 것이다 ( 자기 쓰레드 내에 있는 TLS만 접근할 수 있다 )
+- TLS는 나만의 전역 메모리 같은 것이다 ( 자기 쓰레드의 TLS만 접근할 수 있다 )
 
 ```cpp
 // 일반 전역 변수가 아니라 자기 쓰레드 TLS만 접근할 수 있는 공간이 생긴다 
