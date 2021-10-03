@@ -498,6 +498,47 @@ int main()
 }
 ```
 
+### 01-15 Thread Local Storage
+
+![tls](https://user-images.githubusercontent.com/80055816/135763529-189dc729-6908-48d9-b412-bf98537a8952.png){: width="70%" height="70%"}{: .align-center}
+
+- 데이터를 TLS에 한꺼번에 가져 올 수 있다 ( 06 : 20 )
+- TLS는 나만의 전역 메모리 같은 것이다 ( 자기 쓰레드 내에 있는 TLS만 접근할 수 있다 )
+
+```cpp
+// 일반 전역 변수가 아니라 자기 쓰레드 TLS만 접근할 수 있는 공간이 생긴다 
+thread_local int32 LThreadId = 0;
+
+// 이렇게도 응용이 가능하다
+thread_local queue<int32> q;
+
+// Thread ID 발급
+void ThreadMain(int32 threadId)
+{
+	LThreadId = threadId;
+
+	while (true)
+	{
+		cout << "Hi I am Thread" << LThreadId << endl;
+		this_thread::sleep_for(1s);
+	}
+}
+
+int main()
+{
+	vector<thread> threads;
+
+	for (int32 i = 0; i < 10; i++)
+	{
+		int32 threadId = i + 1;
+		threads.push_back(thread(ThreadMain, threadId));
+	}
+
+	for (thread& t : threads)
+		t.join();
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
