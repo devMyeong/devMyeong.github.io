@@ -539,6 +539,10 @@ int main()
 }
 ```
 
+### 01-16 Lock-Based Stack / Queue
+- 락 기반의 큐와 스택을 만들어 보는 수업
+- 락 프리 기반으로 뭔가 만드는 것 자체가 꾸준히 연구가 되고 있는 학문이다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
