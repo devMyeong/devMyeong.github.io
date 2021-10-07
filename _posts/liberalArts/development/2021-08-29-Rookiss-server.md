@@ -580,6 +580,8 @@ while (_head.compare_exchange_weak(node->next, node) == false)
 
 ### 01-19 Lock-Free Stack 3
 - 오늘의 주제는 스마트 포인터를 활용해 TryPop()을 구현해보자
+- 락 프리 프로그래밍은 생각나는데로 막 짜면 안된다 ( 31 : 45 )
+- 락 프리 프로그래밍은 자주 할 일이 없다 ( 34 : 50 )
 
 
 <br>
