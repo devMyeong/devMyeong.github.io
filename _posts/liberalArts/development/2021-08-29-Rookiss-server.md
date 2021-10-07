@@ -566,6 +566,19 @@ while (_head.compare_exchange_weak(node->next, node) == false)
 }
 ```
 
+### 01-18 Lock-Free Stack 2
+
+```cpp
+// 1) head 읽기
+// 2) head->next 읽기
+// 3) head = head->next
+// 4) data 추출해서 반환
+// 5) 추출한 노드를 삭제
+// 오늘의 주제는 5) 에서 TryPop() 함수를 이용하여 할당된 공간을 삭제해야 메모리 누수를
+// 막을 수 있다 그런데 서로 다른 쓰레드가 TryPop() 함수를 동시에 접근하면 문제가 되니 이를 해결해 보자
+```
+
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
