@@ -543,6 +543,29 @@ int main()
 - 락 기반의 큐와 스택을 만들어 보는 수업
 - 락 프리 기반으로 뭔가 만드는 것 자체가 꾸준히 연구가 되고 있는 학문이다
 
+### 01-17 Lock-Free Stack 1
+
+```cpp
+// Compare and Swap이 핵심!
+/*
+if (_head == node->next)
+{
+	_head = node;
+	return true;
+}
+else
+{
+	node->next = _head;
+	return false;
+}
+*/
+
+while (_head.compare_exchange_weak(node->next, node) == false)
+{
+	//node->next = _head;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
