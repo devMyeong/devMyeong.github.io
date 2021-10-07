@@ -578,6 +578,9 @@ while (_head.compare_exchange_weak(node->next, node) == false)
 // 막을 수 있다 그런데 서로 다른 쓰레드가 TryPop() 함수를 동시에 접근하면 문제가 되니 이를 해결해 보자
 ```
 
+### 01-19 Lock-Free Stack 3
+- 오늘의 주제는 스마트 포인터를 활용해 TryPop()을 구현해보자
+
 
 <br>
 
