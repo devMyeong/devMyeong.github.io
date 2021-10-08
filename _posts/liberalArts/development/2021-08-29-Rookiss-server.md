@@ -583,6 +583,9 @@ while (_head.compare_exchange_weak(node->next, node) == false)
 - 락 프리 프로그래밍은 생각나는데로 막 짜면 안된다 ( 31 : 45 )
 - 락 프리 프로그래밍은 자주 할 일이 없다 ( 34 : 50 )
 
+### 01-20 Lock-Free Queue
+- 이 수업의 내용은 앞으로 사용되지 않을 내용이다
+- Queue는 Push() 할때도 경합이 붙는다
 
 <br>
 
