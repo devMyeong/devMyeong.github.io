@@ -587,6 +587,35 @@ while (_head.compare_exchange_weak(node->next, node) == false)
 - 이 수업의 내용은 앞으로 사용되지 않을 내용이다
 - Queue는 Push() 할때도 경합이 붙는다
 
+### 01-21 ThreadManager
+- 락 프리 스택,큐를 직접 만들어 쓰지말고 MS에서 제공하는 라이브러리를 이용하자
+
+```cpp
+// using을 사용할 경우 좋은점은 typedef랑 다르게 template을 대상으로도 작동을 잘 한다
+template<typename T>
+using Atomic = std::atomic<T>;
+using Mutex = std::mutex;
+using CondVar = std::condition_variable;
+using UniqueLock = std::unique_lock<std::mutex>;
+using LockGuard = std::lock_guard<std::mutex>;
+
+// 인위적인 크래쉬를 만들어 내는 메크로
+#define CRASH(cause)
+// 특정 조건이 아니면 크래쉬를 만들어 내는 메크로
+#define ASSERT_CRASH(expr)
+
+// 오늘의 수업 주제는 지금까지 배웠던 기능들을 아래와 같이 랩핑 하는 것이다
+int main()
+{
+	for (int32 i = 0; i < 5; i++)
+	{
+		GThreadManager->Launch(ThreadMain);
+	}
+
+	GThreadManager->Join();
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
