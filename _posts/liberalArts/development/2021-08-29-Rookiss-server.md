@@ -616,6 +616,9 @@ int main()
 }
 ```
 
+### 01-22 Reader-Writer Lock
+- Write를 하게 될 경우에는 상호 배타적으로 동작하고 Read를 할 경우 상호 배타적으로 동작하지 않는 특성을 지니는 락
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
