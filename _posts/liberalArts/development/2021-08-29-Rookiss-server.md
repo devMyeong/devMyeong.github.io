@@ -2,7 +2,7 @@
 title:  "Rookiss님 언리얼 강의 Part4: 게임 서버"
 
 categories:
-  - Development
+  - Server
 tags:
   - []
 
@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2021-08-29
-last_modified_at: 2021-10-01
+last_modified_at: 2021-10-16
 ---
 
 ## Chapter 00 오티
