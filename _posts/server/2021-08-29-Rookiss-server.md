@@ -635,7 +635,7 @@ int main()
 - 스마트 포인터가 Reference Counting을 관리하면 경쟁 상황(race condition)을 막아준다
 
 ### 02-2 스마트 포인터
-- 스마트 포인터의 순환(Cycle) 문제는 weak_ptr을 이용하여 shared_ptr을 보충해 줌으로써 해결할 수 있다 ( 15: 17 )
+- 스마트 포인터의 순환(Cycle) 문제는 weak_ptr을 이용하여 shared_ptr을 보충해 줌으로써 해결할 수 있다 ( 15 : 17 )
 
 <br>
 
