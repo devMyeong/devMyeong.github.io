@@ -634,6 +634,9 @@ int main()
 - 멀티쓰레드 환경에서는 refCount 변수를 atomic 타입으로 선언해야 한다
 - 스마트 포인터가 Reference Counting을 관리하면 경쟁 상황(race condition)을 막아준다
 
+### 02-2 스마트 포인터
+- 스마트 포인터의 순환(Cycle) 문제는 weak_ptr을 이용하여 shared_ptr을 보충해 줌으로써 해결할 수 있다 ( 15: 17 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
