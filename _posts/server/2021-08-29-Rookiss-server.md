@@ -654,6 +654,10 @@ int main()
 ![memory](https://user-images.githubusercontent.com/80055816/137866526-2f6bbe5a-bd62-4304-a357-84bdae871df6.png){: width="70%" height="70%"}{: .align-center}
 
 - 페이지 관련 설명( 17 : 10 ), 페이지 단위로 보안 레벨을 설정 할 수 있다
+- new 키워드는 운영체제에게 직접적으로 메모리 할당을 요청하는 명령어가 아니다 ( 22 : 00 )
+- new, malloc을 이용하지 않고 윈도우 API를 이용하여 직접 메모리를 관리하면 실행속도는 떨어지지만 메모리 침범 이슈는 해결할 수 있다 ( 27 : 44 )
+- Stomp allocator를 활용하면 Use-After-Free 문제를 해결할 수 있다
+- Stomp allocator를 수정하면 오버플로우 문제도 해결할 수 있다 ( 34 : 45 )
 
 <br>
 
