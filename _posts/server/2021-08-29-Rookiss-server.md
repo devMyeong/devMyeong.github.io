@@ -659,6 +659,10 @@ int main()
 - Stomp allocator를 활용하면 Use-After-Free 문제를 해결할 수 있다
 - Stomp allocator를 수정하면 오버플로우 문제도 해결할 수 있다 ( 34 : 45 )
 
+### 02-5 STL Allocator
+- STL들은 내부적으로 메모리 할당자 new, delete를 사용하고 있는데 이것을 고쳐보고 싶은것이 오늘의 주제
+- 우리가 만든 Custom Allocator를 STL에 붙여보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
