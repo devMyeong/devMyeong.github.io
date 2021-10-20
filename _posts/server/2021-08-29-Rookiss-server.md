@@ -663,6 +663,10 @@ int main()
 - STL들은 내부적으로 메모리 할당자 new, delete를 사용하고 있는데 이것을 고쳐보고 싶은것이 오늘의 주제
 - 우리가 만든 Custom Allocator를 STL에 붙여보자
 
+### 02-6 Memory Pool 1
+- 메모리를 해제하지 말고 어딘가에 보관했다가 나중에 필요해지면 임시보관 장소에서 다시 꺼내 사용하는 개념
+
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
