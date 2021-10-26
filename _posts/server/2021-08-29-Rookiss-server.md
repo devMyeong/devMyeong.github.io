@@ -680,7 +680,6 @@ int main()
 ### 02-10 TypeCast
 - modern c++ design 영문판 책이 유명하다
 - 오늘의 주제는 캐스팅을 안전하게 하는 방법을 알아보자
-- 
 
 <br>
 
