@@ -689,6 +689,10 @@ int main()
 
 ![socket](https://user-images.githubusercontent.com/80055816/139092602-33de2d10-e0d6-4df9-8479-b490726d3697.png){: width="70%" height="70%"}{: .align-center}
 
+### 03-2 소켓 프로그래밍 기초 2
+- 무엇을 하는 함수입니까 라는 질문은 프로그래머라면 하면 안되는 질문이다 ( 구글링 하자 )
+- WSAStartup() 함수와 WSACleanup() 함수는 세트라고 생각하면 된다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
