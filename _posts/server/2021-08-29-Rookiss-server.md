@@ -715,6 +715,9 @@ int main()
 - TCP 데이터 경계 : 경계(Boundary)의 개념이 없다
 - UDP 데이터 경계 : 경계(Boundary)의 개념이 있다
 
+### 03-5 UDP 서버 실습
+- Connected UDP 개념 ( 18 : 22 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
