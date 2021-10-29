@@ -718,6 +718,10 @@ int main()
 ### 03-5 UDP 서버 실습
 - Connected UDP 개념 ( 18 : 22 )
 
+### 03-6 소켓 옵션
+- setsockopt() 함수와 getsockopt() 함수를 이용해 소켓옵션을 설정하거나 가져올 수 있다
+- SOL_SOCKET와 관련된 주요 옵션 ( 3 : 00 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
