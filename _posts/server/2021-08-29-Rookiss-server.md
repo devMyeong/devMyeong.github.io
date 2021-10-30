@@ -731,7 +731,7 @@ int main()
 // send, sendto -> 요청한 데이터를 송신 버퍼에 복사했을 때
 // recv, recvfrom -> 수신 버퍼에 도착한 데이터가 있고, 이를 유저레벨 버퍼에 복사했을 때
 
-::ioctlsocket() 함수를 이용해 논블로킹 방식의 소켓을 만들 수 있다
+// ::ioctlsocket() 함수를 이용해 논블로킹 방식의 소켓을 만들 수 있다
 
 if (clientSocket == INVALID_SOCKET)
 {
