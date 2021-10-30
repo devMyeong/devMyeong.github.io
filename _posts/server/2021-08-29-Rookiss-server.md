@@ -722,6 +722,30 @@ int main()
 - setsockopt() 함수와 getsockopt() 함수를 이용해 소켓옵션을 설정하거나 가져올 수 있다
 - SOL_SOCKET와 관련된 주요 옵션 ( 3 : 00 )
 
+### 03-7 논블로킹 소켓
+
+```cpp
+// 블로킹(Blocking) 소켓 함수 완료 시점
+// accept -> 접속한 클라가 있을 때
+// connect -> 서버 접속 성공했을 때
+// send, sendto -> 요청한 데이터를 송신 버퍼에 복사했을 때
+// recv, recvfrom -> 수신 버퍼에 도착한 데이터가 있고, 이를 유저레벨 버퍼에 복사했을 때
+
+::ioctlsocket() 함수를 이용해 논블로킹 방식의 소켓을 만들 수 있다
+
+if (clientSocket == INVALID_SOCKET)
+{
+	// 원래 블록했어야 했는데... 너가 논블로킹으로 하라며?
+	if (::WSAGetLastError() == WSAEWOULDBLOCK)
+		continue;
+
+	// Error
+	break;
+}
+```
+
+- 논블로킹 방식이 반드시 좋은것은 아니다 이유는 영상 참조 ( 18 : 40 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
