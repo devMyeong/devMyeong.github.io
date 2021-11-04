@@ -897,6 +897,24 @@ if (clientSocket == INVALID_SOCKET)
 
 - APC에 대한 개념 설명 영상 참조 ( 13 : 20 )
 
+### 03-12 Completion Port 모델
+
+```cpp
+// Overlapped 모델 (Completion Routine 콜백 기반)
+// - 비동기 입출력 함수 완료되면, 쓰레드마다 있는 APC 큐에 일감이 쌓임
+// - Alertable Wait 상태로 들어가서 APC 큐 비우기 (콜백 함수)
+// 단점) APC큐 쓰레드마다 있다! Alertable Wait 자체도 조금 부담!
+// 단점) 이벤트 방식 소켓:이벤트 1:1 대응
+
+// IOCP (Completion Port) 모델
+// - APC -> Completion Port (쓰레드마다 있는건 아니고 1개. 중앙에서 관리하는 APC 큐?)
+// - Alertable Wait -> CP 결과 처리를 GetQueuedCompletionStatus
+// 쓰레드랑 궁합이 굉장히 좋다!
+
+// CreateIoCompletionPort
+// GetQueuedCompletionStatus
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
