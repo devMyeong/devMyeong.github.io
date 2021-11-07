@@ -913,7 +913,15 @@ if (clientSocket == INVALID_SOCKET)
 
 // CreateIoCompletionPort
 // GetQueuedCompletionStatus
-```
+
+<br>
+
+## Chapter 04 네트워크 프로그래밍
+
+### 04-1 Socket Utils
+- SocketUtils 클래스는 소켓 관련 초기화를 담당
+- NetAddress 클래스는 클라이언트 주소 관리 담당
+
 
 <br>
 
