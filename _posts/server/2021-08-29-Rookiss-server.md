@@ -923,6 +923,7 @@ if (clientSocket == INVALID_SOCKET)
 - NetAddress 클래스는 클라이언트 주소 관리 담당
 
 ### 04-2 IocpCore
+- IocpCore 클래스는 IOPC의 핵심적인 부분을 담당
 - 
 
 <br>
