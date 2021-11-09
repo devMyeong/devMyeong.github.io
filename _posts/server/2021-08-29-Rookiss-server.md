@@ -924,7 +924,9 @@ if (clientSocket == INVALID_SOCKET)
 
 ### 04-2 IocpCore
 - IocpCore 클래스는 IOPC의 핵심적인 부분을 담당
-- 
+
+### 04-3 Server Service
+- Service 클래스는 여러 기능들을 커스터 마이징 하는 역할을 한다
 
 <br>
 
