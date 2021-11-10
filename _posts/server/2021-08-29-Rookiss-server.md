@@ -931,6 +931,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 04-4 Session 1
 - session이 하는 역할은 패킷을 받는일
 
+### 04-5 Session 2
+- session에 send()함수를 구현하는 것이 오늘의 핵심
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
