@@ -928,6 +928,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 04-3 Server Service
 - Service 클래스는 여러 기능들을 커스터 마이징 하는 역할을 한다
 
+### 04-4 Session 1
+- session이 하는 역할은 패킷을 받는일
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
