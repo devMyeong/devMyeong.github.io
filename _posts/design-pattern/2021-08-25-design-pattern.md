@@ -1191,4 +1191,170 @@ void main(void)
 
 <br>
 
+## Chapter 08 브릿지 패턴
+
+### 08-1 브릿지 패턴 (Bridge Pattern)
+
+```cpp
+//-----------------------------------------------------------------------------------------
+// 브릿지 패턴 에서는 기능 계층과 구현 계층을 분리한다
+//-----------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+
+class MorseCodeFunction
+{
+public:
+	MorseCodeFunction() {}
+	virtual ~MorseCodeFunction() {}
+
+public:
+	virtual void dot()	 = 0;
+	virtual void dash()	 = 0;
+	virtual void space() = 0;
+};
+
+class DefaultMCF : public MorseCodeFunction
+{
+public:
+	DefaultMCF() {}
+	virtual ~DefaultMCF() {}
+
+	// MorseCodeFunction을(를) 통해 상속됨
+	void dot() override
+	{
+		cout << ".";
+	}
+	void dash() override
+	{
+		cout << "-";
+	}
+	void space() override
+	{
+		cout << " ";
+	}
+};
+
+class SoundMCF : public MorseCodeFunction
+{
+public:
+	SoundMCF() {}
+	virtual ~SoundMCF() {}
+
+	// MorseCodeFunction을(를) 통해 상속됨
+	void dot() override
+	{
+		cout << "삣";
+	}
+	void dash() override
+	{
+		cout << "삐~";
+	}
+	void space() override
+	{
+		cout << " ";
+	}
+};
+
+class FlashMCF : public MorseCodeFunction
+{
+public:
+	FlashMCF() {}
+	virtual ~FlashMCF() {}
+
+	// MorseCodeFunction을(를) 통해 상속됨
+	void dot() override
+	{
+		cout << " 번쩍 ";
+	}
+	void dash() override
+	{
+		cout << " 반짝 ";
+	}
+	void space() override
+	{
+		cout << " - ";
+	}
+};
+
+class MorseCode
+{
+private:
+	MorseCodeFunction* function;
+
+public:
+	MorseCode(MorseCodeFunction* function)
+	{
+		this->function = function;
+	}
+	virtual ~MorseCode() {}
+
+	void setFunction(MorseCodeFunction* function)
+	{
+		this->function = function;
+	}
+
+	void dot()
+	{
+		// 델리게이트
+		function->dot();
+	}
+	void dash()
+	{
+		// 델리게이트
+		function->dash();
+	}
+	void space()
+	{
+		// 델리게이트
+		function->space();
+	}
+};
+
+class PrintMorseCode : public MorseCode
+{
+public:
+	PrintMorseCode(MorseCodeFunction* function) : MorseCode(function) {}
+	virtual ~PrintMorseCode() {}
+
+public:
+	PrintMorseCode* g()
+	{
+		dash(); dash(); dot(); space();
+		return this;
+	}
+	PrintMorseCode* a()
+	{
+		dot(); dash(); space();
+		return this;
+	}
+	PrintMorseCode* r()
+	{
+		dot(); dash(); dot(); space();
+		return this;
+	}
+	PrintMorseCode* m()
+	{
+		dash(); dash(); space();
+		return this;
+	}
+};
+
+void main(void)
+{
+	//PrintMorseCode* code = new PrintMorseCode(dynamic_cast<MorseCodeFunction*>(new DefaultMCF()));
+	//PrintMorseCode* code = new PrintMorseCode(dynamic_cast<MorseCodeFunction*>(new SoundMCF()));
+	PrintMorseCode* code = new PrintMorseCode(dynamic_cast<MorseCodeFunction*>(new FlashMCF()));
+
+	// 체이닝 적용 안한 상태
+	//code->g(); code->a(); code->r(); code->a(); code->r();
+
+	// 체이닝 적용한 상태
+	code->g()->a()->r()->a()->m();
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
