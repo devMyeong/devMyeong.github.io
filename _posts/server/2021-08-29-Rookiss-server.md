@@ -934,6 +934,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 04-5 Session 2
 - session에 send()함수를 구현하는 것이 오늘의 핵심
 
+### 04-6 Session 3
+- 소켓을 만드는 작업은 많이 부담 된다 따라서 오늘은 소켓을 재사용 할 수 있게 코드를 수정한다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
