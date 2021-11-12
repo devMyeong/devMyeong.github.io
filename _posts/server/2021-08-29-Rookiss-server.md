@@ -945,6 +945,7 @@ if (clientSocket == INVALID_SOCKET)
 
 ### 04-8 SendBuffer
 - 여러 유저들에게 정보를 보내기 쉬운 구조로 만들기 위해 SendBuffer 클래스를 만드는 것이 목표
+- 브로드 캐스팅이란 모든 세션을 순회하며 동일한 데이터를 보내주는 기능
 
 <br>
 
