@@ -913,6 +913,7 @@ if (clientSocket == INVALID_SOCKET)
 
 // CreateIoCompletionPort
 // GetQueuedCompletionStatus
+```
 
 <br>
 
@@ -936,6 +937,11 @@ if (clientSocket == INVALID_SOCKET)
 
 ### 04-6 Session 3
 - 소켓을 만드는 작업은 많이 부담 된다 따라서 오늘은 소켓을 재사용 할 수 있게 코드를 수정한다
+
+### 04-7 RecvBuffer
+- 현재 _recvBuffer는 문제가 있다 TCP는 경계(Boundary) 개념이 없기 때문에 상대방이 100 바이트를 보내도 우리에게는 우선 20 바이트만 넘어올 수 있다 패킷을 완전체로 받아야지만 처리할 수 있기 때문에 이부분이 문제가 된다( 기존 패킷이 덮어쓰임 당할수 있음 )
+- 해결책 1, 패킷이 완전체로 왔는지 안왔는지 판별할 수 있는 수단 필요 ( 헤더기능 으로 해결 가능하며 추후 강의할 내용 )
+- 해결책 2, 기존 패킷에 덮어 쓰는 방식이 아닌 덧붙이는 방식으로 수정 필요 ( RecvBuffer 클래스 추가로 해결 가능하며 오늘 강의할 내용 )
 
 <br>
 
