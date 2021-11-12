@@ -1355,6 +1355,10 @@ void main(void)
 }
 ```
 
+<br>
+
+## Chapter 09 컴포짓 패턴
+
 ### 09-1 컴포짓 패턴 (Composite Pattern)
 
 ![tree](https://user-images.githubusercontent.com/80055816/141460255-8ce6c1cf-8fae-4ec0-a239-6db663b4b89d.PNG){: width="70%" height="70%"}{: .align-center}
