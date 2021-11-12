@@ -1355,6 +1355,82 @@ void main(void)
 }
 ```
 
+### 09-1 컴포짓 패턴 (Composite Pattern)
+
+![tree](https://user-images.githubusercontent.com/80055816/141460255-8ce6c1cf-8fae-4ec0-a239-6db663b4b89d.PNG){: width="70%" height="70%"}{: .align-center}
+
+- 오늘은 위의 트리 형태를 기반으로 컨테이너와 내용물을 같게 다룬는 패턴을 배운다
+
+```cpp
+//-----------------------------------------------------------------------------------------
+// 컴포짓 패턴 에서는 컨테이너와 내용물을 같게 다룬다
+//-----------------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+#include <list>
+
+class Component
+{
+private:
+	string name;
+
+public:
+	Component(string name) { this->name = name; }
+	virtual ~Component() {}
+};
+
+class File : public Component
+{
+public:
+	File(string name) : Component(name) {}
+	virtual ~File() {}
+
+private:
+	string data;
+};
+
+class Folder : public Component
+{
+private:
+	list<Component*> children;
+
+public:
+	Folder(string name) : Component(name) {}
+	virtual ~Folder() {}
+
+	void addComponent(Component* componet)
+	{
+		children.push_back(componet);
+	}
+
+	void removeComponet(Component* componet)
+	{
+		children.remove(componet);
+	}
+
+};
+
+void main(void)
+{
+	Folder *root = new Folder("root"), *home = new Folder("home"), *garam = new Folder("garam"), *music = new Folder("music"), *picture = new Folder("picture"), *doc = new Folder("doc"), *usr = new Folder("usr");
+	File *track1 = new File("track1"), *track2 = new File("track2"), *pic1 = new File("pic1"), *doc1 = new File("doc1"), *java = new File("java");
+
+	root->addComponent(home);
+		home->addComponent(garam);
+			garam->addComponent(music);
+				music->addComponent(track1);
+				music->addComponent(track2);
+			garam->addComponent(picture);
+				picture->addComponent(pic1);
+			garam->addComponent(doc);
+				doc->addComponent(doc1);
+
+	root->addComponent(usr);
+		usr->addComponent(java);
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
