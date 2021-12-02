@@ -1442,124 +1442,55 @@ void main(void)
 ### 10-1 데코레이터 패턴 (Decorator Pattern)
 
 ```cpp
-//---------------------------------------------------------------------------------------------------------
-// 동적으로 책임 추가가 필요할 때 데코레이터 패턴을 사용할 수 있다 ( 현재 코드 상태가 이상함 수정 필요 )
-//---------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------
+// 동적으로 책임 추가가 필요할 때 데코레이터 패턴을 사용할 수 있다 
+//-----------------------------------------------------------------
 
 #include "stdafx.h"
 #include <string>
 #include <list>
 
-class IBeverage
+class AirPlane { virtual void Attack() = 0; }
+class FrontAttackAirPlane : public AirPlane
 {
-public:
-	IBeverage() {}
-	virtual ~IBeverage() {}
-
-public:
-	virtual int getTotalPrice() = 0;
+    void Attack() { cout << "Front Attack"; }
 };
-
-class Base : public IBeverage
+class Decorator : public AirPlane
 {
-public:
-
-	// IBeverage을(를) 통해 상속됨
-	virtual int getTotalPrice() override
+    Decorator( AirPlane* pAir ) { pComponent = pAir; }
+    virtual void Attack()
 	{
-		return 0;
-	}
-};
-
-class AbstAdding : public IBeverage
-{
+        if ( pComponent != 0 ) { pComponent->Attack(); }
+    }
 private:
-	// 멤버변수로 IBeverage를 가지고 있으면 밖에서 보기에는 AbstAdding가 IBeverage로 보일 수 있다
-	IBeverage* m_base;
-
-public:
-	AbstAdding(IBeverage* base)
-	{
-		m_base = base;
-	}
-
-	// 추가된 책임
-	virtual int getTotalPrice() override
-	{
-		return m_base->getTotalPrice();
-	}
-
-protected:
-	IBeverage* getBase()
-	{
-		return m_base;
-	}
+    AirPlane* pComponent;
+};
+class SideAttackAirPlane : public Decorator
+{
+    SideAttackAirPlane(AirPlane* pAir) : Decorator(pAir) {}
+    void Attack()
+	{ 
+        Decorator::Attack();
+        cout << "Side Attack"; 
+    }
+};
+class RearAttackAirPlane : public Decorator
+{
+    RearAttackAirPlane(AirPlane* pAir) : Decorator(pAir) {}
+    void Attack()
+	{ 
+        Decorator::Attack();
+        cout << "Rear Attack"; 
+    }
 };
 
-class Milk : public AbstAdding
+int main()
 {
-public:
-	Milk(IBeverage *meterial) : AbstAdding(meterial) {}
-
-	virtual int getTotalPrice() override
-	{
-		return AbstAdding::getTotalPrice() + 50;
-	}
-};
-
-class Espresso : public AbstAdding
-{
-protected:
-	int espressoCount = 0;
-
-public:
-	Espresso(IBeverage* base) : AbstAdding(base) {}
-
-	int getAddPrice()
-	{
-		// 에스프레소 원샷은 100원 투샷부터는 70원 즉 할인이 된다
-		espressoCount = espressoCount + 1;
-		int addPrice = 100;
-
-		if (espressoCount > 1)
-		{
-			addPrice = 70;
-		}
-		return addPrice;
-	}
-
-	virtual int getTotalPrice() override
-	{
-		return AbstAdding::getTotalPrice() + getAddPrice();
-	}
-};
-
-void main(void)
-{
-	int iNumber = 0;
-
-	IBeverage* beverage = new Base();
-
-	while (true)
-	{
-		cout << "음료 현재 가격 : " << beverage->getTotalPrice() << endl;
-		cout << "선택 : 1번은 샷추가, 2번은 우유 추가" << endl;
-
-		cin >> iNumber;
-		
-		switch (iNumber)
-		{
-		case 0 :
-			break;
-		case 1:
-			beverage = new Espresso(beverage);
-		case 2:
-			beverage = new Milk(beverage);
-		default:
-			break;
-		}
-	}
-	cout << "음료 가격 : " << beverage->getTotalPrice();
+    AirPlane* pFront = new FrontAttackAirPlane;		// 기본 공격
+    AirPlane* pSide = new SideAttackAirPlane(pFront);
+    AirPlane* pRear = new RearAttackAirPlane(pFront);
+    
+    pRear->Attack();
 }
 ```
 
