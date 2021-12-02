@@ -950,7 +950,6 @@ if (clientSocket == INVALID_SOCKET)
 ### 04-9 SendBuffer Pooling
 - 오늘의 주제는 SendBuffer를 매번 만들지 않고 풀링하는 기법에 대해서 배운다, 간단하게 얘기해서 최대 크기의 버퍼를 만들어 재사용 하는 방식 더 나아가 최대 크기 버퍼를 사용하지 않고 이를 최적화 하는 방식
 - SendBufferChunk()의 정책은 큰 덩어리를 할당받아 그 덩어리를 쪼개서 SendBuffer로 사용하겠다
-- 
 
 <br>
 
