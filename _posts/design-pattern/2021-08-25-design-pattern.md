@@ -1496,4 +1496,82 @@ int main()
 
 <br>
 
+## Chapter 11 방문자 패턴
+
+### 11-1 방문자 패턴 (Visitor Pattern)
+
+```cpp
+//------------------------------------------------------------------
+// 방문자 패턴을 이용하여 객체에서 처리를 분리할 수 있다
+//------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+#include <list>
+#include <vector>
+
+#include<iostream>
+#include <list>
+using namespace std;
+
+class mylist;
+
+class visitor {
+public:
+	virtual void visit(mylist* l) = 0;
+};
+
+class Acceptor {
+	virtual void accept(visitor* v) = 0;
+};
+
+
+class mylist : public Acceptor {
+	list<int> data = { 1,2,3,4,5,6,7,8,9,10 };
+
+public:
+	list<int>* getList() { return &data; }
+	virtual void accept(visitor *v)
+	{
+		v->visit(this);
+	}
+
+};
+
+class doubleVisitor : public visitor
+{
+public:
+	virtual void visit(mylist* l)
+	{
+		list<int>* p = l->getList();
+		for (auto& x : *p)
+			x *= 2;
+	}
+
+};
+class printVisitor : public visitor
+{
+public:
+	virtual void visit(mylist* l)
+	{
+		list<int>* p = l->getList();
+		for (auto x : *p)
+			cout << x << endl;
+	}
+
+};
+
+int main()
+{
+	mylist x;
+	doubleVisitor dv;
+	x.accept(&dv);
+
+	printVisitor pv;
+	x.accept(&pv);
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
