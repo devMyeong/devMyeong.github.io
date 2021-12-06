@@ -57,7 +57,7 @@
                 {% endfor %}
             </ul>
 
-        <span class="nav__sub-title">DirectX</span>
+        <span class="nav__sub-title">Graphics</span>
             <ul>
                 {% for category in site.categories %}
                     {% if category[0] == "DirectX 9" %}
@@ -72,6 +72,28 @@
                     {% endif %}
                 {% endfor %}
             </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "DirectX 12" %}
+                        <li><a href="/categories/directx12" class="">DirectX 12 ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Unity Engine" %}
+                        <li><a href="/categories/unity" class="">Unity Engine ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <ul>
+                {% for category in site.categories %}
+                    {% if category[0] == "Unreal Engine" %}
+                        <li><a href="/categories/unreal" class="">Unreal Engine ({{category[1].size}})</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
 
         <span class="nav__sub-title">Coding Test</span>
 		    <ul>
