@@ -956,4 +956,13 @@ if (clientSocket == INVALID_SOCKET)
 
 <br>
 
+## Chapter 05 패킷 직렬화
+
+### 05-1 Buffer Helpers
+- 네트워크 코어 부분들(Network 필터 안에든 애들)은 한번만 만들어 두면 이후 수정할 일이 잘 없다
+- 컨텐츠 개발은 대부분 GameServer 프로젝트 안에서 이루어 진다
+- 오늘은 버퍼에서 데이터를 쉽게 읽고 쓸 수 있게 도와주는 BufferReader와 BufferWriter를 만들어 볼 예정
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
