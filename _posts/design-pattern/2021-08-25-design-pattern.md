@@ -1592,6 +1592,7 @@ int main()
 #include <list>
 using namespace std;
 
+// 소스코드 출처 : copynull.tistory.com/143
 // 문의자 인터페이스 클래스
 class 문의자
 {
