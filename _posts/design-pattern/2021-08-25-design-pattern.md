@@ -1574,4 +1574,132 @@ int main()
 
 <br>
 
+## Chapter 12 책임사슬 패턴
+
+### 12-1 책임사슬 패턴 (Chain of Resposibility)
+
+```cpp
+//-----------------------------------------------------------------------
+// 책임사슬 패턴을 활용하여 다양한 처리 방식을 유연하게 연결 할 수 있다
+//-----------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+#include <list>
+#include <vector>
+
+#include<iostream>
+#include <list>
+using namespace std;
+
+// 문의자 인터페이스 클래스
+class 문의자
+{
+public:
+	virtual const TCHAR* Class() = 0;
+};
+class 초등학생 : public 문의자
+{
+public:
+	const TCHAR* Class() { return L"초등학생"; }
+};
+class 중학생 : public 문의자
+{
+public:
+	const TCHAR* Class() { return L"중학생"; }
+};
+class 고등학생 : public 문의자
+{
+public:
+	const TCHAR* Class() { return L"고등학생"; }
+};
+
+//------------------------------------------------------------------
+// 수학상담문의 인터페이스 클래스
+class 수학상담문의
+{
+public:
+	수학상담문의(수학상담문의* pHandle) : pHandler(pHandle) {}
+	~수학상담문의() { if (pHandler) delete pHandler; }
+
+public:
+	virtual void 상담문의(문의자* pUser)
+	{
+		if (pHandler != NULL)
+			pHandler->상담문의(pUser);
+	}
+
+private:
+	수학상담문의* pHandler;
+};
+
+//------------------------------------------------------------------
+// 초등수학상담 상속 클래스
+class 초등수학상담 : public 수학상담문의
+{
+public:
+	초등수학상담(수학상담문의* pHandle) : 수학상담문의(pHandle) {}
+
+public:
+	void 상담문의(문의자* pUser) override
+	{
+		if (dynamic_cast<초등학생*>(pUser) != NULL)
+			cout << "초등학생 문의 상담입니다." << endl;
+		else
+			수학상담문의::상담문의(pUser);
+	}
+};
+
+//------------------------------------------------------------------
+// 중등수학상담 상속 클래스
+class 중등수학상담 : public 수학상담문의
+{
+public:
+	중등수학상담(수학상담문의* pHandle) : 수학상담문의(pHandle) {}
+
+public:
+	void 상담문의(문의자* pUser) override
+	{
+		if (dynamic_cast<중학생*>(pUser) != NULL)
+			cout << "중학생 문의 상담입니다." << endl;
+		else
+			수학상담문의::상담문의(pUser);
+	}
+};
+
+//------------------------------------------------------------------
+// 고등수학상담 상속 클래스
+class 고등수학상담 : public 수학상담문의
+{
+public:
+	고등수학상담(수학상담문의* pHandle) : 수학상담문의(pHandle) {}
+
+public:
+	void 상담문의(문의자* pUser) override
+	{
+		if (dynamic_cast<고등학생*>(pUser) != NULL)
+			cout << "고등학생 문의 상담입니다." << endl;
+		else
+			수학상담문의::상담문의(pUser);
+	}
+};
+
+//------------------------------------------------------------------
+// Main
+int _tmain(int argc, _TCHAR* argv[])
+{
+	문의자* pUser = new 고등학생();
+	수학상담문의* pHandler = new 초등수학상담(new 중등수학상담(new 고등수학상담(NULL)));
+
+	pHandler->상담문의(pUser);
+
+	delete pHandler;
+	delete pUser;
+
+	return 0;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
