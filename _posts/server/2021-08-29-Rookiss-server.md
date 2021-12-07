@@ -963,6 +963,9 @@ if (clientSocket == INVALID_SOCKET)
 - 컨텐츠 개발은 대부분 GameServer 프로젝트 안에서 이루어 진다
 - 오늘은 버퍼에서 데이터를 쉽게 읽고 쓸 수 있게 도와주는 BufferReader와 BufferWriter를 만들어 볼 예정
 
+### 05-2 PacketHandler
+- ClientPacketHandler 안에서 패킷 관리를 한다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
