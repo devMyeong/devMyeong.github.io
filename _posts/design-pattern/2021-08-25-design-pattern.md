@@ -1701,6 +1701,117 @@ int _tmain(int argc, _TCHAR* argv[])
 }
 ```
 
+### 12-2 책임사슬 패턴 (Chain of Resposibility)
+
+```cpp
+//-------------------------------------------------------------------------------
+// 책임사슬 패턴을 동적으로 활용하여 다양한 처리 방식을 유연하게 연결 할 수 있다
+//-------------------------------------------------------------------------------
+
+#include "stdafx.h"
+#include <string>
+#include <list>
+#include <vector>
+
+#include<iostream>
+#include <list>
+
+using namespace std;
+
+class Attack
+{
+private:
+	int m_Amount;
+
+public:
+	Attack(int amount)
+	{
+		m_Amount = amount;
+	}
+	virtual ~Attack() = default;
+
+	void setAmount(int amount)
+	{
+		m_Amount = amount;
+	}
+
+	int getAmount()
+	{
+		return m_Amount;
+	}
+
+};
+
+class Defense
+{
+public:
+	virtual void defense(Attack* attack) = 0;
+};
+
+class Armor : public Defense
+{
+public:
+	Armor()
+	{
+
+	}
+
+	Armor(int def)
+	{
+		m_def = def;
+	}
+
+private:
+	Defense* m_nextDefense;
+	int m_def; // 방어력
+
+private:
+	void proccess(Attack* attack)
+	{
+		int amount = attack->getAmount();
+		amount -= m_def;
+		attack->setAmount(amount);
+	}
+
+public:
+	// Defense을(를) 통해 상속됨
+	virtual void defense(Attack* attack) override
+	{
+		// 이 부분이 Key Point !!
+		proccess(attack);
+
+		if (m_nextDefense != nullptr)
+		{
+			m_nextDefense->defense(attack);
+		}
+	}
+
+	void SetDef(int def)
+	{
+		m_def = def;
+	}
+
+	void SetNextDefense(Defense* nextDefense)
+	{
+		m_nextDefense = nextDefense;
+	}
+
+};
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	Attack* attack = new Attack(100);
+	Armor* armor1  = new Armor(10);
+	Armor* armor2  = new Armor(15);
+
+	armor1->SetNextDefense(armor2);
+
+	armor1->defense(attack);
+
+	cout << attack->getAmount() << endl;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
