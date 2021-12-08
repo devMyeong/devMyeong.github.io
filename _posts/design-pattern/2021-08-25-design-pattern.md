@@ -1701,6 +1701,8 @@ int _tmain(int argc, _TCHAR* argv[])
 }
 ```
 
+<br>
+
 ### 12-2 책임사슬 패턴 (Chain of Resposibility)
 
 ```cpp
@@ -1809,6 +1811,60 @@ int _tmain(int argc, _TCHAR* argv[])
 	armor1->defense(attack);
 
 	cout << attack->getAmount() << endl;
+}
+```
+
+<br>
+
+## Chapter 13 퍼사드 패턴
+
+### 13-1 퍼사드 패턴 (Facade)
+
+```cpp
+//----------------------------------------------
+// 어떠한 일련의 과정을 간단하게 표현하는 패턴
+//----------------------------------------------
+class CarFacade
+{
+public:
+    Car car;
+
+    CarFacade(Car car)
+	{
+        this.car = car;
+    }
+
+    void drive()
+	{
+        car.enginStart();
+        car.doorLock();
+        car.wheelsRoll();
+    }
+
+    void stop()
+	{
+        car.enginStop();
+        car.doorUnlock();
+        car.wheelsStop();
+    }
+
+    void park()
+	{
+        car.enginStop();
+        car.doorLock();
+        car.wheelsStop();
+    }
+
+}
+
+class Car
+{
+    public void enginStop(){ cout << "engine stop"; }
+    public void enginStart(){ cout << "engine start"; }
+    public void doorLock(){ cout << "door locked"; }
+    public void doorUnlock(){ cout << "door unlocked"; }
+    public void wheelsRoll(){ cout << "wheels roll"; }
+    public void wheelsStop(){ cout << "wheels stop"; }
 }
 ```
 
