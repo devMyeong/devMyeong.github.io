@@ -966,6 +966,16 @@ if (clientSocket == INVALID_SOCKET)
 ### 05-2 PacketHandler
 - ClientPacketHandler 안에서 패킷 관리를 한다
 
+### 05-3 Unicode
+- ASCII : 0~127을 1바이트로 표현
+- UNICODE : 0~65535를 2바이트로 표현
+- UTF-8 : 영문 1바이트 한글 3바이트, Unicode 문자 집합 + 인코딩 방식 ( 인코딩 방식에 대한 설명은 14 : 30 참조 )
+- UTF-16 : Unicode 문자 집합 + 인코딩 방식, BMP까지는 2바이트 그다음은 4바이트 ( 18 : 45 )
+- MBCS(Multi Byte Character Set) : 개별 문자를 다수의 바이트로 표현한 문자 셋, char
+- WBCS(Wide Byte Character Set) : 유니코드 기반의 character set (Windoes 기준 = UTF-16), wchar
+- TCHAR는 WCHAR와 char 둘다 변환이 가능하다 ( 28 : 27 )
+- 우리 프로젝트는 WCAHR로 간다 ( C#과 호환이 좋다 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
