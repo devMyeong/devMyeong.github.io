@@ -1870,4 +1870,108 @@ class Car
 
 <br>
 
+## Chapter 14 옵저버 패턴
+
+### 14-1 옵저버 패턴 (Observer) 1
+
+```cpp
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// 옵저버 패턴을 활용하면 이벤트 발생후 객체 외부에서 처리를 할 수 있다 // 소스 출처 : jujine.tistory.com/entry/%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%98%95-%EB%B3%80%ED%99%98-string-to-TCHAR
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#include <string>
+#include <list>
+#include <vector>
+#include <iostream>
+#include <atlcoll.h>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// Observer 인터페이스
+class 옵저버_인터페이스
+{
+public:
+	virtual void 방송시청(const string news) = 0;
+	virtual const string 이름() const = 0;
+};
+
+//------------------------------------------------------------------
+// ConcreteObserver 상속 클래스
+class 시청자 : public 옵저버_인터페이스
+{
+public:
+	시청자(const string name) : mName(name) {}
+
+public:
+	void 방송시청(const string news) override { cout << mName << " : " << news << endl; }
+	const string 이름() const { return mName.c_str(); }
+
+private:
+	string mName;
+};
+
+//------------------------------------------------------------------
+// Subject 인터페이스 (옵저버들 관리 및 통지)
+class 방송사_인터페이스
+{
+public:
+	void 방송시청등록(옵저버_인터페이스* o) { mList.AddTail(o); cout << "방송 신청 : " << o->이름() << endl; }
+	void 방송시청해제(옵저버_인터페이스* o) { mList.RemoveAt(mList.Find(o));  cout << "방송 해지 : " << o->이름() << endl; }
+
+protected:
+	void 송출(const string news)
+	{
+		POSITION pos = mList.GetHeadPosition();
+		while (pos != NULL)
+			mList.GetNext(pos)->방송시청(news);
+	}
+
+public:
+	virtual void 뉴스(const string news) = 0;
+
+private:
+	CAtlList<옵저버_인터페이스*> mList;
+};
+
+//------------------------------------------------------------------
+// ConcreteSubject 상속 클래스
+class 코리아방송 : public 방송사_인터페이스
+{
+public:
+	void 뉴스(const string news) override { 송출(news); }
+};
+
+
+//------------------------------------------------------------------
+// Main
+void main(void)
+{
+	방송사_인터페이스* pSubject = new 코리아방송;
+
+	옵저버_인터페이스* pObserver1 = new 시청자("홍길동");
+	옵저버_인터페이스* pObserver2 = new 시청자("태평양");
+	옵저버_인터페이스* pObserver3 = new 시청자("비둘기");
+
+	pSubject->방송시청등록(pObserver1);
+	pSubject->방송시청등록(pObserver2);
+	pSubject->방송시청등록(pObserver3);
+
+	pSubject->뉴스("날씨를 말씀드리겠습니다.");
+
+	pSubject->방송시청해제(pObserver1);
+	pSubject->방송시청해제(pObserver2);
+
+	pSubject->뉴스("뉴스 속보입니다.");
+
+	delete pSubject;
+	delete pObserver1;
+	delete pObserver2;
+	delete pObserver3;
+
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
