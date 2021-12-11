@@ -976,6 +976,11 @@ if (clientSocket == INVALID_SOCKET)
 - TCHAR는 WCHAR와 char 둘다 변환이 가능하다 ( 28 : 27 )
 - 우리 프로젝트는 WCAHR로 간다 ( C#과 호환이 좋다 )
 
+### 05-4 패킷 직렬화 1
+- 메모리에 있는 데이터를 바이트 배열로 만들어 주는것이 패킷 직렬화
+- xml에 대한 설명 및 실습 ( 09 : 00 참조 )
+- `pragma pack(1), pragma pack()`을 사용하면 컴파일러에게 1바이트 단위로 데이터를 나열할 것이다 라고 표현해 줄 수 있다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
