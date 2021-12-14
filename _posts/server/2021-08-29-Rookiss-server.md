@@ -988,6 +988,10 @@ if (clientSocket == INVALID_SOCKET)
 ### 05-6 패킷 직렬화 3
 - 오늘의 주제는 버퍼에 데이터를 바로 밀어넣고 꺼내는 방법에 대해서 설명한다
 
+### 05-7 Protobuf
+- Protobuf는 구글에서 만든것이다 ( 리니지M 등이 이를 사용했다 )
+- 여기서 말하는 컴파일러에 대한 설명은 ( 02:35 참조 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
