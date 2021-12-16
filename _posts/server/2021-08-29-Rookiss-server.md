@@ -997,6 +997,9 @@ if (clientSocket == INVALID_SOCKET)
 - 빌드전 이벤트 적용 방법 ( 13 : 12 )
 - 오늘은 ServerPacketHandler()와 관련된 패킷 자동화를 진행할 예정이다 ( 02 : 08 )
 
+### 05-9 패킷 자동화 2
+- 오늘은 jinja2 라이브러리를 활용하여 자동화 툴을 만든다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
