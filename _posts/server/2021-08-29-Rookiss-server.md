@@ -1002,4 +1002,11 @@ if (clientSocket == INVALID_SOCKET)
 
 <br>
 
+## Chapter 06 JobQueue
+
+### 06-1 채팅 실습
+- 오늘 수업의 핵심은 브로드 캐스팅
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
