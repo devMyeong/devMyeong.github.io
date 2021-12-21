@@ -1982,4 +1982,119 @@ void main(void)
 
 <br>
 
+## Chapter 15 여러가지 디자인 패턴
+
+### 15-1 중재자 패턴(Mediator)
+
+![mediator](https://user-images.githubusercontent.com/80055816/146881210-5e51b197-ff01-42d7-926d-ce68f5f87219.PNG){: width="70%" height="70%"}{: .align-center}
+
+```cpp
+//-------------------------------------------------------------------------
+// M : N 관계를 1 : 1 로 변경하기 출처 : copynull.tistory.com/145
+//----------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// Mediator 인터페이스
+class Colleague;    // 전방 선언
+class Mediator
+{
+public:
+	virtual void AppendUser(Colleague* colleague) = 0;
+	virtual void RemoveUser(Colleague* colleague) = 0;
+	virtual void sendMessage(const TCHAR* message, Colleague* sender) = 0;
+};
+
+//------------------------------------------------------------------
+// Colleague 인터페이스
+class Colleague
+{
+public:
+	Colleague(Mediator* m, const TCHAR* name) : pMediator(m), mName(name) {}
+
+public:
+	virtual void SendMessages(const TCHAR* str) = 0;
+	virtual void ReceiveMessages(const TCHAR* str) = 0;
+
+protected:
+	Mediator* pMediator;
+	wstring mName;
+};
+
+//------------------------------------------------------------------
+// User 상속 클래스
+class User : public Colleague
+{
+public:
+	User(Mediator* m, const TCHAR* name) : Colleague(m, name) {}
+
+public:
+	void SendMessages(const TCHAR* str) override
+	{
+		wcout << mName << " send : " << str << endl;
+		pMediator->sendMessage(str, this);
+	}
+
+	void ReceiveMessages(const TCHAR* str) override
+	{
+		wcout << mName << " recv : " << str << endl;
+	}
+};
+
+//------------------------------------------------------------------
+// ChatMediator 상속 클래스
+class ChatMediator : public Mediator
+{
+public:
+	void AppendUser(Colleague* colleague) override
+	{
+		mList.push_back(colleague);
+	}
+
+	void RemoveUser(Colleague* colleague) override
+	{
+		mList.remove(colleague);
+	}
+
+	void sendMessage(const TCHAR* message, Colleague* sender)
+	{
+		for (Colleague* object : mList)
+		{
+			if (object != sender)
+				object->ReceiveMessages(message);
+		}
+	}
+
+private:
+	list<Colleague*> mList;
+};
+
+//------------------------------------------------------------------
+// Main
+int main(void)
+{
+	ChatMediator mChatMediator;
+
+	User mUser1(&mChatMediator, L"Hong");
+	User mUser2(&mChatMediator, L"Nice");
+	User mUser3(&mChatMediator, L"Design");
+
+	mChatMediator.AppendUser(&mUser1);
+	mChatMediator.AppendUser(&mUser2);
+	mChatMediator.AppendUser(&mUser3);
+
+	mUser1.SendMessages(L"Hello i am Hong");
+
+	return 0;
+}
+```
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
