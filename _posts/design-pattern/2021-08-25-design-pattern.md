@@ -2095,6 +2095,87 @@ int main(void)
 }
 ```
 
+### 15-2 상태 패턴(State Pattern)
+
+```cpp
+//-------------------------------------------------------------------------------------------------
+// 상태 패턴을 통해 상태를 객체로 나타내고 행동을 구현한다 소스 출처 : copynull.tistory.com/128
+//-------------------------------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// 상태 인터페이스 클래스
+class 상태_인터페이스
+{
+public:
+	virtual void 처리() = 0;
+};
+
+//------------------------------------------------------------------
+// 이동 클래스
+class 이동 : public 상태_인터페이스
+{
+public:
+	void 처리() override { cout << "이동" << endl; }
+};
+
+//------------------------------------------------------------------
+// 공격 클래스
+class 공격 : public 상태_인터페이스
+{
+public:
+	void 처리() override { cout << "공격" << endl; }
+};
+
+//------------------------------------------------------------------
+// 아이템 줍기 클래스
+class 아이템줍기 : public 상태_인터페이스
+{
+public:
+	void 처리() override { cout << "아이템줍기" << endl; }
+};
+
+//------------------------------------------------------------------
+// 몬스터(Context) 클래스
+class 몬스터
+{
+public:
+	몬스터(상태_인터페이스* state) : pState(state) {}
+	~몬스터() { if (pState) delete pState; }
+
+public:
+	void 상태변경(상태_인터페이스* state) { if (pState) delete pState; pState = state; }
+	void 처리() { pState->처리(); }
+
+private:
+	상태_인터페이스* pState;
+};
+
+
+//------------------------------------------------------------------
+// Main
+int main(void)
+{
+	몬스터* pMonster = new 몬스터(new 이동());
+	pMonster->처리();
+
+	pMonster->상태변경(new 공격());
+	pMonster->처리();
+
+	pMonster->상태변경(new 아이템줍기());
+	pMonster->처리();
+
+	delete pMonster;
+	return 0;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
