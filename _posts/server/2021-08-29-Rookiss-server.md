@@ -1007,6 +1007,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 06-1 채팅 실습
 - 오늘 수업의 핵심은 브로드 캐스팅
 
+### 06-2 JobQueue 1
+- 커맨드 패턴의 핵심은 어떤 요청을 캡슐화 해서 주문서 형태로 만드는 것이 핵심 ( 05 : 50 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
