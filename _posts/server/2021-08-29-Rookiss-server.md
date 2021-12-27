@@ -1010,6 +1010,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 06-2 JobQueue 1
 - 커맨드 패턴의 핵심은 어떤 요청을 캡슐화 해서 주문서 형태로 만드는 것이 핵심 ( 05 : 50 )
 
+### 06-3 JobQueue 2
+- 커맨드 패턴과 함수자를 활용하여 Job을 관리해보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
