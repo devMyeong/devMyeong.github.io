@@ -2176,6 +2176,101 @@ int main(void)
 }
 ```
 
+### 15-3 메멘토 패턴 ( Memento Pattern )
+
+```cpp
+//------------------------------------------------------------------------------------------------------
+// 메멘토 패턴을 통해 객체의 상태를 저장하고 이전상태로 복구한다 소스 출처 : copynull.tistory.com/139
+//------------------------------------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+#include <stack>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// Memento 클래스
+class Memento
+{
+public:
+	Memento(wstring _state) { state = _state; }
+
+public:
+	wstring getState() const { return state; }
+
+private:
+	wstring state;
+};
+
+//------------------------------------------------------------------
+// Originator 클래스
+class Originator
+{
+public:
+	void setState(wstring _state)
+	{
+		state = _state;
+		wcout << L"Originator: Setting state to " << state << endl;
+	}
+
+public:
+	void setMemento(Memento *m)
+	{
+		if (m)
+		{
+			state = m->getState();
+			delete m;
+			wcout << L"Originator: State after restoring from Memento " << state << endl;
+		}
+	}
+
+	Memento* createMemento()
+	{
+		wcout << L"Originator: Create to Memento " << state << endl;
+		return new Memento(state);
+	}
+
+private:
+	wstring state;
+};
+
+//------------------------------------------------------------------
+// Caretaker 클래스 (Memento 관리)
+class Caretaker
+{
+public:
+	void pushMemento(Memento* m) { mStack.push(m); }
+	Memento* popMemento() { Memento* m = mStack.top(); mStack.pop(); return m; }
+
+private:
+	stack<Memento*> mStack;
+};
+
+//------------------------------------------------------------------
+// Main
+int main(void)
+{
+	Caretaker mCaretaker;
+	Originator *originator = new Originator();
+
+	originator->setState(L"state1");
+	mCaretaker.pushMemento(originator->createMemento());
+
+	originator->setState(L"state2");
+	mCaretaker.pushMemento(originator->createMemento());
+
+	originator->setMemento(mCaretaker.popMemento());
+	originator->setMemento(mCaretaker.popMemento());
+
+	delete originator;
+
+	return 0;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
