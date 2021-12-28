@@ -2271,6 +2271,78 @@ int main(void)
 }
 ```
 
+### 15-4 플라이웨이트 패턴 ( Flyweight Pattern)
+
+```cpp
+//-----------------------------------------------------------------------------------------
+// 플라이웨이트 패턴을 통해 메모리 공간을 절약할 수 있다 소스 출처 : d-yong.tistory.com/48
+//-----------------------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+#include <stack>
+#include <map>
+
+using namespace std;
+
+class Contents
+{
+public:
+	virtual void play() = 0;
+};
+
+class Movie : public Contents
+{
+public:
+	Movie(string title)
+	{
+		this->title = title;
+		cout << "Load " << title << endl;
+	}
+	virtual void play() override final
+	{
+		cout << "Play:" << title << endl;
+	}
+private:
+	string title;
+};
+
+class ContentsFactory
+{
+public:
+	Contents* getContents(string key)
+	{
+		if (contentsList.find(key) == contentsList.end())
+		{
+			contentsList[key] = new Movie(key);
+		}
+		else
+		{
+			cout << "reuese" << endl;
+		}
+
+		return contentsList[key];
+	}
+private:
+	map<string, Contents*> contentsList;
+};
+
+int main(int argc, const char * argv[])
+{
+	ContentsFactory* contentsFactory = new ContentsFactory();
+
+	Contents* movie = contentsFactory->getContents("Big short");
+	movie->play();
+
+	Contents* movie2 = contentsFactory->getContents("Big short");
+	movie2->play();
+
+	return 0;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
