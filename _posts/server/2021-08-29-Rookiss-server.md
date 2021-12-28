@@ -1013,6 +1013,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 06-3 JobQueue 2
 - 커맨드 패턴과 함수자를 활용하여 Job을 관리해보자
 
+### 06-4 JobQueue 3
+- 람다와 함수자를 활용해보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
