@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2021-08-29
-last_modified_at: 2021-10-16
+last_modified_at: 2021-12-30
 ---
 
 ## Chapter 00 오티
@@ -1015,6 +1015,9 @@ if (clientSocket == INVALID_SOCKET)
 
 ### 06-4 JobQueue 3
 - 람다와 함수자를 활용해보자
+
+### 06-5 JobQueue 4
+- DoAsync() 함수를 활용해 일감을 밀어넣는 형태로 코드를 작성해보자
 
 <br>
 
