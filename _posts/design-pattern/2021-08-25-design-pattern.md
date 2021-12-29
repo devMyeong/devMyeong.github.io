@@ -2343,6 +2343,84 @@ int main(int argc, const char * argv[])
 }
 ```
 
+### 15-5 프록시 패턴 ( Proxy Pattern )
+
+```cpp
+//----------------------------------------------------------------------------------------
+// 프록시 패턴을 통해 작업을 나눠서 구현 할 수 있다 소스 출처 : copynull.tistory.com/133
+//----------------------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+#include <stack>
+#include <map>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// Subject 인터페이스
+class Image
+{
+public:
+	virtual void ShowImage() = 0;
+};
+
+//------------------------------------------------------------------
+// RealSubject 상속 클래스
+class RealImage : public Image
+{
+public:
+	RealImage(const TCHAR* name) : mFile(name) {}
+
+public:
+	void LoadImage() { wcout << "disk from loading file : " << mFile.c_str() << endl; }
+	void ShowImage() { wcout << "show image : " << mFile.c_str() << endl; }
+
+private:
+	wstring mFile;
+};
+
+//------------------------------------------------------------------
+// Proxy 상속 클래스
+class ProxyImage : public Image
+{
+public:
+	ProxyImage(const TCHAR* name) : mFile(name), mImage(NULL) {}
+	~ProxyImage() { if (mImage) delete mImage; }
+
+public:
+	void ShowImage()
+	{
+		if (!mImage)
+		{
+			mImage = new RealImage(mFile.c_str());
+			mImage->LoadImage();
+		}
+
+		mImage->ShowImage();
+	}
+
+private:
+	RealImage* mImage;
+	wstring mFile;
+};
+
+//------------------------------------------------------------------
+// Main
+int main(void)
+{
+	Image* pImage = new ProxyImage(L"Image.png");
+	pImage->ShowImage();    // 로딩 및 출력
+	pImage->ShowImage();    // 캐싱 출력
+	pImage->ShowImage();    // 캐싱 출력
+	delete pImage;
+
+	return 0;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
