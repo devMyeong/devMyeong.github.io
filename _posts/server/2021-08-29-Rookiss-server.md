@@ -1019,6 +1019,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 06-5 JobQueue 4
 - DoAsync() 함수를 활용해 일감을 밀어넣는 형태로 코드를 작성해보자
 
+### 06-6 JobQueue 5
+- GlobalQueue를 활용하여 전역으로 일을 배분해보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
