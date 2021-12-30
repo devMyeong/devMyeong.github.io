@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2021-08-25
-last_modified_at: 2021-08-25
+last_modified_at: 2021-12-30
 ---
 
 ## Chapter 00 스트래티지 패턴
@@ -2416,6 +2416,127 @@ int main(void)
 	pImage->ShowImage();    // 캐싱 출력
 	pImage->ShowImage();    // 캐싱 출력
 	delete pImage;
+
+	return 0;
+}
+```
+
+### 15-6 커맨드 패턴 ( Command Pattern )
+
+```cpp
+//----------------------------------------------------------------------------------------
+// 커맨드 패턴을 통해 명령을 객체화 할 수 있다
+//----------------------------------------------------------------------------------------
+
+#include <list>
+#include <string>
+#include <Windows.h>
+#include <iostream>
+#include <stack>
+#include <map>
+
+using namespace std;
+
+//------------------------------------------------------------------
+// Receiver 인터페이스
+class Receiver
+{
+public:
+	virtual void 실행() = 0;
+};
+
+//------------------------------------------------------------------
+// 파일생성 클래스
+class 파일생성 : public Receiver
+{
+public:
+	virtual void 실행() override { cout << "파일 생성" << endl; }
+};
+
+//------------------------------------------------------------------
+// 파일저장 클래스
+class 파일저장 : public Receiver
+{
+public:
+	virtual void 실행() override { cout << "파일 저장" << endl; }
+};
+
+//------------------------------------------------------------------
+// 파일닫기 클래스
+class 파일닫기 : public Receiver
+{
+public:
+	virtual void 실행() override { cout << "파일 닫기" << endl; }
+};
+
+//------------------------------------------------------------------
+// Command 인터페이스
+class Command
+{
+public:
+	virtual void 실행() = 0;
+};
+
+//------------------------------------------------------------------
+// 파일 생성 명령 클래스
+class 파일생성명령 : public Command
+{
+public:
+	void 리시버설정(Receiver* r) { pReceiver = r; }
+	void 실행() { pReceiver->실행(); }
+
+private:
+	Receiver* pReceiver;
+};
+
+//------------------------------------------------------------------
+// 파일 저장 명령 클래스
+class 파일저장명령 : public Command
+{
+public:
+	void 리시버설정(Receiver* r) { pReceiver = r; }
+	void 실행() { pReceiver->실행(); }
+
+private:
+	Receiver* pReceiver;
+};
+
+//------------------------------------------------------------------
+// 파일 닫기 명령 클래스
+class 파일닫기명령 : public Command
+{
+public:
+	void 리시버설정(Receiver* r) { pReceiver = r; }
+	void 실행() { pReceiver->실행(); }
+
+private:
+	Receiver* pReceiver;
+};
+
+//------------------------------------------------------------------
+// 처리자 클래스
+class 처리자
+{
+public:
+	void 명령지정(Command* pCmd) { pCommand = pCmd; }
+	void 명령실행() { pCommand->실행(); }
+
+private:
+	Command* pCommand;
+};
+
+
+//------------------------------------------------------------------
+// Main
+int main(void)
+{
+	처리자 pInvoker;
+	파일생성 pFileNew;
+	파일생성명령 pCommand;
+
+	pCommand.리시버설정(&pFileNew);
+	pInvoker.명령지정(&pCommand);
+	pInvoker.명령실행();
 
 	return 0;
 }
