@@ -1022,6 +1022,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 06-6 JobQueue 5
 - GlobalQueue를 활용하여 전역으로 일을 배분해보자
 
+### 06-7 JobTimer
+- JobTimer 기반으로 예약시스템을 통해 Job을 관리해주자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
