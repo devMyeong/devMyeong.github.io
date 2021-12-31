@@ -1027,4 +1027,11 @@ if (clientSocket == INVALID_SOCKET)
 
 <br>
 
+## Chapter 07 데이터베이스 연동
+
+### 07-1 DB Connection
+- 현업에서는 MS-SQL을 많이 사용한다
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
