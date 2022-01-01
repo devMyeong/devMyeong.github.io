@@ -1032,6 +1032,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 07-1 DB Connection
 - 현업에서는 MS-SQL을 많이 사용한다
 
+### 07-2 DB Bind
+- 바인딩을 자동화 해보자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
