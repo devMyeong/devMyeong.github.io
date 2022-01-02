@@ -1038,6 +1038,12 @@ if (clientSocket == INVALID_SOCKET)
 ### 07-3 XML Parser
 - google rapidxml을 활용하여 DB를 관리해보자 ( rapidxml이 xml 파일 파싱을 도와준다 )
 
+### 07-4 ORM
+- DB에 실존하는 테이블들을 돌면서 XML에 정의된 테이블들과 비교한다
+
+### 07-5 Procedure Generator
+- Procedure 부분을 파싱해서 DBSynchronizer.cpp에 있는 클래스들을 만들어 주는 것이 목표
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
