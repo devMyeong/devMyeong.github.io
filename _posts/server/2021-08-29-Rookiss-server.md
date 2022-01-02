@@ -1035,6 +1035,9 @@ if (clientSocket == INVALID_SOCKET)
 ### 07-2 DB Bind
 - 바인딩을 자동화 해보자
 
+### 07-3 XML Parser
+- google rapidxml을 활용하여 DB를 관리해보자 ( rapidxml이 xml 파일 파싱을 도와준다 )
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
