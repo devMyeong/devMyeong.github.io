@@ -868,7 +868,7 @@ void main(void)
 	Computer* computer = ComputerBuilder::start()->setCpu("i7")->setRam("8g")->setStorage("128g SSD")->build();
 
 	// 지금 넣어주고 있는 값이 무엇인지 함수명을 보고 알수있는 장점이 있다 ( 방식 2 )
-	//Computer* computer = ComputerBuilder::start()->startWithCpu("i7")->setRam("8g")->setStorage("128g SSD")->build();
+	//Computer* computer = ComputerBuilder::startWithCpu("i7")->setRam("8g")->setStorage("128g SSD")->build();
 
 	cout << computer->toString() << endl;
 }
