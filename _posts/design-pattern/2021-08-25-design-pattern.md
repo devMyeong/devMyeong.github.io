@@ -1488,7 +1488,7 @@ int main()
 {
     AirPlane* pFront = new FrontAttackAirPlane;		// 기본 공격
     AirPlane* pSide = new SideAttackAirPlane(pFront);
-    AirPlane* pRear = new RearAttackAirPlane(pFront);
+    AirPlane* pRear = new RearAttackAirPlane(pSide);
     
     pRear->Attack();
 }
