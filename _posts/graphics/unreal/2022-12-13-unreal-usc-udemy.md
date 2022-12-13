@@ -23,17 +23,17 @@ last_modified_at: 2022-12-13
 ### 01-2 Install an IDE
 - Visual studio installer에서 C++을 사용한 게임 개발 체크하자
 
-![config](https://user-images.githubusercontent.com/80055816/207264533-ed045cee-689f-47dd-acf3-04d52c598713.PNG){: width="70%" height="70%"}{: .align-center}
+![config](https://user-images.githubusercontent.com/80055816/207264533-ed045cee-689f-47dd-acf3-04d52c598713.PNG){: width="75%" height="75%"}{: .align-center}
 
-![config2](https://user-images.githubusercontent.com/80055816/207264842-9f56de74-8a18-42fa-a1e7-17db41b57371.PNG){: width="70%" height="70%"}{: .align-center}
+![config2](https://user-images.githubusercontent.com/80055816/207264842-9f56de74-8a18-42fa-a1e7-17db41b57371.PNG){: width="75%" height="75%"}{: .align-center}
 
-![config3](https://user-images.githubusercontent.com/80055816/207264883-e4205773-3ba8-47bb-8fca-4dcba6975ce0.PNG){: width="70%" height="70%"}{: .align-center}
+![config3](https://user-images.githubusercontent.com/80055816/207264883-e4205773-3ba8-47bb-8fca-4dcba6975ce0.PNG){: width="75%" height="75%"}{: .align-center}
 
-![config4](https://user-images.githubusercontent.com/80055816/207264946-8aeeaabc-5057-4610-858b-5a53e23563bc.PNG){: width="70%" height="70%"}{: .align-center}
+![config4](https://user-images.githubusercontent.com/80055816/207264946-8aeeaabc-5057-4610-858b-5a53e23563bc.PNG){: width="75%" height="75%"}{: .align-center}
 
 ### 01-3 Install Unreal Engine
 
-![showcase](https://user-images.githubusercontent.com/80055816/207268243-b690d3cb-62a1-430c-94ba-d416bf0c5cfd.PNG){: width="70%" height="70%"}{: .align-center}
+![showcase](https://user-images.githubusercontent.com/80055816/207268243-b690d3cb-62a1-430c-94ba-d416bf0c5cfd.PNG){: width="75%" height="75%"}{: .align-center}
 
 - 맨 위에서 부터 내 언리얼 엔진, 내 프로젝트, 내 에셋 순으로 나열되어 있다
 
