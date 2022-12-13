@@ -45,6 +45,28 @@ last_modified_at: 2022-12-13
 - Character에 대해 설명하면? A character has its own character, movement component, and this character movement component has functionality
 - 언리얼 HAS A 관계에 대해 나열하면? Package - World - Level - Actor - Actor Component
 
+### 01-5 Reflection and Garbage Collection
+- Reflection에 대해 설명하면? 리플렉션(Reflection)은 프로그램이 실행시간에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있다
+- Now, as soon as that pointer variable goes out of scope, the pointer gets deleted
+- Unreal Engines Garbage collection system keeps track of how many variables reference any given object
+- For a class to participate in Unreal Engines garbage collection system, it must make use of special macros that allow the class to be recognized ([**참고**](https://www.unrealengine.com/ko/blog/unreal-property-system-reflection))
+
+### 01-6 How to Get Help
+- ([**참고**](https://forums.unrealengine.com/categories?tag=unreal-engine)) 여기서 언리얼에 대한 질문을 할 수 있다
+- 강의 영상중 특정 부분이 컴파일이 안되거나 하는 문제가 생기면 해당 영상의 질의응답 탭을 확인하자, 이 탭에서 내 질문에 대한 답변을 찾을수 없다면 직접 질문을 올릴수도 있다
+- 질문 올릴때 유의점, Tag this video when it posts your questions so I'll know which video you're talking about
+- 질문 올릴때 유의점, Mentioned that point in time in the video, in your question
+- 질문 올릴때 유의점, If your question involves code, it's really helpful if you show me your code
+- 질문 올릴때 유의점, If you have a compiler error, take a screenshot of the compiler error and include that in your question
+- 질문 올릴때 유의점, If you have a piece of code that you don't understand, highlight that particular piece of code
+- 강사님이 운영하는 디스코드 방에서 질문이나 의견등을 자유롭게 공유할 수 있으며, 협업할 멤버도 구할 수 있다
+- 이 단원 자료에 이 강좌에 필요한 리소스, 디스코드 주소 등이 기재되어 있다
+
+## Chapter 2 Project Setup
+
+### 02-7 Project Setup
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
