@@ -31,6 +31,19 @@ last_modified_at: 2022-12-13
 
 ![config4](https://user-images.githubusercontent.com/80055816/207264946-8aeeaabc-5057-4610-858b-5a53e23563bc.PNG){: width="70%" height="70%"}{: .align-center}
 
+### 01-3 Install Unreal Engine
+
+![showcase](https://user-images.githubusercontent.com/80055816/207268243-b690d3cb-62a1-430c-94ba-d416bf0c5cfd.PNG){: width="70%" height="70%"}{: .align-center}
+
+- 맨 위에서 부터 내 언리얼 엔진, 내 프로젝트, 내 에셋 순으로 나열되어 있다
+
+### 01-4 C++ Refresher and UE4 Hierarchy
+- 언리얼 계층 구조에 대해 나열하면? Object - Actor - Pawn - Character
+- Object에 대해 설명하면? An object is a very basic type of class, it can store data, but it does not have the capability of being placed in a level
+- Actor에 대해 설명하면? An actor can have a visual representation
+- Pawn에 대해 설명하면? An pawn can be possessed by a controller, a controller is a special type of actor class that allows you to take user input, such as a keyboard
+- Character에 대해 설명하면? A character has its own character, movement component, and this character movement component has functionality
+- 언리얼 HAS A 관계에 대해 나열하면? Package - World - Level - Actor - Actor Component
 
 <br>
 
