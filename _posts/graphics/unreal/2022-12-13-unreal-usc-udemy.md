@@ -73,13 +73,13 @@ last_modified_at: 2022-12-13
 ![projectmap](https://user-images.githubusercontent.com/80055816/207659560-2bb05525-7699-4982-8840-8594edeedaac.PNG){: width="100%" height="100%"}{: .align-center}
 
 - 위의 화면에 대한 설명은 ([**참고**](https://lifeisforu.tistory.com/326)) 여기에서 확인하면 된다
-- it's called shooter game mode base, the class name is called a shooter game mode base because this game mode inherits ultimately from actor in the inheritance hierarchy
+- It's called shooter game mode base, the class name is called a shooter game mode base because this game mode inherits ultimately from actor in the inheritance hierarchy
 - So we have this shooter game mode based class And since we have access to it in C++, we can create variables and functions and things here if we want to, in the Unreal Engine, Ed, we can create a blueprint based on this class and we're going to stick it in the game mode folder
 - 월드 세팅에 대한 설명은 ([**참고**](https://velog.io/@jijang/%EC%9B%94%EB%93%9C-%EC%84%B8%ED%8C%85)) 여기에서 확인하면 된다
 
 ![projectmode](https://user-images.githubusercontent.com/80055816/207664691-17660953-3654-4c54-815d-dbebb4e7a575.PNG){: width="100%" height="100%"}{: .align-center}
 
-- right here for the default game mode, we can set this to shooter game mode based BP and that will ensure that our shooter game mode based BP will be used for our entire project
+- Right here for the default game mode, we can set this to shooter game mode based BP and that will ensure that our shooter game mode based BP will be used for our entire project
 
 <br>
 
