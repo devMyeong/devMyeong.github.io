@@ -194,7 +194,7 @@ void AShooterCharacter::BeginPlay()
 
 ### 02-12 Camera Spring Arm
 - Chpater 1-6에 소개된 깃허브 저장소에서 각 챕터별 소스를 다운받을 수 있다
-- UPROPERTY에 대해 설명하면? UPROPERTY의 역할은 기본적으로 언리얼 리플렉션 시스템에 해당 프로퍼티가 있음을 알리는 것입니다 ([**참고**](https://lifeisforu.tistory.com/326))
+- UPROPERTY에 대해 설명하면? UPROPERTY의 역할은 언리얼 리플렉션 시스템에 해당 프로퍼티가 있음을 알리는 것입니다 ([**참고**](https://lifeisforu.tistory.com/326))
 
 ```cpp
 private:
@@ -225,6 +225,26 @@ AShooterCharacter::AShooterCharacter()
 - The red line is our camera boom and our camera is going to be attached to the end of it
 
 ### 02-13 Follow Camera
+
+```cpp
+// Create a follow camera
+FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
+
+//----------------------------------------------------------------------------------------
+// We're going to specify the socket on the camera boom, a spring arm component contains
+// A socket at the end of it that we can attach the camera to and springform component
+// Has a static variable that contains the name of that socket it's called socket name
+//----------------------------------------------------------------------------------------
+FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attach camera to end of boom
+FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+```
+
+![boom](https://user-images.githubusercontent.com/80055816/207886347-96dc5a82-80de-4457-b32a-5306b5e902df.PNG){: width="100%" height="100%"}{: .align-center}
+
+- It's important to remember that if we ever want to adjust the camera relative to the player, we should adjust the camera boom
+- If we select the camera boom and we change the target arm length
+
+### 02-14 Controllers and Input
 - 
 
 <br>
