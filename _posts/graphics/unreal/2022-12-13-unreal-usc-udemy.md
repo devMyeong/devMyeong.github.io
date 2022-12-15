@@ -245,6 +245,13 @@ FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relativ
 - If we select the camera boom and we change the target arm length
 
 ### 02-14 Controllers and Input
+- The controller is also invisible you can think of it as this invisible entity following the character around, but it doesn't have its own scale or location it's just a C++ class object associated with the character
+- The controller doesn't have its own location per say, it does have an orientation, that is to say a rotation, and there are functions to get and set the controller rotation
+- User의 역할에 대해 설명하면? The user provides input to the game via devices like the mouse and the keyboard
+- Controller의 역할에 대해 설명하면? The controller takes user input data and uses that data to move the character, but first it passes it over to the movement component
+- Movement Component에 대해 설명하면? The movement component takes input data and performs calculations and makes sure that before the character is moved, it's moved in the right ways it has to obey laws such as gravity but once those calculations are performed, then the movement component can move the character
+
+### 02-15 Move Forward and Right
 - 
 
 <br>
