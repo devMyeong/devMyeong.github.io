@@ -81,6 +81,22 @@ last_modified_at: 2022-12-13
 
 - Right here for the default game mode, we can set this to shooter game mode based BP and that will ensure that our shooter game mode based BP will be used for our entire project
 
+### 02-8 Character Class
+
+![bp](https://user-images.githubusercontent.com/80055816/207803202-63742583-7b94-4966-85dd-b46e645302ab.PNG){: width="100%" height="100%"}{: .align-center}
+
+- The capsule component is the root component You cannot assign any other component to be the root component So that's something to keep in mind when it comes to the character class
+- We also have an arrow component, which is pretty handy to show us the forward direction for our character
+- And we also have a mesh This is inherited as well, and it by default has nothing assigned to the skeletal mesh
+- And we also have the character movement component and this has a whole bunch of things that we can edit from here in the details panel
+
+![default](https://user-images.githubusercontent.com/80055816/207804143-8e69f728-7d21-47c4-89af-d06e910b8b43.PNG){: width="100%" height="100%"}{: .align-center}
+
+- What is the Default Pawn class and what is used for in Unreal Engine? ([**참고**](https://gamedev.stackexchange.com/questions/141647/what-is-the-default-pawn-class-and-what-is-used-for-in-unreal-engine))
+
+### 02-9 UE_LOG Format String - Int
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
