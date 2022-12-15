@@ -46,7 +46,7 @@ last_modified_at: 2022-12-13
 - 언리얼 HAS A 관계에 대해 나열하면? Package - World - Level - Actor - Actor Component
 
 ### 01-5 Reflection and Garbage Collection
-- Reflection에 대해 설명하면? 리플렉션(Reflection)은 프로그램이 실행시간에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있다
+- 리플렉션(Reflection)에 대해 설명하면? 프로그램이 런타임에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있다
 - Now, as soon as that pointer variable goes out of scope, the pointer gets deleted
 - Unreal Engines Garbage collection system keeps track of how many variables reference any given object
 - For a class to participate in Unreal Engines garbage collection system, it must make use of special macros that allow the class to be recognized ([**참고**](https://www.unrealengine.com/ko/blog/unreal-property-system-reflection))
@@ -54,11 +54,11 @@ last_modified_at: 2022-12-13
 ### 01-6 How to Get Help
 - ([**참고**](https://forums.unrealengine.com/categories?tag=unreal-engine)) 여기서 언리얼에 대한 질문을 할 수 있다
 - 강의 영상중 특정 부분이 컴파일이 안되거나 하는 문제가 생기면 해당 영상의 질의응답 탭을 확인하자, 이 탭에서 내 질문에 대한 답변을 찾을수 없다면 직접 질문을 올릴수도 있다
-- 질문 올릴때 유의점, Tag this video when it posts your questions so I'll know which video you're talking about
-- 질문 올릴때 유의점, Mentioned that point in time in the video, in your question
-- 질문 올릴때 유의점, If your question involves code, it's really helpful if you show me your code
-- 질문 올릴때 유의점, If you have a compiler error, take a screenshot of the compiler error and include that in your question
-- 질문 올릴때 유의점, If you have a piece of code that you don't understand, highlight that particular piece of code
+- 질문 올릴때 유의점 1, Tag this video when it posts your questions so I'll know which video you're talking about
+- 질문 올릴때 유의점 2, Mentioned that point in time in the video, in your question
+- 질문 올릴때 유의점 3, If your question involves code, it's really helpful if you show me your code
+- 질문 올릴때 유의점 4, If you have a compiler error, take a screenshot of the compiler error and include that in your question
+- 질문 올릴때 유의점 5, If you have a piece of code that you don't understand, highlight that particular piece of code
 - 강사님이 운영하는 디스코드 방에서 질문이나 의견등을 자유롭게 공유할 수 있으며, 협업할 멤버도 구할 수 있다
 - 이 단원 자료에 이 강좌에 필요한 리소스, 디스코드 주소 등이 기재되어 있다
 
@@ -95,6 +95,136 @@ last_modified_at: 2022-12-13
 - What is the Default Pawn class and what is used for in Unreal Engine? ([**참고**](https://gamedev.stackexchange.com/questions/141647/what-is-the-default-pawn-class-and-what-is-used-for-in-unreal-engine))
 
 ### 02-9 UE_LOG Format String - Int
+
+```cpp
+// UE_LOG 사용법 소개
+void AShooterCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
+
+	// 유니폼 초기화
+	int myInt{ 42 };
+	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
+}
+```
+
+### 02-10 UE_LOG Format Specifiers
+
+```cpp
+// UE_LOG 사용법 소개 2
+void AShooterCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
+
+	// 유니폼 초기화
+	int myInt{ 42 };
+	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
+
+	float myFloat{ 3.141592f };
+	UE_LOG(LogTemp, Warning, TEXT("int myFloat : %f"), myFloat);
+
+	double myDouble{ 0.000756 };
+	UE_LOG(LogTemp, Warning, TEXT("double myDouble : %lf"), myDouble);
+
+	char myChar{ 'J' };
+	UE_LOG(LogTemp, Warning, TEXT("char myChar : %c"), myChar);
+
+	// 문자 앞의 대문자 L은 컴파일러에게 이 문자열을 와이드 문자로 저장하라고 지시하는 것이다
+	wchar_t wideChar{ L'J' };
+	UE_LOG(LogTemp, Warning, TEXT("wchar_t wideChar : %lc"), wideChar);
+
+	bool myBool{ true };
+	UE_LOG(LogTemp, Warning, TEXT("bool myBool : %d"), myBool);
+
+	UE_LOG(LogTemp, Warning, TEXT("int : %d, float : %f, bool : %d"), myInt, myFloat, myBool);
+}
+```
+
+### 02-11 UE_LOG with FString
+
+```cpp
+// UE_LOG 사용법 소개 3
+void AShooterCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
+
+	// 유니폼 초기화
+	int myInt{ 42 };
+	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
+
+	float myFloat{ 3.141592f };
+	UE_LOG(LogTemp, Warning, TEXT("int myFloat : %f"), myFloat);
+
+	double myDouble{ 0.000756 };
+	UE_LOG(LogTemp, Warning, TEXT("double myDouble : %lf"), myDouble);
+
+	char myChar{ 'J' };
+	UE_LOG(LogTemp, Warning, TEXT("char myChar : %c"), myChar);
+
+	// 문자 앞의 대문자 L은 컴파일러에게 이 문자열을 와이드 문자로 저장하라고 지시하는 것이다
+	wchar_t wideChar{ L'J' };
+	UE_LOG(LogTemp, Warning, TEXT("wchar_t wideChar : %lc"), wideChar);
+
+	bool myBool{ true };
+	UE_LOG(LogTemp, Warning, TEXT("bool myBool : %d"), myBool);
+
+	UE_LOG(LogTemp, Warning, TEXT("int : %d, float : %f, bool : %d"), myInt, myFloat, myBool);
+
+	//----------------------------------------------------------------------------
+	// This looks like a pointer dereference referencing, but it's not a pointer,
+	// we're actually using this asterisk overload on the string
+	// And what this returns is you can see a constant char array
+	//----------------------------------------------------------------------------
+	FString myString{ TEXT("My String!!!!") };
+	UE_LOG(LogTemp, Warning, TEXT("FString myString : %s"), *myString);
+
+	//----------------------------------------------------------------------------
+	// So that's why I kept the asterisk here, because the asterisk is going to
+	// get this F string and return a constant T char
+	//----------------------------------------------------------------------------
+	UE_LOG(LogTemp, Warning, TEXT("Name of instance : %s"), *GetName());
+}
+```
+
+### 02-12 Camera Spring Arm
+- Chpater 1-6에 소개된 깃허브 저장소에서 각 챕터별 소스를 다운받을 수 있다
+- UPROPERTY에 대해 설명하면? UPROPERTY의 역할은 기본적으로 언리얼 리플렉션 시스템에 해당 프로퍼티가 있음을 알리는 것입니다 ([**참고**](https://lifeisforu.tistory.com/326))
+
+```cpp
+private:
+	// Camera boom positioning the camera behind the character
+	// Let's give it a category of camera, this will give it its own category in the details panel
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* CameraBoom;
+```
+
+- 특정 컴포넌트의 헤더파일 이름은 ([**참고**](https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/GameFramework/USpringArmComponent/)) 여기에서 확인 가능하다
+
+```cpp
+AShooterCharacter::AShooterCharacter()
+{
+	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+	// Create a camera boom (pulls in towards the character if there is a collision)
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+	CameraBoom->SetupAttachment(RootComponent);
+	CameraBoom->TargetArmLength = 300.f; // The camera follows at this distance behind the character
+	CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+}
+```
+
+![boom](https://user-images.githubusercontent.com/80055816/207856156-e0d3c649-5e0a-4777-a7bb-d86411c79da7.PNG){: width="100%" height="100%"}{: .align-center}
+
+- The red line is our camera boom and our camera is going to be attached to the end of it
+
+### 02-13 Follow Camera
 - 
 
 <br>
