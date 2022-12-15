@@ -90,7 +90,7 @@ last_modified_at: 2022-12-13
 - And we also have a mesh This is inherited as well, and it by default has nothing assigned to the skeletal mesh
 - And we also have the character movement component and this has a whole bunch of things that we can edit from here in the details panel
 
-![default](https://user-images.githubusercontent.com/80055816/207804143-8e69f728-7d21-47c4-89af-d06e910b8b43.PNG){: width="100%" height="100%"}{: .align-center}
+![default](https://user-images.githubusercontent.com/80055816/207808796-77fe4ad0-7a46-471a-b9c7-f02ec287427c.PNG){: width="100%" height="100%"}{: .align-center}
 
 - What is the Default Pawn class and what is used for in Unreal Engine? ([**참고**](https://gamedev.stackexchange.com/questions/141647/what-is-the-default-pawn-class-and-what-is-used-for-in-unreal-engine))
 
