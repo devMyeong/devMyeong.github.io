@@ -83,7 +83,7 @@ last_modified_at: 2022-12-13
 
 ### 02-8 Character Class
 
-![bp](https://user-images.githubusercontent.com/80055816/207803202-63742583-7b94-4966-85dd-b46e645302ab.PNG){: width="100%" height="100%"}{: .align-center}
+![bp](https://user-images.githubusercontent.com/80055816/207807937-9ce1f1ef-a762-4260-aaeb-dd063e9ce5d3.PNG){: width="100%" height="100%"}{: .align-center}
 
 - The capsule component is the root component You cannot assign any other component to be the root component So that's something to keep in mind when it comes to the character class
 - We also have an arrow component, which is pretty handy to show us the forward direction for our character
