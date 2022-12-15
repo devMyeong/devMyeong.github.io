@@ -252,6 +252,42 @@ FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relativ
 - Movement Component에 대해 설명하면? The movement component takes input data and performs calculations and makes sure that before the character is moved, it's moved in the right ways it has to obey laws such as gravity but once those calculations are performed, then the movement component can move the character
 
 ### 02-15 Move Forward and Right
+- Project Setting의 Input탭에서 Action Mapping과 Axis Mapping의 차이는? Action mappings are for one off key presses Axis mappings happen every frame, so they're continuously receiving data about those key presses, each frame of the game
+- The controller is what possesses the pawn and the controller is facing a particular direction
+- Yaw, Pitch, Roll에 대해서 각각 설명하면? Yaw는 Z축(수직축)을 중심으로 회전하는 것, Pitch는 Y축(횡축)을 중심으로 회전하는 것, Roll은 X축(종축)을 중심으로 회전하는 것 ([**참고**](https://happy8earth.tistory.com/492))
+
+```cpp
+// MoveForward를 구현하면?
+void AShooterCharacter::MoveForward(float Value)
+{
+	if ((Controller != nullptr) && (Value != 0.0f))
+	{
+		// find out which way is forward
+		const FRotator Rotation{ Controller->GetControlRotation() };
+		const FRotator YawRotation{ 0, Rotation.Yaw, 0 };
+
+		// 회전 행렬에서 방향벡터를 뽑아낸다
+		const FVector Direction{ FRotationMatrix{YawRotation}.GetUnitAxis(EAxis::X) };
+
+		// Add movement input along the given world direction vector(usually normalized) scaled by "ScaleValue"
+		AddMovementInput(Direction, Value);
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	check(PlayerInputComponent);
+
+	// MoveForward와 바인딩 되어 있는 부분을 설명하면? Project Setting의 Input탭에 등록되어 있는 Value
+	PlayerInputComponent->BindAxis("MoveForward", this, &AShooterCharacter::MoveForward);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AShooterCharacter::MoveRight);
+}
+```
+
+### 02-16 Delta Time
 - 
 
 <br>
