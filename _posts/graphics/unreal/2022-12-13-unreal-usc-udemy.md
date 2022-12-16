@@ -305,10 +305,29 @@ void AShooterCharacter::TurnAtRate(float Rate)
 - BindAxis() 함수에 대해 설명하면? 축 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
 
 ### 02-18 Mouse Turning and Jumping
+- 마우스로 시야를 조정할 때 상하 개념을 전환 하라면 어떻게 하면 되는가? Project Setting에서 Scale 값을 양수 또는 음수로 변환한다
 - BindAction() 함수에 대해 설명하면? 액션 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
 
 ### 02-19 Adding a Mesh
-- 
+- 언리얼 런처에서 내 프로젝트에 투입할 리소스를 선택하는 섹션은 무엇인가? Library 탭의 VAULT 섹션
+- Skeletal Mesh가 바라보는 방향을 바꾸려면 어떻게 하면 되는가? 블루프린트의 Viewport 탭에서 해당 Mesh를 클릭한후 E 키를 눌러 원하는 방향으로 회전시키면 된다
+- CapsulComponent와 Mesh의 높이를 어떻게 맞출수 있는가? CapsulComponent의 Details 탭에서 Capsule Half Height를 확인한 후 Mesh의 Details 패널에서 Transform Location Z에 해당 값을 음수를 붙여 기입한다
+
+### 02-20 The AnimInstance
+- The animation blueprint is based on a C++ class called something so what is something? Anime Instance
+- UFUNCTION()에 대해 설명하면? UPROPERTY는 C++의 변수를 블루프린트와 연동한다 UFUNCTION은 C++의 함수를 블루프린트와 연동한다 ([**참고**](https://velog.io/@ezhun/UFUNCTION-%EB%A7%A4%ED%81%AC%EB%A1%9C))
+- Character 클래스의 포인터에 어떤 클래스를 형변환 해서 대입해야 할까? Pawn 클래스
+- CharacterMovementComponent는 어떤 함수를 사용해 불러올 수 있는가? GetCharacterMovement() 함수
+
+### 02-21 Animation Blueprint
+- We have a shooter and BP, we can assign this to the mesh in our shooter character blueprint
+- Something is where we can have blueprint logic so what is somthing? EventGraph
+- Something is where we can have animation logic and state machines so what is somthing? AnimGraph
+- EventGraph 탭의 Event Blueprint Update Animation 노드에 대해 설명하면? This is kind of like the tick function
+- How we can pass Delta Time to UpdateAnimationProperties() function? because we have event blueprint
+
+### 02-22 Run Animation
+- StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
 
 <br>
 
