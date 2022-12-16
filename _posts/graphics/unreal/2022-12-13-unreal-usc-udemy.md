@@ -288,6 +288,26 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 ```
 
 ### 02-16 Delta Time
+- What you should do instead is take your desired movement rate and multiply it by Delta time this will scale the movement rate by exactly the amount that you need to move your actor by the desired
+
+### 02-17 Turn at Rate
+
+```cpp
+void AShooterCharacter::TurnAtRate(float Rate)
+{
+	// calculate delta for this frame from the rate information
+	// AddControllerYawInput에 대해 설명하면? AddControllerYawInput은 APawn의 멤버함수로써,
+	// Value값이 들어오면 Yaw를 컨트롤 할 수 있게끔한다
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds()); // deg/sec * sec/frame
+}
+```
+
+- BindAxis() 함수에 대해 설명하면? 축 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
+
+### 02-18 Mouse Turning and Jumping
+- BindAction() 함수에 대해 설명하면? 액션 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
+
+### 02-19 Adding a Mesh
 - 
 
 <br>
