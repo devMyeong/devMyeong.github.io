@@ -40,13 +40,15 @@ last_modified_at: 2022-12-13
 ### 01-4 C++ Refresher and UE4 Hierarchy
 - 언리얼 계층 구조에 대해 나열하면? Object - Actor - Pawn - Character
 - Object에 대해 설명하면? An object is a very basic type of class, it can store data, but it does not have the capability of being placed in a level
-- Actor에 대해 설명하면? An actor can have a visual representation
-- Pawn에 대해 설명하면? An pawn can be possessed by a controller, a controller is a special type of actor class that allows you to take user input, such as a keyboard
-- Character에 대해 설명하면? A character has its own character, movement component, and this character movement component has functionality
+- Actor에 대해 설명하면? An actor can have a visual representation such as a 3D mesh
+- Pawn에 대해 설명하면? An pawn is an actor, but it has additional functionality, such as the capability of being possessed by a controller ( A controller is a special type of actor class that allows you to take user input, such as a keyboard )
+- Character에 대해 설명하면? A character has its own character movement component, and this character movement component has functionality that's appropriate for a character Things like jumping, swimming, flying or whatever else characters typically do are characteristics of the character movement component
 - 언리얼 HAS A 관계에 대해 나열하면? Package - World - Level - Actor - Actor Component
 
 ### 01-5 Reflection and Garbage Collection
-- 리플렉션(Reflection)에 대해 설명하면? 프로그램이 런타임에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있다
+- 리플렉션(Reflection)에 대해 설명하면? 프로그램이 런타임에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있습니다 ([**참고**](https://mm5-gnap.tistory.com/356))
+- 리플렉션(Reflection)과 C++ RTTI의 차이는? 리플렉션은 런타임에 객체 정보를 확인할 수 있고 RTTI는 클래스의 타입만 확인할 수 있다 ([**참고**](https://mm5-gnap.tistory.com/356))
+- 리플렉션(Reflection)의 사용예시를 설명하면? 멤버 변수 앞에 UPROPERTY 매크로를 붙여 언리얼 리플렉션 시스템에 등록할 수 있다 ([**참고**](https://mm5-gnap.tistory.com/356))
 - Now, as soon as that pointer variable goes out of scope, the pointer gets deleted
 - Unreal Engines Garbage collection system keeps track of how many variables reference any given object
 - For a class to participate in Unreal Engines garbage collection system, it must make use of special macros that allow the class to be recognized ([**참고**](https://www.unrealengine.com/ko/blog/unreal-property-system-reflection))
@@ -73,9 +75,9 @@ last_modified_at: 2022-12-13
 ![projectmap](https://user-images.githubusercontent.com/80055816/207659560-2bb05525-7699-4982-8840-8594edeedaac.PNG){: width="100%" height="100%"}{: .align-center}
 
 - 위의 화면에 대한 설명은 ([**참고**](https://lifeisforu.tistory.com/326)) 여기에서 확인하면 된다
-- It's called shooter game mode base, the class name is called a shooter game mode base because this game mode inherits ultimately from actor in the inheritance hierarchy
+- It's called ShooterGameModeBase(C++ File), the class name is called AShooterGameModeBase because this game mode inherits ultimately from actor in the inheritance hierarchy
 - So we have this shooter game mode based class And since we have access to it in C++, we can create variables and functions and things here if we want to, in the Unreal Engine, Ed, we can create a blueprint based on this class and we're going to stick it in the game mode folder
-- 월드 세팅에 대한 설명은 ([**참고**](https://velog.io/@jijang/%EC%9B%94%EB%93%9C-%EC%84%B8%ED%8C%85)) 여기에서 확인하면 된다
+- 월드 세팅 탭에서는 무엇을 할 수 있는지 설명하면? 기본 게임 모드나 중력같은 레벨 전용 세팅을 설정할 수 있다 ([**참고**](https://docs.unrealengine.com/4.26/ko/Basics/Levels/WorldSettings/)), ([**참고**](https://velog.io/@jijang/%EC%9B%94%EB%93%9C-%EC%84%B8%ED%8C%85))
 
 ![projectmode](https://user-images.githubusercontent.com/80055816/207664691-17660953-3654-4c54-815d-dbebb4e7a575.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -85,14 +87,14 @@ last_modified_at: 2022-12-13
 
 ![bp](https://user-images.githubusercontent.com/80055816/207807937-9ce1f1ef-a762-4260-aaeb-dd063e9ce5d3.PNG){: width="100%" height="100%"}{: .align-center}
 
-- The capsule component is the root component You cannot assign any other component to be the root component So that's something to keep in mind when it comes to the character class
+- The capsule component is the root component you cannot assign any other component to be the root component so that's something to keep in mind when it comes to the character class
 - We also have an arrow component, which is pretty handy to show us the forward direction for our character
 - And we also have a mesh This is inherited as well, and it by default has nothing assigned to the skeletal mesh
 - And we also have the character movement component and this has a whole bunch of things that we can edit from here in the details panel
 
 ![default](https://user-images.githubusercontent.com/80055816/207808796-77fe4ad0-7a46-471a-b9c7-f02ec287427c.PNG){: width="100%" height="100%"}{: .align-center}
 
-- What is the Default Pawn class and what is used for in Unreal Engine? ([**참고**](https://gamedev.stackexchange.com/questions/141647/what-is-the-default-pawn-class-and-what-is-used-for-in-unreal-engine))
+- What is the Default Pawn class? ([**참고**](https://gamedev.stackexchange.com/questions/141647/what-is-the-default-pawn-class-and-what-is-used-for-in-unreal-engine))
 
 ### 02-9 UE_LOG Format String - Int
 
@@ -133,7 +135,7 @@ void AShooterCharacter::BeginPlay()
 	char myChar{ 'J' };
 	UE_LOG(LogTemp, Warning, TEXT("char myChar : %c"), myChar);
 
-	// 문자 앞의 대문자 L은 컴파일러에게 이 문자열을 와이드 문자로 저장하라고 지시하는 것이다
+	// 문자 앞의 대문자 L은 컴파일러에게 이 문자를 와이드 문자로 인식하라고 지시하는 것이다
 	wchar_t wideChar{ L'J' };
 	UE_LOG(LogTemp, Warning, TEXT("wchar_t wideChar : %lc"), wideChar);
 
@@ -167,7 +169,7 @@ void AShooterCharacter::BeginPlay()
 	char myChar{ 'J' };
 	UE_LOG(LogTemp, Warning, TEXT("char myChar : %c"), myChar);
 
-	// 문자 앞의 대문자 L은 컴파일러에게 이 문자열을 와이드 문자로 저장하라고 지시하는 것이다
+	// 문자 앞의 대문자 L은 컴파일러에게 이 문자를 와이드 문자로 인식하라고 지시하는 것이다
 	wchar_t wideChar{ L'J' };
 	UE_LOG(LogTemp, Warning, TEXT("wchar_t wideChar : %lc"), wideChar);
 
@@ -311,7 +313,7 @@ void AShooterCharacter::TurnAtRate(float Rate)
 ### 02-19 Adding a Mesh
 - 언리얼 런처에서 내 프로젝트에 투입할 리소스를 선택하는 섹션은 무엇인가? Library 탭의 VAULT 섹션
 - Skeletal Mesh가 바라보는 방향을 바꾸려면 어떻게 하면 되는가? 블루프린트의 Viewport 탭에서 해당 Mesh를 클릭한후 E 키를 눌러 원하는 방향으로 회전시키면 된다
-- CapsulComponent와 Mesh의 높이를 어떻게 맞출수 있는가? CapsulComponent의 Details 탭에서 Capsule Half Height를 확인한 후 Mesh의 Details 패널에서 Transform Location Z에 해당 값을 음수를 붙여 기입한다
+- CapsulComponent와 Mesh의 높이를 어떻게 맞출수 있는가? CapsulComponent의 Details 탭에서 Capsule Half Height를 확인한 후 Mesh의 Details 패널에서 Transform Location Z에 해당 값을 음수로 전환해 기입한다
 
 ### 02-20 The AnimInstance
 - The animation blueprint is based on a C++ class called something so what is something? Anime Instance
@@ -320,11 +322,11 @@ void AShooterCharacter::TurnAtRate(float Rate)
 - CharacterMovementComponent는 어떤 함수를 사용해 불러올 수 있는가? GetCharacterMovement() 함수
 
 ### 02-21 Animation Blueprint
-- We have a shooter and BP, we can assign this to the mesh in our shooter character blueprint
-- Something is where we can have blueprint logic so what is somthing? EventGraph
+- We have a ShooterAnimBP, we can assign this to the mesh in our shooter character blueprint
+- Something is where we can have blueprint logic so what is something? EventGraph
 - Something is where we can have animation logic and state machines so what is somthing? AnimGraph
 - EventGraph 탭의 Event Blueprint Update Animation 노드에 대해 설명하면? This is kind of like the tick function
-- How we can pass Delta Time to UpdateAnimationProperties() function? because we have event blueprint
+- How we can pass Delta Time to UpdateAnimationProperties() function? because we have Event Blueprint Update Animation
 
 ### 02-22 Run Animation
 - StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
