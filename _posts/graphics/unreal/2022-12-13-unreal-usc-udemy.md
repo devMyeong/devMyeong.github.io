@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2022-12-13
-last_modified_at: 2022-12-13
+last_modified_at: 2022-12-18
 ---
 
 ## Chapter 1 Introduction
@@ -49,7 +49,7 @@ last_modified_at: 2022-12-13
 - 리플렉션(Reflection)에 대해 설명하면? 프로그램이 런타임에 자기 자신을 조사하는 기능입니다 가비지 콜렉션, 네트워크 리플리케이션, 블루프린트/C++ 커뮤니케이션, 에디터의 디테일 패널, 시리얼라이제이션 등 다수의 시스템에 탑재되어 있습니다 ([**참고**](https://mm5-gnap.tistory.com/356))
 - 리플렉션(Reflection)과 C++ RTTI의 차이는? 리플렉션은 런타임에 객체 정보를 확인할 수 있고 RTTI는 클래스의 타입만 확인할 수 있다 ([**참고**](https://mm5-gnap.tistory.com/356))
 - 리플렉션(Reflection)의 사용예시를 설명하면? 멤버 변수 앞에 UPROPERTY 매크로를 붙여 언리얼 리플렉션 시스템에 등록할 수 있다 ([**참고**](https://mm5-gnap.tistory.com/356))
-- Now, as soon as that pointer variable goes out of scope, the pointer gets deleted
+- Garbage collection is when a program manages memory associated with the project and automatically deletes as soon as that pointer variable goes out of scope, the pointer gets deleted
 - Unreal Engines Garbage collection system keeps track of how many variables reference any given object
 - For a class to participate in Unreal Engines garbage collection system, it must make use of special macros that allow the class to be recognized ([**참고**](https://www.unrealengine.com/ko/blog/unreal-property-system-reflection))
 
@@ -307,7 +307,7 @@ void AShooterCharacter::TurnAtRate(float Rate)
 - BindAxis() 함수에 대해 설명하면? 축 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
 
 ### 02-18 Mouse Turning and Jumping
-- 마우스로 시야를 조정할 때 상하 개념을 전환 하라면 어떻게 하면 되는가? Project Setting에서 Scale 값을 양수 또는 음수로 변환한다
+- 마우스로 시야를 조정할 때 상하 개념을 전환 하라면 어떻게 하면 되는가? Project Setting -> Input -> Bindings -> Axis Mappings에서 해당 Scale 값을 양수 또는 음수로 변환한다
 - BindAction() 함수에 대해 설명하면? 액션 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
 
 ### 02-19 Adding a Mesh
