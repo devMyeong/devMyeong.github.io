@@ -331,12 +331,62 @@ void AShooterCharacter::TurnAtRate(float Rate)
 
 ### 02-20 The AnimInstance
 - The animation blueprint is based on a C++ class called something so what is something? Anime Instance
+
+```cpp
+UCLASS()
+class SHOOTER_API UShooterAnimInstance : public UAnimInstance
+{
+	//..
+
+	UFUNCTION(BlueprintCallable)
+
+	// This function will behave much like our tick function
+	// We can call this from the event graph in the animation blueprint thanks to UFUNCTION(BlueprintCallable)
+	void UpdateAnimationProperties(float DeltaTime);
+
+	// Now, this function is kind of like begin play for actors only, it's for the instant class
+	// This is where we can initialize our member variables
+	virtual void NativeInitializeAnimation() override;
+
+	//..
+}
+```
+
 - UFUNCTION()에 대해 설명하면? UPROPERTY는 C++의 변수를 블루프린트와 연동한다 UFUNCTION은 C++의 함수를 블루프린트와 연동한다 ([**참고**](https://velog.io/@ezhun/UFUNCTION-%EB%A7%A4%ED%81%AC%EB%A1%9C))
-- Character 클래스의 포인터에 어떤 클래스를 형변환 해서 대입해야 할까? Pawn 클래스
+
+```cpp
+void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
+{
+	if (ShooterCharacter == nullptr)
+	{
+		// Character 클래스의 포인터에 어떤 클래스를 형변환 해서 대입해야 할까? Pawn 클래스
+		// 현재 AnimInstance를 소유중인 Pawn을 가져오는 것을 시도함
+		ShooterCharacter = Cast<AShooterCharacter>(TryGetPawnOwner());
+	}
+	if (ShooterCharacter)
+	{
+		// Get the lateral speed of the character from velocity
+		FVector Velocity{ ShooterCharacter->GetVelocity() };
+
+		// This speed value does not take the Z component of the velocity into a count
+		// So if the character is flying upward or falling downward, that will not affect this speed variable
+		Velocity.Z = 0;
+		Speed = Velocity.Size();
+
+		//..
+	}
+
+	//..
+}
+```
+
 - CharacterMovementComponent는 어떤 함수를 사용해 불러올 수 있는가? GetCharacterMovement() 함수
 
 ### 02-21 Animation Blueprint
-- We have a ShooterAnimBP, we can assign this to the mesh in our shooter character blueprint
+
+![bp](https://user-images.githubusercontent.com/80055816/208726268-185ecc97-fa9f-463a-9d78-64a10c0dd4ca.PNG){: width="100%" height="100%"}{: .align-center}
+
+- We have a ShooterAnimBP, we can assign this to the animation in our shooter character blueprint
 - Something is where we can have blueprint logic so what is something? EventGraph
 - Something is where we can have animation logic and state machines so what is somthing? AnimGraph
 - EventGraph 탭의 Event Blueprint Update Animation 노드에 대해 설명하면? This is kind of like the tick function
