@@ -393,6 +393,8 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 - How we can pass Delta Time to UpdateAnimationProperties() function? because we have Event Blueprint Update Animation
 
 ### 02-22 Run Animation
+![motion](https://user-images.githubusercontent.com/80055816/208732533-480b44f6-44e7-4326-8770-c4bdd5bca426.PNG){: width="100%" height="100%"}{: .align-center}
+- Every frame, whatever is returned by the state machine will be fed into the Output Poes which will ultimately drive the animation
 - StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
 
 <br>
