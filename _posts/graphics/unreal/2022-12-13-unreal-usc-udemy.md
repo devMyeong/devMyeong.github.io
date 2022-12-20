@@ -106,7 +106,7 @@ void AShooterCharacter::BeginPlay()
 	
 	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
 
-	// 유니폼 초기화
+	// 유니폼 초기화, 유니폼 초기화를 하면 int 값에 42.54와 같이 double형을 입력하려 할 때 컴파일 에러를 띄워준다
 	int myInt{ 42 };
 	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
 }
@@ -122,7 +122,7 @@ void AShooterCharacter::BeginPlay()
 	
 	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
 
-	// 유니폼 초기화
+	// 유니폼 초기화, 유니폼 초기화를 하면 int 값에 42.54와 같이 double형을 입력하려 할 때 컴파일 에러를 띄워준다
 	int myInt{ 42 };
 	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
 
@@ -156,7 +156,7 @@ void AShooterCharacter::BeginPlay()
 	
 	UE_LOG(LogTemp, Warning, TEXT("BeginPlay() called!"));
 
-	// 유니폼 초기화
+	// 유니폼 초기화, 유니폼 초기화를 하면 int 값에 42.54와 같이 double형을 입력하려 할 때 컴파일 에러를 띄워준다
 	int myInt{ 42 };
 	UE_LOG(LogTemp, Warning, TEXT("int myInt : %d"), myInt);
 
@@ -269,20 +269,27 @@ void AShooterCharacter::MoveForward(float Value)
 		const FRotator YawRotation{ 0, Rotation.Yaw, 0 };
 
 		// 회전 행렬에서 방향벡터를 뽑아낸다
+		// Direction is pointing in the direction that corresponds to our controllers orientation
 		const FVector Direction{ FRotationMatrix{YawRotation}.GetUnitAxis(EAxis::X) };
 
-		// Add movement input along the given world direction vector(usually normalized) scaled by "ScaleValue"
+		// Add movement input along the given world direction vector(usually normalized) scaled by "Value"
 		AddMovementInput(Direction, Value);
 	}
 }
 ```
 
 ```cpp
+// SetupPlayerInputComponent() has access to something called the player input component
 void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
+	// PlayerInputComponent is what we use to bind functions to axis
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	// Now we can perform a check to make sure that the input component is valid by using the checked macro
+	// This performs an assert that will actually halt execution if the PlayerInputComponent is not valid
 	check(PlayerInputComponent);
 
+	// BindAxis() 함수에 대해 설명하면? 축 매핑에 처리 함수를 바인딩하는 함수다
 	// MoveForward와 바인딩 되어 있는 부분을 설명하면? Project Setting의 Input탭에 등록되어 있는 Value
 	PlayerInputComponent->BindAxis("MoveForward", this, &AShooterCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AShooterCharacter::MoveRight);
@@ -290,6 +297,9 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 ```
 
 ### 02-16 Delta Time
+- What is Delta time? the time between frames
+- What is Frame(Tick)? a single image updated to the screen
+- What is Frame rate? the number of frames updated per second we often hear the term FPS
 - What you should do instead is take your desired movement rate and multiply it by Delta time this will scale the movement rate by exactly the amount that you need to move your actor by the desired
 
 ### 02-17 Turn at Rate
@@ -305,6 +315,10 @@ void AShooterCharacter::TurnAtRate(float Rate)
 ```
 
 - BindAxis() 함수에 대해 설명하면? 축 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
+
+![compile](https://user-images.githubusercontent.com/80055816/208701914-ba7ca635-fb62-4566-b0ba-7e95d57a410e.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 이미지 처럼 Compile 버튼을 눌렀을 때 우측 하단에 C++ Compile Failed!가 뜨면 Show Log 버튼이 생기는데 해당 버튼을 누르면 컴파일 에러 원인을 확인할 수 있다
 
 ### 02-18 Mouse Turning and Jumping
 - 마우스로 시야를 조정할 때 상하 개념을 전환 하라면 어떻게 하면 되는가? Project Setting -> Input -> Bindings -> Axis Mappings에서 해당 Scale 값을 양수 또는 음수로 변환한다
