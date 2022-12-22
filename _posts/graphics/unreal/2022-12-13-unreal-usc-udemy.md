@@ -397,6 +397,45 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 - Every frame, whatever is returned by the state machine will be fed into the Output Pose which will ultimately drive the animation
 - StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
 
+### 02-23 Trimming Animations
+- We created copies so we didn't trim the originals and we tweaked those until they looked good for our game so that it looks a little more natural when she starts running and when she stops running, this will conclude our video
+
+### 02-24 Rotate Character to Movement
+
+```cpp
+AShooterCharacter::AShooterCharacter() :
+	BaseTurnRate(45.f),
+	BaseLookUpRate(45.f)
+{
+	//..
+
+	// Don't rotate when the controller rotates
+	// Let the controller only affect the camera
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+
+	//--------------------------------
+	// Configure character movement
+	//--------------------------------
+	// Character moves in the direction of input...
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	// RotationRate의 y값이 올라가면 어떻게 되는가? 빠르게 회전한다
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f); // ... at this rotation rate
+	GetCharacterMovement()->JumpZVelocity = 600.f;
+	// AirControl의 역할은 무엇인가? How much control we can have while in the air
+	GetCharacterMovement()->AirControl = 0.2f;
+}
+```
+- bOrientRotationToMovement에 대해 설명하면? 현재 캐릭터가 가속값을 가지고 있다면 현재 가속되고있는값 방향으로 캐릭터 메쉬를 회전시켜줍니다 ([**참고**](https://m.blog.naver.com/PostView.naver?isHttpsRedirect=true&blogId=khy19702&logNo=221451673504)) 
+
+![problem](https://user-images.githubusercontent.com/80055816/209083505-252b6fd9-facf-464a-89ad-2d39f7d2f99a.png){: width="100%" height="100%"}{: .align-center}
+
+- Now, the value here in the blueprint will override the value that you set in the constructor so you need to make sure to change it here as well
+
+### 02-25 Firing the Weapon
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
