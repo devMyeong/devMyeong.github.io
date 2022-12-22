@@ -447,6 +447,17 @@ AShooterCharacter::AShooterCharacter() :
 ![sound](https://user-images.githubusercontent.com/80055816/209101648-ab383b09-3f3a-445f-a835-df6c20462c82.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 02-27 Shooting Particles
+- explain the relationship between a skeletal mesh and a skeleton? a skeleton is applied to a skeletal mesh for animation ([**참고**](https://forums.unrealengine.com/t/skeletal-mesh-vs-skeleton/504342))
+
+![particle](https://user-images.githubusercontent.com/80055816/209128838-bb3f956c-25bd-4817-9c60-b7b3acafbfbf.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Add Socket 버튼을 눌러 weapon의 자식 노드를 만든뒤 이 노드에 점화 파티클을 spawn 하자
+
+![parcode](https://user-images.githubusercontent.com/80055816/209133829-20b5685c-9e92-429e-89e9-190dc5aa4fb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![spawn](https://user-images.githubusercontent.com/80055816/209133898-d98d7d61-31fd-4a45-a424-30c7a355275e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 02-28 Shooting Animation
 - 
 
 <br>
