@@ -482,6 +482,12 @@ AShooterCharacter::AShooterCharacter() :
 
 ![blend](https://user-images.githubusercontent.com/80055816/209188602-ee696b87-13dd-46b7-b5a9-b21c8b6e79a7.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 02-29 Blending Shooting Animations
+
+![blend](https://user-images.githubusercontent.com/80055816/209201843-31525181-c501-40fe-91f6-d656be6a4d17.PNG){: width="100%" height="100%"}{: .align-center}
+
+- In our case, we want to blend in such a way that the hip fire animation is only playing for the top half of the body and the regular ground locomotion is only playing for the bottom half
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
