@@ -472,7 +472,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![cache](https://user-images.githubusercontent.com/80055816/209182462-a746af17-ab35-4f09-824d-28a36ab26654.PNG){: width="100%" height="100%"}{: .align-center}
 
-- New Save Cached Pose what does it do? You should use a cached poses because you can’t plug in the Output Pose into two different inputs
+- New Save Cached Pose what does it do? You should use a cached poses because you can’t plug in the Output Pose into two different inputs ([**참고**](https://forums.unrealengine.com/t/new-save-cached-pose-what-does-it-do/407200))
 
 ![link](https://user-images.githubusercontent.com/80055816/209187079-2725131a-6a1d-4383-a008-50dde378b97b.PNG){: width="100%" height="100%"}{: .align-center}
 
