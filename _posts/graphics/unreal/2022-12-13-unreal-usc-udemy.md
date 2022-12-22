@@ -434,6 +434,19 @@ AShooterCharacter::AShooterCharacter() :
 - Now, the value here in the blueprint will override the value that you set in the constructor so you need to make sure to change it here as well
 
 ### 02-25 Firing the Weapon
+- BindAction() 함수에 대해 설명하면? 액션 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
+
+### 02-26 Shooting Sound Effects
+
+![cue](https://user-images.githubusercontent.com/80055816/209095683-7beea9a1-6463-4fff-b0ad-940275c9cb77.PNG){: width="100%" height="100%"}{: .align-center}
+
+- What is Sound Cue Editor? setting up and editing SoundCue node-based audio assets
+
+![move](https://user-images.githubusercontent.com/80055816/209097652-2ecf860d-73d0-452a-a2ca-c97a654a1b90.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/209101648-ab383b09-3f3a-445f-a835-df6c20462c82.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 02-27 Shooting Particles
 - 
 
 <br>
