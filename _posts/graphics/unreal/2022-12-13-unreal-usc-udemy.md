@@ -398,7 +398,7 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 - StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
 
 ### 02-23 Trimming Animations
-- We created copies so we didn't trim the originals and we tweaked those until they looked good for our game so that it looks a little more natural when she starts running and when she stops running, this will conclude our video
+- We created copies so we didn't trim the originals and we tweaked those until they looked good for our game so that it looks a little more natural when she starts running and when she stops running
 
 ### 02-24 Rotate Character to Movement
 
@@ -468,7 +468,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![slot](https://user-images.githubusercontent.com/80055816/209189204-4f67e4c1-d2a6-4f2a-8aad-e2632c2dfe28.PNG){: width="100%" height="100%"}{: .align-center}
 
-- Now we're using the weapon fire slot for this montage
+- Now we're using the WeaponFire slot for this montage
 
 ![cache](https://user-images.githubusercontent.com/80055816/209182462-a746af17-ab35-4f09-824d-28a36ab26654.PNG){: width="100%" height="100%"}{: .align-center}
 
