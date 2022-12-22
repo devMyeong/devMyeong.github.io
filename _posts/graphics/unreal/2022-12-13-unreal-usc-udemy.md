@@ -462,7 +462,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![montage](https://user-images.githubusercontent.com/80055816/209170273-11ade971-db2f-475d-b9df-3f296e0feb97.PNG){: width="100%" height="100%"}{: .align-center}
 
-- Animation Montage와 Animation Graph의 차이점은? 애니메이션 몽타주는 말 그래도 애니메이션들을 이어붙여 하나의 기능적인 애니메이션 시퀀스를 구성하기 위한 애셋이고, 애니메이션 그래프는 그것을 관리하며, 더 범용적이고 포괄적인 애니메이션의 최종적인 로직을 구성하기 위해 사용된다 ([**참고**](https://bbagwang.com/unreal-engine/ue4-%EC%97%90%EC%84%9C%EC%9D%98-animation-montage%EC%99%80-animation-graph%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90/))
+- Animation Montage와 Animation Graph의 차이점은? 애니메이션 몽타주는 애니메이션들을 이어붙여 하나의 기능적인 애니메이션 시퀀스를 구성하기 위한 애셋이고, 애니메이션 그래프는 그것을 관리하며 애니메이션의 최종적인 로직을 구성하기 위해 사용된다 ([**참고**](https://bbagwang.com/unreal-engine/ue4-%EC%97%90%EC%84%9C%EC%9D%98-animation-montage%EC%99%80-animation-graph%EC%9D%98-%EC%B0%A8%EC%9D%B4%EC%A0%90/))
 
 ![montage2](https://user-images.githubusercontent.com/80055816/209175780-23f77390-309d-4f4c-a587-0d6f2ebc3d32.PNG){: width="100%" height="100%"}{: .align-center}
 
