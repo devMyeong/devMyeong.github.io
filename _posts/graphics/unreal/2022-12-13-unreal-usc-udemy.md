@@ -488,6 +488,70 @@ AShooterCharacter::AShooterCharacter() :
 
 - In our case, we want to blend in such a way that the hip fire animation is only playing for the top half of the body and the regular ground locomotion is only playing for the bottom half
 
+### 02-30 Line Tracing for Bullet Hits
+
+```cpp
+	//..
+
+	if (BarrelSocket)
+	{
+		const FTransform SocketTransform = BarrelSocket->GetSocketTransform(GetMesh());
+
+		if (MuzzleFlash)
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), MuzzleFlash, SocketTransform);
+		}
+
+		// Fill them in with data about the hit result
+		FHitResult FireHit;
+		const FVector Start{ SocketTransform.GetLocation() };
+		// 여기서 Quat는 Quaternion을 의미한다
+		const FQuat Rotation{ SocketTransform.GetRotation() };
+		const FVector RotationAxis{ Rotation.GetAxisX() };
+		const FVector End{ Start + RotationAxis * 50'000.f };
+
+		// https://wergia.tistory.com/139
+		// ECollisionChannel::ECC_Visibility는 화면에 보이는 객체가 맞으면 무조건 맞았다고 판정한다는 의미이다
+		GetWorld()->LineTraceSingleByChannel(FireHit, Start, End, ECollisionChannel::ECC_Visibility);
+		if (FireHit.bBlockingHit)
+		{
+			DrawDebugLine(GetWorld(), Start, End, FColor::Red, false, 2.f);
+			DrawDebugPoint(GetWorld(), FireHit.Location, 5.f, FColor::Red, false, 2.f);
+		}
+	}
+
+	//..
+```
+
+### 02-31 Impact Particles
+
+```cpp
+void AShooterCharacter::FireWeapon()
+{
+	//..
+
+	if (ImpactParticles)
+	{
+		// FireHit 객체를 활용해 파티클이 생성될 위치를 지정해 줄 수 있다
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticles, FireHit.Location);
+	}
+
+	//..
+}
+```
+
+### 02-32 Beam Particles
+
+![beam](https://user-images.githubusercontent.com/80055816/209317459-390c5b24-7ea3-4193-903d-e4c864709c0f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- M_Beam is material and Beam is texture
+
+![particle](https://user-images.githubusercontent.com/80055816/209319442-e05c0355-426a-49dc-899e-a423dbf04c16.PNG){: width="100%" height="100%"}{: .align-center}
+
+![target](https://user-images.githubusercontent.com/80055816/209330269-6cd33c01-5241-4c0e-a32a-46fc90674093.PNG){: width="100%" height="100%"}{: .align-center}
+
+- This is what our particle system uses for the beam behavior
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
