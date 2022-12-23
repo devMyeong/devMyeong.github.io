@@ -552,6 +552,39 @@ void AShooterCharacter::FireWeapon()
 
 - This is what our particle system uses for the beam behavior
 
+### 02-33 Socket Offset
+
+```cpp
+AShooterCharacter::AShooterCharacter() :
+	BaseTurnRate(45.f),
+	BaseLookUpRate(45.f)
+{
+	//..
+
+	// SocketOffset을 조정하면 어떻게 되는가?
+	// 카메라 위치가 바뀐다
+	CameraBoom->SocketOffset = FVector(0.f, 50.f, 50.f);
+
+	//..
+}
+```
+
+### 02-34 HUD Class and Crosshairs
+
+![ui](https://user-images.githubusercontent.com/80055816/209374423-2e356140-6d71-46c1-8c86-eec386015da8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hud](https://user-images.githubusercontent.com/80055816/209374504-dcb0591f-6aa2-4cff-972e-b4cf428bdbd1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![default](https://user-images.githubusercontent.com/80055816/209374574-8b7001bb-75b6-42c8-ab3b-ce9124dd73f6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![event](https://user-images.githubusercontent.com/80055816/209374642-29a9748a-183f-4579-8037-9cf79c8bf552.PNG){: width="100%" height="100%"}{: .align-center}
+
+![eventend](https://user-images.githubusercontent.com/80055816/209374818-8cb56439-f7e4-450b-ae43-2d0685e6dc2a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![center](https://user-images.githubusercontent.com/80055816/209374702-2087ca35-8e82-44dc-ba0b-498d7e039fdb.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 현상 때문에 필요한 노드는? Crosshair Half Width
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
