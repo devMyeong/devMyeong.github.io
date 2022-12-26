@@ -673,6 +673,30 @@ void AShooterCharacter::FireWeapon()
 - In summary, we refactored our code for getting the beam in location all into one neat, tidy function
 
 ### 02-38 Movement Offset Yaw
+
+```cpp
+//..
+
+	// GetBaseAimRotation() 함수에 대해 설명하면?
+	// Return the aim rotation for the Pawn
+	FRotator AimRotation = ShooterCharacter->GetBaseAimRotation();
+
+	// UKismetMathLibrary::MakeRotFromX() 함수에 대해 설명하면?
+	// Builds a rotator given only a XAxis
+	FRotator MovementRotation =
+		UKismetMathLibrary::MakeRotFromX(
+			ShooterCharacter->GetVelocity());
+
+	MovementOffsetYaw = UKismetMathLibrary::NormalizedDeltaRotator(
+		MovementRotation,
+		AimRotation).Yaw;
+
+//..
+```
+
+- FRotator 클래스에 대해 설명하면? Implements a container for rotation information All rotation values are stored in degrees
+
+### 02-39 Strafing Blendspace
 - 
 
 <br>
