@@ -712,6 +712,31 @@ void AShooterCharacter::FireWeapon()
 
 ![jogstart](https://user-images.githubusercontent.com/80055816/209568138-99d571bf-b628-4330-b25a-acbc910f2c03.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 03-41 Jog Stop Blendspace
+
+![stop](https://user-images.githubusercontent.com/80055816/209574769-e20f2fb6-cfdf-4a98-ba00-9e99e19bdec8.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+class SHOOTER_API UShooterAnimInstance : public UAnimInstance
+{
+	// Why we need this value? As soon as we stop moving, then our velocity is no longer to the right
+	// Our velocity vector goes to zero
+	// So there's no longer a delta rotation between our velocity and our Aim rotation
+	// So what we need to do is we need to save this movement offset before we stop moving
+	float LastMovementOffsetYaw;
+};
+```
+
+![ratescale](https://user-images.githubusercontent.com/80055816/209575079-4e80e231-d3df-4ab1-a3e0-93db329312ed.PNG){: width="100%" height="100%"}{: .align-center}
+
+![loop](https://user-images.githubusercontent.com/80055816/209574826-3ebca411-eae9-4719-b635-917ae575b80c.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 03-42 Smoothing Character Movement
+
+![interpol](https://user-images.githubusercontent.com/80055816/209576613-558c6da5-15b8-4f2e-9f77-d7ea881786ab.PNG){: width="100%" height="100%"}{: .align-center}
+
+![option](https://user-images.githubusercontent.com/80055816/209576719-f8766a59-0b32-4a60-a694-6ca06f9f3fb4.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
