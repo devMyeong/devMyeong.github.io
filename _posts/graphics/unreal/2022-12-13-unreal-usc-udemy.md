@@ -64,6 +64,8 @@ last_modified_at: 2022-12-18
 - 강사님이 운영하는 디스코드 방에서 질문이나 의견등을 자유롭게 공유할 수 있으며, 협업할 멤버도 구할 수 있다
 - 이 단원 자료에 이 강좌에 필요한 리소스, 디스코드 주소 등이 기재되어 있다
 
+<br>
+
 ## Chapter 2 Project Setup
 
 ### 02-7 Project Setup
@@ -329,7 +331,11 @@ void AShooterCharacter::TurnAtRate(float Rate)
 - Skeletal Mesh가 바라보는 방향을 바꾸려면 어떻게 하면 되는가? 블루프린트의 Viewport 탭에서 해당 Mesh를 클릭한후 E 키를 눌러 원하는 방향으로 회전시키면 된다
 - CapsulComponent와 Mesh의 높이를 어떻게 맞출수 있는가? CapsulComponent의 Details 탭에서 Capsule Half Height를 확인한 후 Mesh의 Details 패널에서 Transform Location Z에 해당 값을 음수로 전환해 기입한다
 
-### 02-20 The AnimInstance
+<br>
+
+## Chapter 3 Animations
+
+### 03-20 The AnimInstance
 - The animation blueprint is based on a C++ class called something so what is something? Anime Instance
 
 ```cpp
@@ -382,7 +388,7 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 
 - CharacterMovementComponent는 어떤 함수를 사용해 불러올 수 있는가? GetCharacterMovement() 함수
 
-### 02-21 Animation Blueprint
+### 03-21 Animation Blueprint
 
 ![bp](https://user-images.githubusercontent.com/80055816/208726268-185ecc97-fa9f-463a-9d78-64a10c0dd4ca.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -392,15 +398,15 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 - EventGraph 탭의 Event Blueprint Update Animation 노드에 대해 설명하면? This is kind of like the tick function
 - How we can pass Delta Time to UpdateAnimationProperties() function? because we have Event Blueprint Update Animation
 
-### 02-22 Run Animation
+### 03-22 Run Animation
 ![motion](https://user-images.githubusercontent.com/80055816/208732533-480b44f6-44e7-4326-8770-c4bdd5bca426.PNG){: width="100%" height="100%"}{: .align-center}
 - Every frame, whatever is returned by the state machine will be fed into the Output Pose which will ultimately drive the animation
 - StateMachine에서 Automatic Rule Based on Sequence Player in State 옵션의 의미는? 애니메이션이 종료되었을때 바로 Transition이 되도록 설정하는 것 ([**참고**](https://gosnem93.tistory.com/12))
 
-### 02-23 Trimming Animations
+### 03-23 Trimming Animations
 - We created copies so we didn't trim the originals and we tweaked those until they looked good for our game so that it looks a little more natural when she starts running and when she stops running
 
-### 02-24 Rotate Character to Movement
+### 03-24 Rotate Character to Movement
 
 ```cpp
 AShooterCharacter::AShooterCharacter() :
@@ -433,10 +439,10 @@ AShooterCharacter::AShooterCharacter() :
 
 - Now, the value here in the blueprint will override the value that you set in the constructor so you need to make sure to change it here as well
 
-### 02-25 Firing the Weapon
+### 03-25 Firing the Weapon
 - BindAction() 함수에 대해 설명하면? 액션 매핑에 처리 함수를 바인딩하는 함수다 ([**참고**](https://wergia.tistory.com/127))
 
-### 02-26 Shooting Sound Effects
+### 03-26 Shooting Sound Effects
 
 ![cue](https://user-images.githubusercontent.com/80055816/209095683-7beea9a1-6463-4fff-b0ad-940275c9cb77.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -446,7 +452,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![sound](https://user-images.githubusercontent.com/80055816/209101648-ab383b09-3f3a-445f-a835-df6c20462c82.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 02-27 Shooting Particles
+### 03-27 Shooting Particles
 - Explain the relationship between a skeletal mesh and a skeleton? a skeleton is applied to a skeletal mesh for animation ([**참고**](https://forums.unrealengine.com/t/skeletal-mesh-vs-skeleton/504342))
 
 ![particle](https://user-images.githubusercontent.com/80055816/209128838-bb3f956c-25bd-4817-9c60-b7b3acafbfbf.PNG){: width="100%" height="100%"}{: .align-center}
@@ -458,7 +464,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![spawn](https://user-images.githubusercontent.com/80055816/209133898-d98d7d61-31fd-4a45-a424-30c7a355275e.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 02-28 Shooting Animation
+### 03-28 Shooting Animation
 
 ![montage](https://user-images.githubusercontent.com/80055816/209170273-11ade971-db2f-475d-b9df-3f296e0feb97.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -482,13 +488,13 @@ AShooterCharacter::AShooterCharacter() :
 
 ![blend](https://user-images.githubusercontent.com/80055816/209188602-ee696b87-13dd-46b7-b5a9-b21c8b6e79a7.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 02-29 Blending Shooting Animations
+### 03-29 Blending Shooting Animations
 
 ![blend](https://user-images.githubusercontent.com/80055816/209201843-31525181-c501-40fe-91f6-d656be6a4d17.PNG){: width="100%" height="100%"}{: .align-center}
 
 - In our case, we want to blend in such a way that the hip fire animation is only playing for the top half of the body and the regular ground locomotion is only playing for the bottom half
 
-### 02-30 Line Tracing for Bullet Hits
+### 03-30 Line Tracing for Bullet Hits
 
 ```cpp
 	//..
@@ -523,7 +529,7 @@ AShooterCharacter::AShooterCharacter() :
 	//..
 ```
 
-### 02-31 Impact Particles
+### 03-31 Impact Particles
 
 ```cpp
 void AShooterCharacter::FireWeapon()
@@ -540,7 +546,7 @@ void AShooterCharacter::FireWeapon()
 }
 ```
 
-### 02-32 Beam Particles
+### 03-32 Beam Particles
 
 ![beam](https://user-images.githubusercontent.com/80055816/209317459-390c5b24-7ea3-4193-903d-e4c864709c0f.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -552,7 +558,7 @@ void AShooterCharacter::FireWeapon()
 
 - This is what our particle system uses for the beam behavior
 
-### 02-33 Socket Offset
+### 03-33 Socket Offset
 
 ```cpp
 AShooterCharacter::AShooterCharacter() :
@@ -569,7 +575,7 @@ AShooterCharacter::AShooterCharacter() :
 }
 ```
 
-### 02-34 HUD Class and Crosshairs
+### 03-34 HUD Class and Crosshairs
 
 ![ui](https://user-images.githubusercontent.com/80055816/209374423-2e356140-6d71-46c1-8c86-eec386015da8.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -584,6 +590,90 @@ AShooterCharacter::AShooterCharacter() :
 ![center](https://user-images.githubusercontent.com/80055816/209374702-2087ca35-8e82-44dc-ba0b-498d7e039fdb.PNG){: width="100%" height="100%"}{: .align-center}
 
 - 위의 현상 때문에 필요한 노드는? Crosshair Half Width
+
+### 03-35 Directing Rifle Shots
+
+```cpp
+void AShooterCharacter::FireWeapon()
+{
+	//..
+
+	// GetViewportSize() 함수에 대해 설명하면?
+	// Retrieve the size of the main viewport
+	FVector2D ViewportSize;
+	if (GEngine && GEngine->GameViewport)
+	{
+		GEngine->GameViewport->GetViewportSize(ViewportSize);
+	}
+
+	// Get screen space location of crosshairs
+	FVector2D CrosshairLocation(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
+	CrosshairLocation.Y -= 50.f;
+	FVector CrosshairWorldPosition;
+	FVector CrosshairWorldDirection;
+
+	// UGameplayStatics::GetPlayerController() 함수에 대해 설명하면?
+	// Returns the player controller at the specified player index
+	bool bScreenToWorld = UGameplayStatics::DeprojectScreenToWorld(
+		UGameplayStatics::GetPlayerController(this, 0),
+		CrosshairLocation,
+		CrosshairWorldPosition,
+		CrosshairWorldDirection);
+
+	if (bScreenToWorld) // was deprojection successful?
+	{
+		FHitResult ScreenTraceHit;
+		const FVector Start{ CrosshairWorldPosition };
+		const FVector End{ CrosshairWorldPosition + CrosshairWorldDirection * 50'000.f };
+
+		// Set beam end point to line trace end point
+		FVector BeamEndPoint{ End };
+
+		// UWorld::LineTraceSingleByChannel에 대해 설명하면?
+		// Trace a ray against the world using a specific channel and return the first blocking hit
+		GetWorld()->LineTraceSingleByChannel(
+			ScreenTraceHit,
+			Start,
+			End,
+			ECollisionChannel::ECC_Visibility);
+		if (ScreenTraceHit.bBlockingHit) // was there a trace hit?
+		{
+			// Beam end point is now trace hit location
+			BeamEndPoint = ScreenTraceHit.Location;
+			if (ImpactParticles)
+			{
+				UGameplayStatics::SpawnEmitterAtLocation(
+					GetWorld(),
+					ImpactParticles,
+					ScreenTraceHit.Location);
+			}
+		}
+		if (BeamParticles)
+		{
+			UParticleSystemComponent* Beam = UGameplayStatics::SpawnEmitterAtLocation(
+				GetWorld(),
+				BeamParticles,
+				SocketTransform);
+			if (Beam)
+			{
+				Beam->SetVectorParameter(FName("Target"), BeamEndPoint);
+			}
+		}
+	}
+
+	//..
+}
+```
+
+### 03-36 Trace from Gun Barrel
+- Look at the beam particles they're going through the first cube they're not actually stopping at the first cube why is this happening? This is because we're tracing from the screen location of the crosshairs instead of from the gun barrel
+- Why we need a second trace? We also need to check to see if there's anything in between the gun barrel and that hit point
+
+### 03-37 Refactor Beam End Code
+- In summary, we refactored our code for getting the beam in location all into one neat, tidy function
+
+### 02-38 Movement Offset Yaw
+- 
 
 <br>
 
