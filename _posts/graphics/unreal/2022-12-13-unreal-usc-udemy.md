@@ -672,7 +672,7 @@ void AShooterCharacter::FireWeapon()
 ### 03-37 Refactor Beam End Code
 - In summary, we refactored our code for getting the beam in location all into one neat, tidy function
 
-### 02-38 Movement Offset Yaw
+### 03-38 Movement Offset Yaw
 
 ```cpp
 //..
@@ -696,8 +696,21 @@ void AShooterCharacter::FireWeapon()
 
 - FRotator 클래스에 대해 설명하면? Implements a container for rotation information All rotation values are stored in degrees
 
-### 02-39 Strafing Blendspace
-- 
+### 03-39 Strafing Blendspace
+
+![blend](https://user-images.githubusercontent.com/80055816/209563105-6683ae78-76b1-480c-9ba1-1df0eeb04cfa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![jog](https://user-images.githubusercontent.com/80055816/209563145-a092150b-d1ee-483b-8cca-c2551c4c82fb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![adapt](https://user-images.githubusercontent.com/80055816/209563159-261e5160-eae0-4356-a235-db5099a59c03.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 03-40 Strafing Blendspace
+
+![1d](https://user-images.githubusercontent.com/80055816/209568050-a79217e6-de97-4f0f-b3a0-c7f6c09d8dae.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/209568117-13a1606d-c3c2-4efd-b621-bf2ae4b1f7de.PNG){: width="100%" height="100%"}{: .align-center}
+
+![jogstart](https://user-images.githubusercontent.com/80055816/209568138-99d571bf-b628-4330-b25a-acbc910f2c03.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
