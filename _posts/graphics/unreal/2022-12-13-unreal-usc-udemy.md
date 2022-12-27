@@ -767,8 +767,12 @@ class SHOOTER_API UShooterAnimInstance : public UAnimInstance
 ```cpp
 void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 {
+	//..
+
 	// How we get ShooterCharacter class variable?
 	bAiming = ShooterCharacter->GetAiming();
+
+	//..
 }
 ```
 
@@ -779,7 +783,63 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 ![state](https://user-images.githubusercontent.com/80055816/209670526-aa5ce0a5-74eb-4f9e-9ef5-82c091b7b059.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 04-47 Aiming Look Sensitivity
-- 
+- UPROPERTY(EditDefaultsOnly) means? Property can be changed only for Blurprints, in Blueprint->Defaults ([**참고**](https://forums.unrealengine.com/t/uproperty-editdefaultsonly-means/292728))
+- UPROPERTY 에서 UIMin, UIMax의 역할은 무엇인가? 에디터에서 조정할 수 있는 숫자 범위를 지정하는 명령어입니다 ([**참고**](https://darkcatgame.tistory.com/62))
+
+### 04-48 Crosshair Spread Velocity
+
+```cpp
+void AShooterCharacter::CalculateCrosshairSpread(float DeltaTime)
+{
+	FVector2D WalkSpeedRange{ 0.f, 600.f };
+	FVector2D VelocityMultiplierRange{ 0.f, 1.f };
+	FVector Velocity{ GetVelocity() };
+	Velocity.Z = 0.f;
+
+	// GetMappedRangeValueClamped() 함수의 기능에 대해 설명하면?
+	// 특정 범위를 입력받아 정규화된 범위를 출력한다
+	CrosshairVelocityFactor = FMath::GetMappedRangeValueClamped(
+		WalkSpeedRange,
+		VelocityMultiplierRange,
+		Velocity.Size());
+
+	CrosshairSpreadMultiplier = 0.5f + CrosshairVelocityFactor;
+}
+```
+
+### 04-49 Spreading the Crosshairs
+
+![bp](https://user-images.githubusercontent.com/80055816/209703910-d97cbf05-e692-43fb-99b4-a74f70068d53.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nodeone](https://user-images.githubusercontent.com/80055816/209703977-d7b8c8e0-e4cc-45c4-8121-3f72a605e501.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Get a referenceto Shooter Character 코멘트에 대해 설명하면? Shooter Character 변수를 세팅한다
+- Set Screen Center and Crosshair Location 코멘트에 대해 설명하면? Crosshair의 위치를 세팅한다
+- Raise screen center by 50 코멘트에 대해 설명하면? Crosshair의 위치를 y축으로 50만큼 올린다
+- Make sure Shooter Character is valid 코멘트에 대해 설명하면? Shooter Character 변수가 세팅 되었는지 확인한다
+
+![nodetwo](https://user-images.githubusercontent.com/80055816/209704016-87dbc0d4-6a47-4a51-8102-c13ea3ac1283.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Get a reference to Shooter Character 코멘트에 대해 설명하면? CrosshairSpreadMultiplier를 세팅한다
+- Move X by half-width and Y by half-height 코멘트에 대해 설명하면? Crosshair가 중앙에서 오른쪽 하단으로 살짝 벗어나는 문제를 해결한다
+- Center of crosshair location 코멘트에 대해 설명하면? CrosshairBaseCenter 변수를 세팅한다
+- 노드를 연결하는 선중 일부분을 더블클릭 하면 해당 부분에 관절을 만들 수 있다
+- Our conclusion is that spreading our crosshairs based on our character's velocity
+
+### 04-50 Crosshair In Air Factor
+
+```cpp
+void AShooterCharacter::CalculateCrosshairSpread(float DeltaTime)
+{
+	//..
+
+	// CrosshairInAirFactor 값이 증가하면 어떻게 되는가?
+	// Crosshair가 더욱 확장된다
+	CrosshairSpreadMultiplier = 0.5f + CrosshairVelocityFactor + CrosshairInAirFactor;
+
+	//..
+}
+```
 
 <br>
 
