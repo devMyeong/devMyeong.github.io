@@ -783,7 +783,7 @@ void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
 ![state](https://user-images.githubusercontent.com/80055816/209670526-aa5ce0a5-74eb-4f9e-9ef5-82c091b7b059.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 04-47 Aiming Look Sensitivity
-- UPROPERTY(EditDefaultsOnly) means? Property can be changed only for Blurprints, in Blueprint->Defaults ([**참고**](https://forums.unrealengine.com/t/uproperty-editdefaultsonly-means/292728))
+- UPROPERTY(EditDefaultsOnly) means? Property can be changed only for Blurprints, Defaults means the Blueprint ([**참고**](https://forums.unrealengine.com/t/uproperty-editdefaultsonly-means/292728))
 - UPROPERTY 에서 UIMin, UIMax의 역할은 무엇인가? 에디터에서 조정할 수 있는 숫자 범위를 지정하는 명령어입니다 ([**참고**](https://darkcatgame.tistory.com/62))
 
 ### 04-48 Crosshair Spread Velocity
