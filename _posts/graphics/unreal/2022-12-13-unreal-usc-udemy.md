@@ -762,6 +762,25 @@ class SHOOTER_API UShooterAnimInstance : public UAnimInstance
 
 - Blend Weights에 대해 설명하면? 애디티브 포즈가 끼칠 영향력을 결정할 알파 값으로 사용할 (0.0, 1.0) 범위의 float (실수)값입니다 값이 0.0 이면 Additive 포즈는 Base 인풋 포즈에 전혀 더해지지 않음을, 1.0 이면 Additive 포즈를 Base 인풋 포즈에 온전히 더해버림을 뜻합니다 ([**참고**](https://docs.unrealengine.com/5.0/ko/animation-blueprint-blend-nodes-in-unreal-engine/#layeredblendperbone))
 
+### 04-46 Aiming State Machine
+
+```cpp
+void UShooterAnimInstance::UpdateAnimationProperties(float DeltaTime)
+{
+	// How we get ShooterCharacter class variable?
+	bAiming = ShooterCharacter->GetAiming();
+}
+```
+
+![hip](https://user-images.githubusercontent.com/80055816/209670395-1d6642b7-d511-4d3f-822d-4db913b52666.PNG){: width="100%" height="100%"}{: .align-center}
+
+![duration](https://user-images.githubusercontent.com/80055816/209670472-ceda03ef-ca92-4aa1-a56b-ec1092feefc5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![state](https://user-images.githubusercontent.com/80055816/209670526-aa5ce0a5-74eb-4f9e-9ef5-82c091b7b059.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 04-47 Aiming Look Sensitivity
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
