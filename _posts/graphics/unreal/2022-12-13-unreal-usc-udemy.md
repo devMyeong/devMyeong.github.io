@@ -739,4 +739,29 @@ class SHOOTER_API UShooterAnimInstance : public UAnimInstance
 
 <br>
 
+## Chapter 4 Aiming and Crosshairs
+
+### 04-43 Zoom Field of View
+- UPROPERTY의 Category에 대해 설명하면? 디테일패널에서 보일 항목 이름을 명칭 할 수 있습니다 ([**참고**](https://darkcatgame.tistory.com/62))
+- FOV에 대해 설명하면? How much of the world is the camera showing
+- When is the time Our follow camera will be constructed? At the BeginPlay() function
+
+### 04-44 Aiming Zoom Interpolation
+- SetFieldOfView() 함수에 대해 설명하면? Set Field Of View ([**참고**](https://docs.unrealengine.com/4.26/en-US/BlueprintAPI/Camera/SetFieldOfView/))
+- FMath::FInterpTo() 함수에 대해 설명하면? Interpolate float from Current to Target ([**참고**](https://docs.unrealengine.com/4.27/en-US/API/Runtime/Core/Math/FMath/FInterpTo/))
+
+### 04-45 Aiming Pose
+
+![cache](https://user-images.githubusercontent.com/80055816/209630729-50bce418-3f29-4bcd-9a17-c196da4a3201.PNG){: width="100%" height="100%"}{: .align-center}
+
+![additive](https://user-images.githubusercontent.com/80055816/209630782-33770ee8-2cdd-4557-a60d-3288fe8ccfe4.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 애디티브 애니메이션에 대해 설명하면? 그 자체로는 유용하지 않고 애디티브 적용 처리를 해주어야 작동한다 위의 화면 처럼 No additive를 적용하면 애디티브 설정이 해제된다 ([**참고**](https://velog.io/@myverytinybrain/%EC%96%B8%EB%A6%AC%EC%96%BC-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%B8%94%EB%A3%A8%ED%94%84%EB%A6%B0%ED%8A%B83)), ([**참고**](https://velog.io/@cedongne/UE5-Unreal-Engine-5-%EA%B8%B8%EB%9D%BC%EC%9E%A1%EC%9D%B4-10.-%EC%95%A0%EB%8B%88%EB%A9%94%EC%9D%B4%EC%85%98-%EB%B8%94%EB%A3%A8%ED%94%84%EB%A6%B0%ED%8A%B8-%EC%82%BC%EC%9D%B8%EC%B9%AD-%EC%83%98%ED%94%8C-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EB%B6%84%EC%84%9D))
+
+![weight](https://user-images.githubusercontent.com/80055816/209634722-b7902bcc-51e6-41c9-8711-7d9c2e03a24f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Blend Weights에 대해 설명하면? 애디티브 포즈가 끼칠 영향력을 결정할 알파 값으로 사용할 (0.0, 1.0) 범위의 float (실수)값입니다 값이 0.0 이면 Additive 포즈는 Base 인풋 포즈에 전혀 더해지지 않음을, 1.0 이면 Additive 포즈를 Base 인풋 포즈에 온전히 더해버림을 뜻합니다 ([**참고**](https://docs.unrealengine.com/5.0/ko/animation-blueprint-blend-nodes-in-unreal-engine/#layeredblendperbone))
+
+<br>
+
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
