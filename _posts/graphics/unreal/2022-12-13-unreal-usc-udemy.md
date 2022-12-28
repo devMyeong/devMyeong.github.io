@@ -957,6 +957,15 @@ AItem::AItem()
 
 ![throw](https://user-images.githubusercontent.com/80055816/209858824-da8dcf31-0755-4d8c-8444-e816c16ea5d5.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 05-58 UMG Intro Lesson
+- We're going to be creating a pick up widget, which is basically a pop up window that will show information on the screen in our game
+- We're going to use UMG, which is the Unreal Motion graphics editor
+- The canvas panel allows widgets to be laid out arbitrarily on some area
+- Which means distance is measured from the anchor
+- An overlay allows UI elements to stack on top of each other
+- We also have horizontal and vertical boxes and these allow us to arrange items in a widget
+- The hierarchy allows us to arrange items in our UMG
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
