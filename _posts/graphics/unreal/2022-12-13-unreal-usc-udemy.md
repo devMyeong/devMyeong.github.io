@@ -881,7 +881,48 @@ void AShooterCharacter::StartCrosshairBulletFire()
 - 마이너스 노드를 제거한 이유는? Zoom In 일때 50 픽셀과 Zoom Out 일때 50 픽셀은 다르기 때문에 Zoom In 일때 크로스 헤어 위치와 Zoom Out 일때 크로스 헤어 위치가 다른 현상이 있어서이다
 
 ### 04-53 New Level Assets
-- 
+
+![demon](https://user-images.githubusercontent.com/80055816/209819963-1e4636ee-6212-4026-8368-1b20fc9877d5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![start](https://user-images.githubusercontent.com/80055816/209820055-7e81445e-fdee-44d4-a9b6-1ab829984b3d.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 04-54 Automatic Fire
+
+```cpp
+void AShooterCharacter::StartFireTimer()
+{
+	// bShouldFire 변수는 언제 어떤 함수에서 true로 리셋되는가?
+	// AutomaticFireRate가 지난후 AutoFireReset() 함수에서 리셋된다
+	if (bShouldFire)
+	{
+		FireWeapon();
+		bShouldFire = false;
+		GetWorldTimerManager().SetTimer(
+			AutoFireTimer,
+			this,
+			&AShooterCharacter::AutoFireReset,
+			AutomaticFireRate);
+	}
+}
+```
+
+- So just keep in mind that if you increase automatic fire rate, you have to increase that interpolation time for the gunfire spread factor
+
+### 04-55 Jump Animations
+
+![rule](https://user-images.githubusercontent.com/80055816/209841139-bab517d0-0629-44da-8ac5-7056672068b1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule2](https://user-images.githubusercontent.com/80055816/209841174-d581d52b-f283-4edf-bea2-ed66bdd6b2b3.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 상황에서 1번 트랜지션 룰은 어떤 결과를 만드는가? 결론적으로 2번 트랜지션 룰이 실행되게 된다
+
+![in](https://user-images.githubusercontent.com/80055816/209841375-aa244658-8c4b-49ed-a9c4-2be957da312d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/209841412-d478bf93-13a5-4907-98c4-2ba88fcb1e4f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![playrate](https://user-images.githubusercontent.com/80055816/209841453-41a0e118-a738-45d7-bf56-9e7ef5a471c2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![loop](https://user-images.githubusercontent.com/80055816/209841490-b0ca5a03-2e72-4b51-9a37-0e349178d8e0.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
