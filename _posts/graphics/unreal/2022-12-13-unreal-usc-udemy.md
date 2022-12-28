@@ -841,6 +841,48 @@ void AShooterCharacter::CalculateCrosshairSpread(float DeltaTime)
 }
 ```
 
+### 04-51 Crosshair Aim Factor
+
+```cpp
+void AShooterCharacter::CalculateCrosshairSpread(float DeltaTime)
+{
+	//..
+
+		// CrosshairAimFactor는 더해야 할까 빼야 할까?
+		// 정답은 빼야한다
+		CrosshairSpreadMultiplier =
+		0.5f +
+		CrosshairVelocityFactor +
+		CrosshairInAirFactor -
+		CrosshairAimFactor;
+}
+```
+
+### 04-52 Bullet Fire Aim Factor
+- Remember, functions have addresses and memory just like variables do, which means you can take the address of a function
+
+```cpp
+void AShooterCharacter::StartCrosshairBulletFire()
+{
+	bFiringBullet = true;
+
+	// SetTimer 함수에 대해 설명하면?
+	// 하나의 함수를 Tick()과 다른 타임라인으로 지정된 시간 마다 호출 할 수 있다 ( https://midason.tistory.com/442 )
+	GetWorldTimerManager().SetTimer(
+		CrosshairShootTimer,
+		this,
+		&AShooterCharacter::FinishCrosshairBulletFire,
+		ShootTimeDuration);
+}
+```
+
+![diff](https://user-images.githubusercontent.com/80055816/209787317-d3c4fd8c-4d0f-43f0-b745-030b11bfef0a.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 마이너스 노드를 제거한 이유는? Zoom In 일때 50 픽셀과 Zoom Out 일때 50 픽셀은 다르기 때문에 Zoom In 일때 크로스 헤어 위치와 Zoom Out 일때 크로스 헤어 위치가 다른 현상이 있어서이다
+
+### 04-53 New Level Assets
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
