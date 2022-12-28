@@ -924,6 +924,39 @@ void AShooterCharacter::StartFireTimer()
 
 ![loop](https://user-images.githubusercontent.com/80055816/209841490-b0ca5a03-2e72-4b51-9a37-0e349178d8e0.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 05-56 Item Class
+
+![actor](https://user-images.githubusercontent.com/80055816/209851528-d0d00dc4-3406-41e4-99ee-6416bc1dae31.PNG){: width="100%" height="100%"}{: .align-center}
+
+- ctrl + k + o 키를 누르면 현재 헤더 파일의 cpp 파일이 나타난다
+
+```cpp
+AItem::AItem()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+	// 아래 구문의 실행 결과를 설명하면?
+	// ItemMesh 이름을 지닌 USkeletalMeshComponent가 생성된다
+	ItemMesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("ItemMesh"));
+	SetRootComponent(ItemMesh);
+
+	// 아래 구문의 실행 결과를 설명하면?
+	// CollisionBox 이름을 지닌 UBoxComponent가 생성된다
+	CollisionBox = CreateDefaultSubobject<UBoxComponent>(TEXT("CollisionBox"));
+	CollisionBox->SetupAttachment(ItemMesh);
+}
+```
+
+### 05-57 Weapon Class
+- We haven't even created a blueprint based on item class because we're planning on using this as a parent class for other items such as a weapon
+
+![itemclass](https://user-images.githubusercontent.com/80055816/209858762-8cf2d2e1-7528-45a6-b959-494cd10f158c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![duplicate](https://user-images.githubusercontent.com/80055816/209858805-0afe265e-fbe3-4ad0-bd3c-d3026deab8a2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![throw](https://user-images.githubusercontent.com/80055816/209858824-da8dcf31-0755-4d8c-8444-e816c16ea5d5.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
