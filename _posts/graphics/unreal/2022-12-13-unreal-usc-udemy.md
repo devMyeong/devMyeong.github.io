@@ -989,7 +989,34 @@ AItem::AItem()
 ![widget](https://user-images.githubusercontent.com/80055816/210137381-ecd41687-15c1-4539-973c-4cb23df1d443.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-62 Trace for Widget
-- 
+
+```cpp
+bool AShooterCharacter::TraceUnderCrosshairs(FHitResult& OutHitResult)
+{
+	//..
+
+	// Crosshair의 위치를 찾는 방법은?
+	// 뷰포트의 중심 위치를 구해 사용하면 된다
+	FVector2D CrosshairLocation(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
+
+	//..
+```
+
+```cpp
+AItem::AItem()
+{
+	//..
+
+	// https://forums.unrealengine.com/t/what-is-the-meaning-of-each-ecollisionresponse-enum-ecr-ignore-ecr-overlap-ecr-block-ecr-max/397826
+	// 각 옵션들에 대해 이해하지 못했다 위의 사이트를 보고 다시 공부하자
+	CollisionBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	CollisionBox->SetCollisionResponseToChannel(
+		ECollisionChannel::ECC_Visibility,
+		ECollisionResponse::ECR_Block);
+
+	//..
+}
+```
 
 <br>
 
