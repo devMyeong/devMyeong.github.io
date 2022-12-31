@@ -985,6 +985,10 @@ AItem::AItem()
 ![font](https://user-images.githubusercontent.com/80055816/210133871-f0121b4d-f2d6-4f57-9126-2fbd766aac0b.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-61 Adding the Pickup Widget
+
+![widget](https://user-images.githubusercontent.com/80055816/210137381-ecd41687-15c1-4539-973c-4cb23df1d443.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-62 Trace for Widget
 - 
 
 <br>
