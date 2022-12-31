@@ -966,6 +966,27 @@ AItem::AItem()
 - We also have horizontal and vertical boxes and these allow us to arrange items in a widget
 - The hierarchy allows us to arrange items in our UMG
 
+### 05-59 PickupWidget Blueprint
+- ProjectName.Build.cs 파일에 있는 PublicDependencyModuleNames에 대해 설명하면? List of public dependency module names ([**참고**](https://docs.unrealengine.com/4.27/en-US/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/))
+- dependency에 대해 설명하면? 코드를 생성하는 프로젝트는 코드를 사용하는 프로젝트의 프로젝트 종속성이라고 합니다 ([**참고**](https://learn.microsoft.com/ko-kr/visualstudio/ide/how-to-create-and-remove-project-dependencies?view=vs-2022))
+
+![widget](https://user-images.githubusercontent.com/80055816/210127948-e0bed3dc-4c4c-4462-ab41-1f9588cc13c4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hierarchy](https://user-images.githubusercontent.com/80055816/210127959-4820e229-a081-446b-a6fd-5411938e6909.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-60 Finishing the PickupWidget
+
+![anchor](https://user-images.githubusercontent.com/80055816/210133822-ed1f4ffd-bafc-4443-af41-7a845de8a193.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Anchor 설정시 어떤 효과가 있는지 설명하면? If we squeeze in the size of the widget, we're not going to squish that icon
+
+![2d](https://user-images.githubusercontent.com/80055816/210133829-0b4cd511-924f-493f-a1c9-f6fefe5e265d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![font](https://user-images.githubusercontent.com/80055816/210133871-f0121b4d-f2d6-4f57-9126-2fbd766aac0b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-61 Adding the Pickup Widget
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
