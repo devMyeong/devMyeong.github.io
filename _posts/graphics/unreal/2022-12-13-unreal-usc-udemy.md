@@ -1040,7 +1040,43 @@ bool AShooterCharacter::GetBeamEndLocation(
 - OnComponentBeginOverlap() 함수에 대해 설명하면? Event called when something starts to overlaps this component, for example a player walking into a trigger ([**참고**](https://docs.unrealengine.com/5.0/en-US/API/Runtime/Engine/Components/UPrimitiveComponent/OnComponentBeginOverlap/))
 
 ### 05-65 Hide Widget
-- 
+
+```cpp
+void AShooterCharacter::TraceForItems()
+{
+	//..
+
+	// 아래 코드의 결과는?
+	// 이전 프레임의 아이템과 현재 프레임의 아이템이 다르면 Widget을 안보이게 처리한다
+	if (TraceHitItemLastFrame)
+	{
+		if (HitItem != TraceHitItemLastFrame)
+		{
+			// We are hitting a different AItem this frame from last frame
+			// Or AItem is null.
+			TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
+		}
+	}
+
+	//..
+}
+```
+
+### 05-66 Bind Item Name
+
+![bind](https://user-images.githubusercontent.com/80055816/210186302-d4fbadff-ec14-4f1e-a6cb-7e6fef906680.PNG){: width="100%" height="100%"}{: .align-center}
+
+![item](https://user-images.githubusercontent.com/80055816/210186309-e936371a-85cc-4a49-900c-ce6958e3d3ae.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 과정을 설명하면? Item Reference가 유효하면 Item Name을 string 형으로 Return 한다
+
+![widget](https://user-images.githubusercontent.com/80055816/210186314-ad2cfaec-7885-4aee-bf70-ecc377223c3f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 과정이 왜 필요한가? Item Reference를 할당 해주기 위해
+
+![conclude](https://user-images.githubusercontent.com/80055816/210186326-bb62382d-f226-40b6-bd72-328425e5668a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![view](https://user-images.githubusercontent.com/80055816/210186337-6e3aeee2-aa5f-4c81-86d7-50192d71613f.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
