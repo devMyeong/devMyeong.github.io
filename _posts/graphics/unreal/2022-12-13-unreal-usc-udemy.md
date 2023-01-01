@@ -1068,7 +1068,7 @@ void AShooterCharacter::TraceForItems()
 
 ![item](https://user-images.githubusercontent.com/80055816/210186309-e936371a-85cc-4a49-900c-ce6958e3d3ae.PNG){: width="100%" height="100%"}{: .align-center}
 
-- 위의 과정을 설명하면? Item Reference가 유효하면 Item Name을 string 형으로 Return 한다
+- 위의 과정을 설명하면? Item Reference가 유효하면 Item Name을 String 형으로 Return 한다
 
 ![widget](https://user-images.githubusercontent.com/80055816/210186314-ad2cfaec-7885-4aee-bf70-ecc377223c3f.PNG){: width="100%" height="100%"}{: .align-center}
 
