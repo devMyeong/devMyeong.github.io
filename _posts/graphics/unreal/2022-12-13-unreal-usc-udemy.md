@@ -1018,6 +1018,30 @@ AItem::AItem()
 }
 ```
 
+### 05-63 Refactor Trace Under Crosshairs
+
+```cpp
+bool AShooterCharacter::GetBeamEndLocation(
+	const FVector& MuzzleSocketLocation,
+	FVector& OutBeamLocation)
+{
+	//..
+
+	// 아래의 수식이 필요한 이유는?
+	// 연기 파티클이 목표물을 좀더 확실하게 맞췄다는 느낌을 주기위해
+	const FVector WeaponTraceEnd{ MuzzleSocketLocation + StartToEnd * 1.25f };
+
+	// ..
+}
+```
+
+### 05-64 Widget Trace When Close
+- 델리게이트에 대해 설명하면? 등록된 함수에게 알려주는 기능 ([**참고**](https://3dmpengines.tistory.com/2057))
+- OnComponentBeginOverlap() 함수에 대해 설명하면? Event called when something starts to overlaps this component, for example a player walking into a trigger ([**참고**](https://docs.unrealengine.com/5.0/en-US/API/Runtime/Engine/Components/UPrimitiveComponent/OnComponentBeginOverlap/))
+
+### 05-65 Hide Widget
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
