@@ -924,6 +924,10 @@ void AShooterCharacter::StartFireTimer()
 
 ![loop](https://user-images.githubusercontent.com/80055816/209841490-b0ca5a03-2e72-4b51-9a37-0e349178d8e0.PNG){: width="100%" height="100%"}{: .align-center}
 
+<br>
+
+## Chapter 5 The Weapon
+
 ### 05-56 Item Class
 
 ![actor](https://user-images.githubusercontent.com/80055816/209851528-d0d00dc4-3406-41e4-99ee-6416bc1dae31.PNG){: width="100%" height="100%"}{: .align-center}
