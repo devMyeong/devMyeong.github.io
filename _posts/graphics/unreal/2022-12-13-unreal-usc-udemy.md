@@ -1078,6 +1078,38 @@ void AShooterCharacter::TraceForItems()
 
 ![view](https://user-images.githubusercontent.com/80055816/210186337-6e3aeee2-aa5f-4c81-86d7-50192d71613f.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 05-67 Bind Item Count
+
+![bind](https://user-images.githubusercontent.com/80055816/210196484-771c3aba-9a33-4492-afd3-7a45135900dd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![item](https://user-images.githubusercontent.com/80055816/210196495-9f968f8c-7149-4449-8a9e-fabf085bcc62.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-68 Bind Star Opacity
+
+![bindstar](https://user-images.githubusercontent.com/80055816/210220330-a38681ed-93fa-465b-85b6-a1607cac4073.PNG){: width="100%" height="100%"}{: .align-center}
+
+![return](https://user-images.githubusercontent.com/80055816/210220387-d70afcd6-e732-48d8-924a-ac559f32b4fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![one](https://user-images.githubusercontent.com/80055816/210220554-6935c617-6e10-4b63-8e5e-664feeae5b0f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 과정에서 Get 노드는 무엇을 얻어오는 것인지 설명하면? Item.h 파일의 ActiveStars 변수의 1번 인덱스 상태
+- Visible Alpha와 Hidden Alpha 노드의 RGBA 값을 각각 설명하면? (1.0, 1.0, 1.0, 1.0)과 (0.0, 0.0, 0.0, 0.0)
+
+![collapse](https://user-images.githubusercontent.com/80055816/210220591-71aadc63-c38d-43ea-bb3d-ebfb2cfc3d03.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 기능으로 함수를 하나의 덩어리로 묶을수 있다
+
+![gfunction](https://user-images.githubusercontent.com/80055816/210220638-cabb1107-8231-435a-b10c-f5e390980825.PNG){: width="100%" height="100%"}{: .align-center}
+
+- local variables는 지역변수 variables는 멤버변수를 의미한다
+
+![opacity](https://user-images.githubusercontent.com/80055816/210220696-43f6923b-ae83-4a00-bd40-c1df3eb6adb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/210220728-538d9540-12db-4985-ad39-f8d72332ac38.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-69 Spawn Default Weapon
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
