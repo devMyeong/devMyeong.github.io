@@ -1080,7 +1080,7 @@ void AShooterCharacter::TraceForItems()
 
 ### 05-67 Bind Item Count
 
-![bind](https://user-images.githubusercontent.com/80055816/210196484-771c3aba-9a33-4492-afd3-7a45135900dd.PNG){: width="100%" height="100%"}{: .align-center}
+![bind](https://user-images.githubusercontent.com/80055816/210222558-9189c698-8689-4004-bdf9-2ed3d1fe1994.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![item](https://user-images.githubusercontent.com/80055816/210196495-9f968f8c-7149-4449-8a9e-fabf085bcc62.PNG){: width="100%" height="100%"}{: .align-center}
 
