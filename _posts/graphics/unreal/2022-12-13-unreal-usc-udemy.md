@@ -1108,6 +1108,17 @@ void AShooterCharacter::TraceForItems()
 ![final](https://user-images.githubusercontent.com/80055816/210220728-538d9540-12db-4985-ad39-f8d72332ac38.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-69 Spawn Default Weapon
+- TSubclassOf<AWeapon>에 대해 설명하면? 블루프린트 창의 디테일 패널 드롭다운 메뉴에 AWeapon의 파생 클래스만 표시된다 ([**참고**](https://wergia.tistory.com/136))
+
+![socket](https://user-images.githubusercontent.com/80055816/210248575-dddfd384-02a5-46c4-a052-88220baf3964.PNG){: width="100%" height="100%"}{: .align-center}
+
+![position](https://user-images.githubusercontent.com/80055816/210248614-83d26798-0d3d-4373-9440-df8d9108724d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![base](https://user-images.githubusercontent.com/80055816/210248645-5eeb3e71-d388-462e-8ca1-1a0e65230e0d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![class](https://user-images.githubusercontent.com/80055816/210248669-f3749df6-c8fe-4623-bf55-12583ad4ccac.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-70 Equip Function
 - 
 
 <br>
