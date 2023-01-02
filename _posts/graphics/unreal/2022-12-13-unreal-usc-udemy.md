@@ -1108,7 +1108,7 @@ void AShooterCharacter::TraceForItems()
 ![final](https://user-images.githubusercontent.com/80055816/210220728-538d9540-12db-4985-ad39-f8d72332ac38.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-69 Spawn Default Weapon
-- TSubclassOf<AWeapon>에 대해 설명하면? 블루프린트 창의 디테일 패널 드롭다운 메뉴에 AWeapon의 파생 클래스만 표시된다 ([**참고**](https://wergia.tistory.com/136))
+- `TSubclassOf<AWeapon>`에 대해 설명하면? 블루프린트 창의 디테일 패널 드롭다운 메뉴에 AWeapon의 파생 클래스만 표시된다 ([**참고**](https://wergia.tistory.com/136))
 
 ![socket](https://user-images.githubusercontent.com/80055816/210248575-dddfd384-02a5-46c4-a052-88220baf3964.PNG){: width="100%" height="100%"}{: .align-center}
 
