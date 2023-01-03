@@ -1218,7 +1218,7 @@ void AShooterCharacter::DropWeapon()
 ```
 
 ### 05-75 Item Falling State
-- Physics Asset Edito에 대해 설명하면? The editor used to set up physics bodies and constraints for physical simulation and collision for Skeletal Meshes ([**참고**](https://docs.unrealengine.com/4.26/en-US/InteractiveExperiences/Physics/PhysicsAssetEditor/))
+- Physics Asset Editor에 대해 설명하면? The editor used to set up physics bodies and constraints for physical simulation and collision for Skeletal Meshes ([**참고**](https://docs.unrealengine.com/4.26/en-US/InteractiveExperiences/Physics/PhysicsAssetEditor/))
 
 ![phy](https://user-images.githubusercontent.com/80055816/210300800-49ef8011-cb00-4be5-9ca9-52d63aaa3238.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1237,7 +1237,7 @@ void AWeapon::ThrowWeapon()
 	// https://docs.unrealengine.com/4.26/en-US/API/Runtime/Engine/Engine/ETeleportType/ 참고
 	GetItemMesh()->SetWorldRotation(MeshRotation, false, nullptr, ETeleportType::TeleportPhysics);
 
-	// ImpulseDirection() 함수를 대입연산 하고 있는데 어떻게 MeshRight.RotateAngleAxis() 함수와
+	// ImpulseDirection 변수에 대입연산 하고 있는데 어떻게 MeshRight.RotateAngleAxis() 함수와
 	// ImpulseDirection.RotateAngleAxis() 함수가 둘다 적용되고 있는거지?
 	FVector ImpulseDirection = MeshRight.RotateAngleAxis(-20.f, MeshForward);
 	float RandomRotation{ 30.f };
@@ -1275,6 +1275,151 @@ void AWeapon::Tick(float DeltaTime)
 		const FRotator MeshRotation{ 0.f, GetItemMesh()->GetComponentRotation().Yaw, 0.f };
 		GetItemMesh()->SetWorldRotation(MeshRotation, false, nullptr, ETeleportType::TeleportPhysics);
 	}
+}
+```
+
+### 05-77 Swap Weapon
+
+- item 사진
+
+- Swap이 잘되는지 확인하기 위해 위의 사진처럼 머티리얼과 이름을 바꿔보자
+
+```cpp
+void AShooterCharacter::SwapWeapon(AWeapon* WeaponToSwap)
+{
+	DropWeapon();
+	EquipWeapon(WeaponToSwap);
+
+	// 아래 코드가 필요한 이유는?
+	// 무기가 스와핑 되고난 이후에 아래 변수들이 초기화 되지 않는다
+	TraceHitItem = nullptr;
+	TraceHitItemLastFrame = nullptr;
+}
+```
+
+```cpp
+void AItem::SetItemProperties(EItemState State)
+{
+	//..
+
+	// 아래 코드가 필요한 이유는?
+	// 착용 상태에서는 Widget이 출력되면 안되기 때문이다
+	case EItemState::EIS_Equipped:
+	PickupWidget->SetVisibility(false);
+
+	//..
+}
+```
+
+<br>
+
+## Chapter 6 Item Interpolation
+
+### 06-78 Item Interping Slide
+- we will use linear interpolation
+- Here's a curve where the vertical axis represents our items Z position in space and the horizontal axis represents time
+
+### 06-79 Camera Interp Location
+
+```cpp
+class SHOOTER_API AShooterCharacter : public ACharacter
+{
+	// CameraInterpDistance 변수의 생성 목적은 무엇인지 설명하면?
+	// Distance outward from the camera for the interp destination
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+		float CameraInterpDistance;
+
+	// CameraInterpElevation 변수의 생성 목적은 무엇인지 설명하면?
+	// Distance upward from the camera for the interp destination
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Items, meta = (AllowPrivateAccess = "true"))
+		float CameraInterpElevation;
+}
+```
+
+### 06-80 Get Pickup Item
+
+```cpp
+void AShooterCharacter::GetPickupItem(AItem* Item)
+{
+	auto Weapon = Cast<AWeapon>(Item);
+	if (Weapon)
+	{
+		SwapWeapon(Weapon);
+	}
+}
+```
+
+### 06-81 Item Z Curve
+
+![curve](https://user-images.githubusercontent.com/80055816/210357742-c9c2a7a1-2282-441b-a8bd-05d8935f5923.PNG){: width="100%" height="100%"}{: .align-center}
+
+![auto](https://user-images.githubusercontent.com/80055816/210360752-137d29da-7e96-4c6d-87e4-5bbef9c4c7bd.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 06-82 Item Interp Variables
+
+```cpp
+// 아래 함수는 누가 호출할 예정인지 설명하면?
+// 플레이어가 호출할 예정이다
+void AItem::StartItemCurve(AShooterCharacter* Char)
+{
+	// Store a handle to the Character
+	Character = Char;
+	// Store initial location of the Item
+	ItemInterpStartLocation = GetActorLocation();
+	bInterping = true;
+	SetItemState(EItemState::EIS_EquipInterping);
+
+	GetWorldTimerManager().SetTimer(
+		ItemInterpTimer,
+		this,
+		&AItem::FinishInterping,
+		ZCurveTime);
+}
+```
+
+### 06-83 Interping State Properties
+
+```cpp
+void AItem::SetItemProperties(EItemState State)
+{
+	//..
+
+	case EItemState::EIS_EquipInterping:
+	PickupWidget->SetVisibility(false);
+	// Set mesh properties
+	ItemMesh->SetSimulatePhysics(false);
+	ItemMesh->SetEnableGravity(false);
+	ItemMesh->SetVisibility(true);
+	ItemMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// Set AreaSphere properties
+	AreaSphere->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	AreaSphere->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	// Set CollisionBox properties
+	CollisionBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	CollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	break;
+
+	//..
+}
+```
+
+### 06-84 Following the Z Curve
+
+![diff](https://user-images.githubusercontent.com/80055816/210382801-4afee055-96d7-41ba-8f23-983583d2e68f.png){: width="100%" height="100%"}{: .align-center}
+
+### 06-85 Interp Item X and Y
+
+![interp](https://user-images.githubusercontent.com/80055816/210393380-8a7af87c-5144-4927-a7bd-68d3ca0d46b4.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+FVector AShooterCharacter::GetCameraInterpLocation()
+{
+	const FVector CameraWorldLocation{ FollowCamera->GetComponentLocation() };
+	const FVector CameraForward{ FollowCamera->GetForwardVector() };
+	// Desired = CameraWorldLocation + Forward * A + Up * B
+	return CameraWorldLocation + CameraForward * CameraInterpDistance
+		+ FVector(0.f, 0.f, CameraInterpElevation);
 }
 ```
 
