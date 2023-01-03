@@ -1280,7 +1280,7 @@ void AWeapon::Tick(float DeltaTime)
 
 ### 05-77 Swap Weapon
 
-- item 사진
+![item](https://user-images.githubusercontent.com/80055816/210419936-8a0aee2f-7cfb-49e4-a4bd-8ef4d6c06ece.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Swap이 잘되는지 확인하기 위해 위의 사진처럼 머티리얼과 이름을 바꿔보자
 
