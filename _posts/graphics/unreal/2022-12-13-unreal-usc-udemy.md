@@ -1123,7 +1123,160 @@ void AShooterCharacter::TraceForItems()
 ![class](https://user-images.githubusercontent.com/80055816/210248669-f3749df6-c8fe-4623-bf55-12583ad4ccac.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 05-70 Equip Function
-- 
+
+```cpp
+AWeapon* AShooterCharacter::SpawnDefaultWeapon()
+{
+	if (DefaultWeaponClass)
+	{
+		// Spawn the Weapon
+		return GetWorld()->SpawnActor<AWeapon>(DefaultWeaponClass);
+	}
+
+	return nullptr;
+}
+```
+
+- SpawnActor() 함수에 대해 설명하면? 지정된 클래스의 새 인스턴스를 생성한 다음 새로 생성된 Actor 로의 포인터를 반환합니다 ([**참고**](https://pros2.tistory.com/129))
+
+### 05-71 Item State Lesson
+- Item States are Equipped, Pickup, Equipinterping, PickedUp, Falling
+
+### 05-72 Item State
+
+```cpp
+void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip)
+{
+	//..
+
+	// 아래 함수가 실행되면 어떤 일이 일어나는지 설명하면?
+	// Weapon 상태가 EItemState::EIS_Equipped로 바뀐다
+	EquippedWeapon->SetItemState(EItemState::EIS_Equipped);
+
+	//..
+}
+```
+
+### 05-73 Set Item Properties
+
+```cpp
+void AItem::SetItemProperties(EItemState State)
+{
+	// EIS_Pickup 스테이트에 대해 설명하면?
+	// The item Mesh to ignore all collision channels
+	// The Area Sphere to Overlap all collision channels
+	// The Collision Box to ignore all channels except for Visibility, which it will block
+	switch (State)
+	{
+	case EItemState::EIS_Pickup:
+		// Set mesh properties
+		ItemMesh->SetSimulatePhysics(false);
+		ItemMesh->SetEnableGravity(false);
+		ItemMesh->SetVisibility(true);
+		ItemMesh->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+
+		// SetCollisionEnabled에 대해 설명하면?
+		// Controls what kind of collision is enabled for this body
+		// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Components/UPrimitiveComponent/SetCollisionEnabled/ 참고
+		ItemMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		// Set AreaSphere properties
+		AreaSphere->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Overlap);
+		AreaSphere->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+		// Set CollisionBox properties
+		CollisionBox->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+		CollisionBox->SetCollisionResponseToChannel(
+			ECollisionChannel::ECC_Visibility,
+			ECollisionResponse::ECR_Block);
+		
+		// QueryAndPhysics에 대해 설명하면?
+		// Can be used for both spatial queries (raycasts, sweeps, overlaps)
+		// And simulation (rigid body, constraints)
+		// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Engine/ECollisionEnabled__Type/ 참고
+		CollisionBox->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+		break;
+
+		//..
+	}
+}
+```
+
+### 05-74 Detach Weapon
+
+```cpp
+void AShooterCharacter::DropWeapon()
+{
+	if (EquippedWeapon)
+	{
+		// 아래 코드의 실행 결과를 예측하면?
+		// 무기가 손에서 분리되어 월드 공간에 놓인다 ( 더 공부 해야됨 )
+		FDetachmentTransformRules DetachmentTransformRules(EDetachmentRule::KeepWorld, true);
+		EquippedWeapon->GetItemMesh()->DetachFromComponent(DetachmentTransformRules);
+
+		EquippedWeapon->SetItemState(EItemState::EIS_Falling);
+	}
+}
+```
+
+### 05-75 Item Falling State
+- Physics Asset Edito에 대해 설명하면? The editor used to set up physics bodies and constraints for physical simulation and collision for Skeletal Meshes ([**참고**](https://docs.unrealengine.com/4.26/en-US/InteractiveExperiences/Physics/PhysicsAssetEditor/))
+
+![phy](https://user-images.githubusercontent.com/80055816/210300800-49ef8011-cb00-4be5-9ca9-52d63aaa3238.PNG){: width="100%" height="100%"}{: .align-center}
+
+![connect](https://user-images.githubusercontent.com/80055816/210300812-00c1faee-768b-497a-b425-f0c3cc54f7c4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 05-76 Throw Weapon
+- FRotator() 생성자의 매개변수를 순서데로 나열하면? Pitch, Yaw, Roll ([**참고**](https://docs.unrealengine.com/4.26/en-US/API/Runtime/Core/Math/FRotator/__ctor/5/))
+
+```cpp
+void AWeapon::ThrowWeapon()
+{
+	//..
+
+	// ETeleportType::TeleportPhysics에 대해 설명하면?
+	// Teleport physics body so that velocity remains the same and no collision occurs
+	// https://docs.unrealengine.com/4.26/en-US/API/Runtime/Engine/Engine/ETeleportType/ 참고
+	GetItemMesh()->SetWorldRotation(MeshRotation, false, nullptr, ETeleportType::TeleportPhysics);
+
+	// ImpulseDirection() 함수를 대입연산 하고 있는데 어떻게 MeshRight.RotateAngleAxis() 함수와
+	// ImpulseDirection.RotateAngleAxis() 함수가 둘다 적용되고 있는거지?
+	FVector ImpulseDirection = MeshRight.RotateAngleAxis(-20.f, MeshForward);
+	float RandomRotation{ 30.f };
+	ImpulseDirection = ImpulseDirection.RotateAngleAxis(RandomRotation, FVector(0.f, 0.f, 1.f));
+	ImpulseDirection *= 20'000.f;
+
+	// 아래 함수에 대해 설명하면?
+	// Add an impulse to a single rigid body Good for one time instant burst
+	// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Components/UPrimitiveComponent/AddImpulse/ 참고
+	GetItemMesh()->AddImpulse(ImpulseDirection);
+
+	//..
+}
+```
+
+```cpp
+AWeapon::AWeapon() :
+	ThrowWeaponTime(0.7f),
+	bFalling(false)
+{
+	// Now, if you ever find that your tick function isn't being called
+	// Make sure you have this in your constructor because an actor will not tick
+	PrimaryActorTick.bCanEverTick = true;
+}
+```
+
+```cpp
+void AWeapon::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	// 아래 내용은 왜 필요한가? Keep the Weapon upright
+	if (GetItemState() == EItemState::EIS_Falling && bFalling)
+	{
+		const FRotator MeshRotation{ 0.f, GetItemMesh()->GetComponentRotation().Yaw, 0.f };
+		GetItemMesh()->SetWorldRotation(MeshRotation, false, nullptr, ETeleportType::TeleportPhysics);
+	}
+}
+```
 
 <br>
 
