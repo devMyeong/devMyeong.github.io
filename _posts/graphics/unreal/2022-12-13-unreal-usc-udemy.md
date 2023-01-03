@@ -1423,6 +1423,24 @@ FVector AShooterCharacter::GetCameraInterpLocation()
 }
 ```
 
+### 06-86 Interp Rotation
+- Whenever the camera rotates, we would like our item to rotate exactly that same amount
+
+```cpp
+void AItem::ItemInterp(float DeltaTime)
+{
+	//..
+
+	// 아래 코드의 효과는?
+	// 카메라가 회전하면 아이템도 카메라가 회전한 만큼 회전한다
+	const FRotator CameraRotation{ Character->GetFollowCamera()->GetComponentRotation() };
+	FRotator ItemRotation{ 0.f, CameraRotation.Yaw + InterpInitialYawOffset, 0.f };
+	SetActorRotation(ItemRotation, ETeleportType::TeleportPhysics);
+
+	//..
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
