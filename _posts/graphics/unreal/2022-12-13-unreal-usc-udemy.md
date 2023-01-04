@@ -1460,6 +1460,21 @@ void AItem::ItemInterp(float DeltaTime)
 
 ### 06-88 Retargeting Animations
 - What does that mean, retarget? the process of retargeting and animation is taking that animation and assigning it to a different skeleton
+- In order to retarget this animation to the Belka skeleton, we're going to use something called a rig
+
+![rig](https://user-images.githubusercontent.com/80055816/210504496-28fc5007-b0c5-474f-9de0-71cb1d8df7c8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![match](https://user-images.githubusercontent.com/80055816/210504554-80497dd5-2a16-4cc3-b63c-6cfa0f87f3ee.PNG){: width="100%" height="100%"}{: .align-center}
+
+![base](https://user-images.githubusercontent.com/80055816/210504595-140785cd-753b-435c-9479-00ffa549a22a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reload](https://user-images.githubusercontent.com/80055816/210504645-1c845563-5033-4d90-ac25-522127163c7b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![retarget](https://user-images.githubusercontent.com/80055816/210504691-94b82be3-2a9a-49a6-b787-6f720f5a171f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![morphing](https://user-images.githubusercontent.com/80055816/210504764-15b10669-53b7-4f42-a3da-977c4147f129.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 이미지에 나타난 과정을 거치는 이유는? To fix morphing problem
 
 <br>
 
