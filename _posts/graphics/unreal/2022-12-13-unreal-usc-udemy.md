@@ -1441,6 +1441,26 @@ void AItem::ItemInterp(float DeltaTime)
 }
 ```
 
+### 06-87 Interp Scale
+
+```cpp
+void AItem::ItemInterp(float DeltaTime)
+{
+	//..
+
+	if (ItemScaleCurve)
+	{
+		const float ScaleCurveValue = ItemScaleCurve->GetFloatValue(ElapsedTime);
+		SetActorScale3D(FVector(ScaleCurveValue, ScaleCurveValue, ScaleCurveValue));
+	}
+
+	//..
+}
+```
+
+### 06-88 Retargeting Animations
+- What does that mean, retarget? the process of retargeting and animation is taking that animation and assigning it to a different skeleton
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
