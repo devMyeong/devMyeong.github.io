@@ -983,6 +983,7 @@ AItem::AItem()
 ![anchor](https://user-images.githubusercontent.com/80055816/210133822-ed1f4ffd-bafc-4443-af41-7a845de8a193.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Anchor 설정시 어떤 효과가 있는지 설명하면? If we squeeze in the size of the widget, we're not going to squish that icon
+- Anchor를 사용하려면 어떻게 해야 하는가? Canvas Panel 아래 계층에 포함되어야 한다
 
 ![2d](https://user-images.githubusercontent.com/80055816/210133829-0b4cd511-924f-493f-a1c9-f6fefe5e265d.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1483,6 +1484,47 @@ void AItem::ItemInterp(float DeltaTime)
 ![morphing](https://user-images.githubusercontent.com/80055816/210504764-15b10669-53b7-4f42-a3da-977c4147f129.PNG){: width="100%" height="100%"}{: .align-center}
 
 - 위의 이미지에 나타난 과정을 거치는 이유는? To fix morphing problem
+
+### 07-90 Edit Animations In Unreal
+- we're going to make a duplicate of this animation because we're going to have a different version of this reload animation for each weapon
+
+![adjust](https://user-images.githubusercontent.com/80055816/210524863-f0acfc48-d65e-4c4d-9bee-601b8a62db86.PNG){: width="100%" height="100%"}{: .align-center}
+
+![key](https://user-images.githubusercontent.com/80055816/210524948-f0a8abb7-0df6-41b0-8c3c-9fa5f28752cb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-91 Ammo
+- 언리얼에서 열거형에 대해 설명하면? 일반적인 enum이 아닌 enum class로 만들어야 한다 그리고 UENUM은 uint8만을 지원한다 ([**참고**](https://wergia.tistory.com/150))
+
+```cpp
+// 언리얼에서 지원하는 Map 클래스
+TMap<EAmmoType, int32> AmmoMap;
+```
+
+### 07-92 Ammo Count Widget
+
+![widget](https://user-images.githubusercontent.com/80055816/210568546-458d2d02-2771-4b7f-8d9c-44bef1f166f0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![custom](https://user-images.githubusercontent.com/80055816/210568649-a1425022-cbb5-4d8a-9e15-7415ab1bce00.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/210568701-47a5c31e-3960-4dbf-a296-a19926d9546f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-93 Draw Ammo Count To Screen
+
+![pc](https://user-images.githubusercontent.com/80055816/210598818-fddce373-64e2-409f-9438-e8c5cab7966f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- We're going to draw this HUD to the screen using our player controller class and we're going to do this from C++
+
+![over](https://user-images.githubusercontent.com/80055816/210599031-24318290-8f20-4691-93a2-2da0ea7c03ae.PNG){: width="100%" height="100%"}{: .align-center}
+
+- ShooterHUDOverlay를 만드는 이유는? We want to position AmmoCountBP where we want it
+
+![bp](https://user-images.githubusercontent.com/80055816/210599590-33bb8caf-7fe5-4ee1-a91d-2f3e770f227d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![cho](https://user-images.githubusercontent.com/80055816/210599662-8d6db63a-c5bc-4053-b8c4-9a4ab69e616a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/210599732-9c73eac4-d84d-496e-bffe-6210de6bed09.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mode](https://user-images.githubusercontent.com/80055816/210599812-b5a39b7d-17dc-4b23-b8df-ea1a37893569.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
