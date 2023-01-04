@@ -1490,7 +1490,7 @@ void AItem::ItemInterp(float DeltaTime)
 
 ![adjust](https://user-images.githubusercontent.com/80055816/210524863-f0acfc48-d65e-4c4d-9bee-601b8a62db86.PNG){: width="100%" height="100%"}{: .align-center}
 
-![key](https://user-images.githubusercontent.com/80055816/210524948-f0a8abb7-0df6-41b0-8c3c-9fa5f28752cb.PNG){: width="100%" height="100%"}{: .align-center}
+![key](https://user-images.githubusercontent.com/80055816/210601469-b2a833a2-84d0-4de3-abd1-16cd9a99cf70.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 07-91 Ammo
 - 언리얼에서 열거형에 대해 설명하면? 일반적인 enum이 아닌 enum class로 만들어야 한다 그리고 UENUM은 uint8만을 지원한다 ([**참고**](https://wergia.tistory.com/150))
