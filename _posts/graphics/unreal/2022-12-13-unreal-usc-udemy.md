@@ -12,7 +12,7 @@ toc: true
 toc_sticky: true
 
 date: 2022-12-13
-last_modified_at: 2022-12-18
+last_modified_at: 2023-01-04
 ---
 
 ## Chapter 1 Introduction
@@ -1458,7 +1458,15 @@ void AItem::ItemInterp(float DeltaTime)
 }
 ```
 
-### 06-88 Retargeting Animations
+<br>
+
+## Chapter 7 Reloading
+
+### 07-88 Retargeting Animations in Unreal Engine 5
+- I cover the new way of retargeting animations in Unreal Engine 5 in a new YouTube video
+- The link is in the resources for Lecture 88: Retargeting Animations
+
+### 07-89 Retargeting Animations
 - What does that mean, retarget? the process of retargeting and animation is taking that animation and assigning it to a different skeleton
 - In order to retarget this animation to the Belka skeleton, we're going to use something called a rig
 
