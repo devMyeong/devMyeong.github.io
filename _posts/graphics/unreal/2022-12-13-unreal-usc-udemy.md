@@ -1526,6 +1526,33 @@ TMap<EAmmoType, int32> AmmoMap;
 
 ![mode](https://user-images.githubusercontent.com/80055816/210599812-b5a39b7d-17dc-4b23-b8df-ea1a37893569.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 07-94 Weapon Ammo in C++
+
+```cpp
+bool AShooterCharacter::WeaponHasAmmo()
+{
+	if (EquippedWeapon == nullptr) return false;
+
+	return EquippedWeapon->GetAmmo() > 0;
+}
+```
+
+### 07-95 Bind Weapon Ammo
+
+![select](https://user-images.githubusercontent.com/80055816/210627317-85c41cf1-a78a-4b32-9733-925cc285cfb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/210627373-ad6c0743-2441-4414-acee-1aff8021b345.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/210627419-bf234a52-a424-40e6-b873-eef1c35ebaae.PNG){: width="100%" height="100%"}{: .align-center}
+
+![code](https://user-images.githubusercontent.com/80055816/210627463-f70932fd-6246-4b46-ad40-a5fd7c1bf093.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-96 Fixing Barrel Socket Location
+
+![add](https://user-images.githubusercontent.com/80055816/210627524-ad8b653d-d27d-45f9-9e7a-c90fde2b8789.PNG){: width="100%" height="100%"}{: .align-center}
+
+- So we don't actually want the mesh of our character We want the mesh of our equipped weapon
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
