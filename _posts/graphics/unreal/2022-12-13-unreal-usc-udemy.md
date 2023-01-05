@@ -1685,6 +1685,15 @@ AmmoMap.Add(AmmoType, CarriedAmmo);
 
 ![end](https://user-images.githubusercontent.com/80055816/210819469-91f6cd51-4895-49bf-b0a6-0d39dbb75f77.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 07-105 Bind Weapon Name
+
+![item](https://user-images.githubusercontent.com/80055816/210852062-2ad27b4e-9198-401c-bae1-77105394d228.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-106 Move Clip Lecture
+- The scene component can be used as a reference point for its transform
+- So what we're going to do with this scene component is attach it to our hand
+- Then we can simply use that scene component for its transform its location, rotation and scale
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
