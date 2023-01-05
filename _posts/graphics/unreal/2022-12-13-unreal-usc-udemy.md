@@ -1526,6 +1526,8 @@ TMap<EAmmoType, int32> AmmoMap;
 
 ![mode](https://user-images.githubusercontent.com/80055816/210599812-b5a39b7d-17dc-4b23-b8df-ea1a37893569.PNG){: width="100%" height="100%"}{: .align-center}
 
+- 위의 과정은 무엇을 위함인지 설명하면? This right here will override what we have set in the project settings for every level
+
 ### 07-94 Weapon Ammo in C++
 
 ```cpp
@@ -1552,6 +1554,146 @@ bool AShooterCharacter::WeaponHasAmmo()
 ![add](https://user-images.githubusercontent.com/80055816/210627524-ad8b653d-d27d-45f9-9e7a-c90fde2b8789.PNG){: width="100%" height="100%"}{: .align-center}
 
 - So we don't actually want the mesh of our character We want the mesh of our equipped weapon
+
+### 07-97 Improving Weapon Fire Code Lecture
+- So we'll see you in the next video when we start to restructure this code
+
+### 07-98 Improving Weapon Fire Code
+
+```cpp
+void AShooterCharacter::FireButtonPressed()
+{
+	bFireButtonPressed = true;
+	FireWeapon();
+}
+```
+
+```cpp
+void AShooterCharacter::FireWeapon()
+{
+	if (EquippedWeapon == nullptr) return;
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+
+	if (WeaponHasAmmo())
+	{
+		PlayFireSound();
+		SendBullet();
+		PlayGunfireMontage();
+		EquippedWeapon->DecrementAmmo();
+
+		StartFireTimer();
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::StartFireTimer()
+{
+	CombatState = ECombatState::ECS_FireTimerInProgress;
+
+	GetWorldTimerManager().SetTimer(
+		AutoFireTimer,
+		this,
+		&AShooterCharacter::AutoFireReset,
+		AutomaticFireRate);
+}
+```
+
+```cpp
+void AShooterCharacter::AutoFireReset()
+{
+	CombatState = ECombatState::ECS_Unoccupied;
+
+	if (WeaponHasAmmo())
+	{
+		if (bFireButtonPressed)
+		{
+			FireWeapon();
+		}
+	}
+	else
+	{
+		// Reload Weapon
+	}
+}
+```
+
+### 07-99 Reload Montage
+
+![montage](https://user-images.githubusercontent.com/80055816/210723001-9bf4baed-ab97-4d70-b81c-4470089779c8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/210723197-f7f49a63-6655-488f-9f78-15b89b4fb910.PNG){: width="100%" height="100%"}{: .align-center}
+
+![new](https://user-images.githubusercontent.com/80055816/210723784-285a4263-4e2c-457d-8fd6-6c476d334eb4.PNG){: width="100%" height="100%"}{: .align-center}
+
+- The reason we're saying SMG is because this animation is specific to the SMG weapon and we're going to have different sections here with the different animations for the different weapons
+
+![conclude](https://user-images.githubusercontent.com/80055816/210723832-9ec5549e-1a6a-4376-aa2e-f52ee33da8d2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/210723866-4b7f6d65-8a10-4312-bf2a-a4c59d77d2a2.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-100 Reload Lecture
+- Remember, if we're not in the unoccupied state, we cannot fire the weapon
+
+![montage](https://user-images.githubusercontent.com/80055816/210817587-cb0143c8-fe9c-44c2-812c-20da6da47a0c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/210818081-03084560-fd19-4ac0-b9a1-d1c681ed9009.PNG){: width="100%" height="100%"}{: .align-center}
+
+![new](https://user-images.githubusercontent.com/80055816/210818207-d7f55962-8ad0-4eb5-a8c6-713b960369f8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/210818340-8a4b085e-ab4c-44d7-b1fd-4309ad4385f0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/210818482-e56f5199-1866-4f13-93a8-2af7f17b341e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-101 The Weapon Type
+
+```cpp
+UCLASS()
+class SHOOTER_API AWeapon : public AItem
+{
+	//..
+
+	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	
+	//..
+}
+```
+
+### 07-102 Reload Continued
+
+![class](https://user-images.githubusercontent.com/80055816/210818648-deef6cfd-5105-4eb4-9a42-2cb3738e9e27.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hfile](https://user-images.githubusercontent.com/80055816/210818828-c00506b2-c70a-4bb3-8181-7bc0e12b8d97.PNG){: width="100%" height="100%"}{: .align-center}
+
+![delete](https://user-images.githubusercontent.com/80055816/210818932-3e4b74f3-dc4b-48a1-9e4c-2ced4a8466aa.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-103 Update AmmoMap
+
+```cpp
+// 표현식( Ammo + Amount <= MagazineCapacity )이 true가 아니면 에러메시지를 출력한다
+void AWeapon::ReloadAmmo(int32 Amount)
+{
+	checkf(Ammo + Amount <= MagazineCapacity, TEXT("Attempted to reload with more than magazine capacity!"));
+	Ammo += Amount;
+}
+```
+
+```cpp
+//..
+
+// 언리얼 Map에서 Add는 Replace를 의미한다
+AmmoMap.Add(AmmoType, CarriedAmmo);
+
+//..
+```
+
+![notify](https://user-images.githubusercontent.com/80055816/210819133-2c881796-52d5-41b3-a35e-72acd63076b8.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-104 Bind Carried Ammo
+
+![bind](https://user-images.githubusercontent.com/80055816/210819338-7123930b-1dfc-40dc-b90b-b03d4c5d068c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/210819469-91f6cd51-4895-49bf-b0a6-0d39dbb75f77.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
