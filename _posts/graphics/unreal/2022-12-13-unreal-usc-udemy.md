@@ -1653,7 +1653,7 @@ class SHOOTER_API AWeapon : public AItem
 
 ![class](https://user-images.githubusercontent.com/80055816/210818648-deef6cfd-5105-4eb4-9a42-2cb3738e9e27.PNG){: width="100%" height="100%"}{: .align-center}
 
-![hfile](https://user-images.githubusercontent.com/80055816/210818828-c00506b2-c70a-4bb3-8181-7bc0e12b8d97.PNG){: width="100%" height="100%"}{: .align-center}
+![hfile](https://user-images.githubusercontent.com/80055816/210830218-3b70162b-d197-4a68-9274-7343e5d533c2.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![delete](https://user-images.githubusercontent.com/80055816/210818932-3e4b74f3-dc4b-48a1-9e4c-2ced4a8466aa.PNG){: width="100%" height="100%"}{: .align-center}
 
