@@ -1635,16 +1635,6 @@ void AShooterCharacter::AutoFireReset()
 ### 07-100 Reload Lecture
 - Remember, if we're not in the unoccupied state, we cannot fire the weapon
 
-![montage](https://user-images.githubusercontent.com/80055816/210817587-cb0143c8-fe9c-44c2-812c-20da6da47a0c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![drag](https://user-images.githubusercontent.com/80055816/210818081-03084560-fd19-4ac0-b9a1-d1c681ed9009.PNG){: width="100%" height="100%"}{: .align-center}
-
-![new](https://user-images.githubusercontent.com/80055816/210818207-d7f55962-8ad0-4eb5-a8c6-713b960369f8.PNG){: width="100%" height="100%"}{: .align-center}
-
-![conclude](https://user-images.githubusercontent.com/80055816/210818340-8a4b085e-ab4c-44d7-b1fd-4309ad4385f0.PNG){: width="100%" height="100%"}{: .align-center}
-
-![node](https://user-images.githubusercontent.com/80055816/210818482-e56f5199-1866-4f13-93a8-2af7f17b341e.PNG){: width="100%" height="100%"}{: .align-center}
-
 ### 07-101 The Weapon Type
 
 ```cpp
