@@ -1834,6 +1834,86 @@ void UShooterAnimInstance::TurnInPlace()
 
 - So this is how we use our route, your offset to rotate the bone back once we've rotated our camera for each frame
 
+### 08-113 Turn In Place Animations
+
+![copy](https://user-images.githubusercontent.com/80055816/211054454-27af812c-f82d-45ac-9bff-65fb13691eb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/211054510-36f66d3b-3ca9-48d9-90e9-5bcbfe7a51d8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211054552-b6fb2023-06ac-41be-bcab-43644140e6c7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211054610-cef7a87e-3ca1-4290-81e2-db9c951e369c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rrule](https://user-images.githubusercontent.com/80055816/211054660-036bdc06-7620-4fd1-8b40-2b65691c6187.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211054706-ef434b16-d8f3-421f-9229-c2f186aea375.PNG){: width="100%" height="100%"}{: .align-center}
+
+![loop](https://user-images.githubusercontent.com/80055816/211054773-6c9e875e-fc86-4e2f-9adc-ed5c3447bc53.PNG){: width="100%" height="100%"}{: .align-center}
+
+- We actually haven't programmed the ability for the bone to rotate back towards our direction of movement All we're doing is playing the animation
+
+### 08-114 Animation Curves
+
+![curve](https://user-images.githubusercontent.com/80055816/211069552-134ac7ec-8285-4b52-ac31-3451dc1fa9d5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![graph](https://user-images.githubusercontent.com/80055816/211069654-f6d40fcd-59c9-4680-afba-e996dc160b43.PNG){: width="100%" height="100%"}{: .align-center}
+
+![meta](https://user-images.githubusercontent.com/80055816/211069703-928eaf1c-549d-4588-b91d-5664ba2c16a6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![turn](https://user-images.githubusercontent.com/80055816/211069759-41497a74-2db5-4b60-9417-4e6babce27ed.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reuse](https://user-images.githubusercontent.com/80055816/211069804-56fb1d1c-7dc9-46ea-afe1-898ebe71f6df.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-115 Turn In Place Using Curve Values
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (ShooterCharacter == nullptr) return;
+	if (Speed > 0)
+	{
+		// Don't want to turn in place; Character is moving
+		RootYawOffset = 0.f;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		CharacterYawLastFrame = CharacterYaw;
+		RotationCurveLastFrame = 0.f;
+		RotationCurve = 0.f;
+	}
+	else
+	{
+		CharacterYawLastFrame = CharacterYaw;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		const float YawDelta{ CharacterYaw - CharacterYawLastFrame };
+
+		// Root Yaw Offset, updated and clamped to [-180, 180]
+		RootYawOffset = UKismetMathLibrary::NormalizeAxis(RootYawOffset - YawDelta);
+
+		// if turning than? the value is 1.0
+		// if not than? the value is 0.0
+		const float Turning{ GetCurveValue(TEXT("Turning")) };
+		if (Turning > 0)
+		{
+			RotationCurveLastFrame = RotationCurve;
+			RotationCurve = GetCurveValue(TEXT("Rotation"));
+			const float DeltaRotation{ RotationCurve - RotationCurveLastFrame };
+
+			// if RootYawOffset > 0 than? Turning Left
+			// if RootYawOffset < 0 than? Turning Right
+			RootYawOffset > 0 ? RootYawOffset -= DeltaRotation : RootYawOffset += DeltaRotation;
+
+			const float ABSRootYawOffset{ FMath::Abs(RootYawOffset) };
+			if (ABSRootYawOffset > 90.f)
+			{
+				const float YawExcess{ ABSRootYawOffset - 90.f };
+				RootYawOffset > 0 ? RootYawOffset -= YawExcess : RootYawOffset += YawExcess;
+			}
+		}
+
+		if (GEngine) GEngine->AddOnScreenDebugMessage(1, -1, FColor::Cyan, FString::Printf(TEXT("RootYawOffset: %f"), RootYawOffset));
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
