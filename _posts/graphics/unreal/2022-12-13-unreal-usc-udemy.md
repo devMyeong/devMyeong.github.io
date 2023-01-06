@@ -1715,7 +1715,7 @@ void AShooterCharacter::GrabClip()
 
 	//------------------------------------------------------------------------------------------
 	// EAttachmentRule::KeepRelative에 대해 설명하면?
-	// Keeps current relative transform as the relative transform to the new paren
+	// Keeps current relative transform as the relative transform to the new parent
 	// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Engine/EAttachmentRule/ 참고
 	// -----------------------------------------------------------------------------------------
 	FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, true);
