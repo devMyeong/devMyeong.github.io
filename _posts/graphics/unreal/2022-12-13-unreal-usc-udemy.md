@@ -1694,6 +1694,78 @@ AmmoMap.Add(AmmoType, CarriedAmmo);
 - So what we're going to do with this scene component is attach it to our hand
 - Then we can simply use that scene component for its transform its location, rotation and scale
 
+### 07-107 Grab and Release Clip
+
+![notify](https://user-images.githubusercontent.com/80055816/210935695-cd0b4f71-9419-40a3-a61a-24fa781569b6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/210935758-c2d41261-653f-4b89-85af-284b23f3e50d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![track](https://user-images.githubusercontent.com/80055816/210935808-b3bfe638-0789-43ab-a77e-038a76f63541.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bone](https://user-images.githubusercontent.com/80055816/210935848-c4a196b5-a299-4ab9-8a86-b750d66b267d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hand](https://user-images.githubusercontent.com/80055816/210935882-6608860a-affb-47a9-b87f-20a0536dfcd4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/210935919-aaaef0db-5a8a-4781-bdd6-ab76a77b64e2.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::GrabClip()
+{
+	//..
+
+	//------------------------------------------------------------------------------------------
+	// EAttachmentRule::KeepRelative에 대해 설명하면?
+	// Keeps current relative transform as the relative transform to the new paren
+	// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Engine/EAttachmentRule/ 참고
+	// -----------------------------------------------------------------------------------------
+	FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, true);
+	HandSceneComponent->AttachToComponent(GetMesh(), AttachmentRules, FName(TEXT("Hand_L")));
+	HandSceneComponent->SetWorldTransform(ClipTransform);
+
+	EquippedWeapon->SetMovingClip(true);
+
+	//..
+}
+```
+
+### 07-108 Weapon AnimBP
+
+![bp](https://user-images.githubusercontent.com/80055816/210947736-58d0ca5b-4e53-4513-95f9-63b15dfd3b45.PNG){: width="100%" height="100%"}{: .align-center}
+
+![create](https://user-images.githubusercontent.com/80055816/210947781-1a884d9c-eaf3-4e3c-845b-7cca5be6a349.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ref](https://user-images.githubusercontent.com/80055816/210947852-df8964b2-c0f7-4e1b-960c-c90689ed3669.PNG){: width="100%" height="100%"}{: .align-center}
+
+![graph](https://user-images.githubusercontent.com/80055816/210949650-6534a504-7380-4124-b822-fa316b7f976a.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Get owning actor is a node that returns an actor That is the actor that owns this animation blueprint
+
+### 07-109 Moving the Clip
+
+![inside](https://user-images.githubusercontent.com/80055816/210959454-57ddf63e-6fe8-4367-974b-bf6051fb233f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![clip](https://user-images.githubusercontent.com/80055816/210959499-e300ec51-b613-4efa-a6ff-573daa44bd46.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remember](https://user-images.githubusercontent.com/80055816/210959558-f0c4c262-fab0-4caa-aec2-826d62b59b88.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/210959602-6ca766cd-0af0-46d8-992f-012887c8a9a4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![selbp](https://user-images.githubusercontent.com/80055816/210959629-b3376202-2ee9-49b0-8856-bd452d1cd407.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+AShooterCharacter::AShooterCharacter() :
+{
+	//..
+
+	// Now this is a scene component and really we don't even need to attach it to anything
+	// Because Grap clip is going to handle the attachment
+	// We're going to attach it to our handbone
+	HandSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HandSceneComp"));
+
+	//..
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
