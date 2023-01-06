@@ -1766,6 +1766,72 @@ AShooterCharacter::AShooterCharacter() :
 }
 ```
 
+### 07-110 Clip Sounds
+
+![cue](https://user-images.githubusercontent.com/80055816/211035557-ac497055-c52c-402b-b20f-9a956bb2f26c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/211035640-c0e4134e-8cf6-4ba5-9286-7f7dc65d6e06.PNG){: width="100%" height="100%"}{: .align-center}
+
+![select](https://user-images.githubusercontent.com/80055816/211035712-12c4e3c0-dd5d-44e1-9345-717585df3823.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211035777-63ebccd4-beb1-46a6-aa43-03a73e863e67.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-111 Pickup Sounds
+
+```cpp
+//..
+
+// 사운드 재생 함수
+UGameplayStatics::PlaySound2D(this, Item->GetEquipSound());
+
+//..
+```
+
+<br>
+
+## Chapter 8 Advanced Movement
+
+### 08-112 Rotate Root Bone
+- The root is the parent of the skeleton hierarchy So if we rotate the root, the body will follow
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (ShooterCharacter == nullptr) return;
+	if (Speed > 0)
+	{
+		// Don't want to turn in place; Character is moving
+	}
+	else
+	{
+		CharacterYawLastFrame = CharacterYaw;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		const float YawDelta{ CharacterYaw - CharacterYawLastFrame };
+
+		RootYawOffset -= YawDelta;
+
+		if (GEngine) GEngine->AddOnScreenDebugMessage(
+			1,
+			-1,
+			FColor::Blue,
+			FString::Printf(TEXT("CharacterYaw: %f"), CharacterYaw));
+		if (GEngine) GEngine->AddOnScreenDebugMessage(
+			2,
+			-1,
+			FColor::Red,
+			FString::Printf(TEXT("RootYawOffset: %f"), RootYawOffset));
+	}
+}
+```
+
+- And so we're going to use Yaw Offset to rotate our bone back toward the forward direction
+
+![expose](https://user-images.githubusercontent.com/80055816/211035866-67be219c-207f-4bc2-a4ff-1890589417b4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/211035935-c13355c8-6b87-464b-8d0f-fd6f67a96918.PNG){: width="100%" height="100%"}{: .align-center}
+
+- So this is how we use our route, your offset to rotate the bone back once we've rotated our camera for each frame
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
