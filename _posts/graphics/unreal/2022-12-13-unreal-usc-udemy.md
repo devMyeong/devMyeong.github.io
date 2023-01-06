@@ -1810,6 +1810,8 @@ void UShooterAnimInstance::TurnInPlace()
 
 		RootYawOffset -= YawDelta;
 
+		// If we use a different number for each message for the key, 
+		// Then we can print multiple messages on the screen at the same time
 		if (GEngine) GEngine->AddOnScreenDebugMessage(
 			1,
 			-1,
@@ -1828,7 +1830,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![expose](https://user-images.githubusercontent.com/80055816/211035866-67be219c-207f-4bc2-a4ff-1890589417b4.PNG){: width="100%" height="100%"}{: .align-center}
 
-![conclude](https://user-images.githubusercontent.com/80055816/211035935-c13355c8-6b87-464b-8d0f-fd6f67a96918.PNG){: width="100%" height="100%"}{: .align-center}
+![conclude](https://user-images.githubusercontent.com/80055816/211038604-e5f76322-31fd-4f79-92c6-79068b107666.PNG){: width="100%" height="100%"}{: .align-center}
 
 - So this is how we use our route, your offset to rotate the bone back once we've rotated our camera for each frame
 
