@@ -1832,7 +1832,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![conclude](https://user-images.githubusercontent.com/80055816/211038604-e5f76322-31fd-4f79-92c6-79068b107666.PNG){: width="100%" height="100%"}{: .align-center}
 
-- So this is how we use our route, your offset to rotate the bone back once we've rotated our camera for each frame
+- So this is how we use our route, yaw offset to rotate the bone back once we've rotated our camera for each frame
 
 ### 08-113 Turn In Place Animations
 
@@ -1913,6 +1913,36 @@ void UShooterAnimInstance::TurnInPlace()
 	}
 }
 ```
+
+### 08-116 Hip Aim Offset
+
+![offset](https://user-images.githubusercontent.com/80055816/211155215-689a6ba8-7707-425e-be71-081168b7b02c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ao](https://user-images.githubusercontent.com/80055816/211155225-4c245b1d-0368-4cf8-9784-2cc0fed9a271.PNG){: width="100%" height="100%"}{: .align-center}
+
+![down](https://user-images.githubusercontent.com/80055816/211155233-1eed43f6-2559-4321-84ed-4ef7daa63adc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211155246-70174cfd-856d-4686-ba79-314af49ea8af.PNG){: width="100%" height="100%"}{: .align-center}
+
+![connect](https://user-images.githubusercontent.com/80055816/211155265-7437778d-6979-4126-a0e0-2d497429deb2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pitch](https://user-images.githubusercontent.com/80055816/211155271-4159324d-69c9-4026-881a-4dee1feae3d1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reload](https://user-images.githubusercontent.com/80055816/211155281-61537562-0806-4e38-bdcf-90a2f6cd50e0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![clear](https://user-images.githubusercontent.com/80055816/211155295-cf229d2c-495d-4e65-ba0a-51e716741d26.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-117 Aiming Aim Offset
+
+![one](https://user-images.githubusercontent.com/80055816/211163286-f83adc76-f53e-4717-ab48-4b0d9897f0c7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![aim](https://user-images.githubusercontent.com/80055816/211163296-2f381267-d428-4b25-98f5-ca0a90c0607f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/211163307-bce3b149-2579-41ef-919b-ca24519185fb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![many](https://user-images.githubusercontent.com/80055816/211163348-7aaaee07-7c0e-4a68-befb-7d0f0639c474.PNG){: width="100%" height="100%"}{: .align-center}
+
+![air](https://user-images.githubusercontent.com/80055816/211163358-819e5845-d648-4745-a6ef-a1aa3dea9a69.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
