@@ -1918,7 +1918,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![offset](https://user-images.githubusercontent.com/80055816/211155215-689a6ba8-7707-425e-be71-081168b7b02c.PNG){: width="100%" height="100%"}{: .align-center}
 
-![ao](https://user-images.githubusercontent.com/80055816/211155225-4c245b1d-0368-4cf8-9784-2cc0fed9a271.PNG){: width="100%" height="100%"}{: .align-center}
+![ao](https://user-images.githubusercontent.com/80055816/211163870-35168590-a3c4-423d-82dc-5fbea12c8be5.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![down](https://user-images.githubusercontent.com/80055816/211155233-1eed43f6-2559-4321-84ed-4ef7daa63adc.PNG){: width="100%" height="100%"}{: .align-center}
 
