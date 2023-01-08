@@ -2003,7 +2003,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![noskin](https://user-images.githubusercontent.com/80055816/211208201-2846acae-e728-4d65-841d-0368153faaa0.PNG){: width="100%" height="100%"}{: .align-center}
 
-![first](https://user-images.githubusercontent.com/80055816/211208208-9072f403-8f7a-4448-820d-8b3d2a2c61d7.PNG){: width="100%" height="100%"}{: .align-center}
+![first](https://user-images.githubusercontent.com/80055816/211208677-e9608fdb-127a-4714-b394-b661ba16506d.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![next](https://user-images.githubusercontent.com/80055816/211208213-15464b68-b592-4bd6-973c-32058769a7b8.PNG){: width="100%" height="100%"}{: .align-center}
 
