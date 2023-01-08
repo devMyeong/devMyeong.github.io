@@ -1995,6 +1995,36 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![final](https://user-images.githubusercontent.com/80055816/211200932-c138b732-b946-414c-a942-0fe54bc539eb.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 08-123 Crouching Turn Animations
+
+![look](https://user-images.githubusercontent.com/80055816/211208175-d4ab2c47-624b-4d75-8ae0-a3b751962b8e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![down](https://user-images.githubusercontent.com/80055816/211208191-b277f173-94d0-412d-9f46-2f27a9c4678a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![noskin](https://user-images.githubusercontent.com/80055816/211208201-2846acae-e728-4d65-841d-0368153faaa0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![first](https://user-images.githubusercontent.com/80055816/211208208-9072f403-8f7a-4448-820d-8b3d2a2c61d7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/211208213-15464b68-b592-4bd6-973c-32058769a7b8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211208235-681a0fe4-ba8c-4fa3-8c30-1f719764c5eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-124 Retargeting Anims with Different Skeletons
+
+![match](https://user-images.githubusercontent.com/80055816/211208252-5f69b304-6a62-4ad9-9f11-ce62bea3ed84.PNG){: width="100%" height="100%"}{: .align-center}
+
+![view](https://user-images.githubusercontent.com/80055816/211208261-c93d18b5-0759-4d1b-ac28-89ef4b75dcc3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![too](https://user-images.githubusercontent.com/80055816/211208273-a7839a23-8e3d-4cbd-b2e7-8718aeb7d0ba.PNG){: width="100%" height="100%"}{: .align-center}
+
+![use](https://user-images.githubusercontent.com/80055816/211208284-7a69c903-edd0-42a3-aa27-a75b8fc0d312.PNG){: width="100%" height="100%"}{: .align-center}
+
+![apply](https://user-images.githubusercontent.com/80055816/211208300-f14a4d7d-a1cb-447c-8181-505223bac7c1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![re](https://user-images.githubusercontent.com/80055816/211208322-c8161164-fb3a-4f1d-bc2f-f939f526dcff.PNG){: width="100%" height="100%"}{: .align-center}
+
+![temp](https://user-images.githubusercontent.com/80055816/211208334-f1dcc422-c0dd-4a10-a79c-e8df235957a9.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
