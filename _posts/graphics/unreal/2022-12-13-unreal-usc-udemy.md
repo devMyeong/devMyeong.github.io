@@ -1944,6 +1944,57 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![air](https://user-images.githubusercontent.com/80055816/211163358-819e5845-d648-4745-a6ef-a1aa3dea9a69.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 08-118 Lean
+
+```cpp
+void UShooterAnimInstance::Lean(float DeltaTime)
+{
+	//..
+
+	// Explain below code
+	// This gives us a measure of how quickly we're turning
+	// And this is going to handle any sin(math) changes
+	const FRotator Delta{ UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame) };
+	const float Target{ Delta.Yaw / DeltaTime };
+
+	//..
+}
+```
+
+### 08-119 Lean Blendspace
+
+![space](https://user-images.githubusercontent.com/80055816/211194907-1951d564-3b57-47ac-afa5-a41dc1f0c855.PNG){: width="100%" height="100%"}{: .align-center}
+
+![input](https://user-images.githubusercontent.com/80055816/211194930-05d0e4e4-6970-4504-aec4-4603f99f2f4a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/211194942-bfcf61bd-ff28-49e4-90f8-f7265983daca.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-120 Crouching Setup
+
+![crouch](https://user-images.githubusercontent.com/80055816/211194876-4a33c942-746a-4593-a0ce-021c46270650.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-121 Crouching Animations
+
+![dup](https://user-images.githubusercontent.com/80055816/211197423-c35b84d2-f61a-4723-9eb1-1b76cfc193d8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211197438-ceb7dc7f-e321-45d7-b134-20f15e0bc520.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211197458-f1a9e701-b3d6-4e4f-9472-02c38d49bd7b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-122 Crouching AnimBP
+
+![start](https://user-images.githubusercontent.com/80055816/211200848-1582b280-7813-45ea-a137-5d1e7f558997.PNG){: width="100%" height="100%"}{: .align-center}
+
+![insert](https://user-images.githubusercontent.com/80055816/211200862-a1128c8b-29e4-4f43-af50-503a8da85d90.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211200886-d1cfd419-3544-4312-85ac-71e7bab091c9.PNG){: width="100%" height="100%"}{: .align-center}
+
+![check](https://user-images.githubusercontent.com/80055816/211200904-20713d50-e807-47dc-aebe-a88255dbbda4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rulee](https://user-images.githubusercontent.com/80055816/211200919-f2f8ffa5-358e-4b80-8f21-3e140189e003.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/211200932-c138b732-b946-414c-a942-0fe54bc539eb.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
