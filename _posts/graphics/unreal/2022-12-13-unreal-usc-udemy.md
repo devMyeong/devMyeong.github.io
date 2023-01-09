@@ -2029,7 +2029,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![match](https://user-images.githubusercontent.com/80055816/211268589-5df7df03-b573-4d91-8014-2162e9439490.PNG){: width="100%" height="100%"}{: .align-center}
 
-![spin](https://user-images.githubusercontent.com/80055816/211268922-3e6af5b5-430d-420b-8585-9b68bb4aed29.PNG){: width="100%" height="100%"}{: .align-center}
+![spin](https://user-images.githubusercontent.com/80055816/211270630-96904a1a-d74b-4a96-89fa-a6edc28f493b.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![upper](https://user-images.githubusercontent.com/80055816/211269151-0539499b-a0b3-4edd-9b05-c4a41916308b.PNG){: width="100%" height="100%"}{: .align-center}
 
