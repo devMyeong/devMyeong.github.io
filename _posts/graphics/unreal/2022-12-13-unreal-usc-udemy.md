@@ -2025,6 +2025,28 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![temp](https://user-images.githubusercontent.com/80055816/211208334-f1dcc422-c0dd-4a10-a79c-e8df235957a9.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 08-125 Crouch Turn In Place AnimBP
+
+![match](https://user-images.githubusercontent.com/80055816/211268589-5df7df03-b573-4d91-8014-2162e9439490.PNG){: width="100%" height="100%"}{: .align-center}
+
+![spin](https://user-images.githubusercontent.com/80055816/211268922-3e6af5b5-430d-420b-8585-9b68bb4aed29.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211269151-0539499b-a0b3-4edd-9b05-c4a41916308b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/211269195-e9a4cf36-e932-4d86-a766-e9c6495570fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ani](https://user-images.githubusercontent.com/80055816/211269237-7005e56a-e227-4491-bbb1-34e5d2aa7535.PNG){: width="100%" height="100%"}{: .align-center}
+
+![curve](https://user-images.githubusercontent.com/80055816/211269277-baacfdc1-8fa2-4b9a-8776-7f36675d3e63.PNG){: width="100%" height="100%"}{: .align-center}
+
+![curvegood](https://user-images.githubusercontent.com/80055816/211269319-7ec58322-94a9-434d-be96-44fefbd67cb4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![again](https://user-images.githubusercontent.com/80055816/211269370-1da99c5e-753a-4e20-a38f-54585bdc4e23.PNG){: width="100%" height="100%"}{: .align-center}
+
+![speed](https://user-images.githubusercontent.com/80055816/211269410-885e9040-437b-42be-83bd-bc57dde678b6.PNG){: width="100%" height="100%"}{: .align-center}
+
+- layered blend per bone에 대해 설명하면? A value of 0.0 means the Additive pose is not added to the Base input pose at all, while a value of 1.0 means the Additive pose is added fully to the Base input pose ([**참고**](https://docs.unrealengine.com/4.27/en-US/AnimatingObjects/SkeletalMeshAnimation/NodeReference/Blend/))
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
