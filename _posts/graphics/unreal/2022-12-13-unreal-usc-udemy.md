@@ -2086,6 +2086,8 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![time](https://user-images.githubusercontent.com/80055816/211319379-b1eadb4f-c387-4499-bb59-7d78b15219b0.PNG){: width="100%" height="100%"}{: .align-center}
 
+![pick](https://user-images.githubusercontent.com/80055816/211341989-1328a3fb-c38c-4a60-9022-fd533bf1c4ce.PNG){: width="100%" height="100%"}{: .align-center}
+
 ### 08-129 Crouch Movement Speed and Jump
 
 ```cpp
