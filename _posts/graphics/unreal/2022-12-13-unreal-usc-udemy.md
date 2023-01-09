@@ -2047,6 +2047,67 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 - layered blend per bone에 대해 설명하면? A value of 0.0 means the Additive pose is not added to the Base input pose at all, while a value of 1.0 means the Additive pose is added fully to the Base input pose ([**참고**](https://docs.unrealengine.com/4.27/en-US/AnimatingObjects/SkeletalMeshAnimation/NodeReference/Blend/))
 
+### 08-126 Crouch Recoil Weight
+
+![weight](https://user-images.githubusercontent.com/80055816/211308406-8f0d672b-8e98-4c02-a63a-571c4d4511a0.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (bTurningInPlace)
+	{
+		if (bReloading)
+		{
+			RecoilWeight = 1.f;
+		}
+		else
+		{
+			RecoilWeight = 0.f;
+		}
+	}
+}
+```
+
+### 08-127 Crouch Walking Blendspace
+
+![crouch](https://user-images.githubusercontent.com/80055816/211314245-580e8052-830f-4241-8048-207023bf91e9.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211314309-f85bae5d-bd2f-40a4-9112-af31500786cb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![insert](https://user-images.githubusercontent.com/80055816/211314422-a1fc7e90-7c54-4f32-90c3-10c57d7861fd.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-128 Crouch Walking
+
+![bs](https://user-images.githubusercontent.com/80055816/211319248-e8d6e1cd-92df-4e75-ad28-835254a99eeb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211319298-42194331-b68d-4ea9-87c5-4e188693f3bb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nrule](https://user-images.githubusercontent.com/80055816/211319338-649fad54-8b8a-444a-9408-cdaf564a37b1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![time](https://user-images.githubusercontent.com/80055816/211319379-b1eadb4f-c387-4499-bb59-7d78b15219b0.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-129 Crouch Movement Speed and Jump
+
+```cpp
+void AShooterCharacter::CrouchButtonPressed()
+{
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		bCrouching = !bCrouching;
+	}
+	if (bCrouching)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = CrouchMovementSpeed;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+	}
+}
+```
+
+![remove](https://user-images.githubusercontent.com/80055816/211329317-404db5df-07af-4035-82be-4ee479a1888a.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
