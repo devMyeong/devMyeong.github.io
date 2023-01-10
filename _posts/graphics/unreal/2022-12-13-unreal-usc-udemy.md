@@ -880,13 +880,13 @@ void AShooterCharacter::StartCrosshairBulletFire()
 
 - 마이너스 노드를 제거한 이유는? Zoom In 일때 50 픽셀과 Zoom Out 일때 50 픽셀은 다르기 때문에 Zoom In 일때 크로스 헤어 위치와 Zoom Out 일때 크로스 헤어 위치가 다른 현상이 있어서이다
 
-### 04-53 New Level Assets
+### 04-54 New Level Assets ( Warning )
 
 ![demon](https://user-images.githubusercontent.com/80055816/209819963-1e4636ee-6212-4026-8368-1b20fc9877d5.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![start](https://user-images.githubusercontent.com/80055816/209820055-7e81445e-fdee-44d4-a9b6-1ab829984b3d.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 04-54 Automatic Fire
+### 04-55 Automatic Fire
 
 ```cpp
 void AShooterCharacter::StartFireTimer()
@@ -908,7 +908,7 @@ void AShooterCharacter::StartFireTimer()
 
 - So just keep in mind that if you increase automatic fire rate, you have to increase that interpolation time for the gunfire spread factor
 
-### 04-55 Jump Animations
+### 04-56 Jump Animations
 
 ![rule](https://user-images.githubusercontent.com/80055816/209841139-bab517d0-0629-44da-8ac5-7056672068b1.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -928,7 +928,7 @@ void AShooterCharacter::StartFireTimer()
 
 ## Chapter 5 The Weapon
 
-### 05-56 Item Class
+### 05-57 Item Class
 
 ![actor](https://user-images.githubusercontent.com/80055816/209851528-d0d00dc4-3406-41e4-99ee-6416bc1dae31.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -952,7 +952,7 @@ AItem::AItem()
 }
 ```
 
-### 05-57 Weapon Class
+### 05-58 Weapon Class
 - We haven't even created a blueprint based on item class because we're planning on using this as a parent class for other items such as a weapon
 
 ![itemclass](https://user-images.githubusercontent.com/80055816/209858762-8cf2d2e1-7528-45a6-b959-494cd10f158c.PNG){: width="100%" height="100%"}{: .align-center}
@@ -961,7 +961,7 @@ AItem::AItem()
 
 ![throw](https://user-images.githubusercontent.com/80055816/209858824-da8dcf31-0755-4d8c-8444-e816c16ea5d5.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-58 UMG Intro Lesson
+### 05-59 UMG Intro Lesson
 - We're going to be creating a pick up widget, which is basically a pop up window that will show information on the screen in our game
 - We're going to use UMG, which is the Unreal Motion graphics editor
 - The canvas panel allows widgets to be laid out arbitrarily on some area
@@ -970,7 +970,7 @@ AItem::AItem()
 - We also have horizontal and vertical boxes and these allow us to arrange items in a widget
 - The hierarchy allows us to arrange items in our UMG
 
-### 05-59 PickupWidget Blueprint
+### 05-60 PickupWidget Blueprint
 - ProjectName.Build.cs 파일에 있는 PublicDependencyModuleNames에 대해 설명하면? List of public dependency module names ([**참고**](https://docs.unrealengine.com/4.27/en-US/ProductionPipelines/BuildTools/UnrealBuildTool/ModuleFiles/))
 - dependency에 대해 설명하면? 코드를 생성하는 프로젝트는 코드를 사용하는 프로젝트의 프로젝트 종속성이라고 합니다 ([**참고**](https://learn.microsoft.com/ko-kr/visualstudio/ide/how-to-create-and-remove-project-dependencies?view=vs-2022))
 
@@ -978,7 +978,7 @@ AItem::AItem()
 
 ![hierarchy](https://user-images.githubusercontent.com/80055816/210127959-4820e229-a081-446b-a6fd-5411938e6909.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-60 Finishing the PickupWidget
+### 05-61 Finishing the PickupWidget
 
 ![anchor](https://user-images.githubusercontent.com/80055816/210133822-ed1f4ffd-bafc-4443-af41-7a845de8a193.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -989,11 +989,11 @@ AItem::AItem()
 
 ![font](https://user-images.githubusercontent.com/80055816/210133871-f0121b4d-f2d6-4f57-9126-2fbd766aac0b.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-61 Adding the Pickup Widget
+### 05-62 Adding the Pickup Widget
 
 ![widget](https://user-images.githubusercontent.com/80055816/210137381-ecd41687-15c1-4539-973c-4cb23df1d443.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-62 Trace for Widget
+### 05-63 Trace for Widget
 
 ```cpp
 bool AShooterCharacter::TraceUnderCrosshairs(FHitResult& OutHitResult)
@@ -1023,7 +1023,7 @@ AItem::AItem()
 }
 ```
 
-### 05-63 Refactor Trace Under Crosshairs
+### 05-64 Refactor Trace Under Crosshairs
 
 ```cpp
 bool AShooterCharacter::GetBeamEndLocation(
@@ -1040,11 +1040,11 @@ bool AShooterCharacter::GetBeamEndLocation(
 }
 ```
 
-### 05-64 Widget Trace When Close
+### 05-65 Widget Trace When Close
 - 델리게이트에 대해 설명하면? 등록된 함수에게 알려주는 기능 ([**참고**](https://3dmpengines.tistory.com/2057))
 - OnComponentBeginOverlap() 함수에 대해 설명하면? Event called when something starts to overlaps this component, for example a player walking into a trigger ([**참고**](https://docs.unrealengine.com/5.0/en-US/API/Runtime/Engine/Components/UPrimitiveComponent/OnComponentBeginOverlap/))
 
-### 05-65 Hide Widget
+### 05-66 Hide Widget
 
 ```cpp
 void AShooterCharacter::TraceForItems()
@@ -1067,7 +1067,7 @@ void AShooterCharacter::TraceForItems()
 }
 ```
 
-### 05-66 Bind Item Name
+### 05-67 Bind Item Name
 
 ![bind](https://user-images.githubusercontent.com/80055816/210186302-d4fbadff-ec14-4f1e-a6cb-7e6fef906680.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1083,13 +1083,13 @@ void AShooterCharacter::TraceForItems()
 
 ![view](https://user-images.githubusercontent.com/80055816/210186337-6e3aeee2-aa5f-4c81-86d7-50192d71613f.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-67 Bind Item Count
+### 05-68 Bind Item Count
 
 ![bind](https://user-images.githubusercontent.com/80055816/210222558-9189c698-8689-4004-bdf9-2ed3d1fe1994.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![item](https://user-images.githubusercontent.com/80055816/210196495-9f968f8c-7149-4449-8a9e-fabf085bcc62.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-68 Bind Star Opacity
+### 05-69 Bind Star Opacity
 
 ![bindstar](https://user-images.githubusercontent.com/80055816/210220330-a38681ed-93fa-465b-85b6-a1607cac4073.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1112,7 +1112,7 @@ void AShooterCharacter::TraceForItems()
 
 ![final](https://user-images.githubusercontent.com/80055816/210220728-538d9540-12db-4985-ad39-f8d72332ac38.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-69 Spawn Default Weapon
+### 05-70 Spawn Default Weapon
 - `TSubclassOf<AWeapon>`에 대해 설명하면? 블루프린트 창의 디테일 패널 드롭다운 메뉴에 AWeapon의 파생 클래스만 표시된다 ([**참고**](https://wergia.tistory.com/136))
 
 ![socket](https://user-images.githubusercontent.com/80055816/210248575-dddfd384-02a5-46c4-a052-88220baf3964.PNG){: width="100%" height="100%"}{: .align-center}
@@ -1123,7 +1123,7 @@ void AShooterCharacter::TraceForItems()
 
 ![class](https://user-images.githubusercontent.com/80055816/210248669-f3749df6-c8fe-4623-bf55-12583ad4ccac.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-70 Equip Function
+### 05-71 Equip Function
 
 ```cpp
 AWeapon* AShooterCharacter::SpawnDefaultWeapon()
@@ -1140,10 +1140,10 @@ AWeapon* AShooterCharacter::SpawnDefaultWeapon()
 
 - SpawnActor() 함수에 대해 설명하면? 지정된 클래스의 새 인스턴스를 생성한 다음 새로 생성된 Actor 로의 포인터를 반환합니다 ([**참고**](https://pros2.tistory.com/129))
 
-### 05-71 Item State Lesson
+### 05-72 Item State Lesson
 - Item States are Equipped, Pickup, Equipinterping, PickedUp, Falling
 
-### 05-72 Item State
+### 05-73 Item State
 
 ```cpp
 void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip)
@@ -1158,7 +1158,7 @@ void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip)
 }
 ```
 
-### 05-73 Set Item Properties
+### 05-74 Set Item Properties
 
 ```cpp
 void AItem::SetItemProperties(EItemState State)
@@ -1201,7 +1201,7 @@ void AItem::SetItemProperties(EItemState State)
 }
 ```
 
-### 05-74 Detach Weapon
+### 05-75 Detach Weapon
 
 ```cpp
 void AShooterCharacter::DropWeapon()
@@ -1218,14 +1218,14 @@ void AShooterCharacter::DropWeapon()
 }
 ```
 
-### 05-75 Item Falling State
+### 05-76 Item Falling State
 - Physics Asset Editor에 대해 설명하면? The editor used to set up physics bodies and constraints for physical simulation and collision for Skeletal Meshes ([**참고**](https://docs.unrealengine.com/4.26/en-US/InteractiveExperiences/Physics/PhysicsAssetEditor/))
 
 ![phy](https://user-images.githubusercontent.com/80055816/210300800-49ef8011-cb00-4be5-9ca9-52d63aaa3238.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![connect](https://user-images.githubusercontent.com/80055816/210300812-00c1faee-768b-497a-b425-f0c3cc54f7c4.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 05-76 Throw Weapon
+### 05-77 Throw Weapon
 - FRotator() 생성자의 매개변수를 순서데로 나열하면? Pitch, Yaw, Roll ([**참고**](https://docs.unrealengine.com/4.26/en-US/API/Runtime/Core/Math/FRotator/__ctor/5/))
 
 ```cpp
@@ -1279,7 +1279,7 @@ void AWeapon::Tick(float DeltaTime)
 }
 ```
 
-### 05-77 Swap Weapon
+### 05-78 Swap Weapon
 
 ![item](https://user-images.githubusercontent.com/80055816/210419936-8a0aee2f-7cfb-49e4-a4bd-8ef4d6c06ece.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1316,11 +1316,11 @@ void AItem::SetItemProperties(EItemState State)
 
 ## Chapter 6 Item Interpolation
 
-### 06-78 Item Interping Slide
+### 06-79 Item Interping Slide
 - we will use linear interpolation
 - Here's a curve where the vertical axis represents our items Z position in space and the horizontal axis represents time
 
-### 06-79 Camera Interp Location
+### 06-80 Camera Interp Location
 
 ```cpp
 class SHOOTER_API AShooterCharacter : public ACharacter
@@ -1337,7 +1337,7 @@ class SHOOTER_API AShooterCharacter : public ACharacter
 }
 ```
 
-### 06-80 Get Pickup Item
+### 06-81 Get Pickup Item
 
 ```cpp
 void AShooterCharacter::GetPickupItem(AItem* Item)
@@ -1350,13 +1350,13 @@ void AShooterCharacter::GetPickupItem(AItem* Item)
 }
 ```
 
-### 06-81 Item Z Curve
+### 06-82 Item Z Curve
 
 ![curve](https://user-images.githubusercontent.com/80055816/210357742-c9c2a7a1-2282-441b-a8bd-05d8935f5923.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![auto](https://user-images.githubusercontent.com/80055816/210360752-137d29da-7e96-4c6d-87e4-5bbef9c4c7bd.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 06-82 Item Interp Variables
+### 06-83 Item Interp Variables
 
 ```cpp
 // 아래 함수는 누가 호출할 예정인지 설명하면?
@@ -1378,7 +1378,7 @@ void AItem::StartItemCurve(AShooterCharacter* Char)
 }
 ```
 
-### 06-83 Interping State Properties
+### 06-84 Interping State Properties
 
 ```cpp
 void AItem::SetItemProperties(EItemState State)
@@ -1405,11 +1405,11 @@ void AItem::SetItemProperties(EItemState State)
 }
 ```
 
-### 06-84 Following the Z Curve
+### 06-85 Following the Z Curve
 
 ![diff](https://user-images.githubusercontent.com/80055816/210382801-4afee055-96d7-41ba-8f23-983583d2e68f.png){: width="100%" height="100%"}{: .align-center}
 
-### 06-85 Interp Item X and Y
+### 06-86 Interp Item X and Y
 
 ![interp](https://user-images.githubusercontent.com/80055816/210393380-8a7af87c-5144-4927-a7bd-68d3ca0d46b4.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1424,7 +1424,7 @@ FVector AShooterCharacter::GetCameraInterpLocation()
 }
 ```
 
-### 06-86 Interp Rotation
+### 06-87 Interp Rotation
 - Whenever the camera rotates, we would like our item to rotate exactly that same amount
 
 ```cpp
@@ -1442,7 +1442,7 @@ void AItem::ItemInterp(float DeltaTime)
 }
 ```
 
-### 06-87 Interp Scale
+### 06-88 Interp Scale
 
 ```cpp
 void AItem::ItemInterp(float DeltaTime)
@@ -1463,11 +1463,11 @@ void AItem::ItemInterp(float DeltaTime)
 
 ## Chapter 7 Reloading
 
-### 07-88 Retargeting Animations in Unreal Engine 5
+### 07-89 Retargeting Animations in Unreal Engine 5
 - I cover the new way of retargeting animations in Unreal Engine 5 in a new YouTube video
 - The link is in the resources for Lecture 88: Retargeting Animations
 
-### 07-89 Retargeting Animations
+### 07-90 Retargeting Animations
 - What does that mean, retarget? the process of retargeting and animation is taking that animation and assigning it to a different skeleton
 - In order to retarget this animation to the Belka skeleton, we're going to use something called a rig
 
@@ -1485,14 +1485,14 @@ void AItem::ItemInterp(float DeltaTime)
 
 - 위의 이미지에 나타난 과정을 거치는 이유는? To fix morphing problem
 
-### 07-90 Edit Animations In Unreal
+### 07-91 Edit Animations In Unreal
 - we're going to make a duplicate of this animation because we're going to have a different version of this reload animation for each weapon
 
 ![adjust](https://user-images.githubusercontent.com/80055816/210524863-f0acfc48-d65e-4c4d-9bee-601b8a62db86.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![key](https://user-images.githubusercontent.com/80055816/210601469-b2a833a2-84d0-4de3-abd1-16cd9a99cf70.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-91 Ammo
+### 07-92 Ammo
 - 언리얼에서 열거형에 대해 설명하면? 일반적인 enum이 아닌 enum class로 만들어야 한다 그리고 UENUM은 uint8만을 지원한다 ([**참고**](https://wergia.tistory.com/150))
 
 ```cpp
@@ -1500,7 +1500,7 @@ void AItem::ItemInterp(float DeltaTime)
 TMap<EAmmoType, int32> AmmoMap;
 ```
 
-### 07-92 Ammo Count Widget
+### 07-93 Ammo Count Widget
 
 ![widget](https://user-images.githubusercontent.com/80055816/210568546-458d2d02-2771-4b7f-8d9c-44bef1f166f0.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1508,7 +1508,7 @@ TMap<EAmmoType, int32> AmmoMap;
 
 ![ammo](https://user-images.githubusercontent.com/80055816/210568701-47a5c31e-3960-4dbf-a296-a19926d9546f.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-93 Draw Ammo Count To Screen
+### 07-94 Draw Ammo Count To Screen
 
 ![pc](https://user-images.githubusercontent.com/80055816/210598818-fddce373-64e2-409f-9438-e8c5cab7966f.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1528,7 +1528,7 @@ TMap<EAmmoType, int32> AmmoMap;
 
 - 위의 과정은 무엇을 위함인지 설명하면? This right here will override what we have set in the project settings for every level
 
-### 07-94 Weapon Ammo in C++
+### 07-95 Weapon Ammo in C++
 
 ```cpp
 bool AShooterCharacter::WeaponHasAmmo()
@@ -1539,7 +1539,7 @@ bool AShooterCharacter::WeaponHasAmmo()
 }
 ```
 
-### 07-95 Bind Weapon Ammo
+### 07-96 Bind Weapon Ammo
 
 ![select](https://user-images.githubusercontent.com/80055816/210627317-85c41cf1-a78a-4b32-9733-925cc285cfb5.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1549,16 +1549,16 @@ bool AShooterCharacter::WeaponHasAmmo()
 
 ![code](https://user-images.githubusercontent.com/80055816/210627463-f70932fd-6246-4b46-ad40-a5fd7c1bf093.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-96 Fixing Barrel Socket Location
+### 07-97 Fixing Barrel Socket Location
 
 ![add](https://user-images.githubusercontent.com/80055816/210627524-ad8b653d-d27d-45f9-9e7a-c90fde2b8789.PNG){: width="100%" height="100%"}{: .align-center}
 
 - So we don't actually want the mesh of our character We want the mesh of our equipped weapon
 
-### 07-97 Improving Weapon Fire Code Lecture
+### 07-98 Improving Weapon Fire Code Lecture
 - So we'll see you in the next video when we start to restructure this code
 
-### 07-98 Improving Weapon Fire Code
+### 07-99 Improving Weapon Fire Code
 
 ```cpp
 void AShooterCharacter::FireButtonPressed()
@@ -1618,7 +1618,7 @@ void AShooterCharacter::AutoFireReset()
 }
 ```
 
-### 07-99 Reload Montage
+### 07-100 Reload Montage
 
 ![montage](https://user-images.githubusercontent.com/80055816/210723001-9bf4baed-ab97-4d70-b81c-4470089779c8.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1632,10 +1632,10 @@ void AShooterCharacter::AutoFireReset()
 
 ![node](https://user-images.githubusercontent.com/80055816/210723866-4b7f6d65-8a10-4312-bf2a-a4c59d77d2a2.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-100 Reload Lecture
+### 07-101 Reload Lecture
 - Remember, if we're not in the unoccupied state, we cannot fire the weapon
 
-### 07-101 The Weapon Type
+### 07-102 The Weapon Type
 
 ```cpp
 UCLASS()
@@ -1649,7 +1649,7 @@ class SHOOTER_API AWeapon : public AItem
 }
 ```
 
-### 07-102 Reload Continued
+### 07-103 Reload Continued
 
 ![class](https://user-images.githubusercontent.com/80055816/210818648-deef6cfd-5105-4eb4-9a42-2cb3738e9e27.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1657,7 +1657,7 @@ class SHOOTER_API AWeapon : public AItem
 
 ![delete](https://user-images.githubusercontent.com/80055816/210818932-3e4b74f3-dc4b-48a1-9e4c-2ced4a8466aa.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-103 Update AmmoMap
+### 07-104 Update AmmoMap
 
 ```cpp
 // 표현식( Ammo + Amount <= MagazineCapacity )이 true가 아니면 에러메시지를 출력한다
@@ -1679,22 +1679,22 @@ AmmoMap.Add(AmmoType, CarriedAmmo);
 
 ![notify](https://user-images.githubusercontent.com/80055816/210819133-2c881796-52d5-41b3-a35e-72acd63076b8.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-104 Bind Carried Ammo
+### 07-105 Bind Carried Ammo
 
 ![bind](https://user-images.githubusercontent.com/80055816/210819338-7123930b-1dfc-40dc-b90b-b03d4c5d068c.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![end](https://user-images.githubusercontent.com/80055816/210819469-91f6cd51-4895-49bf-b0a6-0d39dbb75f77.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-105 Bind Weapon Name
+### 07-106 Bind Weapon Name
 
 ![item](https://user-images.githubusercontent.com/80055816/210852062-2ad27b4e-9198-401c-bae1-77105394d228.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-106 Move Clip Lecture
+### 07-107 Move Clip Lecture
 - The scene component can be used as a reference point for its transform
 - So what we're going to do with this scene component is attach it to our hand
 - Then we can simply use that scene component for its transform its location, rotation and scale
 
-### 07-107 Grab and Release Clip
+### 07-108 Grab and Release Clip
 
 ![notify](https://user-images.githubusercontent.com/80055816/210935695-cd0b4f71-9419-40a3-a61a-24fa781569b6.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1728,7 +1728,7 @@ void AShooterCharacter::GrabClip()
 }
 ```
 
-### 07-108 Weapon AnimBP
+### 07-109 Weapon AnimBP
 
 ![bp](https://user-images.githubusercontent.com/80055816/210947736-58d0ca5b-4e53-4513-95f9-63b15dfd3b45.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1740,7 +1740,7 @@ void AShooterCharacter::GrabClip()
 
 - Get owning actor is a node that returns an actor That is the actor that owns this animation blueprint
 
-### 07-109 Moving the Clip
+### 07-110 Moving the Clip
 
 ![inside](https://user-images.githubusercontent.com/80055816/210959454-57ddf63e-6fe8-4367-974b-bf6051fb233f.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1766,7 +1766,7 @@ AShooterCharacter::AShooterCharacter() :
 }
 ```
 
-### 07-110 Clip Sounds
+### 07-111 Clip Sounds
 
 ![cue](https://user-images.githubusercontent.com/80055816/211035557-ac497055-c52c-402b-b20f-9a956bb2f26c.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1776,7 +1776,7 @@ AShooterCharacter::AShooterCharacter() :
 
 ![end](https://user-images.githubusercontent.com/80055816/211035777-63ebccd4-beb1-46a6-aa43-03a73e863e67.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 07-111 Pickup Sounds
+### 07-112 Pickup Sounds
 
 ```cpp
 //..
@@ -1791,7 +1791,7 @@ UGameplayStatics::PlaySound2D(this, Item->GetEquipSound());
 
 ## Chapter 8 Advanced Movement
 
-### 08-112 Rotate Root Bone
+### 08-113 Rotate Root Bone
 - The root is the parent of the skeleton hierarchy So if we rotate the root, the body will follow
 
 ```cpp
@@ -1834,7 +1834,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 - So this is how we use our route, yaw offset to rotate the bone back once we've rotated our camera for each frame
 
-### 08-113 Turn In Place Animations
+### 08-114 Turn In Place Animations
 
 ![copy](https://user-images.githubusercontent.com/80055816/211054454-27af812c-f82d-45ac-9bff-65fb13691eb5.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1852,7 +1852,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 - We actually haven't programmed the ability for the bone to rotate back towards our direction of movement All we're doing is playing the animation
 
-### 08-114 Animation Curves
+### 08-115 Animation Curves
 
 ![curve](https://user-images.githubusercontent.com/80055816/211069552-134ac7ec-8285-4b52-ac31-3451dc1fa9d5.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1864,7 +1864,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![reuse](https://user-images.githubusercontent.com/80055816/211069804-56fb1d1c-7dc9-46ea-afe1-898ebe71f6df.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-115 Turn In Place Using Curve Values
+### 08-116 Turn In Place Using Curve Values
 
 ```cpp
 void UShooterAnimInstance::TurnInPlace()
@@ -1914,7 +1914,7 @@ void UShooterAnimInstance::TurnInPlace()
 }
 ```
 
-### 08-116 Hip Aim Offset
+### 08-117 Hip Aim Offset
 
 ![offset](https://user-images.githubusercontent.com/80055816/211155215-689a6ba8-7707-425e-be71-081168b7b02c.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1932,7 +1932,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![clear](https://user-images.githubusercontent.com/80055816/211155295-cf229d2c-495d-4e65-ba0a-51e716741d26.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-117 Aiming Aim Offset
+### 08-118 Aiming Aim Offset
 
 ![one](https://user-images.githubusercontent.com/80055816/211163286-f83adc76-f53e-4717-ab48-4b0d9897f0c7.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1944,7 +1944,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![air](https://user-images.githubusercontent.com/80055816/211163358-819e5845-d648-4745-a6ef-a1aa3dea9a69.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-118 Lean
+### 08-119 Lean
 
 ```cpp
 void UShooterAnimInstance::Lean(float DeltaTime)
@@ -1961,7 +1961,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 }
 ```
 
-### 08-119 Lean Blendspace
+### 08-120 Lean Blendspace
 
 ![space](https://user-images.githubusercontent.com/80055816/211194907-1951d564-3b57-47ac-afa5-a41dc1f0c855.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1969,11 +1969,11 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![next](https://user-images.githubusercontent.com/80055816/211194942-bfcf61bd-ff28-49e4-90f8-f7265983daca.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-120 Crouching Setup
+### 08-121 Crouching Setup
 
 ![crouch](https://user-images.githubusercontent.com/80055816/211194876-4a33c942-746a-4593-a0ce-021c46270650.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-121 Crouching Animations
+### 08-122 Crouching Animations
 
 ![dup](https://user-images.githubusercontent.com/80055816/211197423-c35b84d2-f61a-4723-9eb1-1b76cfc193d8.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1981,7 +1981,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![upper](https://user-images.githubusercontent.com/80055816/211197458-f1a9e701-b3d6-4e4f-9472-02c38d49bd7b.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-122 Crouching AnimBP
+### 08-123 Crouching AnimBP
 
 ![start](https://user-images.githubusercontent.com/80055816/211200848-1582b280-7813-45ea-a137-5d1e7f558997.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -1995,7 +1995,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![final](https://user-images.githubusercontent.com/80055816/211200932-c138b732-b946-414c-a942-0fe54bc539eb.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-123 Crouching Turn Animations
+### 08-124 Crouching Turn Animations
 
 ![look](https://user-images.githubusercontent.com/80055816/211208175-d4ab2c47-624b-4d75-8ae0-a3b751962b8e.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2009,7 +2009,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![end](https://user-images.githubusercontent.com/80055816/211208235-681a0fe4-ba8c-4fa3-8c30-1f719764c5eb.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-124 Retargeting Anims with Different Skeletons
+### 08-125 Retargeting Anims with Different Skeletons
 
 ![match](https://user-images.githubusercontent.com/80055816/211208252-5f69b304-6a62-4ad9-9f11-ce62bea3ed84.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2025,7 +2025,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 ![temp](https://user-images.githubusercontent.com/80055816/211208334-f1dcc422-c0dd-4a10-a79c-e8df235957a9.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-125 Crouch Turn In Place AnimBP
+### 08-126 Crouch Turn In Place AnimBP
 
 ![match](https://user-images.githubusercontent.com/80055816/211268589-5df7df03-b573-4d91-8014-2162e9439490.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2047,7 +2047,7 @@ void UShooterAnimInstance::Lean(float DeltaTime)
 
 - layered blend per bone에 대해 설명하면? A value of 0.0 means the Additive pose is not added to the Base input pose at all, while a value of 1.0 means the Additive pose is added fully to the Base input pose ([**참고**](https://docs.unrealengine.com/4.27/en-US/AnimatingObjects/SkeletalMeshAnimation/NodeReference/Blend/))
 
-### 08-126 Crouch Recoil Weight
+### 08-127 Crouch Recoil Weight
 
 ![weight](https://user-images.githubusercontent.com/80055816/211308406-8f0d672b-8e98-4c02-a63a-571c4d4511a0.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2068,7 +2068,7 @@ void UShooterAnimInstance::TurnInPlace()
 }
 ```
 
-### 08-127 Crouch Walking Blendspace
+### 08-128 Crouch Walking Blendspace
 
 ![crouch](https://user-images.githubusercontent.com/80055816/211314245-580e8052-830f-4241-8048-207023bf91e9.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2076,7 +2076,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![insert](https://user-images.githubusercontent.com/80055816/211314422-a1fc7e90-7c54-4f32-90c3-10c57d7861fd.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-128 Crouch Walking
+### 08-129 Crouch Walking
 
 ![bs](https://user-images.githubusercontent.com/80055816/211319248-e8d6e1cd-92df-4e75-ad28-835254a99eeb.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -2088,7 +2088,7 @@ void UShooterAnimInstance::TurnInPlace()
 
 ![pick](https://user-images.githubusercontent.com/80055816/211341989-1328a3fb-c38c-4a60-9022-fd533bf1c4ce.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 08-129 Crouch Movement Speed and Jump
+### 08-130 Crouch Movement Speed and Jump
 
 ```cpp
 void AShooterCharacter::CrouchButtonPressed()
@@ -2109,6 +2109,45 @@ void AShooterCharacter::CrouchButtonPressed()
 ```
 
 ![remove](https://user-images.githubusercontent.com/80055816/211329317-404db5df-07af-4035-82be-4ee479a1888a.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-131 Interp Capsule Half Height
+
+![pause](https://user-images.githubusercontent.com/80055816/211576680-d31b56a3-b4c2-4c0f-a530-35f272634375.PNG){: width="100%" height="100%"}{: .align-center}
+
+![low](https://user-images.githubusercontent.com/80055816/211576761-ab4d7c9f-7058-4011-913a-9a41d6395100.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
+{
+	// 아래 코드가 필요한 이유는?
+	// 캡슐 크기가 작아지는 만큼 메시를 들어올리기 위해
+	const float DeltaCapsuleHalfHeight{ InterpHalfHeight - GetCapsuleComponent()->GetScaledCapsuleHalfHeight() };
+	const FVector MeshOffset{ 0.f, 0.f, -DeltaCapsuleHalfHeight };
+	GetMesh()->AddLocalOffset(MeshOffset);
+}
+```
+
+```cpp
+void AShooterCharacter::CrouchButtonPressed()
+{
+	// 아래 코드는 무엇을 하는 코드인가?
+	// 상태에 따라 마찰계수를 조절하는 코드
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		bCrouching = !bCrouching;
+	}
+	if (bCrouching)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = CrouchMovementSpeed;
+		GetCharacterMovement()->GroundFriction = CrouchingGroundFriction;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+		GetCharacterMovement()->GroundFriction = BaseGroundFriction;
+	}
+}
+```
 
 <br>
 
