@@ -850,6 +850,48 @@ void AShooterCharacter::CrouchButtonPressed()
 }
 ```
 
+### 08-132 Tweaking Parameters
+
+![mouse](https://user-images.githubusercontent.com/80055816/211620522-aa34643d-b277-4f17-b091-aae11da4d7fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rotate](https://user-images.githubusercontent.com/80055816/211620650-8a5225b2-84ed-4afc-a424-18d293fd82d0.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-133 Aim Walking
+
+![space](https://user-images.githubusercontent.com/80055816/211620743-11072598-58e2-4817-bca6-9a308520976b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211620811-b3b9545a-15df-4cc4-a330-13792392b5d3.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-134 Reconciling Aiming and Reloading
+
+```cpp
+void AShooterCharacter::ReloadWeapon()
+{
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+	if (EquippedWeapon == nullptr) return;
+
+	// Do we have ammo of the correct type?
+	if (CarryingAmmo() && !EquippedWeapon->ClipIsFull())
+	{
+		// 이 코드가 여기 있어야 하는 이유는?
+		// We really only want to stop aiming if we're actually going to reload
+		if (bAiming)
+		{
+			StopAiming();
+		}
+
+		CombatState = ECombatState::ECS_Reloading;
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && ReloadMontage)
+		{
+			AnimInstance->Montage_Play(ReloadMontage);
+			AnimInstance->Montage_JumpToSection(
+				EquippedWeapon->GetReloadMontageSection());
+		}
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
