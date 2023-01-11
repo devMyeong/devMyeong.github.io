@@ -90,6 +90,40 @@ void AAmmo::AmmoSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 }
 ```
 
+### 09-144 Interpolation Scene Components
+
+![static](https://user-images.githubusercontent.com/80055816/211864692-3a7b49f3-8eee-42e8-9a64-e777096d8095.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sm](https://user-images.githubusercontent.com/80055816/211864758-54c8daef-8e8e-48e8-8e29-a33011653813.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 09-145 Setup Interp Locations
+
+```cpp
+void AShooterCharacter::InitializeInterpLocations()
+{
+	FInterpLocation WeaponLocation{ WeaponInterpComp, 0 };
+	InterpLocations.Add(WeaponLocation);
+
+	FInterpLocation InterpLoc1{ InterpComp1, 0 };
+	InterpLocations.Add(InterpLoc1);
+
+	FInterpLocation InterpLoc2{ InterpComp2, 0 };
+	InterpLocations.Add(InterpLoc2);
+
+	FInterpLocation InterpLoc3{ InterpComp3, 0 };
+	InterpLocations.Add(InterpLoc3);
+
+	FInterpLocation InterpLoc4{ InterpComp4, 0 };
+	InterpLocations.Add(InterpLoc4);
+
+	FInterpLocation InterpLoc5{ InterpComp5, 0 };
+	InterpLocations.Add(InterpLoc5);
+
+	FInterpLocation InterpLoc6{ InterpComp6, 0 };
+	InterpLocations.Add(InterpLoc6);
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
