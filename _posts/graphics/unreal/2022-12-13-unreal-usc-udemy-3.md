@@ -195,7 +195,6 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![depth](https://user-images.githubusercontent.com/80055816/212023851-e4b0bcf1-cf3e-44be-a6b8-9cf27f5f9a15.PNG){: width="100%" height="100%"}{: .align-center}
 
-- So objects that are closer are going to have darker pixels and objects that are farther away will have lighter pixels
 - Now, Unreal Engine has an additional buffer called custom depth, and you're allowed to select specific objects to participate in the custom depth buffer
 - A pixel that's not on an object in the scene depth buffer has a same depth of value of a thousand
 - Let's take all the pixels that have no white on them and let's call these pixels object pixels
@@ -219,6 +218,49 @@ void AShooterCharacter::StartPickupSoundTimer()
 ![post](https://user-images.githubusercontent.com/80055816/212042774-1575222a-9797-465f-ab25-dd94294f704d.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![blue](https://user-images.githubusercontent.com/80055816/212042827-1f0af172-4164-4650-b122-3de5f922c5ec.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-150 Custom Depth
+
+![check](https://user-images.githubusercontent.com/80055816/212080855-430ed1ce-dad2-493d-9f2a-8859295e585c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![buffer](https://user-images.githubusercontent.com/80055816/212080933-d2e3ea53-c548-435f-bf5c-1a0bcd5e5055.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-151 Texel Position and Size
+
+![node](https://user-images.githubusercontent.com/80055816/212102557-c817c85f-8580-455c-8936-ab12f4a20b9e.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Textiles are containers for pixels
+- Screen position is giving us the position on the screen and U, V coordinates for a given Texel
+
+### 10-152 Show Interior Pixels
+
+![nodenext](https://user-images.githubusercontent.com/80055816/212121253-87b14900-1eb7-4a50-926b-3f9ce1e0bdd4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![now](https://user-images.githubusercontent.com/80055816/212121359-c5810f67-419d-464c-a846-ab09439094c7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sum](https://user-images.githubusercontent.com/80055816/212121427-f8ec166a-6181-4150-9de8-a78c2e6732a7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![error](https://user-images.githubusercontent.com/80055816/212121500-bab0ba9f-1208-4b19-a971-4ed6c1c07e25.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/212121568-bb662435-994c-4ff2-9965-1ab64907be03.PNG){: width="100%" height="100%"}{: .align-center}
+
+- If it's negative after ceil and clamp, it's going to be zero And if it's positive after ceil and clamp, it's going to be one
+- Ceil에 대해 설명하면? 소수점을 무조건 올려 더 큰 정수로 만든 결과를 출력합니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Materials/ExpressionReference/Math/))
+- Clamp에 대해 설명하면? 값을 받아 최소치와 최대치로 정의된 특정 범위로 제한시킵니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Materials/ExpressionReference/Math/))
+
+### 10-153 Getting The Border
+
+![edge](https://user-images.githubusercontent.com/80055816/212136222-1f819bf6-4c6c-42f4-a80b-a3c4b9bb8655.PNG){: width="100%" height="100%"}{: .align-center}
+
+- At Multiply, the only thing that these two have in common that are both one is the border
+
+### 10-154 Adding the Border to the Scene Color
+
+![end](https://user-images.githubusercontent.com/80055816/212145584-5b8d2cbf-4146-4ac7-856c-bdbc99892307.PNG){: width="100%" height="100%"}{: .align-center}
+
+![second](https://user-images.githubusercontent.com/80055816/212145650-141bdc78-ac5b-41ab-bbdb-91e3c5895a33.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Lerp 노드에 대해 설명하면? If Alpha is 0.0, the first input is used If Alpha is 1.0, the second input is used ([**참고**](https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/ExpressionReference/Math/#linearinterpolate))
 
 <br>
 
