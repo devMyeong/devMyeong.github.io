@@ -229,7 +229,7 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![node](https://user-images.githubusercontent.com/80055816/212102557-c817c85f-8580-455c-8936-ab12f4a20b9e.PNG){: width="100%" height="100%"}{: .align-center}
 
-- Textiles are containers for pixels
+- Texels are containers for pixels
 - Screen position is giving us the position on the screen and U, V coordinates for a given Texel
 
 ### 10-152 Show Interior Pixels
@@ -258,9 +258,17 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![end](https://user-images.githubusercontent.com/80055816/212145584-5b8d2cbf-4146-4ac7-856c-bdbc99892307.PNG){: width="100%" height="100%"}{: .align-center}
 
+- Lerp 노드에 대해 설명하면? If Alpha is 0.0, the first input is used If Alpha is 1.0, the second input is used ([**참고**](https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/ExpressionReference/Math/#linearinterpolate))
+
 ![second](https://user-images.githubusercontent.com/80055816/212145650-141bdc78-ac5b-41ab-bbdb-91e3c5895a33.PNG){: width="100%" height="100%"}{: .align-center}
 
-- Lerp 노드에 대해 설명하면? If Alpha is 0.0, the first input is used If Alpha is 1.0, the second input is used ([**참고**](https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/ExpressionReference/Math/#linearinterpolate))
+### 10-155 Hide Occluded Pixels
+
+![ppre](https://user-images.githubusercontent.com/80055816/212164055-6015d741-4d17-4bed-b644-2e980809c9de.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pre](https://user-images.githubusercontent.com/80055816/212164104-3a8d587e-ffaf-4b78-9c5b-27e42feb0be5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/212164152-75e99880-7f39-4bb6-b5d8-aaf600542b1c.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
