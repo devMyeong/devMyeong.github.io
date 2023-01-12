@@ -124,6 +124,102 @@ void AShooterCharacter::InitializeInterpLocations()
 }
 ```
 
+### 09-146 Interp to Multiple Locations
+
+![default](https://user-images.githubusercontent.com/80055816/212010273-311a1cf8-d050-4419-a746-ace2a73f5905.PNG){: width="100%" height="100%"}{: .align-center}
+
+![type](https://user-images.githubusercontent.com/80055816/212010388-383a2755-a993-4f74-970c-4a88ef030a3b.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+FVector AItem::GetInterpLocation()
+{
+	if (Character == nullptr) return FVector(0.f);
+
+	switch (ItemType)
+	{
+	case EItemType::EIT_Ammo:
+		return Character->GetInterpLocation(InterpLocIndex).SceneComponent->GetComponentLocation();
+		break;
+
+	case EItemType::EIT_Weapon:
+		return Character->GetInterpLocation(0).SceneComponent->GetComponentLocation();
+		break;
+	}
+
+	return FVector();
+}
+```
+
+### 09-147 Limit Pickup and Equip Sounds
+
+```cpp
+void AItem::PlayPickupSound()
+{
+	if (Character)
+	{
+		if (Character->ShouldPlayPickupSound())
+		{
+			Character->StartPickupSoundTimer();
+			if (PickupSound)
+			{
+				UGameplayStatics::PlaySound2D(this, PickupSound);
+			}
+		}
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::StartPickupSoundTimer()
+{
+	bShouldPlayPickupSound = false;
+	GetWorldTimerManager().SetTimer(
+		PickupSoundTimer,
+		this,
+		&AShooterCharacter::ResetPickupSoundTimer,
+		PickupSoundResetTime);
+}
+```
+
+<br>
+
+## Chapter 10 Outline and Glow Effects
+
+### 10-148 Outline Effect Theory
+- When Unreal Engine renders the scene, it uses several buffers
+- A buffer is just information pertaining to each pixel
+
+![buffer](https://user-images.githubusercontent.com/80055816/212023729-afa4a115-4163-4feb-af04-98f64a8c3148.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Now, the reason we're talking about these buffers is because in order to create an outline effect
+
+![depth](https://user-images.githubusercontent.com/80055816/212023851-e4b0bcf1-cf3e-44be-a6b8-9cf27f5f9a15.PNG){: width="100%" height="100%"}{: .align-center}
+
+- So objects that are closer are going to have darker pixels and objects that are farther away will have lighter pixels
+- Now, Unreal Engine has an additional buffer called custom depth, and you're allowed to select specific objects to participate in the custom depth buffer
+- A pixel that's not on an object in the scene depth buffer has a same depth of value of a thousand
+- Let's take all the pixels that have no white on them and let's call these pixels object pixels
+- No white neighbors, call these interior pixels
+- And here's the result of subtracting away the interior pixels for each object(inverse object pixels) This is the basis for creating an outline effect
+
+### 10-149 Post Process Materials
+
+![mat](https://user-images.githubusercontent.com/80055816/212042321-f12fc8fb-dc0f-4b98-8615-0c6e89466c03.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pp](https://user-images.githubusercontent.com/80055816/212042472-74cc8a16-610e-49d9-b89f-8e7f1f62aa22.PNG){: width="100%" height="100%"}{: .align-center}
+
+![volume](https://user-images.githubusercontent.com/80055816/212042534-20273592-bc62-4ed1-bcf7-f835eb4bc57f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![level](https://user-images.githubusercontent.com/80055816/212042586-7a54687e-3db0-4299-9de9-49f9c60f04b1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![adapt](https://user-images.githubusercontent.com/80055816/212042637-453fa93f-312e-4f80-a408-0d32a5115206.PNG){: width="100%" height="100%"}{: .align-center}
+
+![color](https://user-images.githubusercontent.com/80055816/212042713-7362cc48-45d2-4ef2-9f8b-e195e7ae268b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![post](https://user-images.githubusercontent.com/80055816/212042774-1575222a-9797-465f-ab25-dd94294f704d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blue](https://user-images.githubusercontent.com/80055816/212042827-1f0af172-4164-4650-b122-3de5f922c5ec.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
