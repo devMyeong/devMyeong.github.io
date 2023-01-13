@@ -270,6 +270,70 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![conclude](https://user-images.githubusercontent.com/80055816/212164152-75e99880-7f39-4bb6-b5d8-aaf600542b1c.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 10-156 Change Outline Thickness
+
+![texel](https://user-images.githubusercontent.com/80055816/212245353-126e05ab-7903-4b5f-9b9f-a2035542d3c4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![uv](https://user-images.githubusercontent.com/80055816/212245384-8bbc80e8-8af7-4646-9429-cb72d3a8b437.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-157 Color Tinting Effect
+
+![conclude](https://user-images.githubusercontent.com/80055816/212249516-ca8bb7a5-cce2-4670-9f92-9eff82458d0c.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-158 Multiple Colors with Custom Depth Stencil
+
+![stencil](https://user-images.githubusercontent.com/80055816/212295399-85b6098e-87d1-4647-a0dd-bbac4d7871e8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![value](https://user-images.githubusercontent.com/80055816/212295469-f96e39c3-61fd-46a3-9d75-7d5035da01ec.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blue](https://user-images.githubusercontent.com/80055816/212295539-9f78a430-4a07-436b-b457-fd4485a0246e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![create](https://user-images.githubusercontent.com/80055816/212295623-ac3d7f9a-6d2e-4e98-95b8-8dd152c1e67c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![dif](https://user-images.githubusercontent.com/80055816/212295691-e063e74a-c531-47fb-9c3f-613b1990cf62.PNG){: width="100%" height="100%"}{: .align-center}
+
+![line](https://user-images.githubusercontent.com/80055816/212295792-a3ddc56e-babc-4163-a532-90926aa44234.PNG){: width="100%" height="100%"}{: .align-center}
+
+![soft](https://user-images.githubusercontent.com/80055816/212295867-351c8972-ba86-41a5-bb27-a8fb7a67e356.PNG){: width="100%" height="100%"}{: .align-center}
+
+![occpro](https://user-images.githubusercontent.com/80055816/212295907-6773a82d-fc87-49d4-bec9-24c35550f8eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-159 Blend Materials with Material Functions
+
+![mf](https://user-images.githubusercontent.com/80055816/212316256-0f26b55b-6330-4fd7-82cb-9e7438fc1eda.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mat](https://user-images.githubusercontent.com/80055816/212316292-91918a84-1a1c-4142-8c2f-cdbfd5d717bd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/212316325-65034fcc-68d0-4577-a3e2-edc050389e27.PNG){: width="100%" height="100%"}{: .align-center}
+
+![cube](https://user-images.githubusercontent.com/80055816/212316362-044abca2-5004-4fcd-81d8-dc46b823a5a2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ori](https://user-images.githubusercontent.com/80055816/212316400-95981817-49ef-43db-9286-126459d919f3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/212316428-8fee8ce9-c7be-42ae-81f5-3612fc0a27a4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![guns](https://user-images.githubusercontent.com/80055816/212316469-cbe04123-a5bb-4930-b9b3-84ff4a0a537b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![half](https://user-images.githubusercontent.com/80055816/212316529-85586b15-ab54-4b56-bb6f-8bd87edb11b5.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-160 Fresnel Effect on Glow Material
+
+![par](https://user-images.githubusercontent.com/80055816/212347159-ae999d1e-11cc-49c8-a944-2ad1d145db74.PNG){: width="100%" height="100%"}{: .align-center}
+
+![fres](https://user-images.githubusercontent.com/80055816/212347225-6df39e58-48e0-4a28-b12e-03bd721afd1c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![change](https://user-images.githubusercontent.com/80055816/212347278-c0a31266-1c81-40e1-9ec1-8a92d2df6ef3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ref](https://user-images.githubusercontent.com/80055816/212347344-e56113e7-2ae0-4cc4-a63b-d766011d7e56.PNG){: width="100%" height="100%"}{: .align-center}
+
+![more](https://user-images.githubusercontent.com/80055816/212347406-77742295-63a1-4dcc-b8cd-ec6431732f66.PNG){: width="100%" height="100%"}{: .align-center}
+
+![effect](https://user-images.githubusercontent.com/80055816/212347489-a64cdba6-20cd-496e-a43e-c60c37525e2b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![convert](https://user-images.githubusercontent.com/80055816/212347538-47547f3d-6536-433d-a882-3e600522cade.PNG){: width="100%" height="100%"}{: .align-center}
+
+![last](https://user-images.githubusercontent.com/80055816/212347597-df90a524-fd05-474d-a868-d13b8bd68288.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
