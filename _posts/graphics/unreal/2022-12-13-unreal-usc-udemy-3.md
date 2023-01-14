@@ -334,6 +334,92 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![last](https://user-images.githubusercontent.com/80055816/212347597-df90a524-fd05-474d-a868-d13b8bd68288.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 10-161 Material Instances
+
+![ins](https://user-images.githubusercontent.com/80055816/212387286-4d12b2ac-57f8-4b8e-b442-9e17cdfab87e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![import](https://user-images.githubusercontent.com/80055816/212387345-e8a3b9d5-9e06-424f-baa5-7a5f8ea7b292.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-162 Scrolling Lines Effect
+
+![texture](https://user-images.githubusercontent.com/80055816/212457197-e02439dc-d83f-4d7b-b7ba-ac90416cb9e3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![problem](https://user-images.githubusercontent.com/80055816/212457269-b16ba078-34e7-421c-a1b5-16f81194dca5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![size](https://user-images.githubusercontent.com/80055816/212457279-bf385b13-1b76-42b2-a0cd-2d2773aff82b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-163 Enable Custom Depth in C++
+
+- 사진 없음
+
+```cpp
+void AShooterCharacter::TraceForItems()
+{
+	if (bShouldTraceForItems)
+	{
+		FHitResult ItemTraceResult;
+		FVector HitLocation;
+		TraceUnderCrosshairs(ItemTraceResult, HitLocation);
+		if (ItemTraceResult.bBlockingHit)
+		{
+			TraceHitItem = Cast<AItem>(ItemTraceResult.Actor);
+			if (TraceHitItem && TraceHitItem->GetPickupWidget())
+			{
+				TraceHitItem->GetPickupWidget()->SetVisibility(true);
+
+				// Enable Custom Depth
+				TraceHitItem->EnableCustomDepth();
+			}
+
+			if (TraceHitItemLastFrame)
+			{
+				if (TraceHitItem != TraceHitItemLastFrame)
+				{
+					TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
+
+					// Disable Custom Depth
+					TraceHitItemLastFrame->DisableCustomDepth();
+				}
+			}
+			TraceHitItemLastFrame = TraceHitItem;
+		}
+	}
+	else if (TraceHitItemLastFrame)
+	{
+		TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
+
+		// Disable Custom Depth
+		TraceHitItemLastFrame->DisableCustomDepth();
+	}
+}
+```
+
+### 10-164 Dynamic Material Instances
+- So we're going to add this material index as a variable on the item class
+- Now, the next thing we're going to do if we want to be able to change materials properties at runtime is we're going to use something called a dynamic material A dynamic material instance allows us to use a material instance and set properties on that material instance at runtime
+- So why two different variables? The material instance is what we will select in our blueprint That way we'll know which material instance to use And once we create a dynamic material instance, we're going to use this material instance in that dynamic material instance
+- The construction script is a script that runs under certain conditions It runs if we move our actor in the world or if we change a property on the actor This is run before the game starts Nothing in the construction script will be run during the game
+- OnConstruction() is the C++ version of the construction script
+
+![dynamic](https://user-images.githubusercontent.com/80055816/212462543-b6753ef7-ee99-45c1-9511-78f1dc9255ac.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AItem::OnConstruction(const FTransform& Transform)
+{
+	if (MaterialInstance)
+	{
+		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
+
+		// It's going to assign this instance for the material with the given material index
+		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
+	}
+}
+```
+
+### 10-165 Enable Glow Material in C++
+
+![code](https://user-images.githubusercontent.com/80055816/212466559-dd1293ae-cceb-4032-8533-305ea870d72a.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
