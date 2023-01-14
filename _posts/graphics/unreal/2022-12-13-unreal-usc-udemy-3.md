@@ -344,13 +344,11 @@ void AShooterCharacter::StartPickupSoundTimer()
 
 ![texture](https://user-images.githubusercontent.com/80055816/212457197-e02439dc-d83f-4d7b-b7ba-ac90416cb9e3.PNG){: width="100%" height="100%"}{: .align-center}
 
-![problem](https://user-images.githubusercontent.com/80055816/212457269-b16ba078-34e7-421c-a1b5-16f81194dca5.PNG){: width="100%" height="100%"}{: .align-center}
+![problem](https://user-images.githubusercontent.com/80055816/212466740-e147f4fb-8fdf-45af-a57a-b1bc9561ef11.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![size](https://user-images.githubusercontent.com/80055816/212457279-bf385b13-1b76-42b2-a0cd-2d2773aff82b.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 10-163 Enable Custom Depth in C++
-
-- 사진 없음
 
 ```cpp
 void AShooterCharacter::TraceForItems()
