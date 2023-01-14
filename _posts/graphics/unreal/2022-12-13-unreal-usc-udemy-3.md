@@ -418,6 +418,111 @@ void AItem::OnConstruction(const FTransform& Transform)
 
 ![code](https://user-images.githubusercontent.com/80055816/212466559-dd1293ae-cceb-4032-8533-305ea870d72a.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 10-166 Show Outline While Interping
+
+![type](https://user-images.githubusercontent.com/80055816/212470928-be6e2a18-8966-4620-b3af-d7f0f0866b30.PNG){: width="100%" height="100%"}{: .align-center}
+
+![in](https://user-images.githubusercontent.com/80055816/212470940-de2660c7-8e42-4c04-b860-48e445784c47.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AItem::StartItemCurve(AShooterCharacter* Char)
+{
+	//..
+
+	// 이코드가 필요한 이유는?
+	// ItemCurve가 진행되는 동안에는 CustomDepth가 살아있어야 하기 때문이다
+	bCanChangeCustomDepth = false;
+}
+```
+
+### 10-167 Curve Vector for Material Parameters
+
+![curve](https://user-images.githubusercontent.com/80055816/212482320-c5272452-7da0-40b8-b4c0-1fbd99aa986c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![addkey](https://user-images.githubusercontent.com/80055816/212483481-45a406c3-e0e4-40c0-a974-e2bd26335e40.PNG){: width="100%" height="100%"}{: .align-center}
+
+![palse](https://user-images.githubusercontent.com/80055816/212482359-1039495b-1c35-400d-ac68-df03d50f192a.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AItem::UpdatePulse()
+{
+	if (ItemState != EItemState::EIS_Pickup) return;
+
+	const float ElapsedTime{ GetWorldTimerManager().GetTimerElapsed(PulseTimer) };
+	if (PulseCurve)
+	{
+		FVector CurveValue{ PulseCurve->GetVectorValue(ElapsedTime) };
+
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("GlowAmount"), CurveValue.X * GlowAmount);
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelExponent"), CurveValue.Y * FresnelExponent);
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelReflectFraction"), CurveValue.Z * FresnelReflectFraction);
+	}
+}
+```
+
+### 10-168 Material Pulse When Interping
+
+![again](https://user-images.githubusercontent.com/80055816/212486969-370e42b1-3876-474d-ac2b-2ea9e7b25636.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sector](https://user-images.githubusercontent.com/80055816/212486978-d894f240-2129-4e24-b9fb-fced1d8ba5ea.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/212487042-3a8db6c1-ef56-43f6-8103-dde10e3b7ed1.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AItem::UpdatePulse()
+{
+	float ElapsedTime{};
+	FVector CurveValue{};
+	switch (ItemState)
+	{
+	case EItemState::EIS_Pickup:
+		if (PulseCurve)
+		{
+			ElapsedTime = GetWorldTimerManager().GetTimerElapsed(PulseTimer);
+			CurveValue = PulseCurve->GetVectorValue(ElapsedTime);
+		}
+		break;
+	case EItemState::EIS_EquipInterping:
+		if (InterpPulseCurve)
+		{
+			// ItemInterpTimer를 사용해도 되는 이유는?
+			// itemZCurve의 특정 구간과 MaterialPulseCurve의 특정 구간을 동기화 시켜
+			// 해당 구간을 반짝이게 하고 싶기 때문이다
+			ElapsedTime = GetWorldTimerManager().GetTimerElapsed(ItemInterpTimer);
+			CurveValue = InterpPulseCurve->GetVectorValue(ElapsedTime);
+		}
+		break;
+	}
+	if (DynamicMaterialInstance)
+	{
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("GlowAmount"), CurveValue.X * GlowAmount);
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelExponent"), CurveValue.Y * FresnelExponent);
+		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelReflectFraction"), CurveValue.Z * FresnelReflectFraction);
+	}
+}
+```
+
+```cpp
+void AItem::StartItemCurve(AShooterCharacter* Char)
+{
+	//..
+
+	// 이 코드의 목적은?
+	// 타이머 초기화
+	GetWorldTimerManager().ClearTimer(PulseTimer);
+
+	//..
+}
+```
+
+### 10-169 Inventory Slot Widget
+
+![2d](https://user-images.githubusercontent.com/80055816/212490566-8180f146-97c0-4beb-aa51-11dafb7f9433.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bp](https://user-images.githubusercontent.com/80055816/212490573-be885e9f-5dfc-4a46-93a1-1d6078d3c850.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/212490578-e7595ae1-fb21-40eb-9a82-a31717a22165.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
