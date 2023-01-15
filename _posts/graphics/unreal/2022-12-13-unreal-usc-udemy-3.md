@@ -523,6 +523,44 @@ void AItem::StartItemCurve(AShooterCharacter* Char)
 
 ![ammo](https://user-images.githubusercontent.com/80055816/212490578-e7595ae1-fb21-40eb-9a82-a31717a22165.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 10-170 Inventory Bar Widget
+
+![create](https://user-images.githubusercontent.com/80055816/212542843-23a016fe-39a9-48c0-bec7-f66ebdd45ffe.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/212542855-7383ca5d-1f35-4be8-86a9-ee2b50e65522.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/212542891-a996905d-ec04-443f-8705-f8697402b5e9.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-171 Add Button Icons to the Inventory Bar
+
+![one](https://user-images.githubusercontent.com/80055816/212545070-1bf9c857-0d00-4941-91bc-c1fd5dc10810.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/212545094-e968688c-b7a7-4d21-8e96-9a22bdcfee3f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-172 Add Inventory Bar to the ShooterHUDOverlay
+
+![insert](https://user-images.githubusercontent.com/80055816/212546500-24e6bcdf-89fb-4960-897e-607edd81f355.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-173 Inventory Array in C++
+
+```cpp
+class SHOOTER_API AShooterCharacter : public ACharacter
+{
+	//..
+
+	// 헤더파일에서 유니폼 초기화가 가능하다
+	const int32 INVENTORY_CAPACITY{ 6 };
+
+	//..
+}
+```
+
+![inven](https://user-images.githubusercontent.com/80055816/212555015-de5459ee-a3e9-4eac-bcf3-dea09270ecd4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![slot](https://user-images.githubusercontent.com/80055816/212555045-301becaf-fe0b-4356-bf6f-dfad2316c2f2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![last](https://user-images.githubusercontent.com/80055816/212555062-2aac2606-f25b-4a0a-b0cd-b721f98220e1.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
