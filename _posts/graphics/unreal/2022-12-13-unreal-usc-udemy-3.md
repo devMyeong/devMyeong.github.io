@@ -559,6 +559,70 @@ class SHOOTER_API AShooterCharacter : public ACharacter
 
 ![last](https://user-images.githubusercontent.com/80055816/212555062-2aac2606-f25b-4a0a-b0cd-b721f98220e1.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 10-174 Binding the Background Icon
+
+![bind](https://user-images.githubusercontent.com/80055816/212611576-ea0b3a6b-25f4-4df1-9cfd-c94bb2e02054.PNG){: width="100%" height="100%"}{: .align-center}
+
+![button](https://user-images.githubusercontent.com/80055816/212611642-722ea852-6155-40ca-947d-4799267bb0cc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![good](https://user-images.githubusercontent.com/80055816/212611685-3f549270-8b71-4fbf-bbdb-cc4cfe0ebce1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![wis](https://user-images.githubusercontent.com/80055816/212611732-d93a4f85-ce1c-44da-b1a5-bc68f10e80fb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/212611767-534c341a-1df5-4559-9cbd-d44dc2015003.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-175 Binding the Item Icon
+
+![newbind](https://user-images.githubusercontent.com/80055816/212630955-37700503-5c79-48ef-b1ca-d55c4b2f84e4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/212631004-cf72d69d-88cc-4c89-9362-569cbf6abff1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![possible](https://user-images.githubusercontent.com/80055816/212631050-d5314a2b-2f94-4a14-aca0-f9ffe73a2b18.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-176 Binding the Ammo Icon
+
+![re](https://user-images.githubusercontent.com/80055816/212642837-e95964f9-6d5e-4506-b0d7-b4ac20a3d4bf.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/212642904-53182702-f787-4d48-9b68-5f38b49f2b72.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-177 Binding Weapon Ammo Text
+
+![createb](https://user-images.githubusercontent.com/80055816/212689524-3588bbc5-f7d8-419f-982a-2b9d12909adb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/212689592-12bd0dc9-07dc-4a54-9e90-446b8dbfd446.PNG){: width="100%" height="100%"}{: .align-center}
+
+![value](https://user-images.githubusercontent.com/80055816/212689652-1c7c4c72-8eb2-4745-a883-a830de21c46e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-178 Set Item State for Picked Up
+
+```cpp
+void AShooterCharacter::GetPickupItem(AItem* Item)
+{
+	//..
+
+	if (Weapon)
+	{
+		// 이 코드의 결과는?
+		// 슬롯 인덱스가 하나씩 밀려나간다
+		Weapon->SetSlotIndex(Inventory.Num());
+		if (Inventory.Num() < INVENTORY_CAPACITY)
+		{
+			Inventory.Add(Weapon);
+			Weapon->SetItemState(EItemState::EIS_PickedUp);
+		}
+		else // Inventory is full! Swap with EquippedWeapon
+		{
+			SwapWeapon(Weapon);
+		}
+	}
+
+	//..
+}
+```
+
+### 10-179 Send Slot Index with a Delegate
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
