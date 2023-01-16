@@ -533,8 +533,6 @@ void AItem::StartItemCurve(AShooterCharacter* Char)
 
 ### 10-171 Add Button Icons to the Inventory Bar
 
-![one](https://user-images.githubusercontent.com/80055816/212545070-1bf9c857-0d00-4941-91bc-c1fd5dc10810.PNG){: width="100%" height="100%"}{: .align-center}
-
 ![conclude](https://user-images.githubusercontent.com/80055816/212545094-e968688c-b7a7-4d21-8e96-9a22bdcfee3f.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 10-172 Add Inventory Bar to the ShooterHUDOverlay
