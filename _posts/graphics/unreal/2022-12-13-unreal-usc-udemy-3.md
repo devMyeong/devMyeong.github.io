@@ -621,7 +621,109 @@ void AShooterCharacter::GetPickupItem(AItem* Item)
 ```
 
 ### 10-179 Send Slot Index with a Delegate
-- 
+
+![new](https://user-images.githubusercontent.com/80055816/212706263-3bbb1cc8-3380-45b7-b6f5-e29af7a49de3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![del](https://user-images.githubusercontent.com/80055816/212706447-a9314b1d-6999-4b57-b2fe-0ca511c9d31c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nodegood](https://user-images.githubusercontent.com/80055816/212706505-1eb516c6-264d-4145-961e-904b617f6de4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-180 Play Widget Animation
+
+![ani](https://user-images.githubusercontent.com/80055816/212728664-d6c9bd97-f2d1-4c8f-9120-5a0900907a4d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![move](https://user-images.githubusercontent.com/80055816/212728735-ff771419-6995-4793-9ad2-505237d1b06c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![box](https://user-images.githubusercontent.com/80055816/212728785-3688e444-3313-48eb-be70-e277860d87d7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reverse](https://user-images.githubusercontent.com/80055816/212728824-c5afe10f-e9e4-4fad-872a-0a24e83fce6e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![col](https://user-images.githubusercontent.com/80055816/212728868-b293414e-7444-420b-b451-f974ff0aa1e5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![invenbar](https://user-images.githubusercontent.com/80055816/212728921-1f5fc47b-d2e9-49e1-b0a6-8c22162895f6.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-181 Exchange Inventory Items
+
+```cpp
+void AShooterCharacter::SwapWeapon(AWeapon* WeaponToSwap)
+{
+	//..
+
+	// 아래 코드에 대해 설명하면?
+	// 인벤토리의 아이템이 교체된다
+	if (Inventory.Num() - 1 >= EquippedWeapon->GetSlotIndex())
+	{
+		Inventory[EquippedWeapon->GetSlotIndex()] = WeaponToSwap;
+		WeaponToSwap->SetSlotIndex(EquippedWeapon->GetSlotIndex());
+	}
+
+	//..
+}
+```
+
+```cpp
+void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
+{
+	if ((CurrentItemIndex == NewItemIndex) || (NewItemIndex >= Inventory.Num()) || (CombatState != ECombatState::ECS_Unoccupied)) return;
+	auto OldEquippedWeapon = EquippedWeapon;
+	auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
+	EquipWeapon(NewWeapon);
+
+	// 아래 상태는 무슨 상태로 전환 되는 것인지 설명하면?
+	// 장착하고 있지는 않으나 인벤토리에 있는 상태
+	OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
+	NewWeapon->SetItemState(EItemState::EIS_Equipped);
+}
+```
+
+### 10-182 Disable Trace While Interping
+
+```cpp
+void AShooterCharacter::SelectButtonPressed()
+{
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+	if (TraceHitItem)
+	{
+		TraceHitItem->StartItemCurve(this);
+
+		// 아래 코드가 필요한 이유는?
+		// It's not going to allow us to hit the select button again and
+		// Start the item curve again when we just started the item curve
+		TraceHitItem = nullptr;
+	}
+}
+```
+
+### 10-183 Prevent Swapping while Reloading
+
+```cpp
+void AShooterCharacter::SelectButtonPressed()
+{
+	// 아래 코드가 필요한 이유는?
+	// ECS_Unoccupied 상태가 아니면 아이템을 얻지 못하게 하기 위함
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+	if (TraceHitItem)
+	{
+		TraceHitItem->StartItemCurve(this);
+		TraceHitItem = nullptr;
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
+{
+	// 아래 코드에서 가장 중요한 것을 설명하면?
+	// ECombatState::ECS_Unoccupied 상태가 아니면 아이템 교환을 못하게 한다
+	if ((CurrentItemIndex == NewItemIndex) || (NewItemIndex >= Inventory.Num()) || (CombatState != ECombatState::ECS_Unoccupied)) return;
+	auto OldEquippedWeapon = EquippedWeapon;
+	auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
+	EquipWeapon(NewWeapon);
+
+	OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
+	NewWeapon->SetItemState(EItemState::EIS_Equipped);
+}
+```
 
 <br>
 
