@@ -938,7 +938,7 @@ struct FItemRarityTable : public FTableRowBase
 {
 	GENERATED_BODY()
 
-		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FLinearColor GlowColor;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
