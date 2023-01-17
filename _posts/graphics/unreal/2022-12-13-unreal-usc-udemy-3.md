@@ -725,6 +725,137 @@ void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 New
 }
 ```
 
+### 10-184 Equip Montage
+
+![dup](https://user-images.githubusercontent.com/80055816/212833407-e33e9430-a25d-40cf-8466-740e4d8648eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/212833538-f4d5f791-cbb7-4849-bf29-5eb7713a1b4e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mont](https://user-images.githubusercontent.com/80055816/212833568-ae53e418-cbca-4b70-b2b9-a76d991cdad2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![info](https://user-images.githubusercontent.com/80055816/212833605-cc227e29-aca3-46d3-a8f9-169884556984.PNG){: width="100%" height="100%"}{: .align-center}
+
+![finish](https://user-images.githubusercontent.com/80055816/212833677-fa46a64f-6e3a-4711-bf83-492bfc0cabf3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![each](https://user-images.githubusercontent.com/80055816/212833746-8df94bf5-7964-43eb-8538-714d4699df9a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![zero](https://user-images.githubusercontent.com/80055816/212833781-00c4d21d-9eff-4ad7-b09a-ae80db5935d6.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-185 Play Equip Sound while Swapping
+
+```cpp
+void AItem::PlayEquipSound(bool bForcePlaySound)
+{
+	if (Character)
+	{
+		// bForcePlaySound 매개변수가 필요한 이유는?
+		// 사운드를 강제적으로 내야할 상황에 사용하기 위함이다
+		if (bForcePlaySound)
+		{
+			if (EquipSound)
+			{
+				UGameplayStatics::PlaySound2D(this, EquipSound);
+			}
+		}
+		else if (Character->ShouldPlayEquipSound())
+		{
+			Character->StartEquipSoundTimer();
+			if (EquipSound)
+			{
+				UGameplayStatics::PlaySound2D(this, EquipSound);
+			}
+		}
+	}
+}
+```
+
+### 10-186 Swap Pickup Text
+
+![bind](https://user-images.githubusercontent.com/80055816/212851081-5eb09a48-a993-402e-9907-701b742bceb3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/212851143-12d14971-7ea0-4a87-99f6-d1b1d7608095.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-187 Swap Animation Limitations
+
+```cpp
+void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip, bool bSwapping)
+{
+	if (WeaponToEquip)
+	{
+		const USkeletalMeshSocket* HandSocket = GetMesh()->GetSocketByName(
+			FName("RightHandSocket"));
+		if (HandSocket)
+		{
+			// Attach the Weapon to the hand socket RightHandSocket
+			HandSocket->AttachActor(WeaponToEquip, GetMesh());
+		}
+
+		if (EquippedWeapon == nullptr)
+		{
+			// -1 == no EquippedWeapon yet. No need to reverse the icon animation
+			EquipItemDelegate.Broadcast(-1, WeaponToEquip->GetSlotIndex());
+		}
+		// bSwapping 변수가 필요한 이유를 설명하면?
+		// 무기를 교체하는 상황이 아니라 무기를 얻고있는 상황에서는 UI 애니메이션이 동작하지 않게 하기위해
+		else if(!bSwapping)
+		{
+			EquipItemDelegate.Broadcast(EquippedWeapon->GetSlotIndex(), WeaponToEquip->GetSlotIndex());
+		}
+
+		// Set EquippedWeapon to the newly spawned Weapon
+		EquippedWeapon = WeaponToEquip;
+		EquippedWeapon->SetItemState(EItemState::EIS_Equipped);
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
+{
+	// ECombatState::ECS_Equipping 상태를 추가한 이유를 설명하면?
+	// 무기를 교체중인 상황에서 다시 교체를 시도했을때 기다리지 않고 교체되게 하기 위함이다
+	const bool bCanExchangeItems =
+		(CurrentItemIndex != NewItemIndex) &&
+		(NewItemIndex < Inventory.Num()) &&
+		(CombatState == ECombatState::ECS_Unoccupied || CombatState == ECombatState::ECS_Equipping);
+
+	if (bCanExchangeItems)
+	{
+		auto OldEquippedWeapon = EquippedWeapon;
+		auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
+		EquipWeapon(NewWeapon);
+
+		OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
+		NewWeapon->SetItemState(EItemState::EIS_Equipped);
+
+		CombatState = ECombatState::ECS_Equipping;
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && EquipMontage)
+		{
+			AnimInstance->Montage_Play(EquipMontage, 1.0f);
+			AnimInstance->Montage_JumpToSection(FName("Equip"));
+		}
+		NewWeapon->PlayEquipSound(true);
+	}
+}
+```
+
+### 10-188 Create Icon Animation
+
+![margin](https://user-images.githubusercontent.com/80055816/212912064-03e8414e-db10-42e2-a11e-49c4e6249285.PNG){: width="100%" height="100%"}{: .align-center}
+
+![trackone](https://user-images.githubusercontent.com/80055816/212912156-abd96ec7-7ac7-4acd-a22f-162855592f6a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![render](https://user-images.githubusercontent.com/80055816/212912213-bd6d195b-2406-4809-968e-901ee9861df6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![small](https://user-images.githubusercontent.com/80055816/212912260-a1388412-1eb7-4b97-838e-1986a9adea26.PNG){: width="100%" height="100%"}{: .align-center}
+
+![arrow](https://user-images.githubusercontent.com/80055816/212912323-aa5aeeae-8d91-4fd7-b722-ab7dcc3dfc89.PNG){: width="100%" height="100%"}{: .align-center}
+
+![op](https://user-images.githubusercontent.com/80055816/212912462-6ffd2fc7-bab5-4af3-940f-e60d7e16632c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![scale](https://user-images.githubusercontent.com/80055816/212912516-f011246c-c28d-4a34-bf73-8ce75ac5d072.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
