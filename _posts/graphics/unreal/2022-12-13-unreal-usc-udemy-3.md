@@ -842,7 +842,7 @@ void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 New
 
 ### 10-188 Create Icon Animation
 
-![margin](https://user-images.githubusercontent.com/80055816/212912064-03e8414e-db10-42e2-a11e-49c4e6249285.PNG){: width="100%" height="100%"}{: .align-center}
+![margin](https://user-images.githubusercontent.com/80055816/212942216-f959e880-36b3-479a-9edb-1dc2ba3e73fc.png){: width="100%" height="100%"}{: .align-center}
 
 ![trackone](https://user-images.githubusercontent.com/80055816/212912156-abd96ec7-7ac7-4acd-a22f-162855592f6a.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -855,6 +855,129 @@ void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 New
 ![op](https://user-images.githubusercontent.com/80055816/212912462-6ffd2fc7-bab5-4af3-940f-e60d7e16632c.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![scale](https://user-images.githubusercontent.com/80055816/212912516-f011246c-c28d-4a34-bf73-8ce75ac5d072.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-189 Create Icon Highlight Delegate
+
+```cpp
+// 아이콘 애니메이션 델리게이트 선언
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHighlightIconDelegate, int32, SlotIndex, bool, bStartAnimation);
+```
+
+### 10-190 Functions to Broadcast Icon Highlight Delegate
+
+```cpp
+void AShooterCharacter::HighlightInventorySlot()
+{
+	// 아래 코드에 대해 설명하면?
+	// 델리게이트를 호출하는 코드이다
+	const int32 EmptySlot{ GetEmptyInventorySlot() };
+	HighlightIconDelegate.Broadcast(EmptySlot, true);
+	HighlightedSlot = EmptySlot;
+}
+```
+
+### 10-191 Calling Highlight and UnHighlight Inventory Slot
+
+```cpp
+void AItem::FinishInterping()
+{
+	bInterping = false;
+	if (Character)
+	{
+		Character->IncrementInterpLocItemCount(InterpLocIndex, -1);
+		Character->GetPickupItem(this);
+
+		// Important
+		Character->UnHighlightInventorySlot();
+	}
+
+	//..
+}
+```
+
+```cpp
+void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor)
+	{
+		AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(OtherActor);
+		if (ShooterCharacter)
+		{
+			ShooterCharacter->IncrementOverlappedItemCount(1);
+
+			// Important
+			ShooterCharacter->UnHighlightInventorySlot();
+		}
+	}
+}
+```
+
+### 10-192 Assigning the Icon Delegate
+
+![assign](https://user-images.githubusercontent.com/80055816/212966168-2239bc3b-6054-48c4-b8e7-f7ba943b061c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ani](https://user-images.githubusercontent.com/80055816/212966223-34a602ca-00d0-4a74-b611-fdcf8a8a1ff0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hidden](https://user-images.githubusercontent.com/80055816/212966282-f5b68203-e97e-41d1-aedd-08416b09da5c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![high](https://user-images.githubusercontent.com/80055816/212966332-d7438c80-7a35-4ec8-ba09-ba72a1bcec89.PNG){: width="100%" height="100%"}{: .align-center}
+
+![vari](https://user-images.githubusercontent.com/80055816/212966386-e1eb249d-b8d9-4cc8-b6a2-000929144b10.PNG){: width="100%" height="100%"}{: .align-center}
+
+![copy](https://user-images.githubusercontent.com/80055816/212966436-8c698b88-6b49-454a-87d5-c141377d968b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/212966492-321f5a0d-7f02-408f-a1ee-8f7fe376051f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conre](https://user-images.githubusercontent.com/80055816/212966535-a3a68087-0aaf-4bc2-9641-a8d26c0f7e2f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-193 Data Tables FTableRowBase
+
+```cpp
+USTRUCT(BlueprintType)
+struct FItemRarityTable : public FTableRowBase
+{
+	GENERATED_BODY()
+
+		UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FLinearColor GlowColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FLinearColor LightColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		FLinearColor DarkColor;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 NumberOfStars;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UTexture2D* IconBackground;
+};
+```
+
+```cpp
+class SHOOTER_API AItem : public AActor
+{
+	GENERATED_BODY()
+
+	//..
+
+	/** Item Rarity data table */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+		class UDataTable* ItemRarityDataTable;
+
+	//..
+}
+```
+
+- Now, UDataTable is not the same thing as FTableRowBase
+- OnConstruction() 함수에 대해 설명하면? It gets called When the item changes or when we move it in the world
+
+![table](https://user-images.githubusercontent.com/80055816/212987240-6da0f759-f1dc-478e-ba00-7e659f933929.PNG){: width="100%" height="100%"}{: .align-center}
+
+![data](https://user-images.githubusercontent.com/80055816/212987299-e02c0514-c7b2-41dd-a1bd-ffc486a79c88.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ref](https://user-images.githubusercontent.com/80055816/212987362-6795c20c-95d7-4615-9bab-440ed32d8a60.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
