@@ -916,6 +916,8 @@ void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 ![assign](https://user-images.githubusercontent.com/80055816/212966168-2239bc3b-6054-48c4-b8e7-f7ba943b061c.PNG){: width="100%" height="100%"}{: .align-center}
 
+![next](https://user-images.githubusercontent.com/80055816/213091508-16972b27-8572-49cb-84d5-0e3d0ba54a20.PNG){: width="100%" height="100%"}{: .align-center}
+
 ![ani](https://user-images.githubusercontent.com/80055816/212966223-34a602ca-00d0-4a74-b611-fdcf8a8a1ff0.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![hidden](https://user-images.githubusercontent.com/80055816/212966282-f5b68203-e97e-41d1-aedd-08416b09da5c.PNG){: width="100%" height="100%"}{: .align-center}
@@ -978,6 +980,170 @@ class SHOOTER_API AItem : public AActor
 ![data](https://user-images.githubusercontent.com/80055816/212987299-e02c0514-c7b2-41dd-a1bd-ffc486a79c88.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![ref](https://user-images.githubusercontent.com/80055816/212987362-6795c20c-95d7-4615-9bab-440ed32d8a60.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-194 Accessing Data Table Rows in C++
+
+```cpp
+void AItem::OnConstruction(const FTransform& Transform)
+{
+	if (MaterialInstance)
+	{
+		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
+		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
+	}
+
+	EnableGlowMaterial();
+
+	// Load the data in the Item Rarity Data Table
+
+	// Path to the Item Rarity Data Table
+	FString RarityTablePath(TEXT("DataTable'/Game/_Game/DataTable/ItemRarityDataTable.ItemRarityDataTable'"));
+	UDataTable* RarityTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *RarityTablePath));
+	if (RarityTableObject)
+	{
+		FItemRarityTable* RarityRow = nullptr;
+		switch (ItemRarity)
+		{
+		case EItemRarity::EIR_Damaged:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Damaged"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Common:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Common"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Uncommon:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Uncommon"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Rare:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Rare"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Legendary:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Legendary"), TEXT(""));
+			break;
+		}
+
+		if (RarityRow)
+		{
+			GlowColor = RarityRow->GlowColor;
+			LightColor = RarityRow->LightColor;
+			DarkColor = RarityRow->DarkColor;
+			NumberOfStars = RarityRow->NumberOfStars;
+			IconBackground = RarityRow->IconBackground;
+		}
+	}
+}
+```
+
+![rarity](https://user-images.githubusercontent.com/80055816/213094855-0afae333-b835-47e3-a05a-f84725e6e5a7.PNG){: width="100%" height="100%"}{: .align-center}
+
+- OnConstruction() 함수에 대해 설명하면? It gets called When the item changes or when we move it in the world
+- StaticLoadObject()에 대해 설명하면? Find or load an object by string name with optional outer and filename specifications ([**참고**](https://docs.unrealengine.com/4.27/en-US/API/Runtime/CoreUObject/UObject/StaticLoadObject/))
+
+### 10-195 Setting Widget Colors from Data Table Values
+
+![sel](https://user-images.githubusercontent.com/80055816/213099369-ac7f9cad-914f-488f-a438-ec7c7e078f84.PNG){: width="100%" height="100%"}{: .align-center}
+
+![seln](https://user-images.githubusercontent.com/80055816/213099428-a06abdca-a1ba-4475-b9e5-2e630fdafd7e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 10-196 Setting Glow Color from Data Table Value
+
+```cpp
+void AItem::OnConstruction(const FTransform& Transform)
+{
+	// Load the data in the Item Rarity Data Table
+
+	// Path to the Item Rarity Data Table
+	FString RarityTablePath(TEXT("DataTable'/Game/_Game/DataTable/ItemRarityDataTable.ItemRarityDataTable'"));
+	UDataTable* RarityTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *RarityTablePath));
+	if (RarityTableObject)
+	{
+		FItemRarityTable* RarityRow = nullptr;
+		switch (ItemRarity)
+		{
+		case EItemRarity::EIR_Damaged:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Damaged"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Common:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Common"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Uncommon:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Uncommon"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Rare:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Rare"), TEXT(""));
+			break;
+		case EItemRarity::EIR_Legendary:
+			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Legendary"), TEXT(""));
+			break;
+		}
+
+		if (RarityRow)
+		{
+			GlowColor = RarityRow->GlowColor;
+			LightColor = RarityRow->LightColor;
+			DarkColor = RarityRow->DarkColor;
+			NumberOfStars = RarityRow->NumberOfStars;
+			IconBackground = RarityRow->IconBackground;
+		}
+	}
+
+	// 이코드가 여기있는 이유는?
+	// 위에서 GlowColor를 불러오고 난뒤 Set을 해줘야 하기 때문이다
+	if (MaterialInstance)
+	{
+		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
+		DynamicMaterialInstance->SetVectorParameterValue(TEXT("FresnelColor"), GlowColor);
+		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
+
+		EnableGlowMaterial();
+	}
+}
+```
+
+### 10-197 Set Post Process Highlight Color from Data Table
+
+```cpp
+struct FItemRarityTable : public FTableRowBase
+{
+	GENERATED_BODY()
+
+	//..
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 CustomDepthStencil;
+};
+```
+![remind](https://user-images.githubusercontent.com/80055816/213106037-ef339f0c-1d60-4087-874c-b48eacf19c17.PNG){: width="100%" height="100%"}{: .align-center}
+
+![table](https://user-images.githubusercontent.com/80055816/213106105-cf6aa193-8c26-4892-bb63-a0cc4ea32cb6.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AItem::OnConstruction(const FTransform& Transform)
+{
+	//..
+
+	if (GetItemMesh())
+	{
+		GetItemMesh()->SetCustomDepthStencilValue(RarityRow->CustomDepthStencil);
+	}
+
+	//..
+}
+```
+
+- What does StaticLoadObject do? Takes a UClass and a path and constructs an instance of the specified class
+
+<br>
+
+## Chapter 11 Multiple Weapon Types
+
+### 11-198 Weapon Data Table
+
+![new](https://user-images.githubusercontent.com/80055816/213142510-2f63c76e-48cc-4acc-a8b6-3a28eace481d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![newdata](https://user-images.githubusercontent.com/80055816/213142592-feeeda59-6f56-4cf7-bfbd-6059a75adec8.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-199 Getting Data from Weapon Data Table
+- 
 
 <br>
 
