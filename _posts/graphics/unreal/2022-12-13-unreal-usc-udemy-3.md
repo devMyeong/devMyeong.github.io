@@ -1143,7 +1143,145 @@ void AItem::OnConstruction(const FTransform& Transform)
 ![newdata](https://user-images.githubusercontent.com/80055816/213142592-feeeda59-6f56-4cf7-bfbd-6059a75adec8.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 11-199 Getting Data from Weapon Data Table
-- 
+
+```cpp
+void AWeapon::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+	const FString WeaponTablePath{ TEXT("DataTable'/Game/_Game/DataTable/WeaponDataTable.WeaponDataTable'") };
+	UDataTable* WeaponTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *WeaponTablePath));
+
+	if (WeaponTableObject)
+	{
+		FWeaponDataTable* WeaponDataRow = nullptr;
+		switch (WeaponType)
+		{
+		case EWeaponType::EWT_SubmachineGun:
+			WeaponDataRow = WeaponTableObject->FindRow<FWeaponDataTable>(FName("SubmachineGun"), TEXT(""));
+			break;
+		case EWeaponType::EWT_AssaultRifle:
+			WeaponDataRow = WeaponTableObject->FindRow<FWeaponDataTable>(FName("AssaultRifle"), TEXT(""));
+			break;
+		}
+
+		if (WeaponDataRow)
+		{
+			AmmoType = WeaponDataRow->AmmoType;
+			Ammo = WeaponDataRow->WeaponAmmo;
+			MagazineCapacity = WeaponDataRow->MagazingCapacity;
+			SetPickupSound(WeaponDataRow->PickupSound);
+			SetEquipSound(WeaponDataRow->EquipSound);
+			GetItemMesh()->SetSkeletalMesh(WeaponDataRow->ItemMesh);
+			SetItemName(WeaponDataRow->ItemName);
+			SetIconItem(WeaponDataRow->InventoryIcon);
+			SetAmmoIcon(WeaponDataRow->AmmoIcon);
+		}
+	}
+}
+```
+
+![cons](https://user-images.githubusercontent.com/80055816/213181136-1b074a33-5936-45cc-a294-3a53c8111969.PNG){: width="100%" height="100%"}{: .align-center}
+
+![weapon](https://user-images.githubusercontent.com/80055816/213181243-86865b05-1ed5-4135-98d8-3c883189a83a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bp](https://user-images.githubusercontent.com/80055816/213181300-9f61cb83-76df-4225-ba4d-899ed2e6988d.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-200 Assault Rifle Glow Material
+
+![fun](https://user-images.githubusercontent.com/80055816/213238730-c84b683a-e0d4-4385-977e-df9b9982f9e7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/213238889-15a51754-9aef-4915-b214-91c24509a347.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/213239023-26fcf0d4-dc24-41d5-b4ec-6d9f18d2470e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/213239136-7bcc782c-e40f-4ef6-9d4d-e4fb7520694e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![re](https://user-images.githubusercontent.com/80055816/213239233-8c1a5d56-4203-4e87-82fa-340311565371.PNG){: width="100%" height="100%"}{: .align-center}
+
+![copy](https://user-images.githubusercontent.com/80055816/213239343-f7a2f8d5-5f3c-446c-b402-1ed985621c8f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nmat](https://user-images.githubusercontent.com/80055816/213239471-9b903725-40ad-4fba-b539-acb1c20538be.PNG){: width="100%" height="100%"}{: .align-center}
+
+![move](https://user-images.githubusercontent.com/80055816/213239625-0a3964fd-ceb2-405e-a7ec-b6ff600d5b8a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![convert](https://user-images.githubusercontent.com/80055816/213239758-8a87cfb4-2ec4-4b5f-807d-0b401b861626.PNG){: width="100%" height="100%"}{: .align-center}
+
+![must](https://user-images.githubusercontent.com/80055816/213239858-de8dd4b7-44eb-4613-a997-af33649a3678.PNG){: width="100%" height="100%"}{: .align-center}
+
+![create](https://user-images.githubusercontent.com/80055816/213239960-a8e72fd4-1317-40d5-ad8d-13207f23e3bc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![color](https://user-images.githubusercontent.com/80055816/213240074-cc995498-2e41-4868-820c-9db762ef3acf.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/213240186-ef655705-8094-46bc-b64c-01ecc85bdc0d.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-201 Set Material Instance and Index with Data Table
+
+```cpp
+struct FWeaponDataTable : public FTableRowBase
+{
+	//..
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		UMaterialInstance* MaterialInstance;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		int32 MaterialIndex;
+}
+```
+
+```cpp
+void AWeapon::OnConstruction(const FTransform& Transform)
+{
+	Super::OnConstruction(Transform);
+
+	//..
+
+	SetMaterialInstance(WeaponDataRow->MaterialInstance);
+	// 아래 두 구문이 필요한 이유는?
+	// 무기마다 material 정보가 다르다 때문에 이전 material 정보를 지워 줘야한다
+	PreviousMaterialIndex = GetMaterialIndex();
+	GetItemMesh()->SetMaterial(PreviousMaterialIndex, nullptr);
+	SetMaterialIndex(WeaponDataRow->MaterialIndex);
+
+	// Item 클래스에서 아래 구문을 이미 실행하고 있는데 여기서 또 하는 이유는?
+	// Dynamic으로 Material를 교체해주기 위해
+	if (GetMaterialInstance())
+	{
+		SetDynamicMaterialInstance(UMaterialInstanceDynamic::Create(GetMaterialInstance(), this));
+		GetDynamicMaterialInstance()->SetVectorParameterValue(TEXT("FresnelColor"), GetGlowColor());
+		GetItemMesh()->SetMaterial(GetMaterialIndex(), GetDynamicMaterialInstance());
+
+		EnableGlowMaterial();
+	}
+}
+```
+
+![table](https://user-images.githubusercontent.com/80055816/213272583-89636d1a-4449-4b3b-a47b-f14b27b0b0a6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![tablenext](https://user-images.githubusercontent.com/80055816/213272646-755cf16a-d023-4361-9615-68ef57e2ca28.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-202 Adding Barrel Socket to AR
+
+![socket](https://user-images.githubusercontent.com/80055816/213274069-71eba7c2-90b5-44ee-9009-3c89c2339cef.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-203 FABRIK IK
+- What is the Fabric? Fabric is an inverse kinematics technique that allows us to move a particular bone on our skeleton
+
+![check](https://user-images.githubusercontent.com/80055816/213283990-b74a8876-55a9-4c80-b177-0a5e3b833753.PNG){: width="100%" height="100%"}{: .align-center}
+
+![change](https://user-images.githubusercontent.com/80055816/213284049-bbb17df5-2ce9-453e-8008-87016bd68ad4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![fab](https://user-images.githubusercontent.com/80055816/213284093-3978cd96-0d59-4d3d-b938-cc7264948b5c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![maken](https://user-images.githubusercontent.com/80055816/213284140-c64d48d6-d79e-4ff4-a015-09a208c564fc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reconnect](https://user-images.githubusercontent.com/80055816/213284197-86f797c1-b87b-4179-afbd-e4e6d1c0e1ca.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/213284255-b089cfc9-9406-49d9-8049-e81d5fb146d6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![this](https://user-images.githubusercontent.com/80055816/213284304-c74102b7-2a64-486a-8658-c36b69013b8c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pose](https://user-images.githubusercontent.com/80055816/213284370-f2340ced-1498-44e9-92c9-f3dd7a4f775e.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
