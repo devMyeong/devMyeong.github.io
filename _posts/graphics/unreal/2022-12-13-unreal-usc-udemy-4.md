@@ -1208,15 +1208,12 @@ class SHOOTER_API AWeapon : public AItem
 {
 	//..
 
-	/** The speed at which automatic fire happens */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
 	float AutoFireRate;
 
-	/** Particle system spawned at the BarrelSocket */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
 	UParticleSystem* MuzzleFlash;
 
-	/** Sound played when the weapon is fired */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
 	USoundCue* FireSound;
 
