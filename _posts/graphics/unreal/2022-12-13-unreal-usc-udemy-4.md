@@ -1192,13 +1192,13 @@ struct FWeaponDataTable : public FTableRowBase
 {
 	//..
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY( 생략 )
 	float AutoFireRate;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY( 생략 )
 	class UParticleSystem* MuzzleFlash;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UPROPERTY( 생략 )
 	USoundCue* FireSound;
 }
 ```
@@ -1208,13 +1208,13 @@ class SHOOTER_API AWeapon : public AItem
 {
 	//..
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY( 생략 )
 	float AutoFireRate;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY( 생략 )
 	UParticleSystem* MuzzleFlash;
 
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	UPROPERTY( 생략 )
 	USoundCue* FireSound;
 
 	//..
