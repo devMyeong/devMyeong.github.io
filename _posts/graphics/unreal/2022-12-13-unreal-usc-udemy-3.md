@@ -15,6 +15,738 @@ date: 2022-12-13
 last_modified_at: 2023-01-10
 ---
 
+## Chapter 7 Reloading
+
+### 07-89 Retargeting Animations in Unreal Engine 5
+- I cover the new way of retargeting animations in Unreal Engine 5 in a new YouTube video
+- The link is in the resources for Lecture 88: Retargeting Animations
+
+### 07-90 Retargeting Animations
+- What does that mean, retarget? the process of retargeting and animation is taking that animation and assigning it to a different skeleton
+- In order to retarget this animation to the Belka skeleton, we're going to use something called a rig
+
+![rig](https://user-images.githubusercontent.com/80055816/210504496-28fc5007-b0c5-474f-9de0-71cb1d8df7c8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![match](https://user-images.githubusercontent.com/80055816/210504554-80497dd5-2a16-4cc3-b63c-6cfa0f87f3ee.PNG){: width="100%" height="100%"}{: .align-center}
+
+![base](https://user-images.githubusercontent.com/80055816/210504595-140785cd-753b-435c-9479-00ffa549a22a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reload](https://user-images.githubusercontent.com/80055816/210504645-1c845563-5033-4d90-ac25-522127163c7b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![retarget](https://user-images.githubusercontent.com/80055816/210504691-94b82be3-2a9a-49a6-b787-6f720f5a171f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![morphing](https://user-images.githubusercontent.com/80055816/210504764-15b10669-53b7-4f42-a3da-977c4147f129.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 이미지에 나타난 과정을 거치는 이유는? To fix morphing problem
+
+### 07-91 Edit Animations In Unreal
+- we're going to make a duplicate of this animation because we're going to have a different version of this reload animation for each weapon
+
+![adjust](https://user-images.githubusercontent.com/80055816/210524863-f0acfc48-d65e-4c4d-9bee-601b8a62db86.PNG){: width="100%" height="100%"}{: .align-center}
+
+![key](https://user-images.githubusercontent.com/80055816/210601469-b2a833a2-84d0-4de3-abd1-16cd9a99cf70.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-92 Ammo
+- 언리얼에서 열거형에 대해 설명하면? 일반적인 enum이 아닌 enum class로 만들어야 한다 그리고 UENUM은 uint8만을 지원한다 ([**참고**](https://wergia.tistory.com/150))
+
+```cpp
+// 언리얼에서 지원하는 Map 클래스
+TMap<EAmmoType, int32> AmmoMap;
+```
+
+### 07-93 Ammo Count Widget
+
+![widget](https://user-images.githubusercontent.com/80055816/210568546-458d2d02-2771-4b7f-8d9c-44bef1f166f0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![custom](https://user-images.githubusercontent.com/80055816/210568649-a1425022-cbb5-4d8a-9e15-7415ab1bce00.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/210568701-47a5c31e-3960-4dbf-a296-a19926d9546f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-94 Draw Ammo Count To Screen
+
+![pc](https://user-images.githubusercontent.com/80055816/210598818-fddce373-64e2-409f-9438-e8c5cab7966f.PNG){: width="100%" height="100%"}{: .align-center}
+
+- We're going to draw this HUD to the screen using our player controller class and we're going to do this from C++
+
+![over](https://user-images.githubusercontent.com/80055816/210599031-24318290-8f20-4691-93a2-2da0ea7c03ae.PNG){: width="100%" height="100%"}{: .align-center}
+
+- ShooterHUDOverlay를 만드는 이유는? We want to position AmmoCountBP where we want it
+
+![bp](https://user-images.githubusercontent.com/80055816/210599590-33bb8caf-7fe5-4ee1-a91d-2f3e770f227d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![cho](https://user-images.githubusercontent.com/80055816/210599662-8d6db63a-c5bc-4053-b8c4-9a4ab69e616a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/210599732-9c73eac4-d84d-496e-bffe-6210de6bed09.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mode](https://user-images.githubusercontent.com/80055816/210599812-b5a39b7d-17dc-4b23-b8df-ea1a37893569.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 위의 과정은 무엇을 위함인지 설명하면? This right here will override what we have set in the project settings for every level
+
+### 07-95 Weapon Ammo in C++
+
+```cpp
+bool AShooterCharacter::WeaponHasAmmo()
+{
+	if (EquippedWeapon == nullptr) return false;
+
+	return EquippedWeapon->GetAmmo() > 0;
+}
+```
+
+### 07-96 Bind Weapon Ammo
+
+![select](https://user-images.githubusercontent.com/80055816/210627317-85c41cf1-a78a-4b32-9733-925cc285cfb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/210627373-ad6c0743-2441-4414-acee-1aff8021b345.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ammo](https://user-images.githubusercontent.com/80055816/210627419-bf234a52-a424-40e6-b873-eef1c35ebaae.PNG){: width="100%" height="100%"}{: .align-center}
+
+![code](https://user-images.githubusercontent.com/80055816/210627463-f70932fd-6246-4b46-ad40-a5fd7c1bf093.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-97 Fixing Barrel Socket Location
+
+![add](https://user-images.githubusercontent.com/80055816/210627524-ad8b653d-d27d-45f9-9e7a-c90fde2b8789.PNG){: width="100%" height="100%"}{: .align-center}
+
+- So we don't actually want the mesh of our character We want the mesh of our equipped weapon
+
+### 07-98 Improving Weapon Fire Code Lecture
+- So we'll see you in the next video when we start to restructure this code
+
+### 07-99 Improving Weapon Fire Code
+
+```cpp
+void AShooterCharacter::FireButtonPressed()
+{
+	bFireButtonPressed = true;
+	FireWeapon();
+}
+```
+
+```cpp
+void AShooterCharacter::FireWeapon()
+{
+	if (EquippedWeapon == nullptr) return;
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+
+	if (WeaponHasAmmo())
+	{
+		PlayFireSound();
+		SendBullet();
+		PlayGunfireMontage();
+		EquippedWeapon->DecrementAmmo();
+
+		StartFireTimer();
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::StartFireTimer()
+{
+	CombatState = ECombatState::ECS_FireTimerInProgress;
+
+	GetWorldTimerManager().SetTimer(
+		AutoFireTimer,
+		this,
+		&AShooterCharacter::AutoFireReset,
+		AutomaticFireRate);
+}
+```
+
+```cpp
+void AShooterCharacter::AutoFireReset()
+{
+	CombatState = ECombatState::ECS_Unoccupied;
+
+	if (WeaponHasAmmo())
+	{
+		if (bFireButtonPressed)
+		{
+			FireWeapon();
+		}
+	}
+	else
+	{
+		// Reload Weapon
+	}
+}
+```
+
+### 07-100 Reload Montage
+
+![montage](https://user-images.githubusercontent.com/80055816/210723001-9bf4baed-ab97-4d70-b81c-4470089779c8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/210723197-f7f49a63-6655-488f-9f78-15b89b4fb910.PNG){: width="100%" height="100%"}{: .align-center}
+
+![new](https://user-images.githubusercontent.com/80055816/210723784-285a4263-4e2c-457d-8fd6-6c476d334eb4.PNG){: width="100%" height="100%"}{: .align-center}
+
+- The reason we're saying SMG is because this animation is specific to the SMG weapon and we're going to have different sections here with the different animations for the different weapons
+
+![conclude](https://user-images.githubusercontent.com/80055816/210723832-9ec5549e-1a6a-4376-aa2e-f52ee33da8d2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/210723866-4b7f6d65-8a10-4312-bf2a-a4c59d77d2a2.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-101 Reload Lecture
+- Remember, if we're not in the unoccupied state, we cannot fire the weapon
+
+### 07-102 The Weapon Type
+
+```cpp
+UCLASS()
+class SHOOTER_API AWeapon : public AItem
+{
+	//..
+
+	FORCEINLINE EWeaponType GetWeaponType() const { return WeaponType; }
+	
+	//..
+}
+```
+
+### 07-103 Reload Continued
+
+![class](https://user-images.githubusercontent.com/80055816/210818648-deef6cfd-5105-4eb4-9a42-2cb3738e9e27.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hfile](https://user-images.githubusercontent.com/80055816/210830218-3b70162b-d197-4a68-9274-7343e5d533c2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![delete](https://user-images.githubusercontent.com/80055816/210818932-3e4b74f3-dc4b-48a1-9e4c-2ced4a8466aa.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-104 Update AmmoMap
+
+```cpp
+// 표현식( Ammo + Amount <= MagazineCapacity )이 true가 아니면 에러메시지를 출력한다
+void AWeapon::ReloadAmmo(int32 Amount)
+{
+	checkf(Ammo + Amount <= MagazineCapacity, TEXT("Attempted to reload with more than magazine capacity!"));
+	Ammo += Amount;
+}
+```
+
+```cpp
+//..
+
+// 언리얼 Map에서 Add는 Replace를 의미한다
+AmmoMap.Add(AmmoType, CarriedAmmo);
+
+//..
+```
+
+![notify](https://user-images.githubusercontent.com/80055816/210819133-2c881796-52d5-41b3-a35e-72acd63076b8.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-105 Bind Carried Ammo
+
+![bind](https://user-images.githubusercontent.com/80055816/210819338-7123930b-1dfc-40dc-b90b-b03d4c5d068c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/210819469-91f6cd51-4895-49bf-b0a6-0d39dbb75f77.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-106 Bind Weapon Name
+
+![item](https://user-images.githubusercontent.com/80055816/210852062-2ad27b4e-9198-401c-bae1-77105394d228.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-107 Move Clip Lecture
+- The scene component can be used as a reference point for its transform
+- So what we're going to do with this scene component is attach it to our hand
+- Then we can simply use that scene component for its transform its location, rotation and scale
+
+### 07-108 Grab and Release Clip
+
+![notify](https://user-images.githubusercontent.com/80055816/210935695-cd0b4f71-9419-40a3-a61a-24fa781569b6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/210935758-c2d41261-653f-4b89-85af-284b23f3e50d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![track](https://user-images.githubusercontent.com/80055816/210935808-b3bfe638-0789-43ab-a77e-038a76f63541.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bone](https://user-images.githubusercontent.com/80055816/210935848-c4a196b5-a299-4ab9-8a86-b750d66b267d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hand](https://user-images.githubusercontent.com/80055816/210935882-6608860a-affb-47a9-b87f-20a0536dfcd4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/210935919-aaaef0db-5a8a-4781-bdd6-ab76a77b64e2.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::GrabClip()
+{
+	//..
+
+	//------------------------------------------------------------------------------------------
+	// EAttachmentRule::KeepRelative에 대해 설명하면?
+	// Keeps current relative transform as the relative transform to the new parent
+	// https://docs.unrealengine.com/4.27/en-US/API/Runtime/Engine/Engine/EAttachmentRule/ 참고
+	// -----------------------------------------------------------------------------------------
+	FAttachmentTransformRules AttachmentRules(EAttachmentRule::KeepRelative, true);
+	HandSceneComponent->AttachToComponent(GetMesh(), AttachmentRules, FName(TEXT("Hand_L")));
+	HandSceneComponent->SetWorldTransform(ClipTransform);
+
+	EquippedWeapon->SetMovingClip(true);
+
+	//..
+}
+```
+
+### 07-109 Weapon AnimBP
+
+![bp](https://user-images.githubusercontent.com/80055816/210947736-58d0ca5b-4e53-4513-95f9-63b15dfd3b45.PNG){: width="100%" height="100%"}{: .align-center}
+
+![create](https://user-images.githubusercontent.com/80055816/210947781-1a884d9c-eaf3-4e3c-845b-7cca5be6a349.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ref](https://user-images.githubusercontent.com/80055816/210947852-df8964b2-c0f7-4e1b-960c-c90689ed3669.PNG){: width="100%" height="100%"}{: .align-center}
+
+![graph](https://user-images.githubusercontent.com/80055816/210949650-6534a504-7380-4124-b822-fa316b7f976a.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Get owning actor is a node that returns an actor That is the actor that owns this animation blueprint
+
+### 07-110 Moving the Clip
+
+![inside](https://user-images.githubusercontent.com/80055816/210959454-57ddf63e-6fe8-4367-974b-bf6051fb233f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![clip](https://user-images.githubusercontent.com/80055816/210959499-e300ec51-b613-4efa-a6ff-573daa44bd46.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remember](https://user-images.githubusercontent.com/80055816/210959558-f0c4c262-fab0-4caa-aec2-826d62b59b88.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/210959602-6ca766cd-0af0-46d8-992f-012887c8a9a4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![selbp](https://user-images.githubusercontent.com/80055816/210959629-b3376202-2ee9-49b0-8856-bd452d1cd407.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+AShooterCharacter::AShooterCharacter() :
+{
+	//..
+
+	// Now this is a scene component and really we don't even need to attach it to anything
+	// Because Grap clip is going to handle the attachment
+	// We're going to attach it to our handbone
+	HandSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("HandSceneComp"));
+
+	//..
+}
+```
+
+### 07-111 Clip Sounds
+
+![cue](https://user-images.githubusercontent.com/80055816/211035557-ac497055-c52c-402b-b20f-9a956bb2f26c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/211035640-c0e4134e-8cf6-4ba5-9286-7f7dc65d6e06.PNG){: width="100%" height="100%"}{: .align-center}
+
+![select](https://user-images.githubusercontent.com/80055816/211035712-12c4e3c0-dd5d-44e1-9345-717585df3823.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211035777-63ebccd4-beb1-46a6-aa43-03a73e863e67.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 07-112 Pickup Sounds
+
+```cpp
+//..
+
+// 사운드 재생 함수
+UGameplayStatics::PlaySound2D(this, Item->GetEquipSound());
+
+//..
+```
+
+<br>
+
+## Chapter 8 Advanced Movement
+
+### 08-113 Rotate Root Bone
+- The root is the parent of the skeleton hierarchy So if we rotate the root, the body will follow
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (ShooterCharacter == nullptr) return;
+	if (Speed > 0)
+	{
+		// Don't want to turn in place; Character is moving
+	}
+	else
+	{
+		CharacterYawLastFrame = CharacterYaw;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		const float YawDelta{ CharacterYaw - CharacterYawLastFrame };
+
+		RootYawOffset -= YawDelta;
+
+		// If we use a different number for each message for the key, 
+		// Then we can print multiple messages on the screen at the same time
+		if (GEngine) GEngine->AddOnScreenDebugMessage(
+			1,
+			-1,
+			FColor::Blue,
+			FString::Printf(TEXT("CharacterYaw: %f"), CharacterYaw));
+		if (GEngine) GEngine->AddOnScreenDebugMessage(
+			2,
+			-1,
+			FColor::Red,
+			FString::Printf(TEXT("RootYawOffset: %f"), RootYawOffset));
+	}
+}
+```
+
+- And so we're going to use Yaw Offset to rotate our bone back toward the forward direction
+
+![expose](https://user-images.githubusercontent.com/80055816/211035866-67be219c-207f-4bc2-a4ff-1890589417b4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/211038604-e5f76322-31fd-4f79-92c6-79068b107666.PNG){: width="100%" height="100%"}{: .align-center}
+
+- So this is how we use our route, yaw offset to rotate the bone back once we've rotated our camera for each frame
+
+### 08-114 Turn In Place Animations
+
+![copy](https://user-images.githubusercontent.com/80055816/211054454-27af812c-f82d-45ac-9bff-65fb13691eb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/211054510-36f66d3b-3ca9-48d9-90e9-5bcbfe7a51d8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211054552-b6fb2023-06ac-41be-bcab-43644140e6c7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211054610-cef7a87e-3ca1-4290-81e2-db9c951e369c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rrule](https://user-images.githubusercontent.com/80055816/211054660-036bdc06-7620-4fd1-8b40-2b65691c6187.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211054706-ef434b16-d8f3-421f-9229-c2f186aea375.PNG){: width="100%" height="100%"}{: .align-center}
+
+![loop](https://user-images.githubusercontent.com/80055816/211054773-6c9e875e-fc86-4e2f-9adc-ed5c3447bc53.PNG){: width="100%" height="100%"}{: .align-center}
+
+- We actually haven't programmed the ability for the bone to rotate back towards our direction of movement All we're doing is playing the animation
+
+### 08-115 Animation Curves
+
+![curve](https://user-images.githubusercontent.com/80055816/211069552-134ac7ec-8285-4b52-ac31-3451dc1fa9d5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![graph](https://user-images.githubusercontent.com/80055816/211069654-f6d40fcd-59c9-4680-afba-e996dc160b43.PNG){: width="100%" height="100%"}{: .align-center}
+
+![meta](https://user-images.githubusercontent.com/80055816/211069703-928eaf1c-549d-4588-b91d-5664ba2c16a6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![turn](https://user-images.githubusercontent.com/80055816/211069759-41497a74-2db5-4b60-9417-4e6babce27ed.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reuse](https://user-images.githubusercontent.com/80055816/211069804-56fb1d1c-7dc9-46ea-afe1-898ebe71f6df.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-116 Turn In Place Using Curve Values
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (ShooterCharacter == nullptr) return;
+	if (Speed > 0)
+	{
+		// Don't want to turn in place; Character is moving
+		RootYawOffset = 0.f;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		CharacterYawLastFrame = CharacterYaw;
+		RotationCurveLastFrame = 0.f;
+		RotationCurve = 0.f;
+	}
+	else
+	{
+		CharacterYawLastFrame = CharacterYaw;
+		CharacterYaw = ShooterCharacter->GetActorRotation().Yaw;
+		const float YawDelta{ CharacterYaw - CharacterYawLastFrame };
+
+		// Root Yaw Offset, updated and clamped to [-180, 180]
+		RootYawOffset = UKismetMathLibrary::NormalizeAxis(RootYawOffset - YawDelta);
+
+		// if turning than? the value is 1.0
+		// if not than? the value is 0.0
+		const float Turning{ GetCurveValue(TEXT("Turning")) };
+		if (Turning > 0)
+		{
+			RotationCurveLastFrame = RotationCurve;
+			RotationCurve = GetCurveValue(TEXT("Rotation"));
+			const float DeltaRotation{ RotationCurve - RotationCurveLastFrame };
+
+			// if RootYawOffset > 0 than? Turning Left
+			// if RootYawOffset < 0 than? Turning Right
+			RootYawOffset > 0 ? RootYawOffset -= DeltaRotation : RootYawOffset += DeltaRotation;
+
+			const float ABSRootYawOffset{ FMath::Abs(RootYawOffset) };
+			if (ABSRootYawOffset > 90.f)
+			{
+				const float YawExcess{ ABSRootYawOffset - 90.f };
+				RootYawOffset > 0 ? RootYawOffset -= YawExcess : RootYawOffset += YawExcess;
+			}
+		}
+
+		if (GEngine) GEngine->AddOnScreenDebugMessage(1, -1, FColor::Cyan, FString::Printf(TEXT("RootYawOffset: %f"), RootYawOffset));
+	}
+}
+```
+
+### 08-117 Hip Aim Offset
+
+![offset](https://user-images.githubusercontent.com/80055816/211155215-689a6ba8-7707-425e-be71-081168b7b02c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ao](https://user-images.githubusercontent.com/80055816/211163870-35168590-a3c4-423d-82dc-5fbea12c8be5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![down](https://user-images.githubusercontent.com/80055816/211155233-1eed43f6-2559-4321-84ed-4ef7daa63adc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211155246-70174cfd-856d-4686-ba79-314af49ea8af.PNG){: width="100%" height="100%"}{: .align-center}
+
+![connect](https://user-images.githubusercontent.com/80055816/211155265-7437778d-6979-4126-a0e0-2d497429deb2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pitch](https://user-images.githubusercontent.com/80055816/211155271-4159324d-69c9-4026-881a-4dee1feae3d1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reload](https://user-images.githubusercontent.com/80055816/211155281-61537562-0806-4e38-bdcf-90a2f6cd50e0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![clear](https://user-images.githubusercontent.com/80055816/211155295-cf229d2c-495d-4e65-ba0a-51e716741d26.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-118 Aiming Aim Offset
+
+![one](https://user-images.githubusercontent.com/80055816/211163286-f83adc76-f53e-4717-ab48-4b0d9897f0c7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![aim](https://user-images.githubusercontent.com/80055816/211163296-2f381267-d428-4b25-98f5-ca0a90c0607f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/211163307-bce3b149-2579-41ef-919b-ca24519185fb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![many](https://user-images.githubusercontent.com/80055816/211163348-7aaaee07-7c0e-4a68-befb-7d0f0639c474.PNG){: width="100%" height="100%"}{: .align-center}
+
+![air](https://user-images.githubusercontent.com/80055816/211163358-819e5845-d648-4745-a6ef-a1aa3dea9a69.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-119 Lean
+
+```cpp
+void UShooterAnimInstance::Lean(float DeltaTime)
+{
+	//..
+
+	// Explain below code
+	// This gives us a measure of how quickly we're turning
+	// And this is going to handle any sin(math) changes
+	const FRotator Delta{ UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame) };
+	const float Target{ Delta.Yaw / DeltaTime };
+
+	//..
+}
+```
+
+### 08-120 Lean Blendspace
+
+![space](https://user-images.githubusercontent.com/80055816/211194907-1951d564-3b57-47ac-afa5-a41dc1f0c855.PNG){: width="100%" height="100%"}{: .align-center}
+
+![input](https://user-images.githubusercontent.com/80055816/211194930-05d0e4e4-6970-4504-aec4-4603f99f2f4a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/211194942-bfcf61bd-ff28-49e4-90f8-f7265983daca.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-121 Crouching Setup
+
+![crouch](https://user-images.githubusercontent.com/80055816/211194876-4a33c942-746a-4593-a0ce-021c46270650.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-122 Crouching Animations
+
+![dup](https://user-images.githubusercontent.com/80055816/211197423-c35b84d2-f61a-4723-9eb1-1b76cfc193d8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211197438-ceb7dc7f-e321-45d7-b134-20f15e0bc520.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211197458-f1a9e701-b3d6-4e4f-9472-02c38d49bd7b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-123 Crouching AnimBP
+
+![start](https://user-images.githubusercontent.com/80055816/211200848-1582b280-7813-45ea-a137-5d1e7f558997.PNG){: width="100%" height="100%"}{: .align-center}
+
+![insert](https://user-images.githubusercontent.com/80055816/211200862-a1128c8b-29e4-4f43-af50-503a8da85d90.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211200886-d1cfd419-3544-4312-85ac-71e7bab091c9.PNG){: width="100%" height="100%"}{: .align-center}
+
+![check](https://user-images.githubusercontent.com/80055816/211200904-20713d50-e807-47dc-aebe-a88255dbbda4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rulee](https://user-images.githubusercontent.com/80055816/211200919-f2f8ffa5-358e-4b80-8f21-3e140189e003.PNG){: width="100%" height="100%"}{: .align-center}
+
+![final](https://user-images.githubusercontent.com/80055816/211200932-c138b732-b946-414c-a942-0fe54bc539eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-124 Crouching Turn Animations
+
+![look](https://user-images.githubusercontent.com/80055816/211208175-d4ab2c47-624b-4d75-8ae0-a3b751962b8e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![down](https://user-images.githubusercontent.com/80055816/211208191-b277f173-94d0-412d-9f46-2f27a9c4678a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![noskin](https://user-images.githubusercontent.com/80055816/211208201-2846acae-e728-4d65-841d-0368153faaa0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![first](https://user-images.githubusercontent.com/80055816/211208677-e9608fdb-127a-4714-b394-b661ba16506d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/211208213-15464b68-b592-4bd6-973c-32058769a7b8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/211208235-681a0fe4-ba8c-4fa3-8c30-1f719764c5eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-125 Retargeting Anims with Different Skeletons
+
+![match](https://user-images.githubusercontent.com/80055816/211208252-5f69b304-6a62-4ad9-9f11-ce62bea3ed84.PNG){: width="100%" height="100%"}{: .align-center}
+
+![view](https://user-images.githubusercontent.com/80055816/211208261-c93d18b5-0759-4d1b-ac28-89ef4b75dcc3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![too](https://user-images.githubusercontent.com/80055816/211208273-a7839a23-8e3d-4cbd-b2e7-8718aeb7d0ba.PNG){: width="100%" height="100%"}{: .align-center}
+
+![use](https://user-images.githubusercontent.com/80055816/211208284-7a69c903-edd0-42a3-aa27-a75b8fc0d312.PNG){: width="100%" height="100%"}{: .align-center}
+
+![apply](https://user-images.githubusercontent.com/80055816/211208300-f14a4d7d-a1cb-447c-8181-505223bac7c1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![re](https://user-images.githubusercontent.com/80055816/211208322-c8161164-fb3a-4f1d-bc2f-f939f526dcff.PNG){: width="100%" height="100%"}{: .align-center}
+
+![temp](https://user-images.githubusercontent.com/80055816/211208334-f1dcc422-c0dd-4a10-a79c-e8df235957a9.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-126 Crouch Turn In Place AnimBP
+
+![match](https://user-images.githubusercontent.com/80055816/211268589-5df7df03-b573-4d91-8014-2162e9439490.PNG){: width="100%" height="100%"}{: .align-center}
+
+![spin](https://user-images.githubusercontent.com/80055816/211270630-96904a1a-d74b-4a96-89fa-a6edc28f493b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![upper](https://user-images.githubusercontent.com/80055816/211269151-0539499b-a0b3-4edd-9b05-c4a41916308b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/211269195-e9a4cf36-e932-4d86-a766-e9c6495570fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ani](https://user-images.githubusercontent.com/80055816/211269237-7005e56a-e227-4491-bbb1-34e5d2aa7535.PNG){: width="100%" height="100%"}{: .align-center}
+
+![curve](https://user-images.githubusercontent.com/80055816/211269277-baacfdc1-8fa2-4b9a-8776-7f36675d3e63.PNG){: width="100%" height="100%"}{: .align-center}
+
+![curvegood](https://user-images.githubusercontent.com/80055816/211269319-7ec58322-94a9-434d-be96-44fefbd67cb4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![again](https://user-images.githubusercontent.com/80055816/211269370-1da99c5e-753a-4e20-a38f-54585bdc4e23.PNG){: width="100%" height="100%"}{: .align-center}
+
+![speed](https://user-images.githubusercontent.com/80055816/211269410-885e9040-437b-42be-83bd-bc57dde678b6.PNG){: width="100%" height="100%"}{: .align-center}
+
+- layered blend per bone에 대해 설명하면? A value of 0.0 means the Additive pose is not added to the Base input pose at all, while a value of 1.0 means the Additive pose is added fully to the Base input pose ([**참고**](https://docs.unrealengine.com/4.27/en-US/AnimatingObjects/SkeletalMeshAnimation/NodeReference/Blend/))
+
+### 08-127 Crouch Recoil Weight
+
+![weight](https://user-images.githubusercontent.com/80055816/211308406-8f0d672b-8e98-4c02-a63a-571c4d4511a0.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void UShooterAnimInstance::TurnInPlace()
+{
+	if (bTurningInPlace)
+	{
+		if (bReloading)
+		{
+			RecoilWeight = 1.f;
+		}
+		else
+		{
+			RecoilWeight = 0.f;
+		}
+	}
+}
+```
+
+### 08-128 Crouch Walking Blendspace
+
+![crouch](https://user-images.githubusercontent.com/80055816/211314245-580e8052-830f-4241-8048-207023bf91e9.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211314309-f85bae5d-bd2f-40a4-9112-af31500786cb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![insert](https://user-images.githubusercontent.com/80055816/211314422-a1fc7e90-7c54-4f32-90c3-10c57d7861fd.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-129 Crouch Walking
+
+![bs](https://user-images.githubusercontent.com/80055816/211319248-e8d6e1cd-92df-4e75-ad28-835254a99eeb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rule](https://user-images.githubusercontent.com/80055816/211319298-42194331-b68d-4ea9-87c5-4e188693f3bb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nrule](https://user-images.githubusercontent.com/80055816/211319338-649fad54-8b8a-444a-9408-cdaf564a37b1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![time](https://user-images.githubusercontent.com/80055816/211319379-b1eadb4f-c387-4499-bb59-7d78b15219b0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pick](https://user-images.githubusercontent.com/80055816/211341989-1328a3fb-c38c-4a60-9022-fd533bf1c4ce.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-130 Crouch Movement Speed and Jump
+
+```cpp
+void AShooterCharacter::CrouchButtonPressed()
+{
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		bCrouching = !bCrouching;
+	}
+	if (bCrouching)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = CrouchMovementSpeed;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+	}
+}
+```
+
+![remove](https://user-images.githubusercontent.com/80055816/211329317-404db5df-07af-4035-82be-4ee479a1888a.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-131 Interp Capsule Half Height
+
+![pause](https://user-images.githubusercontent.com/80055816/211576680-d31b56a3-b4c2-4c0f-a530-35f272634375.PNG){: width="100%" height="100%"}{: .align-center}
+
+![low](https://user-images.githubusercontent.com/80055816/211576761-ab4d7c9f-7058-4011-913a-9a41d6395100.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::InterpCapsuleHalfHeight(float DeltaTime)
+{
+	// 아래 코드가 필요한 이유는?
+	// 캡슐 크기가 작아지는 만큼 메시를 들어올리기 위해
+	const float DeltaCapsuleHalfHeight{ InterpHalfHeight - GetCapsuleComponent()->GetScaledCapsuleHalfHeight() };
+	const FVector MeshOffset{ 0.f, 0.f, -DeltaCapsuleHalfHeight };
+	GetMesh()->AddLocalOffset(MeshOffset);
+}
+```
+
+```cpp
+void AShooterCharacter::CrouchButtonPressed()
+{
+	// 아래 코드는 무엇을 하는 코드인가?
+	// 상태에 따라 마찰계수를 조절하는 코드
+	if (!GetCharacterMovement()->IsFalling())
+	{
+		bCrouching = !bCrouching;
+	}
+	if (bCrouching)
+	{
+		GetCharacterMovement()->MaxWalkSpeed = CrouchMovementSpeed;
+		GetCharacterMovement()->GroundFriction = CrouchingGroundFriction;
+	}
+	else
+	{
+		GetCharacterMovement()->MaxWalkSpeed = BaseMovementSpeed;
+		GetCharacterMovement()->GroundFriction = BaseGroundFriction;
+	}
+}
+```
+
+### 08-132 Tweaking Parameters
+
+![mouse](https://user-images.githubusercontent.com/80055816/211620522-aa34643d-b277-4f17-b091-aae11da4d7fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rotate](https://user-images.githubusercontent.com/80055816/211620650-8a5225b2-84ed-4afc-a424-18d293fd82d0.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-133 Aim Walking
+
+![space](https://user-images.githubusercontent.com/80055816/211620743-11072598-58e2-4817-bca6-9a308520976b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blend](https://user-images.githubusercontent.com/80055816/211620811-b3b9545a-15df-4cc4-a330-13792392b5d3.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 08-134 Reconciling Aiming and Reloading
+
+```cpp
+void AShooterCharacter::ReloadWeapon()
+{
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+	if (EquippedWeapon == nullptr) return;
+
+	// Do we have ammo of the correct type?
+	if (CarryingAmmo() && !EquippedWeapon->ClipIsFull())
+	{
+		// 이 코드가 여기 있어야 하는 이유는?
+		// We really only want to stop aiming if we're actually going to reload
+		if (bAiming)
+		{
+			StopAiming();
+		}
+
+		CombatState = ECombatState::ECS_Reloading;
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance && ReloadMontage)
+		{
+			AnimInstance->Montage_Play(ReloadMontage);
+			AnimInstance->Montage_JumpToSection(
+				EquippedWeapon->GetReloadMontageSection());
+		}
+	}
+}
+```
+
+<br>
+
 ## Chapter 9 Ammo Pickups
 
 ### 09-135 Item Interping Slide
@@ -180,1108 +912,6 @@ void AShooterCharacter::StartPickupSoundTimer()
 		PickupSoundResetTime);
 }
 ```
-
-<br>
-
-## Chapter 10 Outline and Glow Effects
-
-### 10-148 Outline Effect Theory
-- When Unreal Engine renders the scene, it uses several buffers
-- A buffer is just information pertaining to each pixel
-
-![buffer](https://user-images.githubusercontent.com/80055816/212023729-afa4a115-4163-4feb-af04-98f64a8c3148.PNG){: width="100%" height="100%"}{: .align-center}
-
-- Now, the reason we're talking about these buffers is because in order to create an outline effect
-
-![depth](https://user-images.githubusercontent.com/80055816/212023851-e4b0bcf1-cf3e-44be-a6b8-9cf27f5f9a15.PNG){: width="100%" height="100%"}{: .align-center}
-
-- Now, Unreal Engine has an additional buffer called custom depth, and you're allowed to select specific objects to participate in the custom depth buffer
-- A pixel that's not on an object in the scene depth buffer has a same depth of value of a thousand
-- Let's take all the pixels that have no white on them and let's call these pixels object pixels
-- No white neighbors, call these interior pixels
-- And here's the result of subtracting away the interior pixels for each object(inverse object pixels) This is the basis for creating an outline effect
-
-### 10-149 Post Process Materials
-
-![mat](https://user-images.githubusercontent.com/80055816/212042321-f12fc8fb-dc0f-4b98-8615-0c6e89466c03.PNG){: width="100%" height="100%"}{: .align-center}
-
-![pp](https://user-images.githubusercontent.com/80055816/212042472-74cc8a16-610e-49d9-b89f-8e7f1f62aa22.PNG){: width="100%" height="100%"}{: .align-center}
-
-![volume](https://user-images.githubusercontent.com/80055816/212042534-20273592-bc62-4ed1-bcf7-f835eb4bc57f.PNG){: width="100%" height="100%"}{: .align-center}
-
-![level](https://user-images.githubusercontent.com/80055816/212042586-7a54687e-3db0-4299-9de9-49f9c60f04b1.PNG){: width="100%" height="100%"}{: .align-center}
-
-![adapt](https://user-images.githubusercontent.com/80055816/212042637-453fa93f-312e-4f80-a408-0d32a5115206.PNG){: width="100%" height="100%"}{: .align-center}
-
-![color](https://user-images.githubusercontent.com/80055816/212042713-7362cc48-45d2-4ef2-9f8b-e195e7ae268b.PNG){: width="100%" height="100%"}{: .align-center}
-
-![post](https://user-images.githubusercontent.com/80055816/212042774-1575222a-9797-465f-ab25-dd94294f704d.PNG){: width="100%" height="100%"}{: .align-center}
-
-![blue](https://user-images.githubusercontent.com/80055816/212042827-1f0af172-4164-4650-b122-3de5f922c5ec.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-150 Custom Depth
-
-![check](https://user-images.githubusercontent.com/80055816/212080855-430ed1ce-dad2-493d-9f2a-8859295e585c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![buffer](https://user-images.githubusercontent.com/80055816/212080933-d2e3ea53-c548-435f-bf5c-1a0bcd5e5055.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-151 Texel Position and Size
-
-![node](https://user-images.githubusercontent.com/80055816/212102557-c817c85f-8580-455c-8936-ab12f4a20b9e.PNG){: width="100%" height="100%"}{: .align-center}
-
-- Texels are containers for pixels
-- Screen position is giving us the position on the screen and U, V coordinates for a given Texel
-
-### 10-152 Show Interior Pixels
-
-![nodenext](https://user-images.githubusercontent.com/80055816/212121253-87b14900-1eb7-4a50-926b-3f9ce1e0bdd4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![now](https://user-images.githubusercontent.com/80055816/212121359-c5810f67-419d-464c-a846-ab09439094c7.PNG){: width="100%" height="100%"}{: .align-center}
-
-![sum](https://user-images.githubusercontent.com/80055816/212121427-f8ec166a-6181-4150-9de8-a78c2e6732a7.PNG){: width="100%" height="100%"}{: .align-center}
-
-![error](https://user-images.githubusercontent.com/80055816/212121500-bab0ba9f-1208-4b19-a971-4ed6c1c07e25.PNG){: width="100%" height="100%"}{: .align-center}
-
-![conclude](https://user-images.githubusercontent.com/80055816/212121568-bb662435-994c-4ff2-9965-1ab64907be03.PNG){: width="100%" height="100%"}{: .align-center}
-
-- If it's negative after ceil and clamp, it's going to be zero And if it's positive after ceil and clamp, it's going to be one
-- Ceil에 대해 설명하면? 소수점을 무조건 올려 더 큰 정수로 만든 결과를 출력합니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Materials/ExpressionReference/Math/))
-- Clamp에 대해 설명하면? 값을 받아 최소치와 최대치로 정의된 특정 범위로 제한시킵니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Materials/ExpressionReference/Math/))
-
-### 10-153 Getting The Border
-
-![edge](https://user-images.githubusercontent.com/80055816/212136222-1f819bf6-4c6c-42f4-a80b-a3c4b9bb8655.PNG){: width="100%" height="100%"}{: .align-center}
-
-- At Multiply, the only thing that these two have in common that are both one is the border
-
-### 10-154 Adding the Border to the Scene Color
-
-![end](https://user-images.githubusercontent.com/80055816/212145584-5b8d2cbf-4146-4ac7-856c-bdbc99892307.PNG){: width="100%" height="100%"}{: .align-center}
-
-- Lerp 노드에 대해 설명하면? If Alpha is 0.0, the first input is used If Alpha is 1.0, the second input is used ([**참고**](https://docs.unrealengine.com/4.27/en-US/RenderingAndGraphics/Materials/ExpressionReference/Math/#linearinterpolate))
-
-![second](https://user-images.githubusercontent.com/80055816/212145650-141bdc78-ac5b-41ab-bbdb-91e3c5895a33.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-155 Hide Occluded Pixels
-
-![ppre](https://user-images.githubusercontent.com/80055816/212164055-6015d741-4d17-4bed-b644-2e980809c9de.PNG){: width="100%" height="100%"}{: .align-center}
-
-![pre](https://user-images.githubusercontent.com/80055816/212164104-3a8d587e-ffaf-4b78-9c5b-27e42feb0be5.PNG){: width="100%" height="100%"}{: .align-center}
-
-![conclude](https://user-images.githubusercontent.com/80055816/212164152-75e99880-7f39-4bb6-b5d8-aaf600542b1c.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-156 Change Outline Thickness
-
-![texel](https://user-images.githubusercontent.com/80055816/212245353-126e05ab-7903-4b5f-9b9f-a2035542d3c4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![uv](https://user-images.githubusercontent.com/80055816/212245384-8bbc80e8-8af7-4646-9429-cb72d3a8b437.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-157 Color Tinting Effect
-
-![conclude](https://user-images.githubusercontent.com/80055816/212249516-ca8bb7a5-cce2-4670-9f92-9eff82458d0c.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-158 Multiple Colors with Custom Depth Stencil
-
-![stencil](https://user-images.githubusercontent.com/80055816/212295399-85b6098e-87d1-4647-a0dd-bbac4d7871e8.PNG){: width="100%" height="100%"}{: .align-center}
-
-![value](https://user-images.githubusercontent.com/80055816/212295469-f96e39c3-61fd-46a3-9d75-7d5035da01ec.PNG){: width="100%" height="100%"}{: .align-center}
-
-![blue](https://user-images.githubusercontent.com/80055816/212295539-9f78a430-4a07-436b-b457-fd4485a0246e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![create](https://user-images.githubusercontent.com/80055816/212295623-ac3d7f9a-6d2e-4e98-95b8-8dd152c1e67c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![dif](https://user-images.githubusercontent.com/80055816/212295691-e063e74a-c531-47fb-9c3f-613b1990cf62.PNG){: width="100%" height="100%"}{: .align-center}
-
-![line](https://user-images.githubusercontent.com/80055816/212295792-a3ddc56e-babc-4163-a532-90926aa44234.PNG){: width="100%" height="100%"}{: .align-center}
-
-![soft](https://user-images.githubusercontent.com/80055816/212295867-351c8972-ba86-41a5-bb27-a8fb7a67e356.PNG){: width="100%" height="100%"}{: .align-center}
-
-![occpro](https://user-images.githubusercontent.com/80055816/212295907-6773a82d-fc87-49d4-bec9-24c35550f8eb.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-159 Blend Materials with Material Functions
-
-![mf](https://user-images.githubusercontent.com/80055816/212316256-0f26b55b-6330-4fd7-82cb-9e7438fc1eda.PNG){: width="100%" height="100%"}{: .align-center}
-
-![mat](https://user-images.githubusercontent.com/80055816/212316292-91918a84-1a1c-4142-8c2f-cdbfd5d717bd.PNG){: width="100%" height="100%"}{: .align-center}
-
-![drag](https://user-images.githubusercontent.com/80055816/212316325-65034fcc-68d0-4577-a3e2-edc050389e27.PNG){: width="100%" height="100%"}{: .align-center}
-
-![cube](https://user-images.githubusercontent.com/80055816/212316362-044abca2-5004-4fcd-81d8-dc46b823a5a2.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ori](https://user-images.githubusercontent.com/80055816/212316400-95981817-49ef-43db-9286-126459d919f3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![next](https://user-images.githubusercontent.com/80055816/212316428-8fee8ce9-c7be-42ae-81f5-3612fc0a27a4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![guns](https://user-images.githubusercontent.com/80055816/212316469-cbe04123-a5bb-4930-b9b3-84ff4a0a537b.PNG){: width="100%" height="100%"}{: .align-center}
-
-![half](https://user-images.githubusercontent.com/80055816/212316529-85586b15-ab54-4b56-bb6f-8bd87edb11b5.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-160 Fresnel Effect on Glow Material
-
-![par](https://user-images.githubusercontent.com/80055816/212347159-ae999d1e-11cc-49c8-a944-2ad1d145db74.PNG){: width="100%" height="100%"}{: .align-center}
-
-![fres](https://user-images.githubusercontent.com/80055816/212347225-6df39e58-48e0-4a28-b12e-03bd721afd1c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![change](https://user-images.githubusercontent.com/80055816/212347278-c0a31266-1c81-40e1-9ec1-8a92d2df6ef3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ref](https://user-images.githubusercontent.com/80055816/212347344-e56113e7-2ae0-4cc4-a63b-d766011d7e56.PNG){: width="100%" height="100%"}{: .align-center}
-
-![more](https://user-images.githubusercontent.com/80055816/212347406-77742295-63a1-4dcc-b8cd-ec6431732f66.PNG){: width="100%" height="100%"}{: .align-center}
-
-![effect](https://user-images.githubusercontent.com/80055816/212347489-a64cdba6-20cd-496e-a43e-c60c37525e2b.PNG){: width="100%" height="100%"}{: .align-center}
-
-![convert](https://user-images.githubusercontent.com/80055816/212347538-47547f3d-6536-433d-a882-3e600522cade.PNG){: width="100%" height="100%"}{: .align-center}
-
-![last](https://user-images.githubusercontent.com/80055816/212347597-df90a524-fd05-474d-a868-d13b8bd68288.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-161 Material Instances
-
-![ins](https://user-images.githubusercontent.com/80055816/212387286-4d12b2ac-57f8-4b8e-b442-9e17cdfab87e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![import](https://user-images.githubusercontent.com/80055816/212387345-e8a3b9d5-9e06-424f-baa5-7a5f8ea7b292.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-162 Scrolling Lines Effect
-
-![texture](https://user-images.githubusercontent.com/80055816/212457197-e02439dc-d83f-4d7b-b7ba-ac90416cb9e3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![problem](https://user-images.githubusercontent.com/80055816/212466740-e147f4fb-8fdf-45af-a57a-b1bc9561ef11.PNG){: width="100%" height="100%"}{: .align-center}
-
-![size](https://user-images.githubusercontent.com/80055816/212457279-bf385b13-1b76-42b2-a0cd-2d2773aff82b.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-163 Enable Custom Depth in C++
-
-```cpp
-void AShooterCharacter::TraceForItems()
-{
-	if (bShouldTraceForItems)
-	{
-		FHitResult ItemTraceResult;
-		FVector HitLocation;
-		TraceUnderCrosshairs(ItemTraceResult, HitLocation);
-		if (ItemTraceResult.bBlockingHit)
-		{
-			TraceHitItem = Cast<AItem>(ItemTraceResult.Actor);
-			if (TraceHitItem && TraceHitItem->GetPickupWidget())
-			{
-				TraceHitItem->GetPickupWidget()->SetVisibility(true);
-
-				// Enable Custom Depth
-				TraceHitItem->EnableCustomDepth();
-			}
-
-			if (TraceHitItemLastFrame)
-			{
-				if (TraceHitItem != TraceHitItemLastFrame)
-				{
-					TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
-
-					// Disable Custom Depth
-					TraceHitItemLastFrame->DisableCustomDepth();
-				}
-			}
-			TraceHitItemLastFrame = TraceHitItem;
-		}
-	}
-	else if (TraceHitItemLastFrame)
-	{
-		TraceHitItemLastFrame->GetPickupWidget()->SetVisibility(false);
-
-		// Disable Custom Depth
-		TraceHitItemLastFrame->DisableCustomDepth();
-	}
-}
-```
-
-### 10-164 Dynamic Material Instances
-- So we're going to add this material index as a variable on the item class
-- Now, the next thing we're going to do if we want to be able to change materials properties at runtime is we're going to use something called a dynamic material A dynamic material instance allows us to use a material instance and set properties on that material instance at runtime
-- So why two different variables? The material instance is what we will select in our blueprint That way we'll know which material instance to use And once we create a dynamic material instance, we're going to use this material instance in that dynamic material instance
-- The construction script is a script that runs under certain conditions It runs if we move our actor in the world or if we change a property on the actor This is run before the game starts Nothing in the construction script will be run during the game
-- OnConstruction() is the C++ version of the construction script
-
-![dynamic](https://user-images.githubusercontent.com/80055816/212462543-b6753ef7-ee99-45c1-9511-78f1dc9255ac.PNG){: width="100%" height="100%"}{: .align-center}
-
-```cpp
-void AItem::OnConstruction(const FTransform& Transform)
-{
-	if (MaterialInstance)
-	{
-		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
-
-		// It's going to assign this instance for the material with the given material index
-		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
-	}
-}
-```
-
-### 10-165 Enable Glow Material in C++
-
-![code](https://user-images.githubusercontent.com/80055816/212466559-dd1293ae-cceb-4032-8533-305ea870d72a.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-166 Show Outline While Interping
-
-![type](https://user-images.githubusercontent.com/80055816/212470928-be6e2a18-8966-4620-b3af-d7f0f0866b30.PNG){: width="100%" height="100%"}{: .align-center}
-
-![in](https://user-images.githubusercontent.com/80055816/212470940-de2660c7-8e42-4c04-b860-48e445784c47.PNG){: width="100%" height="100%"}{: .align-center}
-
-```cpp
-void AItem::StartItemCurve(AShooterCharacter* Char)
-{
-	//..
-
-	// 이코드가 필요한 이유는?
-	// ItemCurve가 진행되는 동안에는 CustomDepth가 살아있어야 하기 때문이다
-	bCanChangeCustomDepth = false;
-}
-```
-
-### 10-167 Curve Vector for Material Parameters
-
-![curve](https://user-images.githubusercontent.com/80055816/212482320-c5272452-7da0-40b8-b4c0-1fbd99aa986c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![addkey](https://user-images.githubusercontent.com/80055816/212483481-45a406c3-e0e4-40c0-a974-e2bd26335e40.PNG){: width="100%" height="100%"}{: .align-center}
-
-![palse](https://user-images.githubusercontent.com/80055816/212482359-1039495b-1c35-400d-ac68-df03d50f192a.PNG){: width="100%" height="100%"}{: .align-center}
-
-```cpp
-void AItem::UpdatePulse()
-{
-	if (ItemState != EItemState::EIS_Pickup) return;
-
-	const float ElapsedTime{ GetWorldTimerManager().GetTimerElapsed(PulseTimer) };
-	if (PulseCurve)
-	{
-		FVector CurveValue{ PulseCurve->GetVectorValue(ElapsedTime) };
-
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("GlowAmount"), CurveValue.X * GlowAmount);
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelExponent"), CurveValue.Y * FresnelExponent);
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelReflectFraction"), CurveValue.Z * FresnelReflectFraction);
-	}
-}
-```
-
-### 10-168 Material Pulse When Interping
-
-![again](https://user-images.githubusercontent.com/80055816/212486969-370e42b1-3876-474d-ac2b-2ea9e7b25636.PNG){: width="100%" height="100%"}{: .align-center}
-
-![sector](https://user-images.githubusercontent.com/80055816/212486978-d894f240-2129-4e24-b9fb-fced1d8ba5ea.PNG){: width="100%" height="100%"}{: .align-center}
-
-![conclude](https://user-images.githubusercontent.com/80055816/212487042-3a8db6c1-ef56-43f6-8103-dde10e3b7ed1.PNG){: width="100%" height="100%"}{: .align-center}
-
-```cpp
-void AItem::UpdatePulse()
-{
-	float ElapsedTime{};
-	FVector CurveValue{};
-	switch (ItemState)
-	{
-	case EItemState::EIS_Pickup:
-		if (PulseCurve)
-		{
-			ElapsedTime = GetWorldTimerManager().GetTimerElapsed(PulseTimer);
-			CurveValue = PulseCurve->GetVectorValue(ElapsedTime);
-		}
-		break;
-	case EItemState::EIS_EquipInterping:
-		if (InterpPulseCurve)
-		{
-			// ItemInterpTimer를 사용해도 되는 이유는?
-			// itemZCurve의 특정 구간과 MaterialPulseCurve의 특정 구간을 동기화 시켜
-			// 해당 구간을 반짝이게 하고 싶기 때문이다
-			ElapsedTime = GetWorldTimerManager().GetTimerElapsed(ItemInterpTimer);
-			CurveValue = InterpPulseCurve->GetVectorValue(ElapsedTime);
-		}
-		break;
-	}
-	if (DynamicMaterialInstance)
-	{
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("GlowAmount"), CurveValue.X * GlowAmount);
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelExponent"), CurveValue.Y * FresnelExponent);
-		DynamicMaterialInstance->SetScalarParameterValue(TEXT("FresnelReflectFraction"), CurveValue.Z * FresnelReflectFraction);
-	}
-}
-```
-
-```cpp
-void AItem::StartItemCurve(AShooterCharacter* Char)
-{
-	//..
-
-	// 이 코드의 목적은?
-	// 타이머 초기화
-	GetWorldTimerManager().ClearTimer(PulseTimer);
-
-	//..
-}
-```
-
-### 10-169 Inventory Slot Widget
-
-![2d](https://user-images.githubusercontent.com/80055816/212490566-8180f146-97c0-4beb-aa51-11dafb7f9433.PNG){: width="100%" height="100%"}{: .align-center}
-
-![bp](https://user-images.githubusercontent.com/80055816/212490573-be885e9f-5dfc-4a46-93a1-1d6078d3c850.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ammo](https://user-images.githubusercontent.com/80055816/212490578-e7595ae1-fb21-40eb-9a82-a31717a22165.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-170 Inventory Bar Widget
-
-![create](https://user-images.githubusercontent.com/80055816/212542843-23a016fe-39a9-48c0-bec7-f66ebdd45ffe.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ammo](https://user-images.githubusercontent.com/80055816/212542855-7383ca5d-1f35-4be8-86a9-ee2b50e65522.PNG){: width="100%" height="100%"}{: .align-center}
-
-![end](https://user-images.githubusercontent.com/80055816/212542891-a996905d-ec04-443f-8705-f8697402b5e9.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-171 Add Button Icons to the Inventory Bar
-
-![conclude](https://user-images.githubusercontent.com/80055816/212545094-e968688c-b7a7-4d21-8e96-9a22bdcfee3f.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-172 Add Inventory Bar to the ShooterHUDOverlay
-
-![insert](https://user-images.githubusercontent.com/80055816/212546500-24e6bcdf-89fb-4960-897e-607edd81f355.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-173 Inventory Array in C++
-
-```cpp
-class SHOOTER_API AShooterCharacter : public ACharacter
-{
-	//..
-
-	// 헤더파일에서 유니폼 초기화가 가능하다
-	const int32 INVENTORY_CAPACITY{ 6 };
-
-	//..
-}
-```
-
-![inven](https://user-images.githubusercontent.com/80055816/212555015-de5459ee-a3e9-4eac-bcf3-dea09270ecd4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![slot](https://user-images.githubusercontent.com/80055816/212555045-301becaf-fe0b-4356-bf6f-dfad2316c2f2.PNG){: width="100%" height="100%"}{: .align-center}
-
-![last](https://user-images.githubusercontent.com/80055816/212555062-2aac2606-f25b-4a0a-b0cd-b721f98220e1.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-174 Binding the Background Icon
-
-![bind](https://user-images.githubusercontent.com/80055816/212611576-ea0b3a6b-25f4-4df1-9cfd-c94bb2e02054.PNG){: width="100%" height="100%"}{: .align-center}
-
-![button](https://user-images.githubusercontent.com/80055816/212611642-722ea852-6155-40ca-947d-4799267bb0cc.PNG){: width="100%" height="100%"}{: .align-center}
-
-![good](https://user-images.githubusercontent.com/80055816/212611685-3f549270-8b71-4fbf-bbdb-cc4cfe0ebce1.PNG){: width="100%" height="100%"}{: .align-center}
-
-![wis](https://user-images.githubusercontent.com/80055816/212611732-d93a4f85-ce1c-44da-b1a5-bc68f10e80fb.PNG){: width="100%" height="100%"}{: .align-center}
-
-![node](https://user-images.githubusercontent.com/80055816/212611767-534c341a-1df5-4559-9cbd-d44dc2015003.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-175 Binding the Item Icon
-
-![newbind](https://user-images.githubusercontent.com/80055816/212630955-37700503-5c79-48ef-b1ca-d55c4b2f84e4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![end](https://user-images.githubusercontent.com/80055816/212631004-cf72d69d-88cc-4c89-9362-569cbf6abff1.PNG){: width="100%" height="100%"}{: .align-center}
-
-![possible](https://user-images.githubusercontent.com/80055816/212631050-d5314a2b-2f94-4a14-aca0-f9ffe73a2b18.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-176 Binding the Ammo Icon
-
-![re](https://user-images.githubusercontent.com/80055816/212642837-e95964f9-6d5e-4506-b0d7-b4ac20a3d4bf.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ammo](https://user-images.githubusercontent.com/80055816/212642904-53182702-f787-4d48-9b68-5f38b49f2b72.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-177 Binding Weapon Ammo Text
-
-![createb](https://user-images.githubusercontent.com/80055816/212689524-3588bbc5-f7d8-419f-982a-2b9d12909adb.PNG){: width="100%" height="100%"}{: .align-center}
-
-![nice](https://user-images.githubusercontent.com/80055816/212689592-12bd0dc9-07dc-4a54-9e90-446b8dbfd446.PNG){: width="100%" height="100%"}{: .align-center}
-
-![value](https://user-images.githubusercontent.com/80055816/212689652-1c7c4c72-8eb2-4745-a883-a830de21c46e.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-178 Set Item State for Picked Up
-
-```cpp
-void AShooterCharacter::GetPickupItem(AItem* Item)
-{
-	//..
-
-	if (Weapon)
-	{
-		// 이 코드의 결과는?
-		// 슬롯 인덱스가 하나씩 밀려나간다
-		Weapon->SetSlotIndex(Inventory.Num());
-		if (Inventory.Num() < INVENTORY_CAPACITY)
-		{
-			Inventory.Add(Weapon);
-			Weapon->SetItemState(EItemState::EIS_PickedUp);
-		}
-		else // Inventory is full! Swap with EquippedWeapon
-		{
-			SwapWeapon(Weapon);
-		}
-	}
-
-	//..
-}
-```
-
-### 10-179 Send Slot Index with a Delegate
-
-![new](https://user-images.githubusercontent.com/80055816/212706263-3bbb1cc8-3380-45b7-b6f5-e29af7a49de3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![del](https://user-images.githubusercontent.com/80055816/212706447-a9314b1d-6999-4b57-b2fe-0ca511c9d31c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![nodegood](https://user-images.githubusercontent.com/80055816/212706505-1eb516c6-264d-4145-961e-904b617f6de4.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-180 Play Widget Animation
-
-![ani](https://user-images.githubusercontent.com/80055816/212728664-d6c9bd97-f2d1-4c8f-9120-5a0900907a4d.PNG){: width="100%" height="100%"}{: .align-center}
-
-![move](https://user-images.githubusercontent.com/80055816/212728735-ff771419-6995-4793-9ad2-505237d1b06c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![box](https://user-images.githubusercontent.com/80055816/212728785-3688e444-3313-48eb-be70-e277860d87d7.PNG){: width="100%" height="100%"}{: .align-center}
-
-![reverse](https://user-images.githubusercontent.com/80055816/212728824-c5afe10f-e9e4-4fad-872a-0a24e83fce6e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![col](https://user-images.githubusercontent.com/80055816/212728868-b293414e-7444-420b-b451-f974ff0aa1e5.PNG){: width="100%" height="100%"}{: .align-center}
-
-![invenbar](https://user-images.githubusercontent.com/80055816/212728921-1f5fc47b-d2e9-49e1-b0a6-8c22162895f6.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-181 Exchange Inventory Items
-
-```cpp
-void AShooterCharacter::SwapWeapon(AWeapon* WeaponToSwap)
-{
-	//..
-
-	// 아래 코드에 대해 설명하면?
-	// 인벤토리의 아이템이 교체된다
-	if (Inventory.Num() - 1 >= EquippedWeapon->GetSlotIndex())
-	{
-		Inventory[EquippedWeapon->GetSlotIndex()] = WeaponToSwap;
-		WeaponToSwap->SetSlotIndex(EquippedWeapon->GetSlotIndex());
-	}
-
-	//..
-}
-```
-
-```cpp
-void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
-{
-	if ((CurrentItemIndex == NewItemIndex) || (NewItemIndex >= Inventory.Num()) || (CombatState != ECombatState::ECS_Unoccupied)) return;
-	auto OldEquippedWeapon = EquippedWeapon;
-	auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
-	EquipWeapon(NewWeapon);
-
-	// 아래 상태는 무슨 상태로 전환 되는 것인지 설명하면?
-	// 장착하고 있지는 않으나 인벤토리에 있는 상태
-	OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
-	NewWeapon->SetItemState(EItemState::EIS_Equipped);
-}
-```
-
-### 10-182 Disable Trace While Interping
-
-```cpp
-void AShooterCharacter::SelectButtonPressed()
-{
-	if (CombatState != ECombatState::ECS_Unoccupied) return;
-	if (TraceHitItem)
-	{
-		TraceHitItem->StartItemCurve(this);
-
-		// 아래 코드가 필요한 이유는?
-		// It's not going to allow us to hit the select button again and
-		// Start the item curve again when we just started the item curve
-		TraceHitItem = nullptr;
-	}
-}
-```
-
-### 10-183 Prevent Swapping while Reloading
-
-```cpp
-void AShooterCharacter::SelectButtonPressed()
-{
-	// 아래 코드가 필요한 이유는?
-	// ECS_Unoccupied 상태가 아니면 아이템을 얻지 못하게 하기 위함
-	if (CombatState != ECombatState::ECS_Unoccupied) return;
-	if (TraceHitItem)
-	{
-		TraceHitItem->StartItemCurve(this);
-		TraceHitItem = nullptr;
-	}
-}
-```
-
-```cpp
-void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
-{
-	// 아래 코드에서 가장 중요한 것을 설명하면?
-	// ECombatState::ECS_Unoccupied 상태가 아니면 아이템 교환을 못하게 한다
-	if ((CurrentItemIndex == NewItemIndex) || (NewItemIndex >= Inventory.Num()) || (CombatState != ECombatState::ECS_Unoccupied)) return;
-	auto OldEquippedWeapon = EquippedWeapon;
-	auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
-	EquipWeapon(NewWeapon);
-
-	OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
-	NewWeapon->SetItemState(EItemState::EIS_Equipped);
-}
-```
-
-### 10-184 Equip Montage
-
-![dup](https://user-images.githubusercontent.com/80055816/212833407-e33e9430-a25d-40cf-8466-740e4d8648eb.PNG){: width="100%" height="100%"}{: .align-center}
-
-![remove](https://user-images.githubusercontent.com/80055816/212833538-f4d5f791-cbb7-4849-bf29-5eb7713a1b4e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![mont](https://user-images.githubusercontent.com/80055816/212833568-ae53e418-cbca-4b70-b2b9-a76d991cdad2.PNG){: width="100%" height="100%"}{: .align-center}
-
-![info](https://user-images.githubusercontent.com/80055816/212833605-cc227e29-aca3-46d3-a8f9-169884556984.PNG){: width="100%" height="100%"}{: .align-center}
-
-![finish](https://user-images.githubusercontent.com/80055816/212833677-fa46a64f-6e3a-4711-bf83-492bfc0cabf3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![each](https://user-images.githubusercontent.com/80055816/212833746-8df94bf5-7964-43eb-8538-714d4699df9a.PNG){: width="100%" height="100%"}{: .align-center}
-
-![zero](https://user-images.githubusercontent.com/80055816/212833781-00c4d21d-9eff-4ad7-b09a-ae80db5935d6.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-185 Play Equip Sound while Swapping
-
-```cpp
-void AItem::PlayEquipSound(bool bForcePlaySound)
-{
-	if (Character)
-	{
-		// bForcePlaySound 매개변수가 필요한 이유는?
-		// 사운드를 강제적으로 내야할 상황에 사용하기 위함이다
-		if (bForcePlaySound)
-		{
-			if (EquipSound)
-			{
-				UGameplayStatics::PlaySound2D(this, EquipSound);
-			}
-		}
-		else if (Character->ShouldPlayEquipSound())
-		{
-			Character->StartEquipSoundTimer();
-			if (EquipSound)
-			{
-				UGameplayStatics::PlaySound2D(this, EquipSound);
-			}
-		}
-	}
-}
-```
-
-### 10-186 Swap Pickup Text
-
-![bind](https://user-images.githubusercontent.com/80055816/212851081-5eb09a48-a993-402e-9907-701b742bceb3.PNG){: width="100%" height="100%"}{: .align-center}
-
-![node](https://user-images.githubusercontent.com/80055816/212851143-12d14971-7ea0-4a87-99f6-d1b1d7608095.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-187 Swap Animation Limitations
-
-```cpp
-void AShooterCharacter::EquipWeapon(AWeapon* WeaponToEquip, bool bSwapping)
-{
-	if (WeaponToEquip)
-	{
-		const USkeletalMeshSocket* HandSocket = GetMesh()->GetSocketByName(
-			FName("RightHandSocket"));
-		if (HandSocket)
-		{
-			// Attach the Weapon to the hand socket RightHandSocket
-			HandSocket->AttachActor(WeaponToEquip, GetMesh());
-		}
-
-		if (EquippedWeapon == nullptr)
-		{
-			// -1 == no EquippedWeapon yet. No need to reverse the icon animation
-			EquipItemDelegate.Broadcast(-1, WeaponToEquip->GetSlotIndex());
-		}
-		// bSwapping 변수가 필요한 이유를 설명하면?
-		// 무기를 교체하는 상황이 아니라 무기를 얻고있는 상황에서는 UI 애니메이션이 동작하지 않게 하기위해
-		else if(!bSwapping)
-		{
-			EquipItemDelegate.Broadcast(EquippedWeapon->GetSlotIndex(), WeaponToEquip->GetSlotIndex());
-		}
-
-		// Set EquippedWeapon to the newly spawned Weapon
-		EquippedWeapon = WeaponToEquip;
-		EquippedWeapon->SetItemState(EItemState::EIS_Equipped);
-	}
-}
-```
-
-```cpp
-void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
-{
-	// ECombatState::ECS_Equipping 상태를 추가한 이유를 설명하면?
-	// 무기를 교체중인 상황에서 다시 교체를 시도했을때 기다리지 않고 교체되게 하기 위함이다
-	const bool bCanExchangeItems =
-		(CurrentItemIndex != NewItemIndex) &&
-		(NewItemIndex < Inventory.Num()) &&
-		(CombatState == ECombatState::ECS_Unoccupied || CombatState == ECombatState::ECS_Equipping);
-
-	if (bCanExchangeItems)
-	{
-		auto OldEquippedWeapon = EquippedWeapon;
-		auto NewWeapon = Cast<AWeapon>(Inventory[NewItemIndex]);
-		EquipWeapon(NewWeapon);
-
-		OldEquippedWeapon->SetItemState(EItemState::EIS_PickedUp);
-		NewWeapon->SetItemState(EItemState::EIS_Equipped);
-
-		CombatState = ECombatState::ECS_Equipping;
-		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
-		if (AnimInstance && EquipMontage)
-		{
-			AnimInstance->Montage_Play(EquipMontage, 1.0f);
-			AnimInstance->Montage_JumpToSection(FName("Equip"));
-		}
-		NewWeapon->PlayEquipSound(true);
-	}
-}
-```
-
-### 10-188 Create Icon Animation
-
-![margin](https://user-images.githubusercontent.com/80055816/212942216-f959e880-36b3-479a-9edb-1dc2ba3e73fc.png){: width="100%" height="100%"}{: .align-center}
-
-![trackone](https://user-images.githubusercontent.com/80055816/212912156-abd96ec7-7ac7-4acd-a22f-162855592f6a.PNG){: width="100%" height="100%"}{: .align-center}
-
-![render](https://user-images.githubusercontent.com/80055816/212912213-bd6d195b-2406-4809-968e-901ee9861df6.PNG){: width="100%" height="100%"}{: .align-center}
-
-![small](https://user-images.githubusercontent.com/80055816/212912260-a1388412-1eb7-4b97-838e-1986a9adea26.PNG){: width="100%" height="100%"}{: .align-center}
-
-![arrow](https://user-images.githubusercontent.com/80055816/212912323-aa5aeeae-8d91-4fd7-b722-ab7dcc3dfc89.PNG){: width="100%" height="100%"}{: .align-center}
-
-![op](https://user-images.githubusercontent.com/80055816/212912462-6ffd2fc7-bab5-4af3-940f-e60d7e16632c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![scale](https://user-images.githubusercontent.com/80055816/212912516-f011246c-c28d-4a34-bf73-8ce75ac5d072.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-189 Create Icon Highlight Delegate
-
-```cpp
-// 아이콘 애니메이션 델리게이트 선언
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FHighlightIconDelegate, int32, SlotIndex, bool, bStartAnimation);
-```
-
-### 10-190 Functions to Broadcast Icon Highlight Delegate
-
-```cpp
-void AShooterCharacter::HighlightInventorySlot()
-{
-	// 아래 코드에 대해 설명하면?
-	// 델리게이트를 호출하는 코드이다
-	const int32 EmptySlot{ GetEmptyInventorySlot() };
-	HighlightIconDelegate.Broadcast(EmptySlot, true);
-	HighlightedSlot = EmptySlot;
-}
-```
-
-### 10-191 Calling Highlight and UnHighlight Inventory Slot
-
-```cpp
-void AItem::FinishInterping()
-{
-	bInterping = false;
-	if (Character)
-	{
-		Character->IncrementInterpLocItemCount(InterpLocIndex, -1);
-		Character->GetPickupItem(this);
-
-		// Important
-		Character->UnHighlightInventorySlot();
-	}
-
-	//..
-}
-```
-
-```cpp
-void AItem::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
-{
-	if (OtherActor)
-	{
-		AShooterCharacter* ShooterCharacter = Cast<AShooterCharacter>(OtherActor);
-		if (ShooterCharacter)
-		{
-			ShooterCharacter->IncrementOverlappedItemCount(1);
-
-			// Important
-			ShooterCharacter->UnHighlightInventorySlot();
-		}
-	}
-}
-```
-
-### 10-192 Assigning the Icon Delegate
-
-![assign](https://user-images.githubusercontent.com/80055816/212966168-2239bc3b-6054-48c4-b8e7-f7ba943b061c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![next](https://user-images.githubusercontent.com/80055816/213091508-16972b27-8572-49cb-84d5-0e3d0ba54a20.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ani](https://user-images.githubusercontent.com/80055816/212966223-34a602ca-00d0-4a74-b611-fdcf8a8a1ff0.PNG){: width="100%" height="100%"}{: .align-center}
-
-![hidden](https://user-images.githubusercontent.com/80055816/212966282-f5b68203-e97e-41d1-aedd-08416b09da5c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![high](https://user-images.githubusercontent.com/80055816/212966332-d7438c80-7a35-4ec8-ba09-ba72a1bcec89.PNG){: width="100%" height="100%"}{: .align-center}
-
-![vari](https://user-images.githubusercontent.com/80055816/212966386-e1eb249d-b8d9-4cc8-b6a2-000929144b10.PNG){: width="100%" height="100%"}{: .align-center}
-
-![copy](https://user-images.githubusercontent.com/80055816/212966436-8c698b88-6b49-454a-87d5-c141377d968b.PNG){: width="100%" height="100%"}{: .align-center}
-
-![nice](https://user-images.githubusercontent.com/80055816/212966492-321f5a0d-7f02-408f-a1ee-8f7fe376051f.PNG){: width="100%" height="100%"}{: .align-center}
-
-![conre](https://user-images.githubusercontent.com/80055816/212966535-a3a68087-0aaf-4bc2-9641-a8d26c0f7e2f.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-193 Data Tables FTableRowBase
-
-```cpp
-USTRUCT(BlueprintType)
-struct FItemRarityTable : public FTableRowBase
-{
-	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FLinearColor GlowColor;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FLinearColor LightColor;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		FLinearColor DarkColor;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 NumberOfStars;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UTexture2D* IconBackground;
-};
-```
-
-```cpp
-class SHOOTER_API AItem : public AActor
-{
-	GENERATED_BODY()
-
-	//..
-
-	/** Item Rarity data table */
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
-		class UDataTable* ItemRarityDataTable;
-
-	//..
-}
-```
-
-- Now, UDataTable is not the same thing as FTableRowBase
-- OnConstruction() 함수에 대해 설명하면? It gets called When the item changes or when we move it in the world
-
-![table](https://user-images.githubusercontent.com/80055816/212987240-6da0f759-f1dc-478e-ba00-7e659f933929.PNG){: width="100%" height="100%"}{: .align-center}
-
-![data](https://user-images.githubusercontent.com/80055816/212987299-e02c0514-c7b2-41dd-a1bd-ffc486a79c88.PNG){: width="100%" height="100%"}{: .align-center}
-
-![ref](https://user-images.githubusercontent.com/80055816/212987362-6795c20c-95d7-4615-9bab-440ed32d8a60.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-194 Accessing Data Table Rows in C++
-
-```cpp
-void AItem::OnConstruction(const FTransform& Transform)
-{
-	if (MaterialInstance)
-	{
-		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
-		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
-	}
-
-	EnableGlowMaterial();
-
-	// Load the data in the Item Rarity Data Table
-
-	// Path to the Item Rarity Data Table
-	FString RarityTablePath(TEXT("DataTable'/Game/_Game/DataTable/ItemRarityDataTable.ItemRarityDataTable'"));
-	UDataTable* RarityTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *RarityTablePath));
-	if (RarityTableObject)
-	{
-		FItemRarityTable* RarityRow = nullptr;
-		switch (ItemRarity)
-		{
-		case EItemRarity::EIR_Damaged:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Damaged"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Common:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Common"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Uncommon:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Uncommon"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Rare:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Rare"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Legendary:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Legendary"), TEXT(""));
-			break;
-		}
-
-		if (RarityRow)
-		{
-			GlowColor = RarityRow->GlowColor;
-			LightColor = RarityRow->LightColor;
-			DarkColor = RarityRow->DarkColor;
-			NumberOfStars = RarityRow->NumberOfStars;
-			IconBackground = RarityRow->IconBackground;
-		}
-	}
-}
-```
-
-![rarity](https://user-images.githubusercontent.com/80055816/213094855-0afae333-b835-47e3-a05a-f84725e6e5a7.PNG){: width="100%" height="100%"}{: .align-center}
-
-- OnConstruction() 함수에 대해 설명하면? It gets called When the item changes or when we move it in the world
-- StaticLoadObject()에 대해 설명하면? Find or load an object by string name with optional outer and filename specifications ([**참고**](https://docs.unrealengine.com/4.27/en-US/API/Runtime/CoreUObject/UObject/StaticLoadObject/))
-
-### 10-195 Setting Widget Colors from Data Table Values
-
-![sel](https://user-images.githubusercontent.com/80055816/213099369-ac7f9cad-914f-488f-a438-ec7c7e078f84.PNG){: width="100%" height="100%"}{: .align-center}
-
-![seln](https://user-images.githubusercontent.com/80055816/213099428-a06abdca-a1ba-4475-b9e5-2e630fdafd7e.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 10-196 Setting Glow Color from Data Table Value
-
-```cpp
-void AItem::OnConstruction(const FTransform& Transform)
-{
-	// Load the data in the Item Rarity Data Table
-
-	// Path to the Item Rarity Data Table
-	FString RarityTablePath(TEXT("DataTable'/Game/_Game/DataTable/ItemRarityDataTable.ItemRarityDataTable'"));
-	UDataTable* RarityTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *RarityTablePath));
-	if (RarityTableObject)
-	{
-		FItemRarityTable* RarityRow = nullptr;
-		switch (ItemRarity)
-		{
-		case EItemRarity::EIR_Damaged:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Damaged"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Common:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Common"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Uncommon:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Uncommon"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Rare:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Rare"), TEXT(""));
-			break;
-		case EItemRarity::EIR_Legendary:
-			RarityRow = RarityTableObject->FindRow<FItemRarityTable>(FName("Legendary"), TEXT(""));
-			break;
-		}
-
-		if (RarityRow)
-		{
-			GlowColor = RarityRow->GlowColor;
-			LightColor = RarityRow->LightColor;
-			DarkColor = RarityRow->DarkColor;
-			NumberOfStars = RarityRow->NumberOfStars;
-			IconBackground = RarityRow->IconBackground;
-		}
-	}
-
-	// 이코드가 여기있는 이유는?
-	// 위에서 GlowColor를 불러오고 난뒤 Set을 해줘야 하기 때문이다
-	if (MaterialInstance)
-	{
-		DynamicMaterialInstance = UMaterialInstanceDynamic::Create(MaterialInstance, this);
-		DynamicMaterialInstance->SetVectorParameterValue(TEXT("FresnelColor"), GlowColor);
-		ItemMesh->SetMaterial(MaterialIndex, DynamicMaterialInstance);
-
-		EnableGlowMaterial();
-	}
-}
-```
-
-### 10-197 Set Post Process Highlight Color from Data Table
-
-```cpp
-struct FItemRarityTable : public FTableRowBase
-{
-	GENERATED_BODY()
-
-	//..
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 CustomDepthStencil;
-};
-```
-![remind](https://user-images.githubusercontent.com/80055816/213106037-ef339f0c-1d60-4087-874c-b48eacf19c17.PNG){: width="100%" height="100%"}{: .align-center}
-
-![table](https://user-images.githubusercontent.com/80055816/213106105-cf6aa193-8c26-4892-bb63-a0cc4ea32cb6.PNG){: width="100%" height="100%"}{: .align-center}
-
-```cpp
-void AItem::OnConstruction(const FTransform& Transform)
-{
-	//..
-
-	if (GetItemMesh())
-	{
-		GetItemMesh()->SetCustomDepthStencilValue(RarityRow->CustomDepthStencil);
-	}
-
-	//..
-}
-```
-
-- What does StaticLoadObject do? Takes a UClass and a path and constructs an instance of the specified class
-
-<br>
-
-## Chapter 11 Multiple Weapon Types
-
-### 11-198 Weapon Data Table
-
-![new](https://user-images.githubusercontent.com/80055816/213142510-2f63c76e-48cc-4acc-a8b6-3a28eace481d.PNG){: width="100%" height="100%"}{: .align-center}
-
-![newdata](https://user-images.githubusercontent.com/80055816/213142592-feeeda59-6f56-4cf7-bfbd-6059a75adec8.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 11-199 Getting Data from Weapon Data Table
-
-```cpp
-void AWeapon::OnConstruction(const FTransform& Transform)
-{
-	Super::OnConstruction(Transform);
-	const FString WeaponTablePath{ TEXT("DataTable'/Game/_Game/DataTable/WeaponDataTable.WeaponDataTable'") };
-	UDataTable* WeaponTableObject = Cast<UDataTable>(StaticLoadObject(UDataTable::StaticClass(), nullptr, *WeaponTablePath));
-
-	if (WeaponTableObject)
-	{
-		FWeaponDataTable* WeaponDataRow = nullptr;
-		switch (WeaponType)
-		{
-		case EWeaponType::EWT_SubmachineGun:
-			WeaponDataRow = WeaponTableObject->FindRow<FWeaponDataTable>(FName("SubmachineGun"), TEXT(""));
-			break;
-		case EWeaponType::EWT_AssaultRifle:
-			WeaponDataRow = WeaponTableObject->FindRow<FWeaponDataTable>(FName("AssaultRifle"), TEXT(""));
-			break;
-		}
-
-		if (WeaponDataRow)
-		{
-			AmmoType = WeaponDataRow->AmmoType;
-			Ammo = WeaponDataRow->WeaponAmmo;
-			MagazineCapacity = WeaponDataRow->MagazingCapacity;
-			SetPickupSound(WeaponDataRow->PickupSound);
-			SetEquipSound(WeaponDataRow->EquipSound);
-			GetItemMesh()->SetSkeletalMesh(WeaponDataRow->ItemMesh);
-			SetItemName(WeaponDataRow->ItemName);
-			SetIconItem(WeaponDataRow->InventoryIcon);
-			SetAmmoIcon(WeaponDataRow->AmmoIcon);
-		}
-	}
-}
-```
-
-![cons](https://user-images.githubusercontent.com/80055816/213181136-1b074a33-5936-45cc-a294-3a53c8111969.PNG){: width="100%" height="100%"}{: .align-center}
-
-![weapon](https://user-images.githubusercontent.com/80055816/213181243-86865b05-1ed5-4135-98d8-3c883189a83a.PNG){: width="100%" height="100%"}{: .align-center}
-
-![bp](https://user-images.githubusercontent.com/80055816/213181300-9f61cb83-76df-4225-ba4d-899ed2e6988d.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 11-200 Assault Rifle Glow Material
-
-![fun](https://user-images.githubusercontent.com/80055816/213238730-c84b683a-e0d4-4385-977e-df9b9982f9e7.PNG){: width="100%" height="100%"}{: .align-center}
-
-![drag](https://user-images.githubusercontent.com/80055816/213238889-15a51754-9aef-4915-b214-91c24509a347.PNG){: width="100%" height="100%"}{: .align-center}
-
-![nice](https://user-images.githubusercontent.com/80055816/213239023-26fcf0d4-dc24-41d5-b4ec-6d9f18d2470e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![next](https://user-images.githubusercontent.com/80055816/213239136-7bcc782c-e40f-4ef6-9d4d-e4fb7520694e.PNG){: width="100%" height="100%"}{: .align-center}
-
-![re](https://user-images.githubusercontent.com/80055816/213239233-8c1a5d56-4203-4e87-82fa-340311565371.PNG){: width="100%" height="100%"}{: .align-center}
-
-![copy](https://user-images.githubusercontent.com/80055816/213239343-f7a2f8d5-5f3c-446c-b402-1ed985621c8f.PNG){: width="100%" height="100%"}{: .align-center}
-
-![nmat](https://user-images.githubusercontent.com/80055816/213239471-9b903725-40ad-4fba-b539-acb1c20538be.PNG){: width="100%" height="100%"}{: .align-center}
-
-![move](https://user-images.githubusercontent.com/80055816/213239625-0a3964fd-ceb2-405e-a7ec-b6ff600d5b8a.PNG){: width="100%" height="100%"}{: .align-center}
-
-![convert](https://user-images.githubusercontent.com/80055816/213239758-8a87cfb4-2ec4-4b5f-807d-0b401b861626.PNG){: width="100%" height="100%"}{: .align-center}
-
-![must](https://user-images.githubusercontent.com/80055816/213239858-de8dd4b7-44eb-4613-a997-af33649a3678.PNG){: width="100%" height="100%"}{: .align-center}
-
-![create](https://user-images.githubusercontent.com/80055816/213239960-a8e72fd4-1317-40d5-ad8d-13207f23e3bc.PNG){: width="100%" height="100%"}{: .align-center}
-
-![color](https://user-images.githubusercontent.com/80055816/213240074-cc995498-2e41-4868-820c-9db762ef3acf.PNG){: width="100%" height="100%"}{: .align-center}
-
-![final](https://user-images.githubusercontent.com/80055816/213240186-ef655705-8094-46bc-b64c-01ecc85bdc0d.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 11-201 Set Material Instance and Index with Data Table
-
-```cpp
-struct FWeaponDataTable : public FTableRowBase
-{
-	//..
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		UMaterialInstance* MaterialInstance;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-		int32 MaterialIndex;
-}
-```
-
-```cpp
-void AWeapon::OnConstruction(const FTransform& Transform)
-{
-	Super::OnConstruction(Transform);
-
-	//..
-
-	SetMaterialInstance(WeaponDataRow->MaterialInstance);
-	// 아래 두 구문이 필요한 이유는?
-	// 무기마다 material 정보가 다르다 때문에 이전 material 정보를 지워 줘야한다
-	PreviousMaterialIndex = GetMaterialIndex();
-	GetItemMesh()->SetMaterial(PreviousMaterialIndex, nullptr);
-	SetMaterialIndex(WeaponDataRow->MaterialIndex);
-
-	// Item 클래스에서 아래 구문을 이미 실행하고 있는데 여기서 또 하는 이유는?
-	// Dynamic으로 Material를 교체해주기 위해
-	if (GetMaterialInstance())
-	{
-		SetDynamicMaterialInstance(UMaterialInstanceDynamic::Create(GetMaterialInstance(), this));
-		GetDynamicMaterialInstance()->SetVectorParameterValue(TEXT("FresnelColor"), GetGlowColor());
-		GetItemMesh()->SetMaterial(GetMaterialIndex(), GetDynamicMaterialInstance());
-
-		EnableGlowMaterial();
-	}
-}
-```
-
-![table](https://user-images.githubusercontent.com/80055816/213272583-89636d1a-4449-4b3b-a47b-f14b27b0b0a6.PNG){: width="100%" height="100%"}{: .align-center}
-
-![tablenext](https://user-images.githubusercontent.com/80055816/213272646-755cf16a-d023-4361-9615-68ef57e2ca28.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 11-202 Adding Barrel Socket to AR
-
-![socket](https://user-images.githubusercontent.com/80055816/213274069-71eba7c2-90b5-44ee-9009-3c89c2339cef.PNG){: width="100%" height="100%"}{: .align-center}
-
-### 11-203 FABRIK IK
-- What is the Fabric? Fabric is an inverse kinematics technique that allows us to move a particular bone on our skeleton
-
-![check](https://user-images.githubusercontent.com/80055816/213283990-b74a8876-55a9-4c80-b177-0a5e3b833753.PNG){: width="100%" height="100%"}{: .align-center}
-
-![change](https://user-images.githubusercontent.com/80055816/213284049-bbb17df5-2ce9-453e-8008-87016bd68ad4.PNG){: width="100%" height="100%"}{: .align-center}
-
-![fab](https://user-images.githubusercontent.com/80055816/213284093-3978cd96-0d59-4d3d-b938-cc7264948b5c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![maken](https://user-images.githubusercontent.com/80055816/213284140-c64d48d6-d79e-4ff4-a015-09a208c564fc.PNG){: width="100%" height="100%"}{: .align-center}
-
-![reconnect](https://user-images.githubusercontent.com/80055816/213284197-86f797c1-b87b-4179-afbd-e4e6d1c0e1ca.PNG){: width="100%" height="100%"}{: .align-center}
-
-![remove](https://user-images.githubusercontent.com/80055816/213284255-b089cfc9-9406-49d9-8049-e81d5fb146d6.PNG){: width="100%" height="100%"}{: .align-center}
-
-![this](https://user-images.githubusercontent.com/80055816/213284304-c74102b7-2a64-486a-8658-c36b69013b8c.PNG){: width="100%" height="100%"}{: .align-center}
-
-![pose](https://user-images.githubusercontent.com/80055816/213284370-f2340ced-1498-44e9-92c9-f3dd7a4f775e.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
