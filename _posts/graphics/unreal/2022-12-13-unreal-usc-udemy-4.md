@@ -1161,6 +1161,73 @@ void AWeapon::OnConstruction(const FTransform& Transform)
 
 ![nodeend](https://user-images.githubusercontent.com/80055816/213467855-ca616351-8f1b-434e-a016-ae54e212ea77.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 11-209 Set AnimBP for Weapon from Data Table
+
+![animbp](https://user-images.githubusercontent.com/80055816/213483022-62071b1c-9210-404e-a7de-223619a87ec3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![real](https://user-images.githubusercontent.com/80055816/213483113-7d0060bb-d7ab-4f37-a276-b4c55c464f14.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-210 Different Crosshairs Per Weapon
+
+![smg](https://user-images.githubusercontent.com/80055816/213491882-c2cca990-3bc9-4dde-b22c-4efc56ce8d4d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ar](https://user-images.githubusercontent.com/80055816/213491964-918a02b3-f4cf-4d8f-abca-89c487aef770.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-211 Drawing Crosshairs from Weapon Variables
+
+![newcon](https://user-images.githubusercontent.com/80055816/213511896-ef1e64a5-ba43-4da8-8695-640aa4669a63.PNG){: width="100%" height="100%"}{: .align-center}
+
+![middle](https://user-images.githubusercontent.com/80055816/213511994-053dda42-d4a0-463b-88ba-ffcc49443c3a.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-212 More Weapon Properties in Data Table
+
+![createcue](https://user-images.githubusercontent.com/80055816/213522448-950d5daa-c87e-43b0-8d01-53674d8fe342.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/213522507-38190df7-4d0f-47f3-b4fe-aaacfe94cb66.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-213 Use Weapon Properties in FireWeapon
+
+```cpp
+struct FWeaponDataTable : public FTableRowBase
+{
+	//..
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	float AutoFireRate;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	class UParticleSystem* MuzzleFlash;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	USoundCue* FireSound;
+}
+```
+
+```cpp
+class SHOOTER_API AWeapon : public AItem
+{
+	//..
+
+	/** The speed at which automatic fire happens */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	float AutoFireRate;
+
+	/** Particle system spawned at the BarrelSocket */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* MuzzleFlash;
+
+	/** Sound played when the weapon is fired */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
+	USoundCue* FireSound;
+
+	//..
+
+	FORCEINLINE float GetAutoFireRate() const { return AutoFireRate; }
+	FORCEINLINE UParticleSystem* GetMuzzleFlash() const { return MuzzleFlash; }
+	FORCEINLINE USoundCue* GetFireSound() const { return FireSound; }
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
