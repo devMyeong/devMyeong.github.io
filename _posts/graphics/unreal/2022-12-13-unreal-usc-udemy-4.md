@@ -1186,44 +1186,7 @@ void AWeapon::OnConstruction(const FTransform& Transform)
 ![sound](https://user-images.githubusercontent.com/80055816/213522507-38190df7-4d0f-47f3-b4fe-aaacfe94cb66.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 11-213 Use Weapon Properties in FireWeapon
-
-```cpp
-struct FWeaponDataTable : public FTableRowBase
-{
-	//..
-
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float AutoFireRate;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	class UParticleSystem* MuzzleFlash;
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	USoundCue* FireSound;
-}
-```
-
-```cpp
-class SHOOTER_API AWeapon : public AItem
-{
-	//..
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
-	float AutoFireRate;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
-	UParticleSystem* MuzzleFlash;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = DataTable, meta = (AllowPrivateAccess = "true"))
-	USoundCue* FireSound;
-
-	//..
-
-	FORCEINLINE float GetAutoFireRate() const { return AutoFireRate; }
-	FORCEINLINE UParticleSystem* GetMuzzleFlash() const { return MuzzleFlash; }
-	FORCEINLINE USoundCue* GetFireSound() const { return FireSound; }
-}
-```
+- 
 
 <br>
 
