@@ -1228,6 +1228,50 @@ class SHOOTER_API AWeapon : public AItem
 }
 ```
 
+### 11-214 Adding Pistol Assets
+
+![muti](https://user-images.githubusercontent.com/80055816/213619056-2b733db1-9aee-4c49-bb0c-41c456a6478e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-215 Hide Bone By Name
+
+![hide](https://user-images.githubusercontent.com/80055816/213631969-6237d8c0-4b09-4874-b4b5-239659097cb5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![dup](https://user-images.githubusercontent.com/80055816/213632002-c11216d7-001c-438b-9087-6c2dc935786c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bone](https://user-images.githubusercontent.com/80055816/213632034-69dd7e65-b72a-424e-b6e2-ea9ab9803e11.PNG){: width="100%" height="100%"}{: .align-center}
+
+![weapon](https://user-images.githubusercontent.com/80055816/213632076-49445bd4-2f34-464d-856c-3c4fa1379f3f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/213632119-c572ce44-2479-4f41-b6b5-df9cba5ce252.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pistol](https://user-images.githubusercontent.com/80055816/213632148-60b34ec4-8836-40d8-8011-f25ef7e754a5.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AWeapon::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// 아래 코드에서 EPhysBodyOp::PBO_None를 세팅해준 이유는?
+	// We don't care about physics for this
+	if (BoneToHide != FName(""))
+	{
+		GetItemMesh()->HideBoneByName(BoneToHide, EPhysBodyOp::PBO_None);
+	}
+}
+```
+
+### 11-216 Pistol Icon
+
+![data](https://user-images.githubusercontent.com/80055816/213636461-536504df-d1d2-4d2c-9863-e8305d2ad5b0.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-217 Pistol Data Table Properties
+
+![value](https://user-images.githubusercontent.com/80055816/213642738-d786c6a0-495c-41ec-86f3-05961bbc8f93.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-218 Barrel Socket on the Pistol
+
+![socket](https://user-images.githubusercontent.com/80055816/213646999-7c971379-e22c-4a48-aea3-c0254ef95b83.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
