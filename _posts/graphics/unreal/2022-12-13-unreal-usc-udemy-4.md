@@ -1272,6 +1272,58 @@ void AWeapon::BeginPlay()
 
 ![socket](https://user-images.githubusercontent.com/80055816/213646999-7c971379-e22c-4a48-aea3-c0254ef95b83.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 11-219 Pistol Reload Animation
+
+![dup](https://user-images.githubusercontent.com/80055816/214074862-87c30980-2280-45f6-bb68-0cba2ab7fa72.PNG){: width="100%" height="100%"}{: .align-center}
+
+![reload](https://user-images.githubusercontent.com/80055816/214074950-8e2de123-9f1a-411a-8b73-0bda052afe2b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![grab](https://user-images.githubusercontent.com/80055816/214075057-51060bad-bb5e-4781-8fe3-79d5d01714f3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/214075179-87eb362d-db90-4af1-9284-da32fca00650.PNG){: width="100%" height="100%"}{: .align-center}
+
+![conclude](https://user-images.githubusercontent.com/80055816/214075240-212eb346-6127-40b5-a801-8d6d3f44d572.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-220 Pistol FABRIK IK
+
+![new](https://user-images.githubusercontent.com/80055816/214092195-31942707-29c1-4f13-882d-069e0d8a001e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pis](https://user-images.githubusercontent.com/80055816/214092292-f9989e0f-058f-42c5-80cb-eb880d9c4741.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/214092350-cb6f4c6e-d8ef-41b1-944c-cd84b0c68ab2.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-221 Pistol Aiming Pose
+
+![re](https://user-images.githubusercontent.com/80055816/214100315-a38922cd-b295-4772-bd9c-4f7bf293a31a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![idle](https://user-images.githubusercontent.com/80055816/214100395-de7854f5-ad07-431e-9b59-80a5ee4cc109.PNG){: width="100%" height="100%"}{: .align-center}
+
+![arm](https://user-images.githubusercontent.com/80055816/214100457-653a7ece-45bc-4402-b721-a567ccc3df11.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/214100527-e360bf80-a241-4e8d-a1dc-785e7d4ead12.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-222 Aiming Pose for Each Weapon
+
+![ar](https://user-images.githubusercontent.com/80055816/214110061-ea5b1465-0d42-43b4-9fb4-2f27c4f084f2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rot](https://user-images.githubusercontent.com/80055816/214110109-cbd45cd5-750e-4801-ad9f-7bdc08ab287d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![how](https://user-images.githubusercontent.com/80055816/214110137-1e753253-4358-40df-b12e-9814c08e27fa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ama](https://user-images.githubusercontent.com/80055816/214110209-9bb4d135-b76f-45d8-9785-5650dd8ef108.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ready](https://user-images.githubusercontent.com/80055816/214110256-ca1948c5-1d65-40ef-9b88-5090d6d3c3f1.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-223 Pistol Slide Curve
+
+![zang](https://user-images.githubusercontent.com/80055816/214114313-67719d24-b44e-4241-ae9a-986bae7f67c3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![curve](https://user-images.githubusercontent.com/80055816/214114399-ccce178f-6025-45a4-8b6b-eb10c3e2df18.PNG){: width="100%" height="100%"}{: .align-center}
+
+![base](https://user-images.githubusercontent.com/80055816/214114456-89feb15e-6e1b-4f86-aa74-b128265d9ec3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![auto](https://user-images.githubusercontent.com/80055816/214114504-9750a29c-a679-4d8a-b696-7a95c36022e2.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
