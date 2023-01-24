@@ -1324,6 +1324,91 @@ void AWeapon::BeginPlay()
 
 ![auto](https://user-images.githubusercontent.com/80055816/214114504-9750a29c-a679-4d8a-b696-7a95c36022e2.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 11-224 Pistol Slide Timer
+
+![slide](https://user-images.githubusercontent.com/80055816/214225183-cd8e6997-46e4-400b-a499-c929bb299f9d.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::FireWeapon()
+{
+	if (EquippedWeapon == nullptr) return;
+	if (CombatState != ECombatState::ECS_Unoccupied) return;
+
+	if (WeaponHasAmmo())
+	{
+		PlayFireSound();
+		SendBullet();
+		PlayGunfireMontage();
+		EquippedWeapon->DecrementAmmo();
+
+		StartFireTimer();
+
+		// Important
+		if (EquippedWeapon->GetWeaponType() == EWeaponType::EWT_Pistol)
+		{
+			// Start moving slide timer
+			EquippedWeapon->StartSlideTimer();
+		}
+	}
+}
+```
+
+### 11-225 Update Slide Displacement
+
+```cpp
+void AWeapon::UpdateSlideDisplacement()
+{
+	if (SlideDisplacementCurve && bMovingSlide)
+	{
+		const float ElapsedTime{ GetWorldTimerManager().GetTimerElapsed(SlideTimer) };
+		const float CurveValue{ SlideDisplacementCurve->GetFloatValue(ElapsedTime) };
+		SlideDisplacement = CurveValue * MaxSlideDisplacement;
+	}
+}
+```
+
+### 11-226 Transform Pistol Slide Bone
+
+![bp](https://user-images.githubusercontent.com/80055816/214264410-fc44d0f7-2755-49d6-93f4-0155500d9b9e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![machine](https://user-images.githubusercontent.com/80055816/214264474-2c61991f-b42a-47c5-a854-efe6758d3e10.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pistol](https://user-images.githubusercontent.com/80055816/214264531-1d50f308-17c5-4b64-b2a9-5bd726a1ae70.PNG){: width="100%" height="100%"}{: .align-center}
+
+![float](https://user-images.githubusercontent.com/80055816/214264592-abbb4489-043e-44be-820b-3a1f68383e62.PNG){: width="100%" height="100%"}{: .align-center}
+
+![graph](https://user-images.githubusercontent.com/80055816/214264655-06ffe7b3-0d62-4ce6-994a-8f4291a3820f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bone](https://user-images.githubusercontent.com/80055816/214264740-0fb54a52-530f-4ccf-9ff5-b91b4b5d9ef3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/214264799-6199b0b4-01cc-4a8f-8c89-6a22b59c28d6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![complete](https://user-images.githubusercontent.com/80055816/214264842-f506fa53-38d8-47f0-bf6b-1a1329f81c11.PNG){: width="100%" height="100%"}{: .align-center}
+
+![datapistol](https://user-images.githubusercontent.com/80055816/214264897-0940a2df-d0bf-41a3-be16-6b4f6bef0f7e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sel](https://user-images.githubusercontent.com/80055816/214264955-7083c0d6-00d1-4a94-907a-181c012a2df3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![exist](https://user-images.githubusercontent.com/80055816/214265010-412990d6-ae28-4d05-b862-12a4993a8695.PNG){: width="100%" height="100%"}{: .align-center}
+
+![re](https://user-images.githubusercontent.com/80055816/214265057-3a299bed-0973-4b82-829f-3e4f01a52230.PNG){: width="100%" height="100%"}{: .align-center}
+
+![right](https://user-images.githubusercontent.com/80055816/214265135-1f9b1cc2-fec5-435c-b758-9b1b29915064.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/214265203-2b17b335-fca8-4179-8462-f328e6693f45.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 11-227 Pistol Glow Material
+
+![cm](https://user-images.githubusercontent.com/80055816/214316178-75f11167-79f5-4013-8147-09c9b171529c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![att](https://user-images.githubusercontent.com/80055816/214316241-0f9e0da9-7027-4b65-a4f8-0cfc3e6aeffb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![one](https://user-images.githubusercontent.com/80055816/214316389-7b984940-5267-422e-bcc8-9270a07521a1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mat](https://user-images.githubusercontent.com/80055816/214316473-f42efa24-f11b-474a-aad7-90a5a8185f4a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![inst](https://user-images.githubusercontent.com/80055816/214316524-be418e40-292c-4378-bee7-c6ccdebc2a8e.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
