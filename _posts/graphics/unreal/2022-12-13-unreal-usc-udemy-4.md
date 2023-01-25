@@ -1409,6 +1409,67 @@ void AWeapon::UpdateSlideDisplacement()
 
 ![inst](https://user-images.githubusercontent.com/80055816/214316524-be418e40-292c-4378-bee7-c6ccdebc2a8e.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 11-228 Semi Automatic Fire
+
+![false](https://user-images.githubusercontent.com/80055816/214486744-7ef85f3e-fd1a-4fcb-8ed7-c50409551f00.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rate](https://user-images.githubusercontent.com/80055816/214486782-15761d13-93a7-4524-b45f-39108c3a39db.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::AutoFireReset()
+{
+	CombatState = ECombatState::ECS_Unoccupied;
+	if (EquippedWeapon == nullptr) return;
+	if (WeaponHasAmmo())
+	{
+		// Important
+		if (bFireButtonPressed && EquippedWeapon->GetAutomatic())
+		{
+			FireWeapon();
+		}
+	}
+	else
+	{
+		ReloadWeapon();
+	}
+}
+```
+
+### 11-229 Stop Aiming when Exchanging Weapons
+
+```cpp
+void AShooterCharacter::ExchangeInventoryItems(int32 CurrentItemIndex, int32 NewItemIndex)
+{
+	const bool bCanExchangeItems =
+		(CurrentItemIndex != NewItemIndex) &&
+		(NewItemIndex < Inventory.Num()) &&
+		(CombatState == ECombatState::ECS_Unoccupied || CombatState == ECombatState::ECS_Equipping);
+
+	if (bCanExchangeItems)
+	{
+		// Important
+		if (bAiming)
+		{
+			StopAiming();
+		}
+
+		//..
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::AimingButtonPressed()
+{
+	// So now if the combat state is reloading or equipping, we will not aim
+	bAimingButtonPressed = true;
+	if (CombatState != ECombatState::ECS_Reloading && CombatState != ECombatState::ECS_Equipping)
+	{
+		Aim();
+	}
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
