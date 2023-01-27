@@ -51,6 +51,42 @@ last_modified_at: 2023-01-25
 
 ![grass](https://user-images.githubusercontent.com/80055816/214529281-9d9f8b6a-1a2b-47a8-8173-843dfbdcf42a.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 12-234 Footstep Sync Markers
+- It has bug so in the meantime, we're going to have to wait and make do with just our trimmed animations
+- If we have an animation notify to play a sound here at jog start, is that going to be played in addition to the animation notify in jog forward That's an issue
+- We can solve this issue by designating one particular animation to be the leader and one particular animation to be a follower
+- The leader will have its animation notifies, all triggered, whereas all followers will not have their animation notifies triggered if they're following a leader
+
+### 12-235 Custom Anim Notify
+
+![bp](https://user-images.githubusercontent.com/80055816/215017556-d5aa7aaf-af61-4e9f-90ab-3ae111f4b838.PNG){: width="100%" height="100%"}{: .align-center}
+
+![notify](https://user-images.githubusercontent.com/80055816/215017673-363047e3-ea6b-444c-a0c1-86d58b74b1d2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![save](https://user-images.githubusercontent.com/80055816/215017697-85beb072-5af6-4790-9c9c-b39b2592870b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![receive](https://user-images.githubusercontent.com/80055816/215017738-9854a090-5591-4783-92c2-49218614fc73.PNG){: width="100%" height="100%"}{: .align-center}
+
+![l](https://user-images.githubusercontent.com/80055816/215017779-2e3a215e-64df-4678-bf61-338f61a0c68c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/215017827-14b5a9fc-fbfd-4058-902f-b87d0c790fb2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![run](https://user-images.githubusercontent.com/80055816/215017887-0b48cee0-7e9d-4803-b6de-8521a61d1109.PNG){: width="100%" height="100%"}{: .align-center}
+
+![step](https://user-images.githubusercontent.com/80055816/215017934-c8ee451d-106b-4824-9752-e6670c252dd4.PNG){: width="100%" height="100%"}{: .align-center}
+
+- As we see here, that's because the forward animation is designated to be the leader and the jog left animation is the follower in relation to the jog forward animation
+- And so that means we won't get double footstep and notifies played at the same time
+
+### 12-236 Adding Notifies to Animations
+
+![noti](https://user-images.githubusercontent.com/80055816/214848138-1bf63a5d-eeff-4b42-81f1-e67dd8c8fb3d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![left](https://user-images.githubusercontent.com/80055816/214848224-df08d9f6-2f7a-45c3-a23f-935edbf61ef4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-237 Setting Bone Name for Each Notify
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
