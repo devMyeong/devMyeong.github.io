@@ -85,7 +85,41 @@ last_modified_at: 2023-01-25
 ![left](https://user-images.githubusercontent.com/80055816/214848224-df08d9f6-2f7a-45c3-a23f-935edbf61ef4.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 12-237 Setting Bone Name for Each Notify
-- 
+
+![foot](https://user-images.githubusercontent.com/80055816/215115945-7784f111-ef1a-4e6c-bd21-9db481dcdf27.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-238 Playing Sounds with Anim Notify
+
+![step](https://user-images.githubusercontent.com/80055816/215128083-8e867d3b-bd03-4f2d-b90d-5c629b57b4eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-239 Line Trace for Physical Surface Type
+
+![reconnect](https://user-images.githubusercontent.com/80055816/215156764-de674380-cd7d-488c-bb74-2e4d0184fc57.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/215156848-d625aa0e-0951-4a5d-b350-4eebb8d28d8c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![drag](https://user-images.githubusercontent.com/80055816/215156904-f5588e8c-3b73-4207-8cbc-e14fff490285.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-240 The Grass Surface Type
+
+![drop](https://user-images.githubusercontent.com/80055816/215257174-128c96f2-ab80-478d-972f-642026bacb91.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ran](https://user-images.githubusercontent.com/80055816/215257187-670b9522-187a-4dba-b1bd-265b487ea534.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-241 Get Surface Type
+
+```cpp
+// Shooter.Builds.cs
+
+//..
+
+// Now that we have PhysicsCore, we will be able to have the physical surface type as a function return type
+PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "UMG", "PhysicsCore" });
+
+//..
+```
+
+![noti](https://user-images.githubusercontent.com/80055816/215267833-8ade602f-b892-4b72-a59b-75511b27236b.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
