@@ -121,6 +121,36 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 
 ![noti](https://user-images.githubusercontent.com/80055816/215267833-8ade602f-b892-4b72-a59b-75511b27236b.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 12-242 Implement Footsteps Notify
+
+![metal](https://user-images.githubusercontent.com/80055816/215273273-15f0944e-b781-4dce-8955-9ec85a45c41f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ran](https://user-images.githubusercontent.com/80055816/215273281-dedbcd5a-88dd-4cb0-abee-2239f0346755.PNG){: width="100%" height="100%"}{: .align-center}
+
+![step](https://user-images.githubusercontent.com/80055816/215273292-d69fb45a-7360-4d14-be4f-6edb32008784.PNG){: width="100%" height="100%"}{: .align-center}
+
+![play](https://user-images.githubusercontent.com/80055816/215273299-23df877f-5396-4b52-8280-3887a550a447.PNG){: width="100%" height="100%"}{: .align-center}
+
+![return](https://user-images.githubusercontent.com/80055816/215273311-d7f1cd03-ecf3-4270-9e31-8bd2b4166f5b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 12-243 Jumping and Landing Sounds
+
+![jump](https://user-images.githubusercontent.com/80055816/215279365-bdbf0b7c-ec0b-4690-9a0a-09cdb03f4f83.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sel](https://user-images.githubusercontent.com/80055816/215279390-1fedd528-614e-467b-bfae-54a0f76fdd20.PNG){: width="100%" height="100%"}{: .align-center}
+
+![notify](https://user-images.githubusercontent.com/80055816/215279403-39757846-31fd-4fee-aead-4d81b434a75e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![noti](https://user-images.githubusercontent.com/80055816/215279420-1e66bc5c-d61e-4896-979c-a4212f90ac2b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![local](https://user-images.githubusercontent.com/80055816/215279433-6750da24-9955-41f7-9927-3ea52060f416.PNG){: width="100%" height="100%"}{: .align-center}
+
+![buti](https://user-images.githubusercontent.com/80055816/215279446-c5b218f7-ed64-4067-9807-0ff4b6d64aad.PNG){: width="100%" height="100%"}{: .align-center}
+
+![branch](https://user-images.githubusercontent.com/80055816/215279460-b447dbde-e8ee-4574-872e-cd31a810e1f0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![un](https://user-images.githubusercontent.com/80055816/215279475-0c918f08-86e2-41d5-9a6b-7d33c09f7148.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
