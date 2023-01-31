@@ -228,6 +228,73 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 ### 13-249 Phase
 - Create new character
 
+### 13-250 Enemy Assets
+
+![test](https://user-images.githubusercontent.com/80055816/215703817-4f244d83-9baf-4fd3-8904-19cd0282c7b6.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-251 The Enemy Class
+
+![class](https://user-images.githubusercontent.com/80055816/215716102-cc745b42-abf1-4336-aed3-ae02d00c4f50.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bp](https://user-images.githubusercontent.com/80055816/215716172-81d132e0-a92e-4d9a-af3b-6ea765ae38cc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![in](https://user-images.githubusercontent.com/80055816/215716236-42b23bc1-c667-44f2-93df-30eab1dba5be.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-252 Bullet Hit Interface
+
+![inter](https://user-images.githubusercontent.com/80055816/215754178-390c9a70-36b6-4f43-9d83-5e7781b5f12a.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+class SHOOTER_API IBulletHitInterface
+{
+	GENERATED_BODY()
+
+	// Add interface functions to this class. This is the class that will be inherited to implement this interface.
+public:
+
+	// BlueprintNativeEvent에 대해 나중에 좀 알아봐야함
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void BulletHit(FHitResult HitResult);
+};
+```
+
+```cpp
+class SHOOTER_API AEnemy : public ACharacter, public IBulletHitInterface
+{
+	//..
+
+public:
+	// IBulletHitInterface의 BulletHit를 구현한거라고 하는데 이게 말이 되는지 모르겠음
+	virtual void BulletHit_Implementation(FHitResult HitResult) override;
+}
+```
+
+### 13-253 Bullet Hit Interface
+
+![enemy](https://user-images.githubusercontent.com/80055816/215765552-b97ae9a1-3e03-4232-8862-63b28b3c37aa.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::BulletHit_Implementation(FHitResult HitResult)
+{
+	if (ImpactSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+	}
+	if (ImpactParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticles, HitResult.Location, FRotator(0.f), true);
+	}
+}
+```
+
+### 13-254 Explosive
+
+![actor](https://user-images.githubusercontent.com/80055816/215790069-719bb1bf-a29c-4dc6-87f1-efebb91551d1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![new](https://user-images.githubusercontent.com/80055816/215790177-2a160834-e13b-4adc-99c4-23ab3c95c936.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mesh](https://user-images.githubusercontent.com/80055816/215790299-e42a99c1-02f5-4446-b5bb-5f41b93568ca.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
