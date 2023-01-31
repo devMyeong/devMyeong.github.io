@@ -295,6 +295,102 @@ void AEnemy::BulletHit_Implementation(FHitResult HitResult)
 
 ![mesh](https://user-images.githubusercontent.com/80055816/215790299-e42a99c1-02f5-4446-b5bb-5f41b93568ca.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 13-255 Damage
+
+```cpp
+class SHOOTER_API AEnemy : public ACharacter, public IBulletHitInterface
+{
+	//..
+
+	// Take damage is a function inherited from the actor class
+	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser) override;
+}
+```
+
+```cpp
+void AShooterCharacter::SendBullet()
+{
+	//..
+
+	AEnemy* HitEnemy = Cast<AEnemy>(BeamHitResult.Actor.Get());
+	if (HitEnemy)
+	{
+		// If that actor implements take damage, then it's take damage function will be called
+		UGameplayStatics::ApplyDamage(
+			BeamHitResult.Actor.Get(),
+			EquippedWeapon->GetHeadShotDamage(),
+			GetController(),
+			this,
+			UDamageType::StaticClass());
+	}
+
+	//..
+}
+```
+
+### 13-256 Head Shot Damage
+
+![bone](https://user-images.githubusercontent.com/80055816/215837055-6f74a5be-c3db-42ee-b941-c3fd50eb1503.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::SendBullet()
+{
+	//..
+
+	if (BeamHitResult.BoneName.ToString() == HitEnemy->GetHeadBone())
+	{
+		// Head shot
+		UGameplayStatics::ApplyDamage(
+			BeamHitResult.Actor.Get(),
+			EquippedWeapon->GetHeadShotDamage(),
+			GetController(),
+			this,
+			UDamageType::StaticClass());
+	}
+
+	//..
+}
+```
+
+### 13-257 Enemy Health Bar
+
+![hud](https://user-images.githubusercontent.com/80055816/215846305-2ebcf715-ea06-4ece-85f1-643632d5e364.PNG){: width="100%" height="100%"}{: .align-center}
+
+![color](https://user-images.githubusercontent.com/80055816/215846406-493c6605-4517-4766-90f1-8826cec0d3eb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/215846462-25fc4dde-8e64-44fe-a624-6211c32fc58a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![enemy](https://user-images.githubusercontent.com/80055816/215846520-acc89ea2-bbeb-43c6-a089-e01335768f8d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/215846583-3445d4fe-d7c5-44e7-921a-bc21972bf905.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bind](https://user-images.githubusercontent.com/80055816/215846634-8d5b8cd1-4d68-4352-9cc4-e7dfc79312e5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nice](https://user-images.githubusercontent.com/80055816/215846693-97e4a1df-4795-44f5-9c3c-aea389a5dfb4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-258 Hide Health Bar
+
+![why](https://user-images.githubusercontent.com/80055816/215852961-5960eb03-4c94-49a5-9592-62c9c8b1d30e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-259 Enemy Death Function
+
+```cpp
+float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	if (Health - DamageAmount <= 0.f)
+	{
+		Health = 0.f;
+		Die();
+	}
+	else
+	{
+		Health -= DamageAmount;
+	}
+
+	return DamageAmount;
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
