@@ -462,6 +462,69 @@ void AEnemy::PlayHitMontage(FName Section, float PlayRate)
 
 ![num](https://user-images.githubusercontent.com/80055816/216016738-a6ea2476-fa8c-4554-9430-e042eadaf3a1.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 13-265 Store Hit Number Locations
+
+![store](https://user-images.githubusercontent.com/80055816/216071852-6d4fc10d-1615-4acd-9866-ad425338a9bd.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-266 Remove Hit Number
+
+```cpp
+void AEnemy::StoreHitNumber(UUserWidget* HitNumber, FVector Location)
+{
+	HitNumbers.Add(HitNumber, Location);
+
+	FTimerHandle HitNumberTimer;
+	FTimerDelegate HitNumberDelegate;
+	HitNumberDelegate.BindUFunction(this, FName("DestroyHitNumber"), HitNumber);
+	GetWorld()->GetTimerManager().SetTimer(
+		HitNumberTimer,
+		HitNumberDelegate,
+		HitNumberDestroyTime,
+		false);
+}
+```
+
+```cpp
+void AEnemy::DestroyHitNumber(UUserWidget* HitNumber)
+{
+	HitNumbers.Remove(HitNumber);
+	HitNumber->RemoveFromParent();
+}
+```
+
+### 13-267 Update Hit Number Location
+
+```cpp
+void AEnemy::UpdateHitNumbers()
+{
+	for (auto& HitPair : HitNumbers)
+	{
+		UUserWidget* HitNumber{ HitPair.Key };
+		const FVector Location{ HitPair.Value };
+		FVector2D ScreenPosition;
+		UGameplayStatics::ProjectWorldToScreen(
+			GetWorld()->GetFirstPlayerController(),
+			Location,
+			ScreenPosition);
+		HitNumber->SetPositionInViewport(ScreenPosition);
+	}
+}
+```
+
+### 13-268 Bind Hit Number Text
+
+![bind](https://user-images.githubusercontent.com/80055816/216121204-6a97dd19-c15f-402d-93af-b13b68e9fd17.PNG){: width="100%" height="100%"}{: .align-center}
+
+![promote](https://user-images.githubusercontent.com/80055816/216121257-d82eb608-f1ca-4fe0-87bc-25dd703091cc.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/216121314-6fe83447-2ab0-48b3-bbd3-319096bc4449.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-269 Animate Hit Numbers
+
+![trans](https://user-images.githubusercontent.com/80055816/216125346-7232f366-f2ad-46ee-85aa-d3c6fde89ea3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![goodnode](https://user-images.githubusercontent.com/80055816/216125401-6ca83f2f-2b56-4a16-b388-1f3ef2b5a7f9.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
