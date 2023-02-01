@@ -521,7 +521,7 @@ void AEnemy::UpdateHitNumbers()
 
 ### 13-269 Animate Hit Numbers
 
-![trans](https://user-images.githubusercontent.com/80055816/216125346-7232f366-f2ad-46ee-85aa-d3c6fde89ea3.PNG){: width="100%" height="100%"}{: .align-center}
+![trans](https://user-images.githubusercontent.com/80055816/216127968-de945f25-39e9-453b-ae4d-27bbe8fb5884.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![goodnode](https://user-images.githubusercontent.com/80055816/216125401-6ca83f2f-2b56-4a16-b388-1f3ef2b5a7f9.PNG){: width="100%" height="100%"}{: .align-center}
 
