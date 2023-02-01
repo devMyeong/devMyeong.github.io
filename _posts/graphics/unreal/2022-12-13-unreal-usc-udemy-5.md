@@ -460,7 +460,7 @@ void AEnemy::PlayHitMontage(FName Section, float PlayRate)
 
 ![char](https://user-images.githubusercontent.com/80055816/216012339-4476903e-00ce-48ac-9fd2-35868c33803a.PNG){: width="100%" height="100%"}{: .align-center}
 
-![num](https://user-images.githubusercontent.com/80055816/216012402-5a6485c9-1a2a-4853-92e4-8e0abcf3a258.PNG){: width="100%" height="100%"}{: .align-center}
+![num](https://user-images.githubusercontent.com/80055816/216016738-a6ea2476-fa8c-4554-9430-e042eadaf3a1.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
