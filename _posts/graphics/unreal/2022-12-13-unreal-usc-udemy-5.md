@@ -391,6 +391,77 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 }
 ```
 
+### 13-260 Enemy Anim Instance
+
+![anim](https://user-images.githubusercontent.com/80055816/215965695-dd5c590a-a7ed-43b4-b042-aae75fedec24.PNG){: width="100%" height="100%"}{: .align-center}
+
+![blueprint](https://user-images.githubusercontent.com/80055816/215965756-4a19c17c-1e17-4df0-995d-839d0977b2e2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![one](https://user-images.githubusercontent.com/80055816/215965788-15556b1d-2264-48b9-afb0-74e194982980.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/215965829-6c18e147-1cc3-4016-be28-d82e5256a5dc.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-261 EnemyHit Montage
+
+![mon](https://user-images.githubusercontent.com/80055816/215979997-7441836d-b07f-44cc-be02-5b5df84cd336.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/215980111-70f996f1-b661-435c-8885-c79d2958beaf.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sec](https://user-images.githubusercontent.com/80055816/215980154-1a7b842d-f376-47fe-89b3-99caa99f27aa.PNG){: width="100%" height="100%"}{: .align-center}
+
+![slot](https://user-images.githubusercontent.com/80055816/215980196-7f072b59-84e1-4029-9fc0-feb25477eb17.PNG){: width="100%" height="100%"}{: .align-center}
+
+![slotin](https://user-images.githubusercontent.com/80055816/215980261-6c254462-d417-40a8-9a9a-c91ae1073183.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-262 Play Montage Sections
+
+```cpp
+void AEnemy::PlayHitMontage(FName Section, float PlayRate)
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance)
+	{
+		AnimInstance->Montage_Play(HitMontage, PlayRate);
+		AnimInstance->Montage_JumpToSection(Section, HitMontage);
+	}
+}
+```
+
+![hit](https://user-images.githubusercontent.com/80055816/215984288-cc5333d1-61f5-41da-8d59-5160c596629c.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 13-263 Hit React Delay
+
+```cpp
+void AEnemy::PlayHitMontage(FName Section, float PlayRate)
+{
+	if (bCanHitReact)
+	{
+		UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+		if (AnimInstance)
+		{
+			AnimInstance->Montage_Play(HitMontage, PlayRate);
+			AnimInstance->Montage_JumpToSection(Section, HitMontage);
+		}
+
+		bCanHitReact = false;
+		const float HitReactTime{ FMath::FRandRange(HitReactTimeMin, HitReactTimeMax) };
+		GetWorldTimerManager().SetTimer(
+			HitReactTimer,
+			this,
+			&AEnemy::ResetHitReactTimer,
+			HitReactTime);
+	}
+}
+```
+
+### 13-264 Show Hit Numbers
+
+![bp](https://user-images.githubusercontent.com/80055816/216012242-255e9632-f9e0-43f6-8a38-68015a345235.PNG){: width="100%" height="100%"}{: .align-center}
+
+![char](https://user-images.githubusercontent.com/80055816/216012339-4476903e-00ce-48ac-9fd2-35868c33803a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![num](https://user-images.githubusercontent.com/80055816/216012402-5a6485c9-1a2a-4853-92e4-8e0abcf3a258.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
