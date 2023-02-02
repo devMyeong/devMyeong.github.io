@@ -228,11 +228,15 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 ### 13-249 Phase
 - Create new character
 
-### 13-250 Enemy Assets
+<br>
+
+## Chapter 14 The Enemy Class
+
+### 14-250 Enemy Assets
 
 ![test](https://user-images.githubusercontent.com/80055816/215703817-4f244d83-9baf-4fd3-8904-19cd0282c7b6.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-251 The Enemy Class
+### 14-251 The Enemy Class
 
 ![class](https://user-images.githubusercontent.com/80055816/215716102-cc745b42-abf1-4336-aed3-ae02d00c4f50.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -240,7 +244,7 @@ PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engi
 
 ![in](https://user-images.githubusercontent.com/80055816/215716236-42b23bc1-c667-44f2-93df-30eab1dba5be.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-252 Bullet Hit Interface
+### 14-252 Bullet Hit Interface
 
 ![inter](https://user-images.githubusercontent.com/80055816/215754178-390c9a70-36b6-4f43-9d83-5e7781b5f12a.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -269,7 +273,7 @@ public:
 }
 ```
 
-### 13-253 Bullet Hit Interface
+### 14-253 Bullet Hit Interface
 
 ![enemy](https://user-images.githubusercontent.com/80055816/215765552-b97ae9a1-3e03-4232-8862-63b28b3c37aa.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -287,7 +291,7 @@ void AEnemy::BulletHit_Implementation(FHitResult HitResult)
 }
 ```
 
-### 13-254 Explosive
+### 14-254 Explosive
 
 ![actor](https://user-images.githubusercontent.com/80055816/215790069-719bb1bf-a29c-4dc6-87f1-efebb91551d1.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -295,7 +299,7 @@ void AEnemy::BulletHit_Implementation(FHitResult HitResult)
 
 ![mesh](https://user-images.githubusercontent.com/80055816/215790299-e42a99c1-02f5-4446-b5bb-5f41b93568ca.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-255 Damage
+### 14-255 Damage
 
 ```cpp
 class SHOOTER_API AEnemy : public ACharacter, public IBulletHitInterface
@@ -328,7 +332,7 @@ void AShooterCharacter::SendBullet()
 }
 ```
 
-### 13-256 Head Shot Damage
+### 14-256 Head Shot Damage
 
 ![bone](https://user-images.githubusercontent.com/80055816/215837055-6f74a5be-c3db-42ee-b941-c3fd50eb1503.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -352,7 +356,7 @@ void AShooterCharacter::SendBullet()
 }
 ```
 
-### 13-257 Enemy Health Bar
+### 14-257 Enemy Health Bar
 
 ![hud](https://user-images.githubusercontent.com/80055816/215846305-2ebcf715-ea06-4ece-85f1-643632d5e364.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -368,11 +372,11 @@ void AShooterCharacter::SendBullet()
 
 ![nice](https://user-images.githubusercontent.com/80055816/215846693-97e4a1df-4795-44f5-9c3c-aea389a5dfb4.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-258 Hide Health Bar
+### 14-258 Hide Health Bar
 
 ![why](https://user-images.githubusercontent.com/80055816/215852961-5960eb03-4c94-49a5-9592-62c9c8b1d30e.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-259 Enemy Death Function
+### 14-259 Enemy Death Function
 
 ```cpp
 float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -391,7 +395,7 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 }
 ```
 
-### 13-260 Enemy Anim Instance
+### 14-260 Enemy Anim Instance
 
 ![anim](https://user-images.githubusercontent.com/80055816/215965695-dd5c590a-a7ed-43b4-b042-aae75fedec24.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -401,7 +405,7 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 
 ![set](https://user-images.githubusercontent.com/80055816/215965829-6c18e147-1cc3-4016-be28-d82e5256a5dc.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-261 EnemyHit Montage
+### 14-261 EnemyHit Montage
 
 ![mon](https://user-images.githubusercontent.com/80055816/215979997-7441836d-b07f-44cc-be02-5b5df84cd336.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -413,7 +417,7 @@ float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AC
 
 ![slotin](https://user-images.githubusercontent.com/80055816/215980261-6c254462-d417-40a8-9a9a-c91ae1073183.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-262 Play Montage Sections
+### 14-262 Play Montage Sections
 
 ```cpp
 void AEnemy::PlayHitMontage(FName Section, float PlayRate)
@@ -429,7 +433,7 @@ void AEnemy::PlayHitMontage(FName Section, float PlayRate)
 
 ![hit](https://user-images.githubusercontent.com/80055816/215984288-cc5333d1-61f5-41da-8d59-5160c596629c.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-263 Hit React Delay
+### 14-263 Hit React Delay
 
 ```cpp
 void AEnemy::PlayHitMontage(FName Section, float PlayRate)
@@ -454,7 +458,7 @@ void AEnemy::PlayHitMontage(FName Section, float PlayRate)
 }
 ```
 
-### 13-264 Show Hit Numbers
+### 14-264 Show Hit Numbers
 
 ![bp](https://user-images.githubusercontent.com/80055816/216012242-255e9632-f9e0-43f6-8a38-68015a345235.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -462,11 +466,11 @@ void AEnemy::PlayHitMontage(FName Section, float PlayRate)
 
 ![num](https://user-images.githubusercontent.com/80055816/216016738-a6ea2476-fa8c-4554-9430-e042eadaf3a1.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-265 Store Hit Number Locations
+### 14-265 Store Hit Number Locations
 
 ![store](https://user-images.githubusercontent.com/80055816/216071852-6d4fc10d-1615-4acd-9866-ad425338a9bd.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-266 Remove Hit Number
+### 14-266 Remove Hit Number
 
 ```cpp
 void AEnemy::StoreHitNumber(UUserWidget* HitNumber, FVector Location)
@@ -492,7 +496,7 @@ void AEnemy::DestroyHitNumber(UUserWidget* HitNumber)
 }
 ```
 
-### 13-267 Update Hit Number Location
+### 14-267 Update Hit Number Location
 
 ```cpp
 void AEnemy::UpdateHitNumbers()
@@ -511,7 +515,7 @@ void AEnemy::UpdateHitNumbers()
 }
 ```
 
-### 13-268 Bind Hit Number Text
+### 14-268 Bind Hit Number Text
 
 ![bind](https://user-images.githubusercontent.com/80055816/216121204-6a97dd19-c15f-402d-93af-b13b68e9fd17.PNG){: width="100%" height="100%"}{: .align-center}
 
@@ -519,11 +523,29 @@ void AEnemy::UpdateHitNumbers()
 
 ![set](https://user-images.githubusercontent.com/80055816/216121314-6fe83447-2ab0-48b3-bbd3-319096bc4449.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 13-269 Animate Hit Numbers
+### 14-269 Animate Hit Numbers
 
 ![trans](https://user-images.githubusercontent.com/80055816/216127968-de945f25-39e9-453b-ae4d-27bbe8fb5884.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![goodnode](https://user-images.githubusercontent.com/80055816/216125401-6ca83f2f-2b56-4a16-b388-1f3ef2b5a7f9.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 14-270 Head Shots
+
+![bind](https://user-images.githubusercontent.com/80055816/216243368-7ec0c867-6da3-4dcc-b2fa-b0e3df3fff55.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pro](https://user-images.githubusercontent.com/80055816/216243421-7dbe1ca7-3129-4e64-89e7-371a4052a8ee.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/216243455-6252f959-f866-460e-94ec-1917ae9fbe39.PNG){: width="100%" height="100%"}{: .align-center}
+
+![head](https://user-images.githubusercontent.com/80055816/216243490-23fc305c-a4ef-42c7-8152-a61c5ecacfc8.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 14-271 Grux Physics Asset
+
+![til](https://user-images.githubusercontent.com/80055816/216253058-cfe2692b-ff3e-4e0f-8f93-c6440e48d911.PNG){: width="100%" height="100%"}{: .align-center}
+
+![phy](https://user-images.githubusercontent.com/80055816/216253105-34b28cdb-f0ec-473e-b9e7-54b5e8ab324c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![col](https://user-images.githubusercontent.com/80055816/216253153-8ce5ea4b-b7df-4f1b-b97a-77cbc76798bd.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
