@@ -175,6 +175,75 @@ void AEnemy::BeginPlay()
 
 ![two](https://user-images.githubusercontent.com/80055816/216429591-2e92906b-128c-4c96-80c9-573ee7a8ff5f.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 15-280 Wait Task
+
+![wait](https://user-images.githubusercontent.com/80055816/216525273-a682fd72-abe3-4008-b81c-b64d5083fc17.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-281 Agro Sphere
+
+![obj](https://user-images.githubusercontent.com/80055816/216538124-64360edd-dc2d-4790-a34c-2b0d4f949ad7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![agro](https://user-images.githubusercontent.com/80055816/216538239-2646394f-add7-40d3-b443-eb1119a8df8e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![display](https://user-images.githubusercontent.com/80055816/216538283-d5c03eeb-01db-437b-b00b-2b4c6a1d7410.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::AgroSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor == nullptr) return;
+
+	auto Character = Cast<AShooterCharacter>(OtherActor);
+	if (Character)
+	{
+		// Set the value of the Target Blackboard Key
+		EnemyController->GetBlackboardComponent()->SetValueAsObject(
+			TEXT("Target"),
+			Character);
+	}
+}
+```
+
+### 15-282 Move To Actor
+
+![black](https://user-images.githubusercontent.com/80055816/216542337-79dd16bb-4e39-420c-a8f7-4a83783f5006.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-283 Stun Enemy
+
+![finish](https://user-images.githubusercontent.com/80055816/216571276-4fcc2ee1-91fa-4dbc-b7bf-2411d6c7db73.PNG){: width="100%" height="100%"}{: .align-center}
+
+![anim](https://user-images.githubusercontent.com/80055816/216572092-0b520139-1894-45dd-9054-2128efa6dadd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![stun](https://user-images.githubusercontent.com/80055816/216572142-42097943-5a0d-466c-921e-ae0f1d80e025.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-284 Stunned Blackboard Decorator
+
+![save](https://user-images.githubusercontent.com/80055816/216592044-dc129ee3-e244-49f4-8bf8-c02a84d7233a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![check](https://user-images.githubusercontent.com/80055816/216592120-da97069c-7eda-4ae8-be44-617184192a12.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::SetStunned(bool Stunned)
+{
+	bStunned = Stunned;
+
+	if (EnemyController)
+	{
+		EnemyController->GetBlackboardComponent()->SetValueAsBool(
+			TEXT("Stunned"),
+			Stunned);
+	}
+}
+```
+
+![board](https://user-images.githubusercontent.com/80055816/216592167-7630d5b8-87d4-4cf1-b177-616dfeb2c638.PNG){: width="100%" height="100%"}{: .align-center}
+
+![value](https://user-images.githubusercontent.com/80055816/216592212-a4f86305-ba0d-47a1-b1d4-4730a7ade56e.PNG){: width="100%" height="100%"}{: .align-center}
+
+- A decorator node behaves like a conditional It's like an F check that says if a particular condition is true, then allow the node to execute, otherwise prevent the node from executing
+
+### 15-285 Selector Node
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
