@@ -235,6 +235,8 @@ void AEnemy::SetStunned(bool Stunned)
 }
 ```
 
+![fun](https://user-images.githubusercontent.com/80055816/216625678-336a7f53-2c64-4282-9c30-5c4c70a5382d.PNG){: width="100%" height="100%"}{: .align-center}
+
 ![board](https://user-images.githubusercontent.com/80055816/216592167-7630d5b8-87d4-4cf1-b177-616dfeb2c638.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![value](https://user-images.githubusercontent.com/80055816/216592212-a4f86305-ba0d-47a1-b1d4-4730a7ade56e.PNG){: width="100%" height="100%"}{: .align-center}
@@ -242,6 +244,136 @@ void AEnemy::SetStunned(bool Stunned)
 - A decorator node behaves like a conditional It's like an F check that says if a particular condition is true, then allow the node to execute, otherwise prevent the node from executing
 
 ### 15-285 Selector Node
+- The selector will continue executing children until one of them succeeds
+
+![blackboard](https://user-images.githubusercontent.com/80055816/216632379-6644cba6-5844-44c5-8604-98d525389379.PNG){: width="100%" height="100%"}{: .align-center}
+
+![chose](https://user-images.githubusercontent.com/80055816/216632707-23ee4fff-2d38-46e6-bc5f-196c0bfc71db.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/216632769-e6249592-b452-4bde-894c-a4a4761da853.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-286 In Attack Range
+
+![range](https://user-images.githubusercontent.com/80055816/216649263-61286824-56e4-4c5d-9f72-648e52bf94ab.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::CombatRangeOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (OtherActor == nullptr) return;
+	auto ShooterCharacter = Cast<AShooterCharacter>(OtherActor);
+	if (ShooterCharacter)
+	{
+		bInAttackRange = true;
+		if (EnemyController)
+		{
+			EnemyController->GetBlackboardComponent()->SetValueAsBool(
+				TEXT("InAttackRange"),
+				true
+			);
+		}
+	}
+}
+```
+
+```cpp
+void AEnemy::CombatRangeEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (OtherActor == nullptr) return;
+	auto ShooterCharacter = Cast<AShooterCharacter>(OtherActor);
+	if (ShooterCharacter)
+	{
+		bInAttackRange = false;
+		if (EnemyController)
+		{
+			EnemyController->GetBlackboardComponent()->SetValueAsBool(
+				TEXT("InAttackRange"),
+				false
+			);
+		}
+	}
+}
+```
+
+![attack](https://user-images.githubusercontent.com/80055816/216649551-bd050d89-c73c-42ff-be73-2c7d2d722e38.PNG){: width="100%" height="100%"}{: .align-center}
+
+![true](https://user-images.githubusercontent.com/80055816/216649613-5dae00f1-7719-47a9-8e91-429697e3d792.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-287 Enemy Attack Montage
+
+![mon](https://user-images.githubusercontent.com/80055816/216663064-a0231f6d-3048-4cb8-9e2b-5a8241d3ddef.PNG){: width="100%" height="100%"}{: .align-center}
+
+![slot](https://user-images.githubusercontent.com/80055816/216663135-9040f881-19f0-451f-b573-ab435d7a9ba2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![nodegood](https://user-images.githubusercontent.com/80055816/216663190-6c0b9121-042a-4f93-9164-a691237790bc.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::PlayAttackMontage(FName Section, float PlayRate)
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && AttackMontage)
+	{
+		AnimInstance->Montage_Play(AttackMontage);
+		AnimInstance->Montage_JumpToSection(Section, AttackMontage);
+	}
+}
+```
+
+### 15-288 Get Attack Section Name
+
+```cpp
+FName AEnemy::GetAttackSectionName()
+{
+	FName SectionName;
+	const int32 Section{ FMath::RandRange(1, 4) };
+	switch (Section)
+	{
+	case 1:
+		SectionName = AttackLFast;
+		break;
+	case 2:
+		SectionName = AttackRFast;
+		break;
+	case 3:
+		SectionName = AttackL;
+		break;
+	case 4:
+		SectionName = AttackR;
+		break;
+	}
+	return SectionName;
+}
+```
+
+### 15-289 Custom Behavior Tree Task
+- Now, remember, a sequence node will execute its children from left to right until one of them fails
+
+![task](https://user-images.githubusercontent.com/80055816/216775594-ed19241d-e139-4f0a-9348-2910b549d3ff.PNG){: width="100%" height="100%"}{: .align-center}
+
+![section](https://user-images.githubusercontent.com/80055816/216775616-54f9a480-7984-4571-86dc-077faad3871b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sel](https://user-images.githubusercontent.com/80055816/216775642-0165dfea-8d0b-4fed-952e-047f250c923e.PNG){: width="100%" height="100%"}{: .align-center}
+
+![know](https://user-images.githubusercontent.com/80055816/216775674-b7744286-67af-43ce-95fc-7fe76a1ff35f.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::BeginPlay()
+{
+	//..
+
+	// Ignore the camera for Mesh and Capsule
+	GetMesh()->SetCollisionResponseToChannel(
+		ECollisionChannel::ECC_Camera,
+		ECollisionResponse::ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(
+		ECollisionChannel::ECC_Camera,
+		ECollisionResponse::ECR_Ignore
+	);
+
+	//..
+}
+```
+
+### 15-290 Weapon Collision Volumes
 - 
 
 <br>
