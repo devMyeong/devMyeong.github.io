@@ -374,7 +374,98 @@ void AEnemy::BeginPlay()
 ```
 
 ### 15-290 Weapon Collision Volumes
-- 
+
+![socket](https://user-images.githubusercontent.com/80055816/216778593-5a4bc4ab-608b-4ac0-8cfa-128fa9873620.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::BeginPlay()
+{
+	//..
+
+	// Bind functions to overlap events for weapon boxes
+	LeftWeaponCollision->OnComponentBeginOverlap.AddDynamic(
+		this,
+		&AEnemy::OnLeftWeaponOverlap);
+	RightWeaponCollision->OnComponentBeginOverlap.AddDynamic(
+		this,
+		&AEnemy::OnRightWeaponOverlap);
+
+	// Set collision presets for weapon boxes
+	LeftWeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	LeftWeaponCollision->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	LeftWeaponCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	LeftWeaponCollision->SetCollisionResponseToChannel(
+		ECollisionChannel::ECC_Pawn,
+		ECollisionResponse::ECR_Overlap);
+	RightWeaponCollision->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	RightWeaponCollision->SetCollisionObjectType(ECollisionChannel::ECC_WorldDynamic);
+	RightWeaponCollision->SetCollisionResponseToAllChannels(ECollisionResponse::ECR_Ignore);
+	RightWeaponCollision->SetCollisionResponseToChannel(
+		ECollisionChannel::ECC_Pawn,
+		ECollisionResponse::ECR_Overlap);
+
+	//..
+}
+```
+
+![pause](https://user-images.githubusercontent.com/80055816/216778621-763f2d4b-5e5e-4377-ad7e-8178b3d18b2a.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-291 Activate and Deactivate Collision
+
+![active](https://user-images.githubusercontent.com/80055816/216780769-ddd99fa8-b838-4aff-88a4-5390d3391be1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![de](https://user-images.githubusercontent.com/80055816/216780782-af2007a7-f6b5-4609-a370-e141f892a97f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-292 Enemy Damage
+
+```cpp
+void AEnemy::DoDamage(AActor* Victim)
+{
+	if (Victim == nullptr) return;
+	auto Character = Cast<AShooterCharacter>(Victim);
+	if (Character)
+	{
+		UGameplayStatics::ApplyDamage(
+			Character,
+			BaseDamage,
+			EnemyController,
+			this,
+			UDamageType::StaticClass()
+		);
+	}
+}
+```
+
+```cpp
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	if (Health - DamageAmount <= 0.f)
+	{
+		Health = 0.f;
+	}
+	else
+	{
+		Health -= DamageAmount;
+	}
+	return DamageAmount;
+}
+```
+
+### 15-293 Character Health Bar
+
+![bp](https://user-images.githubusercontent.com/80055816/216835469-fd899790-8bb9-4a94-b786-af648cf0d04c.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bind](https://user-images.githubusercontent.com/80055816/216835499-0f3dd1de-40f1-4169-8531-6b3e8b7edc65.PNG){: width="100%" height="100%"}{: .align-center}
+
+![vari](https://user-images.githubusercontent.com/80055816/216835509-f1d828bf-316a-4572-bfb8-96c970f76289.PNG){: width="100%" height="100%"}{: .align-center}
+
+![hp](https://user-images.githubusercontent.com/80055816/216835517-07166244-e841-47b4-8442-f05f43794704.PNG){: width="100%" height="100%"}{: .align-center}
+
+![health](https://user-images.githubusercontent.com/80055816/216835533-f5c249b2-c9b4-4114-9d62-7d57cde0c055.PNG){: width="100%" height="100%"}{: .align-center}
+
+![tint](https://user-images.githubusercontent.com/80055816/216835543-017afd6f-4ce4-4c53-94fd-15dc08126475.PNG){: width="100%" height="100%"}{: .align-center}
+
+![radi](https://user-images.githubusercontent.com/80055816/216835556-623cfb75-7fe4-4ed5-8f57-af7ba5792f68.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
