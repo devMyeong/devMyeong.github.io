@@ -514,7 +514,117 @@ void AEnemy::DoDamage(AActor* Victim)
 ![trail](https://user-images.githubusercontent.com/80055816/216955860-88ba9265-3b12-4972-b39a-d2d406eda02b.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 15-298 Blood Particles
-- 
+
+```cpp
+class SHOOTER_API AShooterCharacter : public ACharacter
+{
+	//..
+
+	/** Blood splatter particles for melee hit */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	UParticleSystem* BloodParticles;
+
+	//..
+}
+```
+
+```cpp
+void AEnemy::SpawnBlood(AShooterCharacter* Victim, FName SocketName)
+{
+	const USkeletalMeshSocket* TipSocket{ GetMesh()->GetSocketByName(SocketName) };
+	if (TipSocket)
+	{
+		const FTransform SocketTransform{ TipSocket->GetSocketTransform(GetMesh()) };
+		if (Victim->GetBloodParticles())
+		{
+			UGameplayStatics::SpawnEmitterAtLocation(
+				GetWorld(),
+				Victim->GetBloodParticles(),
+				SocketTransform
+			);
+		}
+	}
+}
+```
+
+![parti](https://user-images.githubusercontent.com/80055816/216969126-94578f5f-f66d-4dde-8e86-a2772907b489.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-299 Character Stun State
+
+```cpp
+UENUM(BlueprintType)
+enum class ECombatState : uint8
+{
+	ECS_Unoccupied UMETA(DisplayName = "Unoccupied"),
+	ECS_FireTimerInProgress UMETA(DisplayName = "FireTimerInProgress"),
+	ECS_Reloading UMETA(DisplayName = "Reloading"),
+	ECS_Equipping UMETA(DisplayName = "Equipping"),
+
+	// Stunned 상태 추가
+	ECS_Stunned UMETA(DisplayName = "Stunned"),
+
+	ECS_MAX UMETA(DisplayName = "DefaultMAX")
+};
+```
+
+### 15-300 End Stun Anim Notify
+
+![mon](https://user-images.githubusercontent.com/80055816/217007799-a410c50b-28c3-49fc-b883-20fd651a52f2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![front](https://user-images.githubusercontent.com/80055816/217007857-89c5c43a-046f-4668-9ba3-49fccb102a01.PNG){: width="100%" height="100%"}{: .align-center}
+
+![end](https://user-images.githubusercontent.com/80055816/217007930-a4052c65-1a0f-469a-8639-2582cfb2d497.PNG){: width="100%" height="100%"}{: .align-center}
+
+![stun](https://user-images.githubusercontent.com/80055816/217007976-88a82d25-f278-4818-9612-b59c6258b9f5.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-301 Stun Character on Hit
+
+```cpp
+void AEnemy::StunCharacter(AShooterCharacter* Victim)
+{
+	if (Victim)
+	{
+		const float Stun{ FMath::FRandRange(0.f, 1.f) };
+		if (Stun <= Victim->GetStunChance())
+		{
+			Victim->Stun();
+		}
+	}
+}
+```
+
+![tage](https://user-images.githubusercontent.com/80055816/217024484-d8ef08b3-293f-41ec-89e7-39c51c0aa5cd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![react](https://user-images.githubusercontent.com/80055816/217024562-975ec0ac-b239-4d29-a6f6-2c6f0e90111d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![slot](https://user-images.githubusercontent.com/80055816/217024819-653ae0bd-7c3a-4ce5-b2d9-7b15ab1fc277.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-302 Limit Enemy Attacks
+
+```cpp
+void AEnemy::PlayAttackMontage(FName Section, float PlayRate)
+{
+	//..
+
+	bCanAttack = false;
+	GetWorldTimerManager().SetTimer(
+		AttackWaitTimer,
+		this,
+		&AEnemy::ResetCanAttack,
+		AttackWaitTime
+	);
+	if (EnemyController)
+	{
+		EnemyController->GetBlackboardComponent()->SetValueAsBool(
+			FName("CanAttack"),
+			false);
+	}
+}
+```
+
+![can](https://user-images.githubusercontent.com/80055816/217040148-cf78d2ac-165d-4931-858f-5175d6d2fff2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![black](https://user-images.githubusercontent.com/80055816/217040215-76739b21-7db9-490d-b12d-660897478c90.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
