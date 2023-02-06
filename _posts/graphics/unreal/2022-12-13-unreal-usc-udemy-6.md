@@ -467,6 +467,55 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 ![radi](https://user-images.githubusercontent.com/80055816/216835556-623cfb75-7fe4-4ed5-8f57-af7ba5792f68.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 15-294 Enemy Weapon Attack Sounds
+
+![swing](https://user-images.githubusercontent.com/80055816/216895176-12e61386-6ad9-4d19-b1d3-ae7985fb4065.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sound](https://user-images.githubusercontent.com/80055816/216895209-9da8642b-8dc0-4f1b-9b1e-261e1a9e312f.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-295 Melee Impact Sound
+
+```cpp
+void AEnemy::DoDamage(AActor* Victim)
+{
+	if (Victim == nullptr) return;
+	auto Character = Cast<AShooterCharacter>(Victim);
+	if (Character)
+	{
+		UGameplayStatics::ApplyDamage(
+			Character,
+			BaseDamage,
+			EnemyController,
+			this,
+			UDamageType::StaticClass()
+		);
+
+		if (Character->GetMeleeImpactSound())
+		{
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				Character->GetMeleeImpactSound(),
+				GetActorLocation());
+		}
+	}
+}
+```
+
+![hit](https://user-images.githubusercontent.com/80055816/216898005-5f5a8c70-859e-40b0-80fa-9cec1e586ee4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-296 Enemy Vocal Attack Sounds
+
+![grux](https://user-images.githubusercontent.com/80055816/216914494-569e7d6c-f8d1-46e0-88c9-530f5c6102a2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![pain](https://user-images.githubusercontent.com/80055816/216914541-65e5c526-de8d-4e82-8e14-a938b409d5fc.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-297 Weapon Trails
+
+![trail](https://user-images.githubusercontent.com/80055816/216955860-88ba9265-3b12-4972-b39a-d2d406eda02b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-298 Blood Particles
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
