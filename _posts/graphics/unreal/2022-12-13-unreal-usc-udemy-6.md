@@ -748,6 +748,125 @@ void AEnemy::FinishDeath()
 }
 ```
 
+### 15-308 Character Death
+
+![mon](https://user-images.githubusercontent.com/80055816/217207664-6a385848-43eb-49e0-971f-ef1fe77dbaea.PNG){: width="100%" height="100%"}{: .align-center}
+
+![set](https://user-images.githubusercontent.com/80055816/217208867-fae56a95-896f-4f23-a823-b007af3f6e89.PNG){: width="100%" height="100%"}{: .align-center}
+
+![setthis](https://user-images.githubusercontent.com/80055816/217208977-7a2016d8-58c6-4c54-8a79-c481360d5aa5.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/217209061-104bb7f7-3204-4263-8ebf-dfe76cc116e2.PNG){: width="100%" height="100%"}{: .align-center}
+
+![finish](https://user-images.githubusercontent.com/80055816/217209195-07087b70-28f0-41df-807b-9c7eb2107d27.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AShooterCharacter::Die()
+{
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && DeathMontage)
+	{
+		AnimInstance->Montage_Play(DeathMontage);
+	}
+}
+```
+
+```cpp
+void AShooterCharacter::FinishDeath()
+{
+	GetMesh()->bPauseAnims = true;
+	APlayerController* PC = UGameplayStatics::GetPlayerController(this, 0);
+	if (PC)
+	{
+		DisableInput(PC);
+	}
+}
+```
+
+![end](https://user-images.githubusercontent.com/80055816/217209341-a98ae462-df5e-4433-86b3-61bf2c51aa67.PNG){: width="100%" height="100%"}{: .align-center}
+
+![dup](https://user-images.githubusercontent.com/80055816/217209416-e13e7d93-2954-4309-a750-efea214e43d8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/217209515-de927c77-3033-47a9-b680-4f7a2be366e6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![frame](https://user-images.githubusercontent.com/80055816/217209580-4ba21c64-f7f6-4a75-be7b-334f1ae86705.PNG){: width="100%" height="100%"}{: .align-center}
+
+![wow](https://user-images.githubusercontent.com/80055816/217209644-098f520e-07cd-4b15-83a8-bd3c48bbf85e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-309 Stop Enemy Attack on Death
+
+![dead](https://user-images.githubusercontent.com/80055816/217251572-34223543-8c17-430d-87e6-bb1869535af3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![check](https://user-images.githubusercontent.com/80055816/217251655-1b712e1e-0320-4077-87ac-0d12d3b7196c.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	if (Health - DamageAmount <= 0.f)
+	{
+		Health = 0.f;
+		Die();
+
+		auto EnemyController = Cast<AEnemyController>(EventInstigator);
+		if (EnemyController)
+		{
+			EnemyController->GetBlackboardComponent()->SetValueAsBool(
+				FName(TEXT("CharacterDead")),
+				true
+			);
+		}
+	}
+	else
+	{
+		Health -= DamageAmount;
+	}
+	return DamageAmount;
+}
+```
+
+### 15-310 Retargeting New Montages
+
+![health](https://user-images.githubusercontent.com/80055816/217251749-c20d085a-56a1-4c20-8278-fd42cfe6405d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![dupin](https://user-images.githubusercontent.com/80055816/217251827-aa4f47be-71f7-43ab-b900-ae467601ba36.PNG){: width="100%" height="100%"}{: .align-center}
+
+![twin](https://user-images.githubusercontent.com/80055816/217251880-b199c32b-1b62-4e68-b1c9-7c93cf0c6b3a.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-311 New Type of Enemies
+
+```cpp
+class SHOOTER_API AEnemy : public ACharacter, public IBulletHitInterface
+{
+	//.. 
+
+	// EditAnywhere 으로 설정해 Blueprint에서 컨트롤 가능하게 하자
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	float Health;
+
+	//..
+}
+```
+
+![dupbp](https://user-images.githubusercontent.com/80055816/217269982-7c95dcf9-d3ed-4ffe-a88c-93ce2ad9e1ac.PNG){: width="100%" height="100%"}{: .align-center}
+
+![change](https://user-images.githubusercontent.com/80055816/217270046-e3353794-cc70-4151-8b92-7d2d5f68659f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![del](https://user-images.githubusercontent.com/80055816/217270113-46567fbf-c145-4e65-bcf3-35239880705a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![new](https://user-images.githubusercontent.com/80055816/217270189-734be3fa-1c25-47ab-aafb-24b8bdfb2210.PNG){: width="100%" height="100%"}{: .align-center}
+
+![chief](https://user-images.githubusercontent.com/80055816/217270253-5129840a-0d3f-4c73-b5fd-9b6f656d5a2d.PNG){: width="100%" height="100%"}{: .align-center}
+
+![value](https://user-images.githubusercontent.com/80055816/217270325-41d66fb9-578a-4310-88a4-a79ccccde5df.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-312 Showcasing Different Grux Enemies
+
+![walk](https://user-images.githubusercontent.com/80055816/217284173-31a9c9c4-4993-41cf-ab66-82834a4a9ae0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![draw](https://user-images.githubusercontent.com/80055816/217284270-962fc1a2-1069-429f-a0a5-1f1b0f27daa9.PNG){: width="100%" height="100%"}{: .align-center}
+
+![checkthis](https://user-images.githubusercontent.com/80055816/217284335-c6437fef-9592-40c4-870b-d71ad6f18d1d.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
