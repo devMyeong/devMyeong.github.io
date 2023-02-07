@@ -626,6 +626,128 @@ void AEnemy::PlayAttackMontage(FName Section, float PlayRate)
 
 ![black](https://user-images.githubusercontent.com/80055816/217040215-76739b21-7db9-490d-b12d-660897478c90.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 15-303 Delay Before Chasing Player
+
+![mov](https://user-images.githubusercontent.com/80055816/217060671-26231c3d-75b2-469b-8739-85e3cb83422b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![motion](https://user-images.githubusercontent.com/80055816/217048327-36d6ba5a-e224-4da7-ba50-17411bcf2d34.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-304 Agro Enemy when Shot
+
+```cpp
+float AEnemy::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	// Set the Target Blackboard Key to agro the Character
+	if (EnemyController)
+	{
+		EnemyController->GetBlackboardComponent()->SetValueAsObject(
+			FName("Target"),
+			DamageCauser);
+	}
+
+	if (Health - DamageAmount <= 0.f)
+	{
+		Health = 0.f;
+		Die();
+	}
+	else
+	{
+		Health -= DamageAmount;
+	}
+
+	return DamageAmount;
+}
+```
+
+### 15-305 Enemy Death Montage
+
+![death](https://user-images.githubusercontent.com/80055816/217060177-f28bccfc-6ae9-40f7-81c9-f2454579953b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![enemy](https://user-images.githubusercontent.com/80055816/217060270-f517773c-b55a-41a1-bf67-c81bbc5d3869.PNG){: width="100%" height="100%"}{: .align-center}
+
+![anim](https://user-images.githubusercontent.com/80055816/217060308-8d913644-eb8b-49c5-8421-c65ae01f3de0.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AEnemy::Die()
+{
+	if (bDying) return;
+
+	bDying = true;
+
+	HideHealthBar();
+
+	UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance();
+	if (AnimInstance && DeathMontage)
+	{
+		AnimInstance->Montage_Play(DeathMontage);
+	}
+
+	if (EnemyController)
+	{
+		EnemyController->GetBlackboardComponent()->SetValueAsBool(
+			FName("Dead"),
+			true
+		);
+		EnemyController->StopMovement();
+	}
+}
+```
+
+![option](https://user-images.githubusercontent.com/80055816/217060374-3db05222-ed56-4afe-983d-6c0ab688992f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sel](https://user-images.githubusercontent.com/80055816/217060427-ef453f2f-17f2-42e9-ba1a-af4d4247f89e.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-306 Destroy Enemy
+
+![end](https://user-images.githubusercontent.com/80055816/217157245-dfc03076-9377-4d59-abf2-75d36440eb6b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![node](https://user-images.githubusercontent.com/80055816/217157295-43c11f2f-341f-4c06-a199-562324df1599.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 15-307 Polish Up Enemy Death
+
+```cpp
+void AEnemy::BulletHit_Implementation(FHitResult HitResult)
+{
+	if (ImpactSound)
+	{
+		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
+	}
+	if (ImpactParticles)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactParticles, HitResult.Location, FRotator(0.f), true);
+	}
+
+	// 죽었는데 스턴되는것 방지
+	if (bDying) return;
+
+	ShowHealthBar();	
+
+	// Determine whether bullet hit stuns
+	const float Stunned = FMath::FRandRange(0.f, 1.f);
+	if (Stunned <= StunChance)
+	{
+		// Stun the Enemy
+		PlayHitMontage(FName("HitReactFront"));
+		SetStunned(true);
+	}
+}
+```
+
+```cpp
+// 몬스터가 죽고나서 잠시뒤 사라진다
+void AEnemy::FinishDeath()
+{
+	GetMesh()->bPauseAnims = true;
+
+	GetWorldTimerManager().SetTimer(
+		DeathTimer,
+		this,
+		&AEnemy::DestroyEnemy,
+		DeathTime
+	);
+}
+```
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
