@@ -931,6 +931,109 @@ class SHOOTER_API AEnemy : public ACharacter, public IBulletHitInterface
 
 ![nodetwo](https://user-images.githubusercontent.com/80055816/217352754-246f0a8d-8080-4e89-88b7-f0218566fb7e.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 16-318 Finishing Khaimera AnimBP
+
+![mon](https://user-images.githubusercontent.com/80055816/217469635-478d4149-530d-4a9d-8f3c-d52023e3c47b.PNG){: width="100%" height="100%"}{: .align-center}
+
+![time](https://user-images.githubusercontent.com/80055816/217469690-7c627336-183a-4f2f-b8ca-6f3e6208ff87.PNG){: width="100%" height="100%"}{: .align-center}
+
+![remove](https://user-images.githubusercontent.com/80055816/217469754-20160f5f-04d5-49bb-a403-2ce319dabfd1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![next](https://user-images.githubusercontent.com/80055816/217469822-5a059a11-aca1-4c71-a4c3-65ab357f05a5.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 16-319 Different Khaimera Skins
+
+![dam](https://user-images.githubusercontent.com/80055816/217472581-df35ccc3-f843-4048-a0b3-df60331fc90b.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 16-320 Explosive Get Overlapping Actors
+
+```cpp
+AExplosive::AExplosive()
+{
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+	ExplosiveMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("ExplosiveMesh"));
+	SetRootComponent(ExplosiveMesh);
+
+	OverlapSphere = CreateDefaultSubobject<USphereComponent>(TEXT("OverlapSphere"));
+	OverlapSphere->SetupAttachment(GetRootComponent());
+}
+```
+
+```cpp
+void AExplosive::BulletHit_Implementation(FHitResult HitResult)
+{
+	//..
+
+	// Apply explosive damage
+	TArray<AActor*> OverlappingActors;
+	GetOverlappingActors(OverlappingActors, ACharacter::StaticClass());
+
+	for (auto Actor : OverlappingActors)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Actor damaged by explosive: %s"), *Actor->GetName());
+	}
+
+	Destroy();
+
+}
+```
+
+![code](https://user-images.githubusercontent.com/80055816/217481334-51e6a617-c1c2-44b8-8851-b030b32b66ed.PNG){: width="100%" height="100%"}{: .align-center}
+
+![delete](https://user-images.githubusercontent.com/80055816/217481402-a743d4c4-3bfa-4c70-abcf-f6b37e9ae5ca.PNG){: width="100%" height="100%"}{: .align-center}
+
+![ex](https://user-images.githubusercontent.com/80055816/217481474-94684932-fec2-4c71-8c4e-bcaa4b10d4cd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bar](https://user-images.githubusercontent.com/80055816/217481534-4c4a554b-0c88-4d7a-96b0-6f88353a8fed.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 16-321 Explosive Agro Enemy
+
+```cpp
+// Shooter, ShooterController 매개 변수가 추가되었다
+void AExplosive::BulletHit_Implementation(FHitResult HitResult, AActor* Shooter, AController* ShooterController)
+{
+	//..
+
+	// Apply explosive damage
+	TArray<AActor*> OverlappingActors;
+	GetOverlappingActors(OverlappingActors, ACharacter::StaticClass());
+
+	for (auto Actor : OverlappingActors)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Actor damaged by explosive: %s"), *Actor->GetName());
+
+		UGameplayStatics::ApplyDamage(
+			Actor,
+			Damage,
+			ShooterController,
+			Shooter,
+			UDamageType::StaticClass()
+		);
+	}
+
+	Destroy();
+}
+```
+
+### 16-322 Health Pickup
+
+![blueprint](https://user-images.githubusercontent.com/80055816/217575610-ef11a4ef-9ca0-4469-9f89-2b4d60c08b42.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mesh](https://user-images.githubusercontent.com/80055816/217575751-cb99b208-d75f-45e4-be91-a773d0764d2a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sphere](https://user-images.githubusercontent.com/80055816/217575820-b2e7c32b-c02b-4d0f-a7bf-ce9e5da3de24.PNG){: width="100%" height="100%"}{: .align-center}
+
+![add](https://user-images.githubusercontent.com/80055816/217575884-b7de7b68-a934-4be3-894d-e0c8161138fb.PNG){: width="100%" height="100%"}{: .align-center}
+
+![amount](https://user-images.githubusercontent.com/80055816/217575961-802e0ff8-1536-4570-a227-ccda1c579e46.PNG){: width="100%" height="100%"}{: .align-center}
+
+![option](https://user-images.githubusercontent.com/80055816/217576028-d581652c-785e-4f9b-b091-a89bb5fd86f3.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 16-323 Level Prototyping Tools
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
