@@ -1032,7 +1032,16 @@ void AExplosive::BulletHit_Implementation(FHitResult HitResult, AActor* Shooter,
 ![option](https://user-images.githubusercontent.com/80055816/217576028-d581652c-785e-4f9b-b091-a89bb5fd86f3.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 16-323 Level Prototyping Tools
-- 
+
+![start](https://user-images.githubusercontent.com/80055816/217600137-2714e1bc-a29d-434a-8fa8-aefa3b12b0a8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![file](https://user-images.githubusercontent.com/80055816/217600208-ddb36f8d-af91-416a-92ed-114d575201d0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![proto](https://user-images.githubusercontent.com/80055816/217606505-d5b458cd-4555-4c98-8dd3-98661ff0ce5c.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 16-324 Level Prototype - Starting Area
+
+![add](https://user-images.githubusercontent.com/80055816/217612767-5b6a5d77-addf-48ab-be5c-fe9e8d4bb67c.PNG){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
