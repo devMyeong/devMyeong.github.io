@@ -1061,6 +1061,8 @@ void AExplosive::BulletHit_Implementation(FHitResult HitResult, AActor* Shooter,
 
 ### 17-328 Ruins Assets - Floor
 
+![check](https://user-images.githubusercontent.com/80055816/217913171-4605ae52-3b48-4e93-b884-e1ce18a81c9e.PNG){: width="100%" height="100%"}{: .align-center}
+
 ![blank](https://user-images.githubusercontent.com/80055816/217866730-b4d569f8-389e-47e4-aa9c-aaf8cef5791c.PNG){: width="100%" height="100%"}{: .align-center}
 
 ### 17-329 Ruins Assets - Walls
