@@ -1059,6 +1059,42 @@ void AExplosive::BulletHit_Implementation(FHitResult HitResult, AActor* Shooter,
 
 ![mesh](https://user-images.githubusercontent.com/80055816/217830920-8c8fbd8a-ab8b-4f99-baa0-7756bcb0afb0.PNG){: width="100%" height="100%"}{: .align-center}
 
+### 17-328 Ruins Assets - Floor
+
+![blank](https://user-images.githubusercontent.com/80055816/217866730-b4d569f8-389e-47e4-aa9c-aaf8cef5791c.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-329 Ruins Assets - Walls
+- make walls
+
+### 17-330 Ruins Assets - Walls 2
+- make walls
+
+### 17-331 Ruins Assets - Corners
+
+![brick](https://user-images.githubusercontent.com/80055816/217895745-850b1306-44b4-4deb-8560-5f0aca00d508.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-332 Ruins Assets - Levels
+- make levels
+
+### 17-333 Ruins Assets - Levels 2
+
+![work](https://user-images.githubusercontent.com/80055816/217900366-f6c1c141-4065-4f11-be63-4d31c4b010f1.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-334 Ruins Assets - Levels 3
+
+![regroup](https://user-images.githubusercontent.com/80055816/217902862-f61846fb-f91a-412d-b2cd-8e25ffa58a99.PNG){: width="100%" height="100%"}{: .align-center}
+
+![mat](https://user-images.githubusercontent.com/80055816/217902949-cc564f61-ce37-4b08-b2de-731906725d82.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-335 Ruins Assets - Arches
+- make arches
+
+### 17-336 Ruins Assets - Arches2
+- make arches2
+
+### 17-337 Ruins Assets - Large Stairs
+- 액션 모빌리티에 대한 설명은 ([**참고**](https://docs.unrealengine.com/4.27/ko/Basics/Actors/Mobility/))를 확인하자
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
