@@ -1151,6 +1151,8 @@ class SHOOTER_API AShooterCharacter : public ACharacter
 
 ![light](https://user-images.githubusercontent.com/80055816/218157780-6dea35e0-80e8-4477-86d1-80fbc0e27be8.PNG){: width="100%" height="100%"}{: .align-center}
 
+- LightmassImportanceVolume 은 라이트매스가 광자를 방출하는 영역을 제한시켜, 디테일한 간접광이 필요한 지역에 집중시킬 수 있습니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Lightmass/Basics/))
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
