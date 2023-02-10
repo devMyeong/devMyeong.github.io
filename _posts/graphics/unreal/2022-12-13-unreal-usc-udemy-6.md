@@ -1097,6 +1097,60 @@ void AExplosive::BulletHit_Implementation(FHitResult HitResult, AActor* Shooter,
 ### 17-337 Ruins Assets - Large Stairs
 - 액션 모빌리티에 대한 설명은 ([**참고**](https://docs.unrealengine.com/4.27/ko/Basics/Actors/Mobility/))를 확인하자
 
+### 17-338 Ruins Assets - Boss Room
+- make boss room
+
+### 17-339 Ruins Assets - Finishing Up the Level
+
+![mesh](https://user-images.githubusercontent.com/80055816/218060076-78f2085b-4aa5-476d-8f9c-71a751342f49.PNG){: width="100%" height="100%"}{: .align-center}
+
+![two](https://user-images.githubusercontent.com/80055816/218060146-25ca85ea-e120-4a8e-a835-d6ed33c9ac59.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-340 Level Design - Enemies
+
+![nav](https://user-images.githubusercontent.com/80055816/218082730-5cb533d8-1eaa-4eec-a5c5-71bc9b3c7822.PNG){: width="100%" height="100%"}{: .align-center}
+
+![value](https://user-images.githubusercontent.com/80055816/218082839-7b1556f0-a455-407b-a012-f21a5ccd4092.PNG){: width="100%" height="100%"}{: .align-center}
+
+![sim](https://user-images.githubusercontent.com/80055816/218082880-2a61720e-8c25-4c2c-952e-97d211c77cd3.PNG){: width="100%" height="100%"}{: .align-center}
+
+![radi](https://user-images.githubusercontent.com/80055816/218082915-c905977a-a657-48e5-acc1-5f1b55a97cc1.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-341 Polishing Gameplay
+
+```cpp
+class SHOOTER_API AShooterCharacter : public ACharacter
+{
+	//..
+
+	/** true when Character dies */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Combat, meta = (AllowPrivateAccess = "true"))
+	bool bDead;
+}
+```
+
+![chardead](https://user-images.githubusercontent.com/80055816/218096481-57c2870f-d456-4632-b980-c8e68e74106a.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bp](https://user-images.githubusercontent.com/80055816/218096865-e19819e1-cddb-4bb2-8931-16ef7e865a09.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-342 Polishing Gameplay 2
+
+![type](https://user-images.githubusercontent.com/80055816/218147659-d11b25f5-06d3-4a0a-b30a-21b70b427628.PNG){: width="100%" height="100%"}{: .align-center}
+
+![dup](https://user-images.githubusercontent.com/80055816/218148318-6ea0b275-6143-4de0-8e6d-79e7c275a5bd.PNG){: width="100%" height="100%"}{: .align-center}
+
+![rar](https://user-images.githubusercontent.com/80055816/218148373-4624e5ad-c87d-4db8-aad3-0326be70b5d0.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-343 Prevent Attack when Enemy Dead
+
+![next](https://user-images.githubusercontent.com/80055816/218151628-5706a6fe-61c4-4ee2-a02d-d60d4156b1e5.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-344 Sphere Reflection Capture
+
+![dark](https://user-images.githubusercontent.com/80055816/218157742-243a287b-8636-4886-bc40-9e5798442257.PNG){: width="100%" height="100%"}{: .align-center}
+
+![light](https://user-images.githubusercontent.com/80055816/218157780-6dea35e0-80e8-4477-86d1-80fbc0e27be8.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
