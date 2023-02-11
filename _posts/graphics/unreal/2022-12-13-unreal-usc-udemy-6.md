@@ -1153,6 +1153,46 @@ class SHOOTER_API AShooterCharacter : public ACharacter
 
 - LightmassImportanceVolume 은 라이트매스가 광자를 방출하는 영역을 제한시켜, 디테일한 간접광이 필요한 지역에 집중시킬 수 있습니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/Lightmass/Basics/))
 
+### 17-345 Post Process Effects
+
+![nav](https://user-images.githubusercontent.com/80055816/218268730-58a33334-d4a0-4d23-9fd5-bdea4aae1278.PNG){: width="100%" height="100%"}{: .align-center}
+
+![black](https://user-images.githubusercontent.com/80055816/218268765-00cba8a6-19a0-4295-b8f5-0d07230a2900.PNG){: width="100%" height="100%"}{: .align-center}
+
+![infinit](https://user-images.githubusercontent.com/80055816/218268779-0b71bfe5-6bf0-46f9-87f5-62cb65df02ed.PNG){: width="100%" height="100%"}{: .align-center}
+
+![bloom](https://user-images.githubusercontent.com/80055816/218268800-cba6f6b8-36b5-4d86-a6f7-2c9ac0ff533f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![manual](https://user-images.githubusercontent.com/80055816/218268831-d79a1756-cdc2-4e4a-a262-7eb85e0d1667.PNG){: width="100%" height="100%"}{: .align-center}
+
+![camera](https://user-images.githubusercontent.com/80055816/218268847-2a2ae65c-b36e-4daf-b115-3170bdbcf4e4.PNG){: width="100%" height="100%"}{: .align-center}
+
+![chromatic](https://user-images.githubusercontent.com/80055816/218268870-c2980ed8-50d8-42b2-b88f-3c331fe72576.PNG){: width="100%" height="100%"}{: .align-center}
+
+- 색수차(Chromatic Aberration)는 광선이 렌즈의 여러 지점으로 들어가면서 RGB 컬러의 분리를 유발하는 현상입니다 ([**참고**](https://docs.unrealengine.com/5.0/ko/post-process-effects-in-unreal-engine/))
+
+![effect](https://user-images.githubusercontent.com/80055816/218268895-c9994f93-516a-44ff-b8aa-bc844a0d06e7.PNG){: width="100%" height="100%"}{: .align-center}
+
+![intense](https://user-images.githubusercontent.com/80055816/218268922-a731eee9-50ed-4bf4-ad36-b2ab966b63c0.PNG){: width="100%" height="100%"}{: .align-center}
+
+![shadow](https://user-images.githubusercontent.com/80055816/218268940-811cb8f1-352b-419b-94af-295251cf0c3f.PNG){: width="100%" height="100%"}{: .align-center}
+
+![high](https://user-images.githubusercontent.com/80055816/218268952-22f1ad99-05b2-4f56-9af3-7a28ee9ca3f1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![oc](https://user-images.githubusercontent.com/80055816/218268972-80d132d2-d909-493e-90eb-51b3d7f865e2.PNG){: width="100%" height="100%"}{: .align-center}
+
+- Ambient Occlusion은 빛의 차폐로 인한 감쇠 근사치를 구하는 이펙트입니다 현실에서도 방의 구석 부분은 훨씬 더 어둡듯이, 구석이나 틈 같은 곳을 더 어둡게 하여 더욱 자연스럽고 사실적인 느낌을 낼 수 있도록, 표준 글로벌 일루미네이션에 더해 미묘한 이펙트로 사용하는 것이 보통 가장 좋습니다 ([**참고**](https://docs.unrealengine.com/4.27/ko/RenderingAndGraphics/PostProcessEffects/AmbientOcclusion/))
+
+![per](https://user-images.githubusercontent.com/80055816/218268989-1978c173-ffb5-4ba1-986e-7b5e9fb488ef.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-346 ESC to Quit
+
+![quit](https://user-images.githubusercontent.com/80055816/218271209-49e6c91d-32d8-4aff-9d02-e0d82ebfcec4.PNG){: width="100%" height="100%"}{: .align-center}
+
+### 17-347 Finishing the Game
+
+![phy](https://user-images.githubusercontent.com/80055816/218272229-31c7dfbc-c9ce-40c9-bde6-029f78cec6b0.PNG){: width="100%" height="100%"}{: .align-center}
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
