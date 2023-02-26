@@ -704,7 +704,7 @@ void AShooterCharacter::FireWeapon()
 
 ![adapt](https://user-images.githubusercontent.com/80055816/209563159-261e5160-eae0-4356-a235-db5099a59c03.PNG){: width="100%" height="100%"}{: .align-center}
 
-### 03-40 Strafing Blendspace
+### 03-40 Jog Start Blendspace
 
 ![1d](https://user-images.githubusercontent.com/80055816/209568050-a79217e6-de97-4f0f-b3a0-c7f6c09d8dae.PNG){: width="100%" height="100%"}{: .align-center}
 

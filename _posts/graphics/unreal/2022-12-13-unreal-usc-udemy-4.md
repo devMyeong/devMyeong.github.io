@@ -28,7 +28,6 @@ last_modified_at: 2023-01-10
 ![depth](https://user-images.githubusercontent.com/80055816/212023851-e4b0bcf1-cf3e-44be-a6b8-9cf27f5f9a15.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Now, Unreal Engine has an additional buffer called custom depth, and you're allowed to select specific objects to participate in the custom depth buffer
-- A pixel that's not on an object in the scene depth buffer has a same depth of value of a thousand
 - Let's take all the pixels that have no white on them and let's call these pixels object pixels
 - No white neighbors, call these interior pixels
 - And here's the result of subtracting away the interior pixels for each object(inverse object pixels) This is the basis for creating an outline effect
