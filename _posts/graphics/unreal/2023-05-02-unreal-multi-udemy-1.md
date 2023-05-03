@@ -51,7 +51,7 @@ last_modified_at: 2023-05-02
 
 ![server](https://user-images.githubusercontent.com/80055816/235873638-0281ae10-9b0b-4399-8742-870cdde0a6e9.PNG){: width="100%" height="100%"}{: .align-center}
 
-![person](https://user-images.githubusercontent.com/80055816/235873703-d249e6e9-728d-4bd8-b4df-ac6b5de6b675.PNG){: width="100%" height="100%"}{: .align-center}
+![person](https://user-images.githubusercontent.com/80055816/235876712-ae8d63a9-1885-4956-87fa-39ae518bdd87.PNG){: width="100%" height="100%"}{: .align-center}
 
 ![connect](https://user-images.githubusercontent.com/80055816/235873752-383563be-43d6-4c45-bff6-a1f9378a3ac4.PNG){: width="100%" height="100%"}{: .align-center}
 
