@@ -55,7 +55,7 @@ last_modified_at: 2023-05-02
 
 ![connect](https://user-images.githubusercontent.com/80055816/235873752-383563be-43d6-4c45-bff6-a1f9378a3ac4.PNG){: width="100%" height="100%"}{: .align-center}
 
-![local](https://user-images.githubusercontent.com/80055816/235873805-008afaf0-da09-4be7-83bc-a9b7dec90bbf.PNG){: width="100%" height="100%"}{: .align-center}
+![local](https://user-images.githubusercontent.com/80055816/235875974-1a42a4c9-24d4-40fa-b6b7-8227b09771cd.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Connect error solution, 16:23
 
