@@ -63,7 +63,87 @@ last_modified_at: 2023-05-02
 - Connect error solution
 
 ### 01-9 Detecting Where Code is Running
-- 
+
+![actor](https://user-images.githubusercontent.com/80055816/236115230-4d9ff59e-0fee-4f16-8d61-06cf373e41b1.PNG){: width="100%" height="100%"}{: .align-center}
+
+![plat](https://user-images.githubusercontent.com/80055816/236115267-4903969e-e424-476b-a373-18cfea25a440.PNG){: width="100%" height="100%"}{: .align-center}
+
+![move](https://user-images.githubusercontent.com/80055816/236115286-4da4a638-0599-4c91-9586-0fe05bc0edb8.PNG){: width="100%" height="100%"}{: .align-center}
+
+![diff](https://user-images.githubusercontent.com/80055816/236115320-7e4d7aac-e9e5-48f1-808e-975dd18da14d.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+AMovingPlatform::AMovingPlatform()
+{
+	PrimaryActorTick.bCanEverTick = true;
+
+	// Now this actor can move
+	SetMobility(EComponentMobility::Movable);
+}
+
+void AMovingPlatform::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	// The code that we write runs both on the server and the client in exactly the same way
+	// The only difference being that there are some method calls that allow us to detect
+	// Whether we are the client or whether we are the server
+	// Namely that method call is has authority
+	// If server returns true else return false
+	if (HasAuthority())
+	{
+		FVector Location = GetActorLocation();
+		Location += FVector(Speed * DeltaTime, 0, 0);
+		SetActorLocation(Location);
+	}
+}
+```
+
+### 01-10 Authority and Replication
+
+![replication](https://user-images.githubusercontent.com/80055816/236127710-3917f93c-4a6f-4f72-8eab-2440ec4ea2a6.PNG){: width="100%" height="100%"}{: .align-center}
+
+![replication2](https://user-images.githubusercontent.com/80055816/236127795-4666b395-2894-4a06-87b1-964cfb464b28.PNG){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+void AMovingPlatform::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (HasAuthority())
+	{
+		// 이 액터가 네트워크 클라이언트에 복제되는지 여부를 설정합니다
+		SetReplicates(true);
+		// 이 액터의 움직임이 네트워크 클라이언트에 복제되는지 여부를 설정합니다
+		SetReplicateMovement(true);
+	}
+}
+```
+
+```cpp
+void AMovingPlatform::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	//------------------------------------------------------------------------
+	// 코드를 만약 이렇게 바꾸면 클라에서만 큐브가 움직인다
+	// 하지만 서버가 기준이기 때문에 클라 캐릭터가 큐브가
+	// 원래 있던 위치에 박치기 하면 충돌이 일어난다
+	// 이 상태에서 만약 서버 캐릭터가 큐브위에 올라서면
+	// 클라이언트 큐브가 서버 캐릭터를 옮길것이다 하지만
+	// 진실은 서버 캐릭터와 서버 큐브는 안움직이고 있다
+	// 본문에서는 이것을 아래와 같이 설명하고 있다
+	// Unreal builds basically will move when something is attached to moves
+	// Something when it's standing on top of something, then it moves
+	//------------------------------------------------------------------------
+	if (!HasAuthority())
+	{
+		FVector Location = GetActorLocation();
+		Location += FVector(Speed * DeltaTime, 0, 0);
+		SetActorLocation(Location);
+	}
+}
+```
 
 <br>
 
