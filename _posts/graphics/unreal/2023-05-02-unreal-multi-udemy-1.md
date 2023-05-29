@@ -145,6 +145,60 @@ void AMovingPlatform::Tick(float DeltaTime)
 }
 ```
 
+### 01-11 Widgets For FVector Properties
+
+![edit](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/1be85207-afc7-4aab-9a16-94d7d7a8037c){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
+{
+	GENERATED_BODY()
+
+	//..
+	
+	// 위의 사진 처럼 Target 다이아 몬드를 생성하주려면 어떻게 해야 하는가?
+	// MakeEditWidget = true로 세팅해준다
+	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
+	FVector TargetLocation;
+};
+```
+
+### 01-12 Sending The Platform Back
+
+```cpp
+if (HasAuthority())
+{
+	// Target Swap을 아래 코드처럼 거리기반으로 해주는 이유는 무엇인가?
+	// Position 기반으로 코드를 작성하면 속도가 너무 빠를때 해당 Position을
+	// 지나쳐 무한히 움직일 수 있기 때문이다
+	FVector Location = GetActorLocation();
+	float JourneyLength = (GlobalTargetLocation - GlobalStartLocation).Size();
+	float JourneyTravelled = (Location - GlobalStartLocation).Size();
+
+	if (JourneyTravelled >= JourneyLength)
+	{
+		// GlobalStartLocation은 Local 좌표인가 World 좌표인가?
+		// World 좌표
+		FVector Swap = GlobalStartLocation;
+		GlobalStartLocation = GlobalTargetLocation;
+		GlobalTargetLocation = Swap;
+	}
+
+	FVector Direction = (GlobalTargetLocation - GlobalStartLocation).GetSafeNormal();
+	Location += Speed * DeltaTime * Direction;
+	SetActorLocation(Location);
+}
+```
+
+### 01-13 Set Up A Simple Puzzle
+
+![open](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/903b178c-e35c-4570-8a4c-39924bf0f0bf){: width="100%" height="100%"}{: .align-center}
+
+![movement](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/ccbb2915-d9ac-4749-b614-93d1126ce4a8){: width="100%" height="100%"}{: .align-center}
+
+### 01-14 Playing Over The Internet
+- 
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
