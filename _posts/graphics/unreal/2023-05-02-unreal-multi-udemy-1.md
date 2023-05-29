@@ -210,7 +210,7 @@ if (HasAuthority())
 
 ![bp](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/06b8c425-ebf8-46d8-9ca2-04f32ccbf779){: width="100%" height="100%"}{: .align-center}
 
-![add](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/06b8c425-ebf8-46d8-9ca2-04f32ccbf779){: width="100%" height="100%"}{: .align-center}
+![add](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/6cfabb44-b90c-408c-afe1-ca5f4a674219){: width="100%" height="100%"}{: .align-center}
 
 ![pad](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/39cd8ee6-6f7f-424a-a39a-340d5a5d2e57){: width="100%" height="100%"}{: .align-center}
 
