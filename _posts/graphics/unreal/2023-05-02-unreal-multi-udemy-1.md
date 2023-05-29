@@ -197,7 +197,36 @@ if (HasAuthority())
 ![movement](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/ccbb2915-d9ac-4749-b614-93d1126ce4a8){: width="100%" height="100%"}{: .align-center}
 
 ### 01-14 Playing Over The Internet
-- 
+
+![net](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/4e0d7085-aef2-4cd0-b18f-86eb69317543){: width="100%" height="100%"}{: .align-center}
+
+![hamachi](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/7f0bfe0d-3ebf-48b7-94ee-12008063b3bd){: width="100%" height="100%"}{: .align-center}
+
+- C:\UE_4.17\Engine\Binaries\Win64\UE4Editor.exe D:\Puzzle_Platforms\PuzzlePlatforms\PuzzlePlatforms.uproject 000.000.000.000 -game -log
+
+### 01-15 Set Up A Platform Trigger
+
+![plat](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/74480ed8-0dfa-417a-98c9-1efc086e6efd){: width="100%" height="100%"}{: .align-center}
+
+![bp](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/06b8c425-ebf8-46d8-9ca2-04f32ccbf779){: width="100%" height="100%"}{: .align-center}
+
+![add](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/06b8c425-ebf8-46d8-9ca2-04f32ccbf779){: width="100%" height="100%"}{: .align-center}
+
+![pad](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/39cd8ee6-6f7f-424a-a39a-340d5a5d2e57){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+APlatformTrigger::APlatformTrigger()
+{
+ 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	PrimaryActorTick.bCanEverTick = true;
+
+	// TriggerVolume 라는 이름으로 컴포넌트를 생성했다
+	TriggerVolume = CreateDefaultSubobject<UBoxComponent>(FName("TriggerVolume"));
+	if (!ensure(TriggerVolume != nullptr)) return;
+
+	RootComponent = TriggerVolume;
+}
+```
 
 <br>
 
