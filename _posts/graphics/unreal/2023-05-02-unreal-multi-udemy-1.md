@@ -228,6 +228,84 @@ APlatformTrigger::APlatformTrigger()
 }
 ```
 
+### 01-16 Handling Overlap Events in C++
+
+```cpp
+// 충돌 이벤트를 생성하기 위한 주요 과정을 설명하면?
+
+// 1. Dynamic 등록
+TriggerVolume->OnComponentBeginOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapBegin);
+TriggerVolume->OnComponentEndOverlap.AddDynamic(this, &APlatformTrigger::OnOverlapEnd);
+
+// 2. 충돌 함수 정의
+void APlatformTrigger::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Activated"));
+}
+
+void APlatformTrigger::OnOverlapEnd(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Deactivated"));
+}
+```
+
+![col](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/b268a431-9764-4159-b445-296f8682fe96){: width="100%" height="100%"}{: .align-center}
+
+### 01-17 Activating Platforms From Triggers
+
+![set](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/e78f4808-48ce-4644-bb8e-ad07d4866435){: width="100%" height="100%"}{: .align-center}
+
+![click](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/68264525-64b2-438f-8f3d-a9620902bb0c){: width="100%" height="100%"}{: .align-center}
+
+### 01-18 When To Use A GameInstance
+
+![ins](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/14b332da-ab92-4cf9-92f8-018d46be60a7){: width="100%" height="100%"}{: .align-center}
+
+![setins](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/2946cf93-692e-4b74-b84e-2a9ba2447310){: width="100%" height="100%"}{: .align-center}
+
+![ini](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/f80369a2-8fa2-4ed3-b476-935af1f873dd){: width="100%" height="100%"}{: .align-center}
+
+![window](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/42388599-f22a-45e9-8cfd-25092dd64362){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance
+{
+	GENERATED_BODY()
+	
+public:
+	UPuzzlePlatformsGameInstance(const FObjectInitializer& ObjectInitializer);
+
+	// 이 함수에 대해 설명하면?
+	// UGameInstance에 있는 함수를 오버라이딩한 함수이다
+	virtual void Init();
+};
+```
+
+### 01-19 Console Commands With Exec
+
+![press](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/60418109-6090-4b88-ae37-17afcd6502c9){: width="100%" height="100%"}{: .align-center}
+
+```cpp
+class PUZZLEPLATFORMS_API UPuzzlePlatformsGameInstance : public UGameInstance
+{
+	GENERATED_BODY()
+	
+public:
+	UPuzzlePlatformsGameInstance(const FObjectInitializer& ObjectInitializer);
+	virtual void Init();
+	
+	// 이 함수의 용도는 무엇인가?
+	// 콘솔 창에서 실행시킬 명령어를 정의한다
+	UFUNCTION(Exec)
+	void Host();
+
+	UFUNCTION(Exec)
+	void Join(const FString& Address);
+};
+```
+
+- logging to the screen unreal 라고 구글에 검색하면 unreal 메시지 출력 가이드를 볼 수 있다
+
 <br>
 
 [맨 위로 이동하기](#){: .btn .btn--primary }{: .align-right}
