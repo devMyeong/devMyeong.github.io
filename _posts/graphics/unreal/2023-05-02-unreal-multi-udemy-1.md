@@ -58,6 +58,7 @@ last_modified_at: 2023-05-02
 ![local](https://user-images.githubusercontent.com/80055816/235875974-1a42a4c9-24d4-40fa-b6b7-8227b09771cd.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Connect error solution, 16:23
+- 데디케이티드 서버에 대한 정보는 오른쪽 링크를 참고하자 ([**참고**](https://docs.unrealengine.com/4.26/ko/InteractiveExperiences/Networking/Server/)), ([**참고**](https://kyoun.tistory.com/97))
 
 ### 01-8 Tips For Not Spawning
 - Connect error solution
@@ -305,6 +306,34 @@ public:
 ```
 
 - logging to the screen unreal 라고 구글에 검색하면 디버깅 메시지 출력 가이드를 볼 수 있다
+
+### 01-20 Hosting Servers With ServerTravel
+
+![level](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/9cb29746-e3e0-495c-9e0a-28b051ad5d5b){: width="100%" height="100%"}{: .align-center}
+
+![actor](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/86a90d62-3a0a-45e8-ab9c-56c4a93e85b6){: width="100%" height="100%"}{: .align-center}
+
+- (1) Player controllers will connect in to the map (2) We've got three players all playing around in the same map (3) Server can execute a command called server travel and say, oh, there's another map (4) All to move over their server, travel to map number two, in this case, Africa map (5) All the servers, one by one, have to reconnect to the new map and move themselves into the new map so the controllers don't get destroyed They just get moved into a new map
+
+```cpp
+void UPuzzlePlatformsGameInstance::Host()
+{
+	UEngine* Engine = GetEngine();
+	if (!ensure(Engine != nullptr)) return;
+
+	Engine->AddOnScreenDebugMessage(0, 2, FColor::Green, TEXT("Hosting"));
+
+	UWorld* World = GetWorld();
+	if (!ensure(World != nullptr)) return;
+
+	// 이 함수의 역할은?
+	// 월드 이동
+	World->ServerTravel("/Game/ThirdPersonCPP/Maps/ThirdPersonExampleMap?listen"); // ?listen 구문이 없으면 어떻게 될까? 따로 공부하자
+}
+```
+
+### 01-21 Joining Servers With ClientTravel
+- 
 
 <br>
 
