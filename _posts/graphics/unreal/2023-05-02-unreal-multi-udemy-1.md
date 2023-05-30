@@ -304,7 +304,7 @@ public:
 };
 ```
 
-- logging to the screen unreal 라고 구글에 검색하면 unreal 메시지 출력 가이드를 볼 수 있다
+- logging to the screen unreal 라고 구글에 검색하면 디버깅 메시지 출력 가이드를 볼 수 있다
 
 <br>
 
