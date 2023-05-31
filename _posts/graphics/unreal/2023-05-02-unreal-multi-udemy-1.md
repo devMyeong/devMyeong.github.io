@@ -58,7 +58,7 @@ last_modified_at: 2023-05-02
 ![local](https://user-images.githubusercontent.com/80055816/235875974-1a42a4c9-24d4-40fa-b6b7-8227b09771cd.PNG){: width="100%" height="100%"}{: .align-center}
 
 - Connect error solution, 16:23
-- 데디케이티드 서버에 대한 정보는 오른쪽 링크를 참고하자 ([**참고**](https://docs.unrealengine.com/4.26/ko/InteractiveExperiences/Networking/Server/)), ([**참고**](https://kyoun.tistory.com/97))
+- 데디케이티드 서버에 대한 정보는 오른쪽 링크를 참고하자 ([**참고**](https://docs.unrealengine.com/4.26/ko/InteractiveExperiences/Networking/Server/)), ([**참고**](https://docs.unrealengine.com/4.27/ko/InteractiveExperiences/Networking/HowTo/DedicatedServers/)), ([**참고**](https://kyoun.tistory.com/97))
 
 ### 01-8 Tips For Not Spawning
 - Connect error solution
@@ -333,7 +333,45 @@ void UPuzzlePlatformsGameInstance::Host()
 ```
 
 ### 01-21 Joining Servers With ClientTravel
-- 
+
+![default](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/cea0772b-2c46-4722-872d-eaa06bc384e5){: width="100%" height="100%"}{: .align-center}
+
+- Understand the difference between client travel and server travel, Client travel that operates on a player controller level and it tells the individual player controller that it should move
+
+```cpp
+void UPuzzlePlatformsGameInstance::Join(const FString& Address)
+{
+	UEngine* Engine = GetEngine();
+	if (!ensure(Engine != nullptr)) return;
+
+	Engine->AddOnScreenDebugMessage(0, 5, FColor::Green, FString::Printf(TEXT("Joining %s"), *Address));
+
+	APlayerController* PlayerController = GetFirstLocalPlayerController();
+	if (!ensure(PlayerController != nullptr)) return;
+
+	// 이 함수의 용도는 무엇인가?
+	// Client travel을 하기위한 용도
+	PlayerController->ClientTravel(Address, ETravelType::TRAVEL_Absolute);
+}
+```
+
+### 01-22 Sharing Your Game On itch.io
+
+![pack](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/d43e3d89-8497-4626-90dd-c4ba23c8acb3){: width="100%" height="100%"}{: .align-center}
+
+- https://itch.io/ 이 사이트는 스팀과 달리 무료로 게임을 배포해 볼 수 있다
+
+![itch](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/94ef0d9e-2dcf-4930-b4f1-48e6ac818397){: width="100%" height="100%"}{: .align-center}
+
+![edit](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/5a7c6437-fcd1-4629-9faa-a0a83b54ff57){: width="100%" height="100%"}{: .align-center}
+
+![zip](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/e1c8e214-9bc8-4dbd-a40c-6337f75c46e7){: width="100%" height="100%"}{: .align-center}
+
+![upload](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/d27185d2-0b25-4dba-9673-1895430cf9f6){: width="100%" height="100%"}{: .align-center}
+
+![up](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/fe0f7e9b-5030-4f2b-a41c-da499d42b2d1){: width="100%" height="100%"}{: .align-center}
+
+![view](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/167fb5df-1539-4c09-bf14-7639eb22577d){: width="100%" height="100%"}{: .align-center}
 
 <br>
 
