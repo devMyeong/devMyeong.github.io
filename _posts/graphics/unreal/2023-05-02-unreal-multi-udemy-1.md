@@ -32,6 +32,8 @@ last_modified_at: 2023-05-02
 
 ![set](https://user-images.githubusercontent.com/80055816/235620178-5a129919-2493-4eef-b565-4d60a2c4e50c.PNG){: width="100%" height="100%"}{: .align-center}
 
+![modeworld](https://github.com/devMyeong/devMyeong.github.io/assets/80055816/e49bbf66-6b7a-4abd-85ff-d0a203bd44e5){: width="100%" height="100%"}{: .align-center}
+
 - What happen Under the Hood? (1) Unreal loads the Map (2) The Map specifies a GameMode (3) The PlayerController joins the Map (4) It asks the GameMode to spawn a Pawn (5) The Pawn is linked th the PlayerController
 
 ### 01-5 How to Be an Active Student
