@@ -81,6 +81,8 @@ AMovingPlatform::AMovingPlatform()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// Now this actor can move
+	// 주의할 점은 생성자에서 무언가를 변경해도
+	// 월드에 배치되거나 블루프린트로 생성된 오브젝트는 변경되지 않는다
 	SetMobility(EComponentMobility::Movable);
 }
 
