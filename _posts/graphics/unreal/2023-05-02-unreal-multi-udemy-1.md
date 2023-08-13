@@ -161,7 +161,7 @@ class PUZZLEPLATFORMS_API AMovingPlatform : public AStaticMeshActor
 
 	//..
 	
-	// 위의 사진 처럼 Target 다이아 몬드를 생성하주려면 어떻게 해야 하는가?
+	// 위의 사진 처럼 Target 다이아 몬드를 생성해주려면 어떻게 해야 하는가?
 	// MakeEditWidget = true로 세팅해준다
 	UPROPERTY(EditAnywhere, Meta = (MakeEditWidget = true))
 	FVector TargetLocation;
