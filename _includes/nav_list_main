@@ -94,7 +94,6 @@
                 {% endfor %}
             </ul>
 
-
         <span class="nav__sub-title">Coding Test</span>
 		    <ul>
                 {% for category in site.categories %}
