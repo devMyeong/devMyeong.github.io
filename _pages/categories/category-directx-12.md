@@ -1,7 +1,7 @@
 ---
-title: "DirectX 11"
+title: "DirectX 12"
 layout: archive
-permalink: categories/directx11
+permalink: categories/directx12
 author_profile: true
 sidebar_main: true
 ---
@@ -10,5 +10,5 @@ sidebar_main: true
 
 ***
 
-{% assign posts = site.categories['DirectX 11'] %}
+{% assign posts = site.categories['DirectX 12'] %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}
