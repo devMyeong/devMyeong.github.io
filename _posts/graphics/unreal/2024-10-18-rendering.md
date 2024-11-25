@@ -19,7 +19,7 @@ last_modified_at: 2024-10-18
 - RenderDoc의 역할은? Lets you break down a frame draw call by draw call and inspect GPU data
 - Engine\Config\ConsoleVariables.ini 에서 r.ShaderDevelopmentMode=1의 역할은? Make Unreal prompt you for a shader recompile when the default material fails to compile
 - Engine\Config\BaseEngine.ini 에서 어떤 것을 할 수 있는가? bAllowAsynchronousShaderCompiling, It can be useful to turn these off if you are trying to debug a section of the C++ shader pipeline
-- ([**출처**](https://medium.com/@lordned/unreal-engine-4-rendering-overview-part-1-c47f2da65346))
+- [[**출처**](https://medium.com/@lordned/unreal-engine-4-rendering-overview-part-1-c47f2da65346)]
 
 ## Unreal Engine 4 Rendering Part 2: Shaders and Vertex Data
 - Vertex Factories의 역할은? Vertex Factory to control what data gets uploaded to the GPU for the vertex shader
