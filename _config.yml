@@ -97,7 +97,7 @@ author:
   name             : "InMyeong"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "Study blog"
-  location         : "Korea"
+  location         :
   email            :
   links:
     - label: "Email"
