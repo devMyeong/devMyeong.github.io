@@ -20,10 +20,10 @@ last_modified_at: 2025-03-09
 ### 01-1 Setup Dedicated server and Client builds
 - 
 
-### 01-2 Introduction to Puzzle Platforms
+### 01-2 Auto Connect to Server
 - 
 
-### 01-3 Differences Between UE5 and UE4
+### 01-3 Compile code out of client build
 - 
 
 ### 01-4 참고한 사이트
