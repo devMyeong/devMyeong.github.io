@@ -41,7 +41,8 @@ last_modified_at: 2025-03-09
 ![connect](https://github.com/user-attachments/assets/ade40d3a-e55c-4597-a5e2-c2577d413b6e){: width="100%" height="100%"}{: .align-center}
 
 ### 01-2 Auto Connect to Server
-- 
+
+![entrylevel](https://github.com/user-attachments/assets/cb3b75f5-9d68-4f03-b76c-a04c322f6f8a){: width="100%" height="100%"}{: .align-center}
 
 ### 01-3 Compile code out of client build
 - 
