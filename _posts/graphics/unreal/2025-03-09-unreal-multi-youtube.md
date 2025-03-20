@@ -55,8 +55,7 @@ void Akusogaki77_ProjectCharacter::BeginPlay()
 	Super::BeginPlay();
 
 //-----------------------------------------
-// 클라이언트 바로가기에 -log를 넣고 실행해보면
-// 아래 로그가 표시되지 않는것을 볼 수 있다
+// 클라이언트 에서는 아래 로그가 출력되지 않는다
 //-----------------------------------------
 #if UE_SERVER
 	UE_LOG(LogTemp, Warning, TEXT("This is running on the server"));
