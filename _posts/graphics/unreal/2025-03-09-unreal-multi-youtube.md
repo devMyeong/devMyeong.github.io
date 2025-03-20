@@ -47,7 +47,22 @@ last_modified_at: 2025-03-09
 ![connect](https://github.com/user-attachments/assets/2b8fc48b-84df-4a59-94bf-bbeb2d1d7e84){: width="100%" height="100%"}{: .align-center}
 
 ### 01-3 Compile code out of client build
-- 
+
+```cpp
+void Akusogaki77_ProjectCharacter::BeginPlay()
+{
+	// Call the base class  
+	Super::BeginPlay();
+
+//-----------------------------------------
+// 클라이언트 바로가기에 -log를 넣고 실행해보면
+// 아래 로그가 표시되지 않는것을 볼 수 있다
+//-----------------------------------------
+#if UE_SERVER
+	UE_LOG(LogTemp, Warning, TEXT("This is running on the server"));
+#endif
+}
+```
 
 ### 01-4 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=ad5MZLSDAZk&list=PLnHeglBaPYu8GGRJrRu2nKVnPomyX1Xff)]
