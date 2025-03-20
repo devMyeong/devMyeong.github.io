@@ -44,6 +44,8 @@ last_modified_at: 2025-03-09
 
 ![entrylevel](https://github.com/user-attachments/assets/cb3b75f5-9d68-4f03-b76c-a04c322f6f8a){: width="100%" height="100%"}{: .align-center}
 
+![connect](https://github.com/user-attachments/assets/2b8fc48b-84df-4a59-94bf-bbeb2d1d7e84){: width="100%" height="100%"}{: .align-center}
+
 ### 01-3 Compile code out of client build
 - 
 
