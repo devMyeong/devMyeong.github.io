@@ -71,7 +71,8 @@ void Akusogaki77_ProjectCharacter::BeginPlay()
 ## Chapter 2 Multiplayer in Unreal Engine
 
 ### 02-1 How to Understand Network Replication
-- 
+- 언리얼 엔진은 어떤 개념을 활용해 각 클라이언트의 월드를 동기화 시키는가? Replication ( 00 : 46 )
+- NetMode는 무엇의 속성인가? World ( 01 : 28 )
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
