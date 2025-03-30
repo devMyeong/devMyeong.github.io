@@ -73,6 +73,33 @@ void Akusogaki77_ProjectCharacter::BeginPlay()
 ### 02-1 How to Understand Network Replication
 - 언리얼 엔진은 어떤 개념을 활용해 각 클라이언트의 월드를 동기화 시키는가? Replication ( 00 : 46 )
 - NetMode는 무엇의 속성인가? World ( 01 : 28 )
+- 게임을 플레이할 수 있고 GameInstance에 LocalPlayer가 있는 NetMode는? NM_Standalone, NM_ListenServer, NM_Client ( 01 : 35 )
+- GameInstance에 GameMode 액터가 포함된 World의 표준적이고 신뢰할 수 있는 사본이 있는 NetMode는? NM_Standalone, NM_DedicatedServer, NM_ListenServer ( 01 : 43 )
+- 원격 연결 시도에 열려 있는 NetMode는? NM_DedicatedServer, NM_ListenServer ( 01 : 52 )
+- 게임 인스턴스가 시작된 방식에 따라 무엇이 달라 지는가? 월드의 NetMode ( 02 : 13 )
+- 위에서 말하는 방식 중에서 게임 인스턴스가 원격 서버에 연결된 경우 해당 월드는 어떤 NetMode를 갖는가? NM_Client ( 02 : 18 )
+- NM_Client의 특징은? 로컬 플레이어도 플레이 할 수 있지만, 서버의 요청에 따라 월드가 업데이트 된다 ( 02 : 23 )
+- 게임 인스턴스가 로컬 맵을 로드하는 경우 어떤 NetMode를 갖는가? NM_Standalone ( 02 : 29 )
+- 로컬에서 맵을 로드하고 ?Listen 옵션을 추가하면 어떤 NetMode를 갖는가? NM_ListenServer ( 02 : 43 )
+- LocalPlayer도 없고 뷰포트도 없는 NetMode는? NM_DedicatedServer ( 02 : 57 )
+- Replication 실현을 위해 필요한 클래스는? NetDriver, NetConnection, Channel ( 03 : 48 )
+- 각 프로세스마다 고유의 NetDriver를 갖는가? Yes 이때 서버 프로세스의 NetDriver는 메시지 수신 기능을 담당하고 클라이언트 프로세스의 NetDriver는 서버에 연결 요청을 보냄 ( 04 : 05 )
+- 서버와 클라이언트 NetDriver가 접촉하면 어떤일이 일어 나는가? 각각의 NetDriver 내에 NetConnection이 설정된다 이때 서버는 연결된 플레이어의 수만큼 NetConnection을 갖고 각 클라이언트는 서버와의 연결을 나타내는 단일 NetConnection을 갖는다 ( 04 : 17 )
+- NetConnection 내에 어떤 채널들이 있는가? UControlChannel, UVoiceChannel, UActorChannel ( 04 : 33 )
+- UActorChannel의 특징은? 현재 연결을 통해 Replication 되고 있는 액터 수만큼 생성된다 주의할 점은 클라이언트 수만큼이 아니라 액터 수만큼 이라는 것이다 ( 04 : 41 )
+- 액터가 클라이언트에 복제되는 경우 발생할 수 있는 중요한 세가지 사항은? Actor의 수명이 서버와 클라 사이에 동기화 된다, Property 또한 동기화 된다, RPC 또한 동기화 된다 ( 05 : 13 )
+- 서버와 액터를 소유한 단일 클라이언트 간에 메시지를 주고 받는 방법은? 클라이언트 또는 서버 RPC를 선언한다 ( 05 : 59 )
+
+```cpp
+// 아래 코드에 대해 설명하면? ( 04 : 58 )
+// 복제에 적합한 액터가 특정 플레이어와 관련이 있다고 간주되어
+// 서버는 해당 플레이어의 NetConnection 에서 ActorChannel을 열고
+// 서버와 클라이언트는 해당 채널을 사용하여 해당 액터에 대한 정보를 교환한다
+bReplicates = true;
+IsNetRelevantFor(P0) = true;
+```
+
+<img width="583" alt="Image" src="https://github.com/user-attachments/assets/b03d679e-07e0-480b-9b63-109c7fb5a660" />
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
