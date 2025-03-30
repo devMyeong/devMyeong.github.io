@@ -87,8 +87,6 @@ void Akusogaki77_ProjectCharacter::BeginPlay()
 - 서버와 클라이언트 NetDriver가 접촉하면 어떤일이 일어 나는가? 각각의 NetDriver 내에 NetConnection이 설정된다 이때 서버는 연결된 플레이어의 수만큼 NetConnection을 갖고 각 클라이언트는 서버와의 연결을 나타내는 단일 NetConnection을 갖는다 ( 04 : 17 )
 - NetConnection 내에 어떤 채널들이 있는가? UControlChannel, UVoiceChannel, UActorChannel ( 04 : 33 )
 - UActorChannel의 특징은? 현재 연결을 통해 Replication 되고 있는 액터 수만큼 생성된다 주의할 점은 클라이언트 수만큼이 아니라 액터 수만큼 이라는 것이다 ( 04 : 41 )
-- 액터가 클라이언트에 복제되는 경우 발생할 수 있는 중요한 세가지 사항은? Actor의 수명이 서버와 클라 사이에 동기화 된다, Property 또한 동기화 된다, RPC 또한 동기화 된다 ( 05 : 13 )
-- 서버와 액터를 소유한 단일 클라이언트 간에 메시지를 주고 받는 방법은? 클라이언트 또는 서버 RPC를 선언한다 ( 05 : 59 )
 
 ```cpp
 // 아래 코드에 대해 설명하면? ( 04 : 58 )
@@ -99,10 +97,17 @@ bReplicates = true;
 IsNetRelevantFor(P0) = true;
 ```
 
+- 액터가 클라이언트에 복제되는 경우 발생할 수 있는 중요한 세가지 사항은? Actor의 수명이 서버와 클라 사이에 동기화 된다, Property 또한 동기화 된다, RPC 또한 동기화 된다 ( 05 : 13 )
+- 서버와 액터를 소유한 단일 클라이언트 간에 메시지를 주고 받는 방법은? 클라이언트 또는 서버 RPC를 선언한다 ( 05 : 59 )
 - NetConnection은 보통 무엇을 나타내는가? 플레이어를 나타내며 플레이어가 게임에 완전히 로그인하면 해당 플레이어와 연관된 PlayerController 액터를 갖게 된다 ( 06 : 29 )
 - 서버 관점에서 소유에 대해 설명하면? UNetConnection은 해당 PlayerController를 소유하며 PlayerController가 소유중인 자식들까지 소유한다 ( 06 : 38 )
 - PlayerController가 소유중인 대표적인 자식 클래스들을 말해보면? APlayerState, APawn 이다 이때 APawn이 자신이 소유한 AWeapon을 액터를 생성했다고 가정하면 AWeapon의 부모를 추적해 어떤 클라이언트에 속해있는지 알 수 있다 ( 06 : 53 )
-- 
+- Relevancy에 대해 설명하면? 서버의 NetDriver는 해당 액터가 각 클라이언트와 Relevancy 즉 관련이 있는지 확인한다 ( 07 : 51 )
+- 항상 Relevancy 상태인 액터는? GameState, PlayerState ( 08 : 01 )
+- 특정 플레이어가 A 액터를 소유했다면 어떤일이 일어나는가? A 액터는 항상 해당 클라이언트와 Relevancy 하다고 간주된다 ( 08 : 14 )
+- PlayerController와 같은 일부 액터의 특징은? 소유자에게만 관련이 있도록 구성 되어있다 때문에 소유하지 않은 클라이언트에게 복제되지 않는다 ( 08 : 24 )
+- 소유자로부터 관련성을 상속하도록 Actor를 구성하는것이 가능한가? Yes ( 08 : 33 )
+- 소유되지 않은 Actor가 숨겨져 있고 충돌이 비활성화된 경우 Relevancy 하지 않는 것으로 간주된다 ( 08 : 38 )
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
