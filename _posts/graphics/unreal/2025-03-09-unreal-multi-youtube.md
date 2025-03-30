@@ -99,7 +99,10 @@ bReplicates = true;
 IsNetRelevantFor(P0) = true;
 ```
 
-<img width="583" alt="Image" src="https://github.com/user-attachments/assets/b03d679e-07e0-480b-9b63-109c7fb5a660" />
+- NetConnection은 보통 무엇을 나타내는가? 플레이어를 나타내며 플레이어가 게임에 완전히 로그인하면 해당 플레이어와 연관된 PlayerController 액터를 갖게 된다 ( 06 : 29 )
+- 서버 관점에서 소유에 대해 설명하면? UNetConnection은 해당 PlayerController를 소유하며 PlayerController가 소유중인 자식들까지 소유한다 ( 06 : 38 )
+- PlayerController가 소유중인 대표적인 자식 클래스들을 말해보면? APlayerState, APawn 이다 이때 APawn이 자신이 소유한 AWeapon을 액터를 생성했다고 가정하면 AWeapon의 부모를 추적해 어떤 클라이언트에 속해있는지 알 수 있다 ( 06 : 53 )
+- 
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
