@@ -109,7 +109,46 @@ IsNetRelevantFor(P0) = true;
 - 소유자로부터 관련성을 상속하도록 Actor를 구성하는것이 가능한가? Yes ( 08 : 33 )
 - 소유되지 않은 Actor가 숨겨져 있고 충돌이 비활성화된 경우 어떤일이 일어나는가? Relevancy 하지 않는 것으로 간주된다 ( 08 : 38 )
 - 위의 경우에 해당하지 않으면 Relevancy의 기준은 무엇인가? 플레이어와의 거리, IsNetRelevantFor 함수를 사용해 재정의 할 수 있음 ( 08 : 51 )
-- 
+- 서버가 해당 액터와 관련된 업데이트를 클라이언트에게 동기화 하는 빈도는 어떤 요소에 의해 결정되는가? NetUpdateFrequency와 NetPriority ( 09 : 12 )
+- 서버의 NetDriver는 대역폭 완화를 위해 무엇을 하는가? 우선순위에 따라 관련 행위자를 정렬한 다음 사용 가능한 대역폭을 모두 사용할 때까지 네트워크 업데이트를 실행한다 ( 09 : 42 )
+- 우선순위의 기준은 무엇인가? 플레이어와 가까울수록, 한동안 업데이트가 되지 않을수록 우선순위가 올라간다 ( 09 : 56 )
+- 우선순위 가중치에 해당하는 변수는? NetPriority ( 10 : 07 )
+- 주기적이고 대역폭이 제한된 네트워크 업데이트 프로세스는 무엇을 활용하는게 좋은가? Property ( 10 : 20 )
+- 네트워크로 즉시 전송하고 싶은 높은 우선순위 메시지가 있다면 무엇을 활용해야 하는가? RPCs ( 10 : 26 )
+- 모든 UFUNCTION을 RPC로 만들 수 있는가? Yes ( 10 : 34 )
+
+```cpp
+// 서버에서 클라이언트 RPC를 호출하면 어떻게 되는가? 아래 코드처럼 소유 클라이언트 에서 실행된다 ( 10 : 41 )
+
+// GameServer.exe
+SomePawn->Client_DoSomething();
+
+// Game.exe
+Client_DoSomething_Implementation();
+
+// 클라이언트 에서 서버 RPC를 호출하면 어떻게 되는가? 아래 코드처럼 서버에서 실행된다 ( 10 : 48 )
+
+// Game.exe
+SomePawn->Server_DoSomething();
+
+// GameServer.exe
+Server_DoSomething_Implementation();
+
+// 서버에서 멀티캐스트 RPC를 호출하면 어떻게 되는가? 아래 코드처럼 서버 및 모든 클라이언트 에서 실행된다 ( 10 : 54 )
+
+// GameServer.exe
+SomePawn->Multicast_DoSomething();
+Multicast_DoSomething_Implementation();
+
+// Game.exe - P0
+Multicast_DoSomething_Implementation();
+
+// Game.exe - P1
+Multicast_DoSomething_Implementation();
+```
+
+- Multicast RPC 에서 중요한 요소는? Relevancy, 특정 클라이언트는 해당 액터에 대한 오픈 채널이 없을 수 있기 때문이다 ( 11 : 00 )
+- 위에서 말한 경우에서 어떤일이 발생 하는가? 해당 Multicast RPC를 특정 클라이언트가 수신하지 못한다 ( 11 : 12 )
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
