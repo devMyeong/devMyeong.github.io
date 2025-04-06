@@ -164,7 +164,8 @@ bool ASomePawn::Server_InitiateAttack_Validate(float ChargeStrength)
 }
 ```
 
-- 
+- 소유 연결을 통해 클라이언트 에서 서버로 데이터를 가져오는 유일한 방법은? 서버 RPC ( 12 : 44 )
+- RPC는 보통 언제 사용 되는가? 우선 순위가 높고 시간이 중요한 네트워크 코드에 사용된다 예를들어 엔진의 캐릭터 이동 ( 12 : 50 )
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
