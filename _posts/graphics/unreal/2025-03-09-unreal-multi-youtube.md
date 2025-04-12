@@ -166,6 +166,66 @@ bool ASomePawn::Server_InitiateAttack_Validate(float ChargeStrength)
 
 - 소유 연결을 통해 클라이언트 에서 서버로 데이터를 가져오는 유일한 방법은? 서버 RPC ( 12 : 44 )
 - RPC는 보통 언제 사용 되는가? 우선 순위가 높고 시간이 중요한 네트워크 코드에 사용된다 예를들어 엔진의 캐릭터 이동 ( 12 : 50 )
+- Property에 대한 복제를 활성화 하려면 어떻게 해야 하는가? Replicated 지정자를 추가 해준다 ( 14 : 06 )
+
+```cpp
+// 아래 함수의 기능은? 어떤 속성을 어떤 조건에서 복제해야 하는지 지정하는 기능이다 ( 14 : 24 )
+
+void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ASomeActor, SomeProperty);
+}
+```
+
+- Property 속성이 업데이트 될 때 특정 함수를 실행해야 하는 경우 사용하는 키워드는? ReplicatedUsing ( 14 : 54 )
+- ReplicatedUsing을 사용할 때 블루프린트와 CPP의 차이는 무엇인가? 블루프린트는 속성값이 변하면 서버에서 연관된 함수가 자동으로 호출된다 하지만 CPP 에서는 클라이언트 뿐만 아니라 서버에서도 연관된 함수가 호출되려면 HasAuthority를 활용해 수동으로 호출해야 한다 ( 15 : 10 )
+- ActorRole의 종류는? ROLE_None, ROLE_SimulatedProxy, ROLE_AutonomousProxy, ROLE_Authority ( 15 : 28 )
+- Actor가 HasAuthority 하지 않으면 보통 어떤 Role 상태일까? SimulatedProxy ( 16 : 11 )
+- PlayerController는 소유 클라이언트에 리플리케이티드 되며 어떤 Role을 담당하는가? ROLE_AutonomousProxy 참고로 서버는 PlayerController에 대해 Authority 하다 ( 16 : 18 )
+- PlayerController에 연관된 Pawn의 Role은? ROLE_AutonomousProxy, 연관 되지 않은 Pawn 들은 ROLE_SimulatedProxy ( 16 : 23 )
+- Pawn이 IsLocalController에 대해 참이면 해당 플레이어는? 코드가 실행되는 GameInstance에 해당한다 ( 16 : 53 )
+- Pawn이 IsLocalController에 대해 거짓이면 해당 플레이어는? 원격 클라이언트의 플레이어에 해당한다 ( 16 : 59 )
+- 리플리케이티드 되고있는 Actor의 모든 부분이 네트워킹과 관련되어야 하는가? No ( 18 : 15 )
+- 네트워크를 인식하지 못하는 부분들은 어떻게 동기화 하면 좋을까? 함수화 시켜놓고 리플리케이션을 적용한다 ( 18 : 22 )
+
+```cpp
+각 액터들의 특징을 말해보면? ( 18 : 51 )
+
+AGameModeBase - server only
+AGameStateBase - replicated to all clients
+AGameSession - server only
+
+APlayerController - replicated to owning client
+APlayerState - replicated to all clients
+APawn - replicated to relevant clients
+
+AActor - you decide
+```
+
+- 권한이 있어야만 호출되는 함수를 어떻게 체크할 수 있을까? checkf 함수를 활용한다 ( 19 : 04 )
+- 프로세스가 클라이언트에서 시작되어 서버에서 종료되는 경우 보통 어떤 RPC를 사용하는가? 서버 RPC ( 19 : 37 )
+- 프로세스가 서버에서 시작되어 결국 클라이언트에 영향을 미치는 경우 보통 어떤 RPC를 사용하는가?  ( 19 : 44 )
+
+```cpp
+// 멀티플레이와 싱글플레이에서 서버에서만 발생해야 하는 일이 있다면? ( 20 : 24 )
+if (HasAuthority()) {}
+
+// 클라이언트로 실행할 때만 필요하고 싱글플레이에서 조차 실행 안되게 하려면? ( 20 : 32 )
+if (!HasAuthority()) {}
+
+// 데디케이티드 서버를 특별히 제외 하려는 경우는? ( 20 : 39 )
+if (!IsRunningDedicatedServer()) {}
+
+// 순전히 클라이언트 측 기능이 필요한 경우는? ( 20 : 47 )
+if (Pawn->IsLocalController()) {}
+if (Controller->IsLocalController()) {}
+```
+
+- 더 세부적인 사항은? ( 21 : 07 )
+
+- [[Networking and Multiplayer](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine)]
 
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
