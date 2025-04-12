@@ -191,7 +191,7 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 - 네트워크를 인식하지 못하는 부분들은 어떻게 동기화 하면 좋을까? 함수화 시켜놓고 리플리케이션을 적용한다 ( 18 : 22 )
 
 ```cpp
-각 액터들의 특징을 말해보면? ( 18 : 51 )
+// 각 액터들의 특징을 말해보면? ( 18 : 51 )
 
 AGameModeBase - server only
 AGameStateBase - replicated to all clients
