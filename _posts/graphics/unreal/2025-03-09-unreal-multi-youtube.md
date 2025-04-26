@@ -192,6 +192,9 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 
 ```cpp
 // 각 액터들의 특징을 말해보면? ( 18 : 51 )
+// dev.epicgames.com/documentation/ko-kr/unreal-engine/remote-procedure-calls-in-unreal-engine
+// 액터 소유권이 어느쪽에 있는지 명확하게 구분하자
+// 서버에서 호출된 RPC 인지 클라이언트에서 호출된 RPC 인지 명확하게 구분하자
 
 AGameModeBase - server only
 AGameStateBase - replicated to all clients
