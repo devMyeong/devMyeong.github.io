@@ -196,6 +196,10 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 // 액터 소유권이 어느쪽에 있는지 명확하게 구분하자
 // 서버에서 호출된 RPC 인지 클라이언트에서 호출된 RPC 인지 명확하게 구분하자
 
+// 블루프린트는 아래 링크들을 참고하자
+// dev.epicgames.com/documentation/en-us/unreal-engine/replicating-variables-in-blueprints?application_version=4.27
+// www.youtube.com/watch?v=jtWhd4ugPW0
+
 AGameModeBase - server only
 AGameStateBase - replicated to all clients
 AGameSession - server only
@@ -225,7 +229,8 @@ if (!IsRunningDedicatedServer()) {}
 if (Pawn->IsLocalController()) {}
 if (Controller->IsLocalController()) {}
 ```
-
+- 플레이어가 직접 조종하는 캐릭터나 오브젝트의 오너는 보통 PlayerController 이다
+- PlayerController는 Only Relevant to Owner 이다
 - 더 세부적인 사항은? ( 21 : 07 )
 
 - [[Networking and Multiplayer](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine)]
