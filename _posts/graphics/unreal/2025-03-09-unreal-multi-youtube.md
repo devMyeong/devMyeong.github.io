@@ -198,7 +198,7 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 
 // 블루프린트는 아래 링크들을 참고하자
 // dev.epicgames.com/documentation/en-us/unreal-engine/replicating-variables-in-blueprints?application_version=4.27
-// www.youtube.com/watch?v=jtWhd4ugPW0
+// www.youtube.com/watch?v=jtWhd4ugPW0 ( 07 : 56 )
 
 AGameModeBase - server only
 AGameStateBase - replicated to all clients
