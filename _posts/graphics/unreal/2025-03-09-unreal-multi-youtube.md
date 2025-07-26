@@ -98,7 +98,7 @@ IsNetRelevantFor(P0) = true;
 ```
 
 - 액터가 클라이언트에 복제되는 경우 발생할 수 있는 중요한 세가지 사항은? Actor의 수명이 서버와 클라 사이에 동기화 된다, Property 또한 동기화 된다, RPC 또한 동기화 된다 ( 05 : 13 )
-- 서버와 액터를 소유한 단일 클라이언트 간에 메시지를 주고 받는 방법은? 클라이언트 또는 서버 RPC를 선언한다 ( 05 : 59 )
+- 서버와 액터를 소유한 단일 클라이언트 간에 메시지를 주고 받는 방법은? 클라이언트 또는 서버 RPC를 선언한다, 만약 매개변수를 넘기려면 해당 매개변수로 넘기려는 변수가 Replicated 여야한다 ( 05 : 59 )
 - NetConnection은 보통 무엇을 나타내는가? 플레이어를 나타내며 플레이어가 게임에 완전히 로그인하면 해당 플레이어와 연관된 PlayerController 액터를 갖게 된다 ( 06 : 29 )
 - 서버 관점에서 소유에 대해 설명하면? UNetConnection은 해당 PlayerController를 소유하며 PlayerController가 소유중인 자식들까지 소유한다 ( 06 : 38 )
 - PlayerController가 소유중인 대표적인 자식 클래스들을 말해보면? APlayerState, APawn 이다 이때 APawn이 자신이 소유한 AWeapon을 액터를 생성했다고 가정하면 AWeapon의 부모를 추적해 어떤 클라이언트에 속해있는지 알 수 있다 ( 06 : 53 )
