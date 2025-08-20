@@ -1,5 +1,5 @@
 ---
-title:  "Dedicated Server"
+title:  "Niagara"
 
 categories:
   - Unreal Engine
