@@ -54,7 +54,7 @@ last_modified_at: 2025-07-21
 ### 01-8 USING GPU FOR SIMULATION
 - 가장 최적화된 모드는? GPUCompute Sim, Fixed ( 52 : 37 )
 
-### 01-3 참고한 사이트
+### 01-9 참고한 사이트
 - [[참고](https://www.youtube.com/watch?v=SAAZRWBry_I&t=1156s)]
 
 <br>
