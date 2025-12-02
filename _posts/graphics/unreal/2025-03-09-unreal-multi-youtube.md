@@ -94,7 +94,7 @@ void Akusogaki77_ProjectCharacter::BeginPlay()
 // 서버는 해당 플레이어의 NetConnection 에서 ActorChannel을 열고
 // 서버와 클라이언트는 해당 채널을 사용하여 해당 액터에 대한 정보를 교환한다
 bReplicates = true;
-IsNetRelevantFor(P0) = true;
+IsNetRelevantFor(P0) => true;
 ```
 
 - 액터가 클라이언트에 복제되는 경우 발생할 수 있는 중요한 세가지 사항은? Actor의 수명이 서버와 클라 사이에 동기화 된다, Property 또한 동기화 된다, RPC 또한 동기화 된다 ( 05 : 13 )
@@ -185,7 +185,7 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 - Actor가 HasAuthority 하지 않으면 보통 어떤 Role 상태일까? SimulatedProxy ( 16 : 11 )
 - PlayerController는 소유 클라이언트에 리플리케이티드 되며 어떤 Role을 담당하는가? ROLE_AutonomousProxy 참고로 서버는 PlayerController에 대해 Authority 하다 ( 16 : 18 )
 - PlayerController에 연관된 Pawn의 Role은? ROLE_AutonomousProxy, 연관 되지 않은 Pawn 들은 ROLE_SimulatedProxy ( 16 : 23 )
-- Pawn이 IsLocalController에 대해 참이면 해당 플레이어는? 코드가 실행되는 GameInstance에 해당한다 ( 16 : 53 )
+- Pawn이 IsLocalController에 대해 참이면 해당 플레이어는? 로컬 클라이언트의 플레이어에 해당한다 ( 16 : 53 )
 - Pawn이 IsLocalController에 대해 거짓이면 해당 플레이어는? 원격 클라이언트의 플레이어에 해당한다 ( 16 : 59 )
 - 리플리케이티드 되고있는 Actor의 모든 부분이 네트워킹과 관련되어야 하는가? No ( 18 : 15 )
 - 네트워크를 인식하지 못하는 부분들은 어떻게 동기화 하면 좋을까? 함수화 시켜놓고 리플리케이션을 적용한다 ( 18 : 22 )
