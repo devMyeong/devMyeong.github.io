@@ -235,6 +235,10 @@ if (Controller->IsLocalController()) {}
 
 - [[Networking and Multiplayer](https://dev.epicgames.com/documentation/en-us/unreal-engine/networking-and-multiplayer-in-unreal-engine)]
 
+- [[Gameplay Ability System Tutorials](https://www.youtube.com/watch?v=wpAvEOZAlEs)]
+
+- [[Gameplay Ability System](https://dev.epicgames.com/documentation/en-us/unreal-engine/gameplay-ability-system-for-unreal-engine)]
+
 ### 02-2 참고한 사이트
 - [[**출처**](https://www.youtube.com/watch?v=JOJP0CvpB8w&list=WL&index=46&t=44s)]
 
