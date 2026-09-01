@@ -191,7 +191,6 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 - 네트워크를 인식하지 못하는 부분들은 어떻게 동기화 하면 좋을까? 함수화 시켜놓고 리플리케이션을 적용한다 ( 18 : 22 )
 
 ```cpp
-// 각 액터들의 특징을 말해보면? ( 18 : 51 )
 // dev.epicgames.com/documentation/ko-kr/unreal-engine/remote-procedure-calls-in-unreal-engine
 // 액터 소유권이 어느쪽에 있는지 명확하게 구분하자
 // 서버에서 호출된 RPC 인지 클라이언트에서 호출된 RPC 인지 명확하게 구분하자
@@ -200,6 +199,7 @@ void ASomeActor::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifeti
 // dev.epicgames.com/documentation/en-us/unreal-engine/replicating-variables-in-blueprints?application_version=4.27
 // www.youtube.com/watch?v=jtWhd4ugPW0 ( 07 : 56 )
 
+// 각 액터들의 특징을 말해보면? ( 18 : 51 )
 AGameModeBase - server only
 AGameStateBase - replicated to all clients
 AGameSession - server only
